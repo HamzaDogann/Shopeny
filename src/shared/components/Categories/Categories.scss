@@ -1,0 +1,109 @@
+@import "../../styles/main.scss";
+
+
+.categories-box {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.519);
+    backdrop-filter: blur(5px);
+    gap: 20px;
+
+
+    h3 {
+        display: none
+    }
+
+    .category-item {
+        @include flex-center;
+        @include white-button-hover;
+        background-color: transparent;
+        padding: 5px 10px;
+        border-radius: 5px;
+        gap: 5px;
+    }
+}
+
+//================Media Query===============//
+
+.category-mobile-menu-icon {
+    display: none;
+    position: absolute;
+    top: 46px;
+    left: 20;
+    font-size: 40px;
+    color: rgb(111, 111, 111);
+    background-color: rgb(236, 236, 236);
+    border-radius: 10px;
+    padding: 3px;
+}
+
+@media (max-width: 1200px) {
+
+    .categories-box {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        padding-top: 20px;
+        background-color: rgba(255, 255, 255, 0.69);
+        animation: animationMobileMenu 0.8s ease-in;
+
+        h3 {
+            display: inline;
+            text-align: center;
+            @include opacity-effect(0.6s);
+
+            font-size: 30px;
+            margin: 0;
+            font-weight: 700;
+            margin-top: -20px;
+            padding-bottom: 10px;
+        }
+
+        .category-item {
+            width: 100%;
+            scale: 1.5;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+    }
+
+    @keyframes animationMobileMenu {
+        0% {
+            width: 0;
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0;
+        }
+
+        100% {
+            width: 100%;
+            opacity: 1;
+        }
+    }
+
+    .category-mobile-menu-icon {
+        display: flex;
+    }
+
+    .category-menu-close-icon {
+        display: none;
+        @include opacity-effect(1.7s);
+        z-index: 999;
+        font-size: 50px;
+        position: fixed;
+        top: 30px;
+        right: 20px;
+        color: $shopenyOrange;
+    }
+}

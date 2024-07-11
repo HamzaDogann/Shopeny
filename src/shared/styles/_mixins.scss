@@ -1,0 +1,128 @@
+//Font Mixin
+
+@mixin font-face($font-family, $font-weight, $font-style, $font-path) {
+  @font-face {
+    font-family: #{$font-family};
+    src: url('../../assets/fonts/#{$font-path}') format('truetype');
+    font-weight: $font-weight;
+    font-style: $font-style;
+  }
+}
+
+
+//Font Faces
+@include font-face('Poppins', 400, normal, 'Poppins-Regular.ttf');
+@include font-face('Poppins', 300, normal, 'Poppins-Light.ttf');
+@include font-face('Poppins', 500, normal, 'Poppins-Medium.ttf');
+@include font-face('Poppins', 600, normal, 'Poppins-SemiBold.ttf');
+@include font-face('Poppins', 700, normal, 'Poppins-Bold.ttf');
+
+
+//Flex Mixins
+
+@mixin flex {
+  display: flex;
+}
+
+@mixin inline-flex {
+  display: inline-flex;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-align {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-column-align-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+//Buttons Mixins
+
+@mixin white-button-hover {
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgb(240, 240, 240);
+  }
+}
+
+@mixin button-hover-effect {
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.1);
+  }
+}
+
+
+//Shopeny Orange Hover Effect
+@mixin shopenyOrangeHoverEffect {
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: $shopenyOrange;
+  }
+}
+@mixin shopenyOrangeBackgroundHoverEffect {
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $shopenyOrange;
+    color: white;
+  }
+}
+
+
+
+//Animation Mixins
+
+@mixin opacity-effect($duration) {
+  animation: fadeIn $duration ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@mixin auth-opacity-effect($duration) {
+  animation: fadeIn $duration ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

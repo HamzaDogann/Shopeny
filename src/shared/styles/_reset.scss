@@ -1,0 +1,43 @@
+// Box-sizing reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Remove margin and padding
+body,
+ul,
+ol,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+// Remove list styles
+ul,
+ol {
+  list-style: none;
+}
+
+// Reset anchor styles
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Reset list item styles
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: "Poppins";
+}
+
+input {
+  outline: none;
+  font-family: "Poppins";
+}

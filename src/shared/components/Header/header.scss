@@ -1,0 +1,202 @@
+@import "../../styles/main.scss";
+
+
+
+.header-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 2px solid rgb(230, 230, 230);
+
+    .header-item:first-child {
+        width: 30%;
+        @include flex-align;
+
+        //Logo
+        .logo {
+            width: 230px;
+        }
+    }
+
+    //Search Bar
+    .header-item:nth-child(2) {
+        @include flex-center;
+        width: 35%;
+
+        div {
+            @include flex-center;
+            width: 100%;
+            padding: 5px 0px;
+            font-family: "Poppins";
+            border-radius: 30px;
+            background-color: #f4f4f4;
+            border: 2px solid rgb(232, 232, 232);
+            transition: all 0.3s ease-in-out;
+
+            &:focus {
+                border-color: orange;
+            }
+
+
+            .header-search-bar {
+                width: 90%;
+                padding: 0px 12px;
+                font-size: 16px;
+                color: rgb(46, 46, 46);
+                font-weight: 400;
+                border-radius: 10px;
+                border: 0;
+                background-color: #f5f5f5;
+            }
+
+            .header-search-button {
+                margin-right: 0px;
+                font-size: 34px;
+                padding: 4px;
+                border-radius: 50%;
+                color: rgb(85, 85, 85);
+                transition: all 0.4s ease;
+                border: 2px solid transparent;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.5);
+                    background-color: $shopenyOrange;
+                    color: $textWhite;
+                    border: 2px solid rgb(232, 232, 232);
+                }
+            }
+        }
+    }
+
+    //UserActions
+    .header-item:nth-child(3) {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+}
+
+
+
+@mixin user-actions-button-styles {
+    @include flex-center;
+    border-radius: 10px;
+    cursor: pointer;
+    @include white-button-hover
+}
+
+//User Actions
+
+.user-account-button {
+    @include user-actions-button-styles;
+    color: rgb(55, 55, 55);
+    padding: 7px 12px;
+
+    .user-icon {
+        font-size: 30px;
+        color: rgb(201, 201, 201);
+    }
+
+    .user-actions-buttons-detail-info {
+
+        margin-left: 6px;
+
+        span {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 15px;
+            margin-top: -7px;
+            font-weight: 500;
+            color: rgb(60, 60, 60);
+        }
+    }
+}
+
+
+.favorite-products-button {
+
+    color: rgb(55, 55, 55);
+    @include user-actions-button-styles;
+    padding: 10px 12px;
+
+    .heart-icon {
+        font-size: 30px;
+        color: rgb(60, 60, 60);
+    }
+}
+
+.basket-button {
+    color: rgb(55, 55, 55);
+    @include user-actions-button-styles;
+    padding: 7px 10px;
+
+    .basket-icon {
+        font-size: 30px;
+        color: rgb(60, 60, 60);
+    }
+
+    .user-actions-buttons-detail-info {
+        margin-left: 9px;
+
+        span {
+            font-size: 12px;
+            margin: 0;
+        }
+
+        p {
+            font-size: 14px;
+            margin-top: -7px;
+            font-weight: 500;
+            color: rgb(60, 60, 60);
+        }
+    }
+}
+
+//================Media Query===============//
+
+@media (max-width: 1200px) {
+    .header-box {
+        margin-top: 30px;
+        padding: 0;
+        border-bottom: 2px solid rgb(221, 221, 221);
+        flex-direction: column;
+        padding-bottom: 10px;
+
+        .header-item {
+            @include flex-center;
+            width: 100% !important;
+        }
+
+        .header-item:first-child {
+            .logo {
+                width: 220px !important;
+            }
+        }
+
+        .header-item:nth-child(2) {
+            margin: 10px 0px;
+        }
+
+        .header-item:nth-child(3) {
+            justify-content: center !important;
+            margin-top: 10px;
+            gap: 20px;
+        }
+
+        .user-actions-buttons-detail-info {
+            display: none;
+        }
+
+        .user-account-button,
+        .favorite-products-button,
+        .basket-button {
+            scale: 0.9;
+        }
+    }
+
+}
