@@ -12,13 +12,13 @@ function App() {
   return (
     <>
       <Toaster position="top-center" />
-      {/* <Container>
+      <Container>
         <Header />
         <Categories />
       </Container>
-      <Footer /> */}
+      <Footer />
 
-      <SignIn />
+      {/* <SignIn /> */}
       {/* <SignUp /> */}
       {/* <ResetPassword /> */}
 
