@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 //Styles
 import "./Categories.scss";
 //Icons
@@ -16,10 +16,10 @@ import { RiCloseCircleFill } from "react-icons/ri";
 
 
 
-function Categories() {
-
+const Categories = React.memo(() => {
+  
     const [categoryMenu, setCategoryMenu] = useState(false);
-
+ 
     return (
         <>
 
@@ -76,7 +76,8 @@ function Categories() {
                 className="category-menu-close-icon"
             />
         </>
-    )
-}
+   );
+});
+
 
 export default Categories

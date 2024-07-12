@@ -3,9 +3,19 @@ import Badge from '@mui/material/Badge';
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineHeart } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
-
+import { useDispatch } from 'react-redux';
+import { startLoading, stopLoading } from "../../store/slices/preLoaderSlice";
 
 function UserActions() {
+  const dispatch = useDispatch();
+
+  const handleEffect = () => {
+    dispatch(startLoading());
+    setTimeout(() => {
+      dispatch(stopLoading());
+    }, 4000); // 2 saniye sonra stopLoading çağrılır
+  }
+
   return (
     <>
       <div className='user-account-button'>
@@ -21,8 +31,8 @@ function UserActions() {
           <HiOutlineHeart className='heart-icon' />
         </Badge>
       </div>
-      
-      <div className='basket-button'>
+
+      <div onClick={() => handleEffect()} className='basket-button'>
         <Badge color="error" variant="dot">
           <TiShoppingCart className='basket-icon' />
         </Badge>

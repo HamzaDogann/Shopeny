@@ -1,13 +1,14 @@
+import React from 'react';
+// Components
+import Logo from '../../../features/Header/Logo';
+import SearchBar from '../../../features/Header/SearchBar';
+import UserActions from '../../../features/Header/UserActions';
 
-//Components
-import Logo from '../../../features/Header/Logo'
-import SearchBar from '../../../features/Header/SearchBar'
-import UserActions from '../../../features/Header/UserActions'
+// Styles
+import "./header.scss";
 
-//Styles
-import "./header.scss"
-
-function Header() {
+const Header = React.memo(() => {
+   
     return (
         <div className='header-box'>
             <div className='header-item'>
@@ -20,7 +21,7 @@ function Header() {
                 <UserActions />
             </div>
         </div>
-    )
-}
+    );
+});
 
-export default Header
+export default Header;

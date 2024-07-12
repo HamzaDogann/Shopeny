@@ -1,11 +1,13 @@
-import React from 'react'
-import HighlightsBenefits from '../../../features/Footer/HighlightsBenefits'
-import InfiniteBrands from '../../../features/Footer/InfiniteBrands'
-import SocialContent from '../../../features/Footer/SocialContent'
-import Links from '../../../features/Footer/Links'
-import "./footer.scss"
-import Container from '../../../features/Container/Container'
-function Footer() {
+import React from 'react';
+import HighlightsBenefits from '../../../features/Footer/HighlightsBenefits';
+import InfiniteBrands from '../../../features/Footer/InfiniteBrands';
+import SocialContent from '../../../features/Footer/SocialContent';
+import Links from '../../../features/Footer/Links';
+import "./footer.scss";
+import Container from '../../../features/Container/Container';
+
+const Footer = React.memo(() => {
+  
     return (
         <div style={{ marginTop: "100px" }}>
             <Container>
@@ -14,8 +16,8 @@ function Footer() {
                 <SocialContent />
             </Container>
             <Links />
-        </div >
-    )
-}
+        </div>
+    );
+});
 
-export default Footer
+export default Footer;
