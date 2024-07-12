@@ -4,7 +4,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineHeart } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
 import { useDispatch } from 'react-redux';
-import { startLoading, stopLoading } from "../../store/slices/preLoaderSlice";
+import { startLoading, stopLoading } from "../../store/features/PreLoader/preLoaderSlice";
 
 function UserActions() {
   const dispatch = useDispatch();

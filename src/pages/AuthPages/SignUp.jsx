@@ -4,11 +4,24 @@ import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import "./Auth.scss";
 import MembershipAgreement from '../../features/AuthPageComponents/MembershipAgreement';
+import { authActions } from '../../store/features/auth/authActions';
+import { useDispatch } from 'react-redux';
 
 function SignUp() {
 
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    phone: '',
+    gender: '',
+    agreementAccepted: false,
+    promotionalAccepted: false
+  });
+
+  const dispatch = useDispatch();
+
   const [showPassword, setShowPassword] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
 
   const [showAgreement, setShowAgreement] = useState(false);
 
@@ -18,6 +31,12 @@ function SignUp() {
 
   const handleAgreement = () => {
     setShowAgreement(!showAgreement);
+  }
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    dispatch(authActions.registerWithEmail("hamzadgn011@gmail.com", "hamza123", "Hamza", "Doğan", "Erkek", "05253535353"));
+
   }
 
   return (
@@ -34,10 +53,9 @@ function SignUp() {
 
           {/* =========================Form========================= */}
 
-          <form className='sign-form'>
+          <form onSubmit={handleRegister} className='sign-form'>
             <div className='input-box'>
-              <input type="text" placeholder="İsim" />
-              <input type="text" placeholder="Soyisim" />
+              <input type="text" placeholder="Ad Soyad" />
             </div>
             <span className='warning-spans'></span>
 

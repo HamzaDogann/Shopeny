@@ -1,4 +1,9 @@
 import React, { useState } from 'react'
+
+//Styles - Images - Icons
+import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
+import "./Auth.scss";
+
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { LuEye } from "react-icons/lu";
@@ -6,18 +11,34 @@ import { LuEyeOff } from "react-icons/lu";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
-import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
-import "./Auth.scss";
-import { customSuccessToast, customErrorToast } from "../../shared/utils/CustomToasts.js";
+//Configurations
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../store/features/auth/authActions.js';
+
 function SignIn() {
 
+  // Sign In Informations
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  //Password Show/Hidden
   const [showPassword, setShowPassword] = useState(false);
 
+  //Login Methods
 
-  const handleToaster = (e) => {
+  const dispatch = useDispatch();
+
+  const handleLoginWithGoogle = () => {
+    dispatch(authActions.loginWithGoogle());
+  }
+
+  const handleLoginWithFacebook = () => {
+    dispatch(authActions.loginWithFacebook());
+  }
+
+  const handleSignIn = (e) => {
     e.preventDefault();
-    customSuccessToast("Giriş Başarılı");
-    customErrorToast("Hata var!");
+    dispatch(authActions.loginWithEmail(email, password));
   }
 
   return (
@@ -35,16 +56,23 @@ function SignIn() {
 
         {/* =========================Form========================= */}
 
-        <form onSubmit={handleToaster} className='sign-form'>
+        <form onSubmit={handleSignIn} className='sign-form'>
           {/* Email */}
           <div className='input-box'>
             <HiOutlineMail className='auth-icons' />
-            <input type="text" placeholder="E-mail giriniz" />
+            <input  onChange={(e)=> setEmail(e.target.value)} 
+              type="text"
+              placeholder="E-mail giriniz" />
           </div>
+
           {/* Password */}
           <div className='input-box' style={{ marginTop: "5px" }}>
             <RiLockPasswordLine className='auth-icons' />
-            <input type={showPassword ? "text" : "password"} maxLength={16} placeholder="Şifre giriniz" />
+            <input onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              maxLength={16}
+              placeholder="Şifre giriniz"
+            />
             {showPassword
               ? <LuEye onClick={() => setShowPassword(false)} className='auth-icons eyes' />
               : <LuEyeOff onClick={() => setShowPassword(true)} className='auth-icons eyes' />
@@ -56,24 +84,27 @@ function SignIn() {
           </div>
 
           <div className='flex-center'>
-            <button className='sign-buttons' type="submit">Giriş Yap</button>
-          </div>
-
-          {/* Social Media Buttons */}
-          <div className='social-media-auth-box' >
-            <span>Sosyal Hesabın ile Giriş Yap</span>
-            <div className='social-platforms'>
-              <button>
-                <FcGoogle />
-              </button>
-              <button>
-                <FaFacebook style={{ color: "#1877F2" }} />
-              </button>
-            </div>
+            <button type="submit" className='sign-buttons'>Giriş Yap</button>
           </div>
 
         </form>
 
+        {/* Social Media Buttons */}
+        <div className='social-media-auth-box' >
+          <span>Sosyal Hesabın ile Giriş Yap</span>
+          <div className='social-platforms'>
+            <button onClick={() => handleLoginWithGoogle()}>
+              <FcGoogle />
+            </button>
+            <button>
+              <FaFacebook onClick={() => handleLoginWithFacebook()} style={{ color: "#1877F2" }} />
+            </button>
+          </div>
+        </div>
+
+        <button onClick={() => showUserInfo()}>
+          user Bilgilerini gör
+        </button>
         <div className='account-status-box'>
           <p>Hesabınız yok mu? <a href="#">Üye Ol</a></p>
         </div>

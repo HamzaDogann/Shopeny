@@ -11,20 +11,21 @@ import Header from "./shared/components/Header/Header";
 import { Toaster } from 'react-hot-toast';
 
 function App() {
+
   const isLoading = useSelector((state) => state.preLoader.isLoading);
-  
+
   return (
     <>
       {isLoading && <PreLoader />}
       <Toaster position="top-center" />
-      <Container>
+      {/* <Container>
         <Header />
         <Categories />
       </Container>
-      <Footer />
+      <Footer /> */}
 
       {/* <SignIn /> */}
-      {/* <SignUp /> */}
+      <SignUp />
       {/* <ResetPassword /> */}
     </>
   );
