@@ -24,8 +24,8 @@ function App() {
       </Container>
       <Footer /> */}
 
-      {/* <SignIn /> */}
-      <SignUp />
+      <SignIn />
+      {/* <SignUp /> */}
       {/* <ResetPassword /> */}
     </>
   );

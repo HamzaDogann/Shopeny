@@ -101,10 +101,7 @@ function SignIn() {
             </button>
           </div>
         </div>
-
-        <button onClick={() => showUserInfo()}>
-          user Bilgilerini gör
-        </button>
+        
         <div className='account-status-box'>
           <p>Hesabınız yok mu? <a href="#">Üye Ol</a></p>
         </div>

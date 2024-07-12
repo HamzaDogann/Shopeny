@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-function RadioButton({ onChange }) {
+function RadioButton({ }) {
     const [checked, setChecked] = useState(false);
 
     const handleCheckboxChange = () => {
         setChecked(!checked);
     };
-
-    useEffect(() => {
-        onChange(checked);
-    }, [checked, onChange]);
 
     return (
         <div className="checkbox-wrapper-12">

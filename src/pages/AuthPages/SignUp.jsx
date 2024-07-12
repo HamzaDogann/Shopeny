@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import RadioButton from '../../features/Helpers/RadioButton';
-import { LuEye } from "react-icons/lu";
-import { LuEyeOff } from "react-icons/lu";
-import "./Auth.scss";
+import { useDispatch } from 'react-redux';
 import MembershipAgreement from '../../features/AuthPageComponents/MembershipAgreement';
 import { authActions } from '../../store/features/auth/authActions';
-import { useDispatch } from 'react-redux';
+import { LuEye } from "react-icons/lu";
+import { LuEyeOff } from "react-icons/lu";
+import RadioButton from '../../features/Helpers/RadioButton';
+import "./Auth.scss";
 
 function SignUp() {
+
+  const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -16,27 +18,41 @@ function SignUp() {
     phone: '',
     gender: '',
     agreementAccepted: false,
-    promotionalAccepted: false
   });
 
-  const dispatch = useDispatch();
-
   const [showPassword, setShowPassword] = useState(false);
-
   const [showAgreement, setShowAgreement] = useState(false);
-
-  const handleCheckboxChange = (checked) => {
-    setIsChecked(checked);
-  };
-
+  
   const handleAgreement = () => {
     setShowAgreement(!showAgreement);
   }
 
+  //Input Data Controllers
+
+   //=======Input Data Controllers Methods======\\
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleRadioButtonChange = () => {
+    setFormData((prevFormData) => {
+      const newAgreementAccepted = !prevFormData.agreementAccepted;
+      console.log(newAgreementAccepted);
+      return { ...prevFormData, agreementAccepted: newAgreementAccepted };
+    });
+  };
+
+
+  //=======Register Method======\\
+
   const handleRegister = (e) => {
     e.preventDefault();
-    dispatch(authActions.registerWithEmail("hamzadgn011@gmail.com", "hamza123", "Hamza", "Doğan", "Erkek", "05253535353"));
-
+    dispatch(authActions.registerWithEmail(formData));
   }
 
   return (
@@ -55,19 +71,39 @@ function SignUp() {
 
           <form onSubmit={handleRegister} className='sign-form'>
             <div className='input-box'>
-              <input type="text" placeholder="Ad Soyad" />
+              <input
+                type="text"
+                name="name"
+                placeholder="Ad Soyad"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
             </div>
             <span className='warning-spans'></span>
 
             {/* Email */}
             <div className='input-box'>
-              <input type="text" placeholder="E-mail" />
+              <input
+                type="text"
+                name="email"
+                placeholder="E-mail"
+                value={formData.email}
+                onChange={handleInputChange}
+              />
             </div>
             <span className='warning-spans'></span>
 
             {/* Password */}
             <div className='input-box'>
-              <input type={showPassword ? "text" : "password"} maxLength={16} placeholder="Şifre Belirle" />
+              <input
+                type={showPassword ? "text" : "password"}
+                maxLength={16}
+                name="password"
+                placeholder="Şifre Belirle"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+
               {showPassword
                 ? <LuEye onClick={() => setShowPassword(false)} className='auth-icons eyes' />
                 : <LuEyeOff onClick={() => setShowPassword(true)} className='auth-icons eyes' />
@@ -79,14 +115,26 @@ function SignUp() {
             {/* Phone Number */}
             <div className='input-box'>
               <span style={{ fontSize: "15px" }}>+90</span>
-              <input style={{ marginLeft: "-10px" }} type="text" maxLength={10} placeholder="Telefon" />
+              <input
+                style={{ marginLeft: "-10px" }}
+                type="text"
+                name="phone"
+                maxLength={10}
+                placeholder="Telefon"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
             </div>
             <span className='warning-spans'></span>
 
             {/* Gender */}
             <div className='input-box'>
-              <select value="Cinsiyetiniz" name="" id="">
-                <option value="" disabled selected>Cinsiyetiniz</option>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleInputChange}
+              >
+                <option value="" disabled>Cinsiyetiniz</option>
                 <option value="Erkek">Erkek</option>
                 <option value="Kadın">Kadın</option>
               </select>
@@ -94,7 +142,11 @@ function SignUp() {
 
             {/* Confirm Rules  */}
             <div className='confirm-rules-box'>
-              <RadioButton onChange={handleCheckboxChange} />
+
+              <div onClick={() => handleRadioButtonChange()}>
+                <RadioButton />
+              </div>
+
               <span>
                 <strong onClick={() => handleAgreement()} style={{ cursor: "pointer", marginRight: "4px" }}>
                   Üyelik Sözleşmesi
@@ -103,7 +155,7 @@ function SignUp() {
               </span>
             </div>
             <div className='confirm-rules-box' style={{ marginTop: "20px" }}>
-              <RadioButton onChange={handleCheckboxChange} />
+              <RadioButton />
               <span>Shopeny'nin bana özel sunduğu kampanya ve fırsatlardan haberdar olmak istiyorum.</span>
             </div>
             <span className='warning-spans'></span>

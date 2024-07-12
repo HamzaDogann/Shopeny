@@ -39,11 +39,12 @@ export const authActions = {
 
     //========== Register Method | Email/Password/UserInformations==========\\
 
-    registerWithEmail: (email, password, name, surname, gender, phone) => async (dispatch) => {
+    registerWithEmail: (formData) => async (dispatch) => {
+        const { email, password, name, gender, phone } = formData;
         dispatch(startLoading());
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = { uid: userCredential.user.uid, name, surname, gender, phone };
+            const user = { uid: userCredential.user.uid };
             dispatch(setUser(user));
             customSuccessToast("Hesap Oluşturuldu");
         } catch (error) {
