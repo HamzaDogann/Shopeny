@@ -6,6 +6,7 @@ import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import RadioButton from '../../features/Helpers/RadioButton';
 import "./Auth.scss";
+import { Link } from 'react-router-dom';
 
 function SignUp() {
 
@@ -22,14 +23,12 @@ function SignUp() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showAgreement, setShowAgreement] = useState(false);
-  
+
   const handleAgreement = () => {
     setShowAgreement(!showAgreement);
   }
 
-  //Input Data Controllers
-
-   //=======Input Data Controllers Methods======\\
+  //=======Input Data Controllers Methods======\\
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -168,7 +167,7 @@ function SignUp() {
             </div>
 
             <div className='account-status-box' style={{ marginTop: "20px" }}>
-              <p>Zaten Hesabın var mı? <a href="#">Giriş Yap</a></p>
+              <p>Zaten Hesabın var mı? <Link to="/giris-yap">Giriş Yap</Link></p>
             </div>
 
           </form>

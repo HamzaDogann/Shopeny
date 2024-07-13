@@ -14,6 +14,7 @@ import { FcGoogle } from "react-icons/fc";
 //Configurations
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/features/auth/authActions.js';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
 
@@ -80,7 +81,8 @@ function SignIn() {
           </div>
 
           <div className='forgot-password-box'>
-            <a className='forgot-password-link' href="">Şifremi Unuttum</a>
+
+            <Link to="/sifre-yenileme" className='forgot-password-link'>Şifremi unuttum</Link>
           </div>
 
           <div className='flex-center'>
@@ -103,7 +105,7 @@ function SignIn() {
         </div>
         
         <div className='account-status-box'>
-          <p>Hesabınız yok mu? <a href="#">Üye Ol</a></p>
+          <p>Hesabınız yok mu?  <Link to="/uye-ol">Üye Ol</Link></p>
         </div>
       </div >
     </div >

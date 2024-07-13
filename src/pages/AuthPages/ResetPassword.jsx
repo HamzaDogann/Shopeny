@@ -5,6 +5,7 @@ import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import "./Auth.scss";
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/features/auth/authActions';
+import { Link } from 'react-router-dom';
 
 function ResetPassword() {
 
@@ -25,9 +26,10 @@ function ResetPassword() {
         </div>
 
         <div className='reset-password-modal'>
-          <div className='back-box'>
-            <IoArrowBack className='come-back-to-signIn-page' />
-          </div>
+
+          <Link to="/giris-yap" className='come-back-to-signIn-page'>
+            <IoArrowBack />
+          </Link>
 
           <div className='reset-password-content'>
             <h2>Şifre Yenileme</h2>

@@ -9,6 +9,7 @@ import Categories from "./shared/components/Categories/Categories.jsx";
 import Footer from "./shared/components/Footer/Footer.jsx";
 import Header from "./shared/components/Header/Header";
 import { Toaster } from 'react-hot-toast';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
 
@@ -24,9 +25,11 @@ function App() {
       </Container>
       <Footer /> */}
 
-      <SignIn />
-      {/* <SignUp /> */}
-      {/* <ResetPassword /> */}
+      <Routes>
+        <Route path='giris-yap' element={<SignIn />} />
+        <Route path='uye-ol' element={<SignUp />} />
+        <Route path='sifre-yenileme' element={<ResetPassword />} />
+      </Routes >
     </>
   );
 }
