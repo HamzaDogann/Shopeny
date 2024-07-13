@@ -12,9 +12,10 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 //Configurations
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { authActions } from '../../store/features/auth/authActions.js';
 import { Link } from 'react-router-dom';
+
 
 function SignIn() {
 
@@ -61,7 +62,7 @@ function SignIn() {
           {/* Email */}
           <div className='input-box'>
             <HiOutlineMail className='auth-icons' />
-            <input  onChange={(e)=> setEmail(e.target.value)} 
+            <input onChange={(e) => setEmail(e.target.value)}
               type="text"
               placeholder="E-mail giriniz" />
           </div>
@@ -103,11 +104,13 @@ function SignIn() {
             </button>
           </div>
         </div>
-        
+
         <div className='account-status-box'>
           <p>Hesabınız yok mu?  <Link to="/uye-ol">Üye Ol</Link></p>
         </div>
       </div >
+      <div>
+      </div>
     </div >
   )
 }

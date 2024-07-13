@@ -3,26 +3,47 @@ import Badge from '@mui/material/Badge';
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineHeart } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
-import { useDispatch } from 'react-redux';
-import { startLoading, stopLoading } from "../../store/features/PreLoader/preLoaderSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { customSuccessToast } from '../../shared/utils/CustomToasts';
+import { useNavigate } from 'react-router-dom';
 
 function UserActions() {
   const dispatch = useDispatch();
 
-  const handleEffect = () => {
-    dispatch(startLoading());
-    setTimeout(() => {
-      dispatch(stopLoading());
-    }, 4000); // 2 saniye sonra stopLoading çağrılır
+  const user = useSelector(state => state.auth.user)
+
+  const navigate = useNavigate();
+
+  const handleUserAccount = () => {
+    if (user) {
+      //!Yapım aşaması
+      customSuccessToast("Hesabım Sayfasına gidicek yer")
+    }
+    else {
+      // Kullanıcı yoksa "giriş-yap" sayfasına yönlendir
+      navigate('/giris-yap')
+    }
+
   }
+
 
   return (
     <>
-      <div className='user-account-button'>
+      <div onClick={() => handleUserAccount()} className='user-account-button'>
         <FaUserLarge className='user-icon' />
         <div className='user-actions-buttons-detail-info'>
-          <span>Hesap</span>
-          <p>Hamza Doğan</p>
+          {user ?
+            <>
+              <span>Hesap</span>
+              <p>{user.userData.nameAndSurname}</p>
+            </>
+
+            :
+            <>
+              <span>Üye ol veya</span>
+              <p>Giriş Yap</p>
+            </>
+          }
         </div>
       </div>
 

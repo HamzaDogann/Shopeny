@@ -19,11 +19,11 @@ function App() {
     <>
       {isLoading && <PreLoader />}
       <Toaster position="top-center" />
-      {/* <Container>
+      <Container>
         <Header />
         <Categories />
       </Container>
-      <Footer /> */}
+      <Footer />
 
       <Routes>
         <Route path='giris-yap' element={<SignIn />} />

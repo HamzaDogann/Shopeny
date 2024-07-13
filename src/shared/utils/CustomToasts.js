@@ -7,7 +7,7 @@ export const customSuccessToast = (message) => {
       border: '0px solid #713200',
       padding: '16px 20px',
       color: '#202020',
-      fontSize:"15px"
+      fontSize: "16px"
     },
     iconTheme: {
       primary: '#f27d59',
@@ -22,7 +22,7 @@ export const customErrorToast = (message) => {
     style: {
       border: '0px solid #713200',
       padding: '16px 20px',
-       fontSize:"13px",
+      fontSize: "13px",
       color: '#202020',
     },
     iconTheme: {

@@ -17,6 +17,8 @@ import {
     FacebookAuthProvider,
 } from 'firebase/auth';
 
+//Cookie
+import Cookies from 'js-cookie';
 
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
@@ -28,10 +30,24 @@ export const authActions = {
     //========== Login Method | Email/Password==========\\
 
     loginWithEmail: (email, password) => async (dispatch) => {
+
         dispatch(startLoading());
+
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            dispatch(setUser(userCredential.user));
+            const uid = userCredential.user.uid;
+
+            const userRef = ref(db, `Data/Users/${uid}`);
+            const snapshot = await get(userRef);
+
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                const user = { userData };
+
+                dispatch(setUser(user));
+                Cookies.set('user', JSON.stringify(user));
+            }
+
             customSuccessToast("Giriş Başarılı");
 
         } catch (error) {
@@ -72,7 +88,7 @@ export const authActions = {
             const user = { uid: userCredential.user.uid };
             dispatch(setUser(user));
             customSuccessToast("Hesap Oluşturuldu");
-
+            console.log("normal girişten dönen veri:", userCredential.user);
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 customErrorToast("Bu e-mail ile kayıtlı kullanıcı bulunuyor.");
@@ -102,10 +118,11 @@ export const authActions = {
                 photoURL: userCredential.user.photoURL,
             };
 
-            // Google kaydı için yeni fonksiyonu çağır
+
             await newUserRegistrationWithGoogle(uid, userInfo);
 
             const user = { uid: uid, name: userInfo.displayName };
+
             dispatch(setUser(user));
 
             customSuccessToast("Giriş Başarılı");
@@ -142,6 +159,7 @@ export const authActions = {
             await newUserRegistrationWithFacebook(uid, userInfo);
 
             const user = { uid: uid, name: userInfo.displayName };
+
             dispatch(setUser(user));
             customSuccessToast("Giriş Başarılı");
 
@@ -161,7 +179,7 @@ export const authActions = {
     resetPassword: (email) => async (dispatch) => {
         dispatch(startLoading());
         try {
-            // Email adresini kontrol etmek için Firebase Realtime Database'de sorgu oluşturun
+
             const usersRef = ref(db, 'Data/Users');
             const emailQuery = query(usersRef, orderByChild('email'), equalTo(email));
 
@@ -174,7 +192,7 @@ export const authActions = {
                 return;
             }
 
-            // Email adresi bulunursa şifre sıfırlama emaili gönderin
+
             await sendPasswordResetEmail(auth, email);
             customSuccessToast("Sıfırlama bağlantısı gönderildi");
         } catch (error) {
@@ -195,8 +213,9 @@ export const authActions = {
         try {
             await signOut(auth);
             dispatch(clearUser());
+            Cookies.remove('user');
         } catch (error) {
-
+            customErrorToast(error.message);
         } finally {
             dispatch(stopLoading());
         }
