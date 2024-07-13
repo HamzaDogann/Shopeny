@@ -56,6 +56,31 @@ export const newUserRegistrationWithGoogle = async (uid, userInfo) => {
     }
 };
 
+
+//=================== Add new user to database | Facebook Registration ===================
+
+export const newUserRegistrationWithFacebook = async (uid, userInfo) => {
+    const { email, displayName, photoURL } = userInfo;
+
+    const userData = {
+        email: email,
+        nameAndSurname: displayName,
+        phoneNumber: 'belirtilmedi',
+        gender: 'belirtilmedi', 
+        profilePhotoURL: '', 
+    };
+
+    const userRef = dbRef(db, `Data/Users/${uid}`);
+
+    try {
+        userData.profilePhotoURL = await uploadProfilePhoto(uid, photoURL);
+        await set(userRef, userData);
+    } catch (error) {
+        customErrorToast("Bir sorun meydana geldi");
+        throw error; 
+    }
+};
+
 //=================== Upload profile photo to Firebase Storage ===================
 
 const uploadProfilePhoto = async (uid, photoURL = userDefaultProfileImage) => {

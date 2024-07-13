@@ -1,7 +1,8 @@
 import { toast } from 'react-hot-toast';
 
-export const customSuccessToast = (message,width) => {
+export const customSuccessToast = (message) => {
   toast.success(message, {
+    duration: 3500,
     style: {
       border: '0px solid #713200',
       padding: '16px 20px',
@@ -17,9 +18,11 @@ export const customSuccessToast = (message,width) => {
 
 export const customErrorToast = (message) => {
   toast.error(message, {
+    duration: 5000,
     style: {
       border: '0px solid #713200',
       padding: '16px 20px',
+       fontSize:"13px",
       color: '#202020',
     },
     iconTheme: {

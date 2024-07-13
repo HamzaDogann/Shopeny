@@ -5,7 +5,8 @@ import {
 } from './authSlice';
 
 //Firebase Configuration
-import { auth } from "../../../services/firebase/config";
+import { auth, db } from "../../../services/firebase/config";
+import { get, query, ref, orderByChild, equalTo } from 'firebase/database';
 import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
@@ -16,10 +17,11 @@ import {
     FacebookAuthProvider,
 } from 'firebase/auth';
 
+
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { startLoading, stopLoading } from "../PreLoader/preLoaderSlice";
-import { newUserRegistration, newUserRegistrationWithGoogle } from '../database/databaseActions';
+import { newUserRegistration, newUserRegistrationWithGoogle, newUserRegistrationWithFacebook } from '../../../services/firebase/database/newUserRegisterOperations';
 
 export const authActions = {
 
@@ -31,8 +33,22 @@ export const authActions = {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             dispatch(setUser(userCredential.user));
             customSuccessToast("Giriş Başarılı");
+
         } catch (error) {
-            customErrorToast(error.message);
+            if (error.code === 'auth/invalid-email') {
+                customErrorToast("Geçersiz email adresi");
+            }
+            else if (error.code === 'auth/user-not-found') {
+                customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
+            }
+            else if (error.code === 'auth/invalid-credential') {
+                customErrorToast("Email veya Şifre Yalnış");
+            }
+            else if (error.code === 'auth/wrong-password') {
+                customErrorToast("Geçersiz şifre");
+            } else {
+                customErrorToast(error.message);
+            }
         } finally {
             dispatch(stopLoading());
         }
@@ -83,7 +99,7 @@ export const authActions = {
             const userInfo = {
                 email: userCredential.user.email,
                 displayName: userCredential.user.displayName,
-                photoURL: userCredential.user.photoURL, 
+                photoURL: userCredential.user.photoURL,
             };
 
             // Google kaydı için yeni fonksiyonu çağır
@@ -110,24 +126,25 @@ export const authActions = {
     loginWithFacebook: () => async (dispatch) => {
         const provider = new FacebookAuthProvider();
         dispatch(startLoading());
-    
+
         try {
             const userCredential = await signInWithPopup(auth, provider);
-            
+
             const uid = userCredential.user.uid;
+
             const userInfo = {
                 email: userCredential.user.email,
                 displayName: userCredential.user.displayName,
-                photoURL: userCredential.user.photoURL, 
+                photoURL: userCredential.user.photoURL,
             };
-    
-           
+
+
             await newUserRegistrationWithFacebook(uid, userInfo);
-    
+
             const user = { uid: uid, name: userInfo.displayName };
             dispatch(setUser(user));
             customSuccessToast("Giriş Başarılı");
-    
+
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
@@ -144,19 +161,33 @@ export const authActions = {
     resetPassword: (email) => async (dispatch) => {
         dispatch(startLoading());
         try {
-            const donenDeger = await sendPasswordResetEmail(auth, email);
-            console.log(donenDeger);
+            // Email adresini kontrol etmek için Firebase Realtime Database'de sorgu oluşturun
+            const usersRef = ref(db, 'Data/Users');
+            const emailQuery = query(usersRef, orderByChild('email'), equalTo(email));
+
+            // Veriyi alın
+            const snapshot = await get(emailQuery);
+
+
+            if (!snapshot.exists()) {
+                customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
+                return;
+            }
+
+            // Email adresi bulunursa şifre sıfırlama emaili gönderin
+            await sendPasswordResetEmail(auth, email);
             customSuccessToast("Sıfırlama bağlantısı gönderildi");
         } catch (error) {
             if (error.code === 'auth/user-not-found') {
                 customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
             } else {
-                customErrorToast("İşlem başarısız");
+                customErrorToast(error.message);
             }
         } finally {
             dispatch(stopLoading());
         }
     },
+
     //========== Auth Logout ==========\\
 
     logout: () => async (dispatch) => {
