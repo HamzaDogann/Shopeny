@@ -12,8 +12,7 @@ const authSlice = createSlice({
             state.user = action.payload;
         },
         clearUser: (state) => {
-            state.user = [];
-            state.error = null;
+            state.user = null;
         },
     },
 });

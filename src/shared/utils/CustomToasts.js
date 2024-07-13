@@ -6,6 +6,7 @@ export const customSuccessToast = (message,width) => {
       border: '0px solid #713200',
       padding: '16px 20px',
       color: '#202020',
+      fontSize:"15px"
     },
     iconTheme: {
       primary: '#f27d59',

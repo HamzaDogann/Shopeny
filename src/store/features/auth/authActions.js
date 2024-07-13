@@ -19,6 +19,7 @@ import {
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { startLoading, stopLoading } from "../PreLoader/preLoaderSlice";
+import { newUserRegistration, newUserRegistrationWithGoogle } from '../database/databaseActions';
 
 export const authActions = {
 
@@ -40,15 +41,30 @@ export const authActions = {
     //========== Register Method | Email/Password/UserInformations==========\\
 
     registerWithEmail: (formData) => async (dispatch) => {
-        const { email, password, name, gender, phone } = formData;
+
         dispatch(startLoading());
+        const { email, password } = formData;
+
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+            // Register New User
+            const uid = userCredential.user.uid;
+            await newUserRegistration(uid, formData);
+
+            // Set User
             const user = { uid: userCredential.user.uid };
             dispatch(setUser(user));
             customSuccessToast("Hesap Oluşturuldu");
+
         } catch (error) {
-            customErrorToast("Bu e-mail ile kayıtlı kullanıcı bulunuyor");
+            if (error.code === 'auth/email-already-in-use') {
+                customErrorToast("Bu e-mail ile kayıtlı kullanıcı bulunuyor.");
+            } else if (error.code === 'auth/invalid-email') {
+                customErrorToast("Geçersiz e-mail adresi.");
+            } else {
+                customErrorToast("Kayıt işlemi sırasında bir hata oluştu.");
+            }
         } finally {
             dispatch(stopLoading());
         }
@@ -57,13 +73,27 @@ export const authActions = {
     //========== Login with Google Method ==========\\
 
     loginWithGoogle: () => async (dispatch) => {
-        const provider = new GoogleAuthProvider();
         dispatch(startLoading());
+        const provider = new GoogleAuthProvider();
+
         try {
             const userCredential = await signInWithPopup(auth, provider);
-            const user = { uid: userCredential.user.uid, name: userCredential.user.displayName };
+
+            const uid = userCredential.user.uid;
+            const userInfo = {
+                email: userCredential.user.email,
+                displayName: userCredential.user.displayName,
+                photoURL: userCredential.user.photoURL, 
+            };
+
+            // Google kaydı için yeni fonksiyonu çağır
+            await newUserRegistrationWithGoogle(uid, userInfo);
+
+            const user = { uid: uid, name: userInfo.displayName };
             dispatch(setUser(user));
+
             customSuccessToast("Giriş Başarılı");
+
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
@@ -78,15 +108,26 @@ export const authActions = {
     //========== Login with Facebook Method ==========\\
 
     loginWithFacebook: () => async (dispatch) => {
-
         const provider = new FacebookAuthProvider();
         dispatch(startLoading());
-
+    
         try {
             const userCredential = await signInWithPopup(auth, provider);
-            const user = { uid: userCredential.user.uid, name: userCredential.user.displayName };
+            
+            const uid = userCredential.user.uid;
+            const userInfo = {
+                email: userCredential.user.email,
+                displayName: userCredential.user.displayName,
+                photoURL: userCredential.user.photoURL, 
+            };
+    
+           
+            await newUserRegistrationWithFacebook(uid, userInfo);
+    
+            const user = { uid: uid, name: userInfo.displayName };
             dispatch(setUser(user));
             customSuccessToast("Giriş Başarılı");
+    
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
