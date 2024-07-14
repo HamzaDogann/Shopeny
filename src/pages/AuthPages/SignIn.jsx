@@ -12,12 +12,14 @@ import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
 //Configurations
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/features/auth/authActions.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function SignIn() {
+
+  const user = useSelector(state => state.auth.user);
 
   // Sign In Informations
   const [email, setEmail] = useState('');
@@ -29,6 +31,7 @@ function SignIn() {
   //Login Methods
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLoginWithGoogle = () => {
     dispatch(authActions.loginWithGoogle());
@@ -38,10 +41,11 @@ function SignIn() {
     dispatch(authActions.loginWithFacebook());
   }
 
-  const handleSignIn = (e) => {
+
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    dispatch(authActions.loginWithEmail(email, password));
-  }
+    await dispatch(authActions.loginWithEmail(email, password));
+  };
 
   return (
     <div className='sign-box'>

@@ -16,16 +16,23 @@ function UserActions() {
 
   const handleUserAccount = () => {
     if (user) {
-      //!Yapım aşaması
-      customSuccessToast("Hesabım Sayfasına gidicek yer")
+      navigate('/hesabim')
     }
     else {
-      // Kullanıcı yoksa "giriş-yap" sayfasına yönlendir
       navigate('/giris-yap')
     }
-
   }
 
+
+  const handleBasketButton = () => {
+    if (user) {
+      navigate('/sepetim')
+    }
+    else {
+ 
+      navigate('/giris-yap')
+    }
+  }
 
   return (
     <>
@@ -35,7 +42,7 @@ function UserActions() {
           {user ?
             <>
               <span>Hesap</span>
-              <p>{user.userData.nameAndSurname}</p>
+               <p>{user.nameAndSurname}</p>
             </>
 
             :
@@ -53,7 +60,7 @@ function UserActions() {
         </Badge>
       </div>
 
-      <div onClick={() => handleEffect()} className='basket-button'>
+      <div onClick={() => handleBasketButton()} className='basket-button'>
         <Badge color="error" variant="dot">
           <TiShoppingCart className='basket-icon' />
         </Badge>

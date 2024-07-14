@@ -22,7 +22,6 @@ export const customErrorToast = (message) => {
     style: {
       border: '0px solid #713200',
       padding: '16px 20px',
-      fontSize: "13px",
       color: '#202020',
     },
     iconTheme: {
