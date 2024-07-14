@@ -136,6 +136,14 @@ export const authActions = {
 
             await newUserRegistrationWithFacebook(uid, userInfo);
             await handleUserLogin(userCredential, dispatch);
+
+            // Try to get the token explicitly
+            const token = await userCredential.user.getIdToken();
+            if (token) {
+                Cookies.set('token', token, { expires: 1 });
+            } else {
+                throw new Error("Token alınamadı");
+            }
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
