@@ -7,7 +7,7 @@ import "./footer.scss";
 import Container from '../../../features/Container/Container';
 
 const Footer = React.memo(() => {
-  
+
     return (
         <div style={{ marginTop: "100px" }}>
             <Container>

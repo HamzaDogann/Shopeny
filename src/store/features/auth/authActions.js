@@ -36,8 +36,8 @@ const handleUserLogin = async (userCredential, dispatch) => {
 
         const token = await userCredential.user.getIdToken();
         Cookies.set('token', token, { expires: 1 });
-
-        customSuccessToast("Giriş Başarılı");
+        console.log(userData.nameAndSurname);
+        customSuccessToast(`Hoşgeldin, ${userData.nameAndSurname}`);
     }
 };
 
@@ -79,7 +79,7 @@ export const authActions = {
             const uid = userCredential.user.uid;
             await newUserRegistration(uid, formData);
 
-            customSuccessToast("Hesap Oluşturuldu");
+            customSuccessToast("Giriş Yapabilisiniz");
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 customErrorToast("Bu e-mail ile kayıtlı kullanıcı bulunuyor.");

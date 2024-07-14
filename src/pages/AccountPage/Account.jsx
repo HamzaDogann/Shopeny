@@ -2,13 +2,7 @@ import React from 'react'
 
 function Account() {
   return (
-    <div>Account
-
-      <button>
-        Çıkış yap
-      </button>
-
-    </div>
+    <div>Hesabım Sayfası</div>
   )
 }
 
