@@ -25,7 +25,7 @@ function App() {
     <>
       {isLoading && <PreLoader />}
       <Toaster position="top-center" />
-    
+
       <DataLoader>
         <Routes>
           <Route path="giris-yap" element={<AuthProtectedRoute element={<SignIn />} />} />

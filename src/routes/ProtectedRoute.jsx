@@ -7,7 +7,7 @@ const ProtectedRoute = ({ element }) => {
     const user = useSelector((state) => state.auth.user);
 
     if (isLoading || user == "nologinuser") {
-        return null;
+        return <div className='projected-route'></div>;
     }
 
     if (user == null) {
