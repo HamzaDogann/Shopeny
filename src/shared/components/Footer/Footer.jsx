@@ -4,7 +4,7 @@ import InfiniteBrands from '../../../features/Footer/InfiniteBrands';
 import SocialContent from '../../../features/Footer/SocialContent';
 import Links from '../../../features/Footer/Links';
 import "./footer.scss";
-import Container from '../../../features/Container/Container';
+import Container from '../../container/Container';
 
 const Footer = React.memo(() => {
 

@@ -4,7 +4,7 @@ import MembershipAgreement from '../../features/AuthPageComponents/MembershipAgr
 import { authActions } from '../../store/features/auth/authActions';
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
-import RadioButton from '../../features/Helpers/RadioButton';
+import RadioButton from '../../shared/helpers/RadioButton';
 import "./Auth.scss";
 import { Link } from 'react-router-dom';
 

@@ -1,6 +1,6 @@
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import Container from "../Container/Container";
+import Container from "../../shared/container/Container";
 
 function Links() {
   return (

@@ -6,11 +6,15 @@ const ProtectedRoute = ({ element }) => {
     const isLoading = useSelector((state) => state.preLoader.isLoading);
     const user = useSelector((state) => state.auth.user);
 
-    if (isLoading) {
-        return <div className='projected-route'></div>;
+    if (isLoading || user == "nologinuser") {
+        return null;
     }
 
-    return   user == "usernologin" ? <Navigate to="/giris-yap" /> : element;
+    if (user == null) {
+        return <Navigate to="/giris-yap" />;
+    }
+
+    return element;
 };
 
 export default ProtectedRoute;

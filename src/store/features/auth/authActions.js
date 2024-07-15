@@ -15,10 +15,12 @@ import {
     sendPasswordResetEmail,
     GoogleAuthProvider,
     FacebookAuthProvider,
+    signInWithCredential
 } from 'firebase/auth';
 
 //Cookie
 import Cookies from 'js-cookie';
+
 
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
@@ -35,37 +37,13 @@ const handleUserLogin = async (userCredential, dispatch) => {
         dispatch(setUser(userData));
 
         const token = await userCredential.user.getIdToken();
-        Cookies.set('token', token, { expires: 1 });
+        Cookies.set('JWT', token, { expires: 7 });
         console.log(userData.nameAndSurname);
         customSuccessToast(`Hoşgeldin, ${userData.nameAndSurname}`);
     }
 };
 
 export const authActions = {
-
-    //========== Login Method | Email/Password ==========\\
-    loginWithEmail: (email, password) => async (dispatch) => {
-        dispatch(startLoading());
-
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            await handleUserLogin(userCredential, dispatch);
-        } catch (error) {
-            if (error.code === 'auth/invalid-email') {
-                customErrorToast("Geçersiz email adresi");
-            } else if (error.code === 'auth/user-not-found') {
-                customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
-            } else if (error.code === 'auth/invalid-credential') {
-                customErrorToast("Email veya Şifre Yalnış");
-            } else if (error.code === 'auth/wrong-password') {
-                customErrorToast("Geçersiz şifre");
-            } else {
-                customErrorToast(error.message);
-            }
-        } finally {
-            dispatch(stopLoading());
-        }
-    },
 
     //========== Register Method | Email/Password/UserInformations ==========\\
     registerWithEmail: (formData) => async (dispatch) => {
@@ -93,6 +71,30 @@ export const authActions = {
         }
     },
 
+
+    //========== Login Method | Email/Password ==========\\
+    loginWithEmail: (email, password) => async (dispatch) => {
+        dispatch(startLoading());
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            await handleUserLogin(userCredential, dispatch);
+        } catch (error) {
+            if (error.code === 'auth/invalid-email') {
+                customErrorToast("Geçersiz email adresi");
+            } else if (error.code === 'auth/user-not-found') {
+                customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
+            } else if (error.code === 'auth/invalid-credential') {
+                customErrorToast("Email veya Şifre Yalnış");
+            } else if (error.code === 'auth/wrong-password') {
+                customErrorToast("Geçersiz şifre");
+            }
+        } finally {
+            dispatch(stopLoading());
+        }
+    },
+
+
     //========== Login with Google Method ==========\\
     loginWithGoogle: () => async (dispatch) => {
         dispatch(startLoading());
@@ -112,8 +114,12 @@ export const authActions = {
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
-            } else {
-                customErrorToast(error.message);
+            }
+            else if(error.code === 'auth/account-exists-with-different-credential'){
+                customErrorToast("Bu hesap başka kimlik ile ilişkili");
+            }
+            else {
+                customErrorToast("Giriş Yapılamıyor, Tekrar Deneyiniz");
             }
         } finally {
             dispatch(stopLoading());
@@ -137,7 +143,6 @@ export const authActions = {
             await newUserRegistrationWithFacebook(uid, userInfo);
             await handleUserLogin(userCredential, dispatch);
 
-            // Try to get the token explicitly
             const token = await userCredential.user.getIdToken();
             if (token) {
                 Cookies.set('token', token, { expires: 1 });
@@ -147,7 +152,11 @@ export const authActions = {
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
-            } else {
+            }
+            else if(error.code === 'auth/account-exists-with-different-credential'){
+                customErrorToast("Bu hesap başka kimlik ile ilişkili");
+            }
+            else {
                 customErrorToast(error.message);
             }
         } finally {
@@ -187,11 +196,43 @@ export const authActions = {
         try {
             await signOut(auth);
             dispatch(clearUser());
-            Cookies.remove('token');
-        } catch (error) {
-            customErrorToast(error.message);
+            Cookies.remove('JWT');
+            customSuccessToast("Çıkış yapıldı");
+        } catch {
+            customErrorToast("Çıkış işlemi başarısız.");
         } finally {
             dispatch(stopLoading());
         }
     },
+};
+
+
+// ==== Remembering and logging in the user with token ==== \\
+
+const getUserFromCookies = () => {
+    const token = Cookies.get('JWT');
+    return token ? token :null;
+};
+
+export const fetchUserData = () => async (dispatch) => {
+    const token = getUserFromCookies();
+    if (token) {
+        try {
+
+            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            const uid = decodedToken.user_id;
+
+            const userRef = ref(db, `Data/Users/${uid}`);
+            const snapshot = await get(userRef);
+
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                dispatch(setUser(userData));
+            }
+        } catch (error) {
+
+        }
+    } else {
+        dispatch(setUser(null));
+    }
 };

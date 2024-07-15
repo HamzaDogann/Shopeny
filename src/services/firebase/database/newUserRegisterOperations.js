@@ -52,7 +52,6 @@ export const newUserRegistrationWithGoogle = async (uid, userInfo) => {
         await set(userRef, userData);
     } catch (error) {
         customErrorToast("Bir sorun meydana geldi");
-        throw error; 
     }
 };
 

@@ -3,35 +3,21 @@ import Badge from '@mui/material/Badge';
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineHeart } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
-import { useDispatch, useSelector } from 'react-redux';
-import { customSuccessToast } from '../../shared/utils/CustomToasts';
+
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function UserActions() {
-  const dispatch = useDispatch();
-
-  const user = useSelector(state => state.auth.user)
 
   const navigate = useNavigate();
+  const user = useSelector(state => state.auth.user);
 
   const handleUserAccount = () => {
-    if (user) {
-      navigate('/hesabim')
-    }
-    else {
-      navigate('/giris-yap')
-    }
+    navigate('/hesabim');
   }
 
-
   const handleBasketButton = () => {
-    if (user) {
-      navigate('/sepetim')
-    }
-    else {
- 
-      navigate('/giris-yap')
-    }
+    navigate('/sepetim')
   }
 
   return (
@@ -42,7 +28,7 @@ function UserActions() {
           {user ?
             <>
               <span>Hesap</span>
-               <p>{user.nameAndSurname}</p>
+              <p>{user.nameAndSurname}</p>
             </>
 
             :
