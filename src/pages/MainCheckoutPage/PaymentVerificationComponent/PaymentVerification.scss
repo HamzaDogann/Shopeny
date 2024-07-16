@@ -1,0 +1,21 @@
+@import "../../../shared/styles/main.scss";
+
+.payment-verification-box{
+height: 100vh;
+position: fixed;
+width: 100%;
+top: 0;
+left: 0;
+background-color: rgba(215, 215, 215, 0.253);
+backdrop-filter: blur(10px);
+z-index: 999999999999;
+@include flex-center;
+
+.payment-verification-modal{
+    padding: 25px;
+    background-color: white;
+   border: 2px solid rgb(224, 224, 224);
+   border-radius: 15px;
+}
+
+}

@@ -13,13 +13,19 @@ import { RxCamera } from "react-icons/rx";
 import { FiMic } from "react-icons/fi";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiCloseCircleFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 
 const Categories = React.memo(() => {
 
     const [categoryMenu, setCategoryMenu] = useState(false);
+
+    const location = useLocation();
+
+    if (location.pathname.includes("hesabim") || location.pathname.includes("sepetim") || location.pathname.includes("odeme-islemleri")) {
+        return null;
+    }
 
     return (
         <>
@@ -61,7 +67,7 @@ const Categories = React.memo(() => {
                     <span>Klavye</span>
                 </Link>
 
-                <Link to={"/kamera"}  className="category-item">
+                <Link to={"/kamera"} className="category-item">
                     <RxCamera />
                     <span>Kamera</span>
                 </Link>

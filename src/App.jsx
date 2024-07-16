@@ -16,6 +16,7 @@ import DataLoader from './features/DataLoader.jsx';
 import Layout from './shared/layout/Layout.jsx';
 import AppRoutes from './routes/AppRoutes.jsx';
 import Container from './shared/container/Container.jsx';
+import Breadcrumbs from './shared/components/Breadcrumbs/Breadcrumbs.jsx';
 
 function App() {
 
@@ -36,6 +37,9 @@ function App() {
           <Container>
             <Header />
             <Categories />
+          </Container>
+            <Breadcrumbs />
+          <Container>
             <AppRoutes />
           </Container>
           <Footer />
