@@ -15,7 +15,6 @@ import {
     sendPasswordResetEmail,
     GoogleAuthProvider,
     FacebookAuthProvider,
-    signInWithCredential
 } from 'firebase/auth';
 
 //Cookie
@@ -36,12 +35,17 @@ const handleUserLogin = async (userCredential, dispatch) => {
         const userData = snapshot.val();
         dispatch(setUser(userData));
 
-        const token = await userCredential.user.getIdToken();
-        Cookies.set('JWT', token, { expires: 7 });
-        console.log(userData.nameAndSurname);
+        let token = Cookies.get('JWT');
+
+        if (!token) {
+            token = await userCredential.user.getIdToken();
+            Cookies.set('JWT', token, { expires: 7 });
+        }
+
         customSuccessToast(`Hoşgeldin, ${userData.nameAndSurname}`);
     }
 };
+
 
 export const authActions = {
 
@@ -103,19 +107,25 @@ export const authActions = {
         try {
             const userCredential = await signInWithPopup(auth, provider);
             const uid = userCredential.user.uid;
-            const userInfo = {
-                email: userCredential.user.email,
-                displayName: userCredential.user.displayName,
-                photoURL: userCredential.user.photoURL,
-            };
 
-            await newUserRegistrationWithGoogle(uid, userInfo);
+            const userDoc = await checkOutUserFromDatabase(uid);
+
+            if (!userDoc) {
+                const userInfo = {
+                    email: userCredential.user.email,
+                    displayName: userCredential.user.displayName,
+                    photoURL: userCredential.user.photoURL,
+                };
+                await newUserRegistrationWithGoogle(uid, userInfo);
+            }
+
             await handleUserLogin(userCredential, dispatch);
+
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
             }
-            else if(error.code === 'auth/account-exists-with-different-credential'){
+            else if (error.code === 'auth/account-exists-with-different-credential') {
                 customErrorToast("Bu hesap başka kimlik ile ilişkili");
             }
             else {
@@ -134,30 +144,36 @@ export const authActions = {
         try {
             const userCredential = await signInWithPopup(auth, provider);
             const uid = userCredential.user.uid;
-            const userInfo = {
-                email: userCredential.user.email,
-                displayName: userCredential.user.displayName,
-                photoURL: userCredential.user.photoURL,
-            };
 
-            await newUserRegistrationWithFacebook(uid, userInfo);
-            await handleUserLogin(userCredential, dispatch);
+            const userDoc = await checkOutUserFromDatabase(uid);
 
-            const token = await userCredential.user.getIdToken();
-            if (token) {
-                Cookies.set('token', token, { expires: 1 });
-            } else {
-                throw new Error("Token alınamadı");
+            if (!userDoc) {
+                const userInfo = {
+                    email: userCredential.user.email,
+                    displayName: userCredential.user.displayName,
+                    photoURL: userCredential.user.photoURL,
+                };
+                await newUserRegistrationWithGoogle(uid, userInfo);
             }
+
+            const userRef = ref(db, `Data/Users/${uid}`);
+            const snapshot = await get(userRef);
+
+            if (snapshot.exists()) {
+                const userData = snapshot.val();
+                dispatch(setUser(userData));
+                customSuccessToast(`Hoşgeldin, ${userData.nameAndSurname}`);
+            }
+
         } catch (error) {
             if (error.code === 'auth/cancelled-popup-request' || error.code === 'auth/popup-closed-by-user') {
                 customErrorToast("Giriş işlemi iptal edildi");
             }
-            else if(error.code === 'auth/account-exists-with-different-credential'){
+            else if (error.code === 'auth/account-exists-with-different-credential') {
                 customErrorToast("Bu hesap başka kimlik ile ilişkili");
             }
             else {
-                customErrorToast(error.message);
+                customErrorToast("Giriş Başarısız");
             }
         } finally {
             dispatch(stopLoading());
@@ -211,7 +227,7 @@ export const authActions = {
 
 const getUserFromCookies = () => {
     const token = Cookies.get('JWT');
-    return token ? token :null;
+    return token ? token : null;
 };
 
 export const fetchUserData = () => async (dispatch) => {
@@ -234,5 +250,24 @@ export const fetchUserData = () => async (dispatch) => {
         }
     } else {
         dispatch(setUser(null));
+    }
+};
+
+//===== Get User From Database =====
+
+const checkOutUserFromDatabase = async (uid) => {
+    try {
+        const userRef = ref(db, `Data/Users/${uid}`);
+      
+        const snapshot = await get(userRef);
+        if (snapshot.exists()) {
+            console.log("Kullanıcı ilk kayıtı çoktan yapıldı.")
+            return snapshot.val();
+            
+        } else {
+            return null;
+        }
+    } catch {
+        return null;
     }
 };

@@ -30,20 +30,19 @@ function Links() {
           <h2>Kategoriler</h2>
           <div className="footer-link-item-box" >
             {/* Router Link Nesnelerine dönüşecekler */}
-            <a href="">Bilgisayar</a>
-            <a href="">Telefon</a>
-            <a href="">Televizyon</a>
-            <a href="">Kulaklık</a>
+            <Link to={"/bilgisayar"}>Bilgisayar</Link>
+            <Link to={"/telefon"}>Telefon</Link>
+            <Link to={"/televizyon"}>Televizyon</Link>
+            <Link to={"/kulaklik"}>Kulaklık</Link>
           </div>
         </div>
 
         <div className="footer-links-item  item-4">
           <div className="footer-link-item-box" style={{ marginTop: "8px" }}>
-            {/* Router Link Nesnelerine dönüşecekler */}
-            <a href="">Oyuncu Fareleri</a>
-            <a href="">Mikrofon</a>
-            <a href="">Kamera</a>
-            <a href="">Klavye</a>
+            <Link to={"/oyuncu-fareleri"}>Oyuncu Fareleri</Link>
+            <Link to={"/mikrofon"}>Mikrofon</Link>
+            <Link to={"/kamera"}>Kamera</Link>
+            <Link to={"/klavye"}>Klavye</Link>
           </div>
         </div>
 

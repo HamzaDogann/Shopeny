@@ -35,8 +35,9 @@ export const newUserRegistration = async (uid, formData) => {
 
 
 export const newUserRegistrationWithGoogle = async (uid, userInfo) => {
-    const { email, displayName, photoURL } = userInfo;
 
+    const { email, displayName, photoURL } = userInfo;
+    
     const userData = {
         email: email,
         nameAndSurname: displayName,
