@@ -19,28 +19,21 @@ function UserActions() {
   const handleBasketButton = () => {
     navigate('/sepetim')
   }
+  const handleFavoriteProductsButton = () => {
+    navigate('/favori-urunler')
+  }
 
   return (
     <>
       <div onClick={() => handleUserAccount()} className='user-account-button'>
         <FaUserLarge className='user-icon' />
         <div className='user-actions-buttons-detail-info'>
-          {user ?
-            <>
-              <span>Hesap</span>
-              <p>{user.nameAndSurname}</p>
-            </>
-
-            :
-            <>
-              <span>Üye ol veya</span>
-              <p>Giriş Yap</p>
-            </>
-          }
+          <span>{user ? user == "nologinuser" ? "Üye ol veya" : "Hesap" : "Üye ol veya"}</span>
+          <p>{user ? user == "nologinuser" ? "Giriş Yap" : user.nameAndSurname : "Giriş Yap"}</p>
         </div>
       </div>
 
-      <div className='favorite-products-button'>
+      <div onClick={()=> handleFavoriteProductsButton()} className='favorite-products-button'>
         <Badge color="error" variant="dot">
           <HiOutlineHeart className='heart-icon' />
         </Badge>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
+import AuthProtectedRoute from "./routes/AuthProtectedRoute.jsx"
 
 import PreLoader from "./features/PreLoader/PreLoader.jsx";
 import ResetPassword from "./pages/AuthPages/ResetPassword.jsx";
@@ -13,7 +14,6 @@ import Header from "./shared/components/Header/Header";
 
 import DataLoader from './features/DataLoader.jsx';
 import Layout from './shared/layout/Layout.jsx';
-import AuthProtectedRoute from './routes/AuthProtectedRoute.jsx';
 import AppRoutes from './routes/AppRoutes.jsx';
 import Container from './shared/container/Container.jsx';
 

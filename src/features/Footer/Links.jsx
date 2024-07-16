@@ -1,6 +1,6 @@
+import { Link } from "react-router-dom";
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import Container from "../../shared/container/Container";
 
 function Links() {
   return (
@@ -19,11 +19,10 @@ function Links() {
         <div className="footer-links-item">
           <h2>Yardım ve Destek</h2>
           <div className="footer-link-item-box">
-            {/* Router Link Nesnelerine dönüşecekler */}
-            <a href="">Sıkça Sorulan Sorular (SSS)</a>
-            <a href="">İade ve Değişim Politikası</a>
-            <a href="">Teslimat Bilgileri</a>
-            <a href="">Gizlilik Politikası</a>
+            <Link to={"/yardim-ve-destek/sikca-sorulan-sorular"}>Sıkça Sorulan Sorular (SSS)</Link>
+            <Link to={"/yardim-ve-destek/iade-ve-degisim-politikasi"}>İade ve Değişim Politikası</Link>
+            <Link to={"/yardim-ve-destek/teslimat-bilgileri"}>Teslimat Bilgileri</Link>
+            <Link to={"/yardim-ve-destek/gizlilik-politikasi"}>Gizlilik Politikası</Link>
           </div>
         </div>
 
@@ -51,12 +50,12 @@ function Links() {
         <div className="footer-links-item">
           <h2>Hızlı Bağlantılar</h2>
           <div className="footer-link-item-box">
-            {/* Router Link Nesnelerine dönüşecekler */}
-            <a href="">Favori Ürünlerim</a>
-            <a href="">Siparişlerim</a>
-            <a href="">Sepetim</a>
-            <a href="">Adres Bilgilerim</a>
-            <a href="">Kullanıcı Bilgilerim</a>
+            <Link to={"/favori-urunler"}>Favori Ürünlerim</Link>
+            <Link to={"/hesabim/siparislerim"}>Siparişlerim</Link>
+            <Link to={"/sepetim"}>Sepetim</Link>
+            <Link to={"/hesabim/adreslerim"}>Adreslerim</Link>
+            <Link to={"/hesabim/hesap-bilgilerim"}>Hesap Bilgilerim</Link>
+
           </div>
         </div>
 

@@ -13,57 +13,58 @@ import { RxCamera } from "react-icons/rx";
 import { FiMic } from "react-icons/fi";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { RiCloseCircleFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 
 
 const Categories = React.memo(() => {
-  
+
     const [categoryMenu, setCategoryMenu] = useState(false);
- 
+
     return (
         <>
 
             <div className='categories-box' style={{ display: categoryMenu && "flex" }}>
                 <h3>Kategoriler</h3>
-                <button className="category-item">
+                <Link to={"/bilgisayar"} className="category-item">
                     <GrPersonalComputer />
                     <span>Bilgisayar</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/telefon"} className="category-item">
                     <HiMiniDevicePhoneMobile />
                     <span>Telefon</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/televizyon"} className="category-item">
                     <PiMonitorLight />
                     <span>Televizyon</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/kulaklik"} className="category-item" >
                     <TfiHeadphoneAlt />
                     <span>Kulaklık</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/mikrofon"} className="category-item" >
                     <FiMic />
                     <span>Mikrofon</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/oyuncu-fareleri"} className="category-item" >
                     <BsMouse3 />
                     <span>Oyuncu Fareleri</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/klavye"} className="category-item">
                     <FaRegKeyboard />
                     <span>Klavye</span>
-                </button>
+                </Link>
 
-                <button className="category-item">
+                <Link to={"/kamera"}  className="category-item">
                     <RxCamera />
                     <span>Kamera</span>
-                </button>
+                </Link>
             </div >
 
             <HiOutlineMenuAlt1 onClick={() => setCategoryMenu(true)}
@@ -76,7 +77,7 @@ const Categories = React.memo(() => {
                 className="category-menu-close-icon"
             />
         </>
-   );
+    );
 });
 
 

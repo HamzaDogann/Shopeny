@@ -1,7 +1,11 @@
 import React from 'react'
 import "./ProductDetails.scss";
+import { useParams } from 'react-router-dom';
 
 function ProductDetails() {
+
+    const { categoryName, productName } = useParams();
+
     return (
         <div>
             <h2>Ürün Resimleri</h2>
