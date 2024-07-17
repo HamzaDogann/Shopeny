@@ -9,7 +9,7 @@
     backdrop-filter: blur(5px);
     gap: 20px;
     border-top: 2px solid rgb(230, 230, 230);
-
+    z-index: 999!important;
 
     h3 {
         display: none

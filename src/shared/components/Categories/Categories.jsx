@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //Styles
 import "./Categories.scss";
 //Icons
@@ -22,6 +22,10 @@ const Categories = React.memo(() => {
     const [categoryMenu, setCategoryMenu] = useState(false);
 
     const location = useLocation();
+
+    useEffect(() => {
+        setCategoryMenu(false);
+    }, [location]);
 
     if (location.pathname.includes("hesabim") || location.pathname.includes("sepetim") || location.pathname.includes("odeme-islemleri")) {
         return null;

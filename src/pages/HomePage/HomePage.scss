@@ -2,11 +2,28 @@
 
 
 .home-page-box {
-
     h3 {
         font-weight: 600;
+        margin-top: 50px;
         font-size: 26px;
+
+    }
+
+    .title-linear-gradient-box {
+        width: 100%;
         margin: 60px 0px;
+        margin-top: -16px;
+        @include flex-center;
+
+        p {
+            background: linear-gradient(45deg, $shopenyBlue, $shopenyOrange);
+            height: 6px;
+            width: 200px;
+            border-radius: 30px;
+        }
+
+
+
     }
 }
 
@@ -170,6 +187,12 @@
 .super-deal-cards-box {
     @include flex-row;
     padding: 0px 50px;
+
+    @media (max-width:"1200px") {
+        @include flex-column;
+        padding: 0px;
+    }
+
     gap: 20px;
 
     // Large Box----------------
@@ -181,6 +204,21 @@
         height: 350px;
         width: 100%;
         padding: 10px 40px;
+
+        @media (max-width:"1200px") {
+            padding: 10px 20px;
+            height: 220px;
+        }
+
+        @media (max-width:"560px") {
+            height: 240px;
+        }
+
+        @media (max-width:"500px") {
+            border-radius: 10px;
+        }
+
+
         overflow: hidden;
         cursor: pointer;
 
@@ -194,6 +232,11 @@
             background-color: #26262600;
             background-image: linear-gradient(25deg, rgba(29, 85, 206, 0.785) 10%, #00000000 80%);
             border-radius: 25px;
+
+            @media (max-width:"500px") {
+                border-radius: 10px;
+            }
+
             z-index: 1;
         }
 
@@ -209,12 +252,25 @@
             background-size: cover;
             background-repeat: no-repeat;
             border-radius: 25px;
+
+            @media (max-width:"500px") {
+                border-radius: 10px;
+            }
+
             z-index: 0;
             transition: transform 0.3s ease;
         }
 
         &:hover::after {
             transform: scale(1.06); // Hover efekti sırasında arka planın büyütülmesi
+        }
+
+        @media (max-width:"500px") {
+
+            &:hover::after {
+                transform: scale(1); // Hover efekti sırasında arka planın büyütülmesi
+            }
+
         }
 
         h2 {
@@ -224,14 +280,29 @@
             margin-bottom: 0px;
             position: relative;
             z-index: 2;
+
+            @media (max-width:"1200px") {
+                margin-top: 30px;
+                font-size: 35px;
+            }
+
+            @media (max-width:"1200px") {
+                font-size: 26px;
+            }
         }
 
         p {
             color: rgb(255, 255, 255);
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 500;
             position: relative;
             z-index: 2;
+
+
+            @media (max-width:"500px") {
+                font-size: 13px;
+
+            }
         }
 
         a {
@@ -249,6 +320,14 @@
             backdrop-filter: blur(7.5px);
             -webkit-backdrop-filter: blur(7.5px);
             border-radius: 10px;
+
+            @media (max-width:"560px") {
+                width: 100%;
+                bottom: 0px;
+                left: 0;
+                border-radius: 0px 10px 10px 10px;
+                text-align: center;
+            }
         }
     }
 
@@ -261,25 +340,55 @@
 
     .small-boxes {
         gap: 20px;
-        height: auto;
 
+        @media (max-width:"1200px") {
+            height: 330px;
+        }
+
+        @media (max-width:"500px") {
+            height: 250px;
+        }
 
         .small-box {
             height: 50%;
-            border-radius: 25px;
+            border-radius: 18px;
             padding: 0px 10px;
             padding-left: 10px;
+            cursor: pointer;
+
+            @media (max-width:"500px") {
+                border-radius: 10px;
+            }
 
             h2 {
                 font-weight: 500;
+
+                @media (max-width:"1200px") {
+                    font-size: 22px;
+                }
+
                 padding-top: 50px;
                 margin: 0;
                 padding-left: 20px;
+
+                @media (max-width:"500px") {
+                    padding-top: 0px;
+
+                }
             }
 
             p {
                 font-weight: 500;
                 font-size: 16px;
+
+                @media (max-width:"1200px") {
+                    font-size: 14px;
+                }
+
+                @media (max-width:"500px") {
+                    font-size: 12px;
+                }
+
                 padding-left: 20px;
             }
 
@@ -289,7 +398,7 @@
                 background-size: cover;
                 background-repeat: no-repeat;
 
-                color: rgb(53, 53, 53);
+                color: white;
                 position: relative;
                 overflow: hidden;
 
@@ -300,6 +409,83 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
+                    background-color: #26262600;
+                    background-image: linear-gradient(100deg, rgba(59, 104, 208, 0.914) 10%, #00000000 70%);
+                    border-radius: 18px;
+
+                    @media (max-width:"500px") {
+                        border-radius: 10px;
+                    }
+
+                    z-index: 1;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image: url("./../../assets/images/SuperDeals/PhonesDeal.png");
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    border-radius: 18px;
+                    z-index: 0;
+                    transition: transform 0.3s ease;
+
+                    @media (max-width:"500px") {
+                        border-radius: 10px;
+                    }
+                }
+
+                &:hover::after {
+                    transform: scale(1.06);
+                }
+
+                @media (max-width:"500px") {
+                    &:hover::after {
+                        transform: scale(1);
+                    }
+                }
+
+
+                p {
+                    position: relative;
+                    z-index: 3;
+                }
+
+                h2 {
+                    padding-top: 40px;
+                    position: relative;
+                    z-index: 3;
+
+                    @media (max-width:"500px") {
+                        padding-top: 15px;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                background-image: url("./../../assets/images/SuperDeals/TVDeals.jpg");
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+                color: white;
+                position: relative;
+                overflow: hidden;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: #26262600;
+                    background-image: linear-gradient(100deg, rgba(31, 31, 31, 0.914) 10%, #00000000 70%);
                     border-radius: 25px;
                     z-index: 1;
                 }
@@ -311,7 +497,7 @@
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    background-image: url("./../../assets/images/SuperDeals/iphoneDeal.jpg");
+                    background-image: url("./../../assets/images/SuperDeals/TVDeals.jpg");
                     background-position: center;
                     background-size: cover;
                     background-repeat: no-repeat;
@@ -320,11 +506,16 @@
                     transition: transform 0.3s ease;
                 }
 
+
                 &:hover::after {
-                    transform: scale(1.06); // Hover efekti sırasında arka planın büyütülmesi
+                    transform: scale(1.06);
                 }
 
-
+                @media (max-width:"500px") {
+                    &:hover::after {
+                        transform: scale(1);
+                    }
+                }
 
                 p {
                     position: relative;
@@ -332,9 +523,13 @@
                 }
 
                 h2 {
-                    padding-top: 30px;
+                    padding-top: 40px;
                     position: relative;
                     z-index: 3;
+
+                    @media (max-width:"500px") {
+                        padding-top: 15px;
+                    }
                 }
             }
         }

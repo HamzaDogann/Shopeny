@@ -8,9 +8,15 @@ function HomePage() {
   return (
     <div className='home-page-box'>
       <AutoPlaySlider />
-      <h3  className="text-center">Popüler Ürünler</h3>
+      <h3 className="text-center">Popüler Ürünler</h3>
+      <div className='title-linear-gradient-box'>
+        <p></p>
+      </div>
       <PopularProductsSlider />
       <h3 className="text-center">Süper Fırsat</h3>
+      <div className='title-linear-gradient-box'>
+        <p></p>
+      </div>
       <SuperDealCards />
     </div>
   )
