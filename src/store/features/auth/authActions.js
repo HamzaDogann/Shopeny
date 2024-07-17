@@ -108,7 +108,7 @@ export const authActions = {
             const userCredential = await signInWithPopup(auth, provider);
             const uid = userCredential.user.uid;
 
-            const userDoc = await checkOutUserFromDatabase(uid);
+            const userDoc = await checkUserFromDatabase(uid);
 
             if (!userDoc) {
                 const userInfo = {
@@ -145,7 +145,7 @@ export const authActions = {
             const userCredential = await signInWithPopup(auth, provider);
             const uid = userCredential.user.uid;
 
-            const userDoc = await checkOutUserFromDatabase(uid);
+            const userDoc = await checkUserFromDatabase(uid);
 
             if (!userDoc) {
                 const userInfo = {
@@ -255,15 +255,15 @@ export const fetchUserData = () => async (dispatch) => {
 
 //===== Get User From Database =====
 
-const checkOutUserFromDatabase = async (uid) => {
+const checkUserFromDatabase = async (uid) => {
     try {
         const userRef = ref(db, `Data/Users/${uid}`);
-      
+
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
             console.log("Kullanıcı ilk kayıtı çoktan yapıldı.")
             return snapshot.val();
-            
+
         } else {
             return null;
         }

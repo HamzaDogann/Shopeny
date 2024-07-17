@@ -1,9 +1,9 @@
 import React from 'react'
 import "./ProductCard.scss";
 
-function ProductCard() {
+function ProductCard({product}) {
     return (
-        <div>Ürün Kartı</div>
+        <div className='product-card'>Product - {product}</div>
     )
 }
 
