@@ -1,6 +1,160 @@
-.product-card{
+@import "../../styles/main.scss";
+
+.product-card {
     width: 230px;
     height: 380px;
-    background-color: rgb(236, 236, 236);
+    background-color: #f1f1f1;
     border-radius: 20px;
+    padding: 10px 14px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #e7e7e7;
+    }
+
+    .add-favorite-btn,
+    .remove-favorite-btn {
+        position: absolute;
+        background-color: rgba(213, 213, 213, 0.321);
+        backdrop-filter: blur(4px);
+        border-radius: 30px;
+        @include flex-center;
+        top: 12px;
+        right: 13px;
+        padding: 5px;
+        padding-top: 6px;
+        padding-left: 6px;
+        padding-bottom: 4px;
+        font-size: 27px;
+        z-index: 5;
+        @include click-scale(0.8, 0.2s);
+    }
+
+    .add-favorite-btn {
+        color: rgb(160, 160, 160);
+    }
+
+    .remove-favorite-btn {
+        color: rgb(245, 82, 82);
+        animation: smoothEffect 0.3s linear;
+    }
+
+    @keyframes smoothEffect {
+        0% {
+            transform: scale(1);
+            color: rgb(160, 160, 160);
+        }
+
+        100% {
+            color: rgb(245, 82, 82);
+            transform: scale(0.8);
+        }
+    }
+
+    .image-box {
+        width: 100%;
+        height: 190px;
+        padding: 5px;
+        @include flex-center;
+        border-bottom: 3px solid rgb(220, 220, 220);
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    .product-name-box {
+        text-align: left;
+        margin-top: 10px;
+
+        p {
+            font-weight: 500;
+            font-size: 17px;
+            color: rgb(38, 38, 38);
+            margin-bottom: -2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 15px;
+            color: rgb(116, 116, 116);
+        }
+    }
+
+    .rating-box {
+        margin-top: 7px;
+        @include flex-row;
+        align-items: center;
+        width: max-content;
+        padding: 2px 9px;
+        padding-left: 5px;
+        background-color: rgb(225, 225, 225);
+        border-radius: 30px;
+
+        p {
+            padding-top: 1px;
+            margin-left: 5px;
+            font-weight: 500;
+            font-size: 17px;
+        }
+    }
+
+    .original-price-box {
+        @include flex-row;
+        margin-top: 7px;
+        padding-left: 3px;
+
+        strike {
+            color: rgb(153, 153, 153);
+            font-size: 18px;
+        }
+
+        span {
+            margin-top: 4px;
+            padding: 1px 7px;
+            height: 20px;
+            background-color: rgb(100, 183, 130);
+            border-radius: 5px;
+            color: rgb(233, 233, 233);
+            margin-left: 9px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+    }
+
+    .discount-price {
+        float: left;
+        font-weight: 600;
+        padding-left: 5px;
+        color: black;
+        font-size: 26px;
+    }
+
+    .basket-btn {
+        @include flex-center;
+        border-radius: 10px;
+        background-color: $shopenyBlue;
+        color: $textWhite;
+        padding: 7px 12px;
+        font-size: 30px;
+        position: absolute;
+        bottom: 13px;
+        right: 17px;
+        @include click-scale(0.8, 0.2s);
+    }
+
 }
