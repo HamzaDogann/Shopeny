@@ -1,0 +1,76 @@
+@import "../../shared/styles/main.scss";
+
+.category-products-box {
+    margin-top: 20px;
+
+    .top-filter-options-box {
+        @include flex-center;
+        float: right;
+        margin-bottom: 20px;
+
+        .is-stock-box {
+            @include flex-center;
+            font-size: 16px;
+            border: 2px solid rgb(219, 219, 219);
+            border-radius: 30px;
+            padding: 7px 10px;
+            gap: 8px;
+        }
+
+        select {
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: 500;
+            font-size: 16px;
+            border: 2px solid rgb(219, 219, 219);
+            border-radius: 30px;
+        }
+    }
+
+    .category-filter-bar {
+        width: 100%;
+        @include flex;
+        padding: 0px 10px;
+        justify-content: center;
+
+        .filter-box {
+            border: 2px solid rgb(235, 235, 235);
+            border-radius: 10px;
+            width: 80%;
+           
+
+            .brands-box{
+            }
+        }
+    }
+
+
+    .category-products {
+        width: 100%;
+        @include flex-row;
+
+        .category-filter-bar {
+            width: 30%;
+        }
+
+        .category-products-bar {
+            border: 2px solid rgb(200, 128, 52);
+            width: 70%;
+
+            .products-box {
+                @include flex-row;
+                gap: 20px;
+                padding: 0px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    }
+
+}
