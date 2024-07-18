@@ -33,7 +33,7 @@ function ProductCard() {
             </div>
             <div className='original-price-box'>
                 <strike>350$</strike>
-                <span>%70</span>
+                <span>%50</span>
             </div>
             <p className='discount-price'>
                 175₺
