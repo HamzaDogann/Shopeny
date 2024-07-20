@@ -1,21 +1,21 @@
 import React from 'react'
-import "./ProductDetails.scss";
 import { useParams } from 'react-router-dom';
-
+import Product from '../../features/ProductDetailsPageComponents/Product';
+import TechnicialSpecifications from '../../features/ProductDetailsPageComponents/TechnicialSpecifications';
+import ProductComments from '../../features/ProductDetailsPageComponents/ProductComments';
+import AddComment from '../../features/ProductDetailsPageComponents/AddComment';
+import "./ProductDetails.scss";
 function ProductDetails() {
 
     const { categoryName, productName } = useParams();
 
     return (
-        <div>
-            <h2>Ürün Resimleri</h2>
-            <h4>Ürün Marka ve Adı</h4>
-            <h4>Fiyat, Sepete ekle bilgileri</h4>
-            <hr />
-            <h1>Teknik Özellikler</h1>
-            <hr />
-            <h1>Yorumlar </h1>
-        </div>
+        <>
+            <Product />
+            <TechnicialSpecifications />
+            <ProductComments />
+            <AddComment />
+        </>
     )
 }
 

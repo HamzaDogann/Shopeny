@@ -1,0 +1,231 @@
+@import "../../shared/styles/main.scss";
+
+// ----- Product -----\\
+
+.product-general-box {
+    margin-top: 10px;
+    padding: 25px;
+    @include flex-center;
+
+    .product-box {
+        background-color: rgb(243, 243, 243);
+        width: 85%;
+        border-radius: 20px;
+        padding: 25px 35px;
+        @include flex-row;
+
+        .product-image-box {
+            width: 55%;
+
+        }
+
+        .product-details-box {
+            width: 45%;
+            position: relative;
+
+            .about-the-product {
+                margin-top: 30px;
+                width: 100%;
+
+                .product-brand {
+                    color: rgb(120, 120, 120);
+                    font-weight: 500;
+                    font-size: 22px;
+                }
+
+                .product-name {
+                    margin: 10px 0px;
+                    color: rgb(60, 60, 60);
+                    font-size: 26px;
+                    font-weight: 600;
+                }
+
+                .product-description {
+                    color: rgb(79, 79, 79);
+                    font-size: 15px;
+                    font-weight: 500;
+
+                }
+
+                .reviews-box {
+                    @include flex-row;
+                    gap: 15px;
+
+                    .rating-box {
+                        background-color: rgba(230, 230, 230, 0.679);
+                        padding: 5px 10px;
+                        padding-right: 13px;
+                        border-radius: 30px;
+                        @include flex-align;
+                        gap: 7px;
+                        font-weight: 600;
+                        margin-top: 10px;
+                        margin-bottom: 5px;
+
+                    }
+
+                    .comment-status {
+                        @include flex-row;
+                        align-items: center;
+                        gap: 7px;
+                        border-radius: 5px;
+                        background-color: rgba(230, 230, 230, 0.679);
+                        color: rgb(59, 59, 59);
+                        font-size: 15px;
+                        padding: 5px 10px;
+                        font-weight: 500;
+                        margin-top: 10px;
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .reviews-box {
+                    margin-top: 10px;
+                }
+
+
+                .distinction {
+                    background-color: rgb(231, 231, 231);
+                    border-radius: 30px;
+                    height: 8px;
+                    width: 100%;
+                    margin-top: 18px;
+                }
+
+            }
+
+            .product-buy-process-box {
+                margin-top: 15px;
+
+                .color-title {
+                    font-weight: 500;
+                    font-size: 18px;
+                    margin-bottom: 10px
+                }
+
+                .choose-color-box {
+                    @include flex-row;
+                    gap: 15px;
+
+
+                    button {
+                        width: 40px;
+                        height: 29px;
+                        border-radius: 12px;
+                        transition: all 0.2s ease-in-out;
+                    }
+                }
+
+                .product-price-info {
+                    margin-top: 18px;
+                    @include flex-row;
+                    align-items: center;
+                    gap: 15px;
+
+                    strike {
+                        font-size: 20px;
+                        font-weight: 500;
+                        color: rgb(158, 158, 158);
+                    }
+
+                    .discount {
+                        @include flex-center;
+                        gap: 5px;
+                        padding: 2px 10px;
+                        background-color: rgba(251, 196, 164, 0.708);
+                        color: $shopenyOrange;
+                        font-size: 16px;
+                        font-weight: 600;
+                        border-radius: 5px;
+                    }
+
+                }
+
+                // background-color: rgba(230, 230, 230, 0.679);
+                .discounted-price {
+                    margin-top: 5px;
+                    font-size: 29px;
+                    font-weight: 500;
+                    color: rgb(60, 60, 60);
+                }
+
+                .amount-and-add-basket-box {
+                    margin-top: 10px;
+                    @include flex-row;
+                    align-items: center;
+                    gap: 20px;
+                    font-size: 20px;
+
+                    .amount-box {
+                        background-color: rgba(230, 230, 230, 0.679);
+                        @include flex-row-center;
+                        border-radius: 30px;
+                        width: 140px;
+                        justify-content: space-between;
+                        padding: 4px 5px;
+                        @include click-scale(1.1, 0.2s);
+
+                        button {
+                            background-color: rgba(220, 220, 220, 0.679);
+                            border-radius: 50%;
+                            font-size: 22px;
+                            padding: 0px 11px;
+                            color: $shopenyOrange;
+
+                            @include click-scale(0.8, 0.3s);
+                            @include shopenyOrangeBackgroundHoverEffect;
+                        }
+
+                        .amount-value {
+                            color: rgb(75, 75, 75);
+                            font-weight: 500;
+                        }
+
+
+                    }
+
+                    .add-basket {
+                        @include flex-center;
+                        gap: 7px;
+                        font-size: 24px;
+                        background-color: $shopenyBlue;
+                        color: rgb(255, 255, 255);
+                        border-radius: 30px;
+                        padding: 8px 15px;
+                       
+
+                        &:hover {
+                            transition: all 0.3s ease-in-out;
+                            background-color: #4664dd;
+                        }
+
+                        @include click-scale(0.7, 0.3s);
+
+                        span {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+
+            .top-buttons {
+                position: absolute;
+                top: 0;
+                right: 0;
+                @include flex-row-center;
+                gap: 10px;
+
+                button {
+                    @include flex-center;
+                    background-color: rgb(225, 225, 225);
+                    border-radius: 7px;
+                    font-size: 24px;
+                    padding: 4px;
+                    cursor: pointer;
+                    color: rgb(135, 135, 135);
+                    @include click-scale(0.7, 0.2s);
+                }
+            }
+        }
+    }
+}
