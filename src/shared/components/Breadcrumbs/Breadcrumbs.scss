@@ -9,6 +9,10 @@
     justify-content: center;
     background: linear-gradient(30deg, $shopenyOrange 25%, $shopenyBlue);
 
+    @media (max-width:768px) {
+        display: none;
+    }
+
     .breadcrumbs-box {
 
         width: 1430px;
@@ -44,7 +48,7 @@
                 }
 
                 &.breadcrumb-item {
-                   color: rgb(255, 255, 255);
+                    color: rgb(255, 255, 255);
                 }
             }
         }

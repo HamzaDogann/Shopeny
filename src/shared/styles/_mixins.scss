@@ -132,6 +132,27 @@
   }
 }
 
+//Move and Opaticy
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@mixin move-opacity-effect($duration) {
+  animation: fadeInUp $duration ease-in-out;
+}
+
+
+
+//Click
+
 @mixin click-scale($scale: 0.8, $duration: 0.6s) {
   transition: transform $duration ease;
   &:active {

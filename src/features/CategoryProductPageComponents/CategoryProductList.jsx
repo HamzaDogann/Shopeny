@@ -81,7 +81,6 @@ const ProductList = memo(() => {
                 {currentProducts.map((product) => (
                     <div key={product.id} className="product-card">
                         <h2>{product.name}</h2>
-                    
                     </div>
                 ))}
             </div>

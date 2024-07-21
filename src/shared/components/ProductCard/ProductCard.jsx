@@ -5,10 +5,19 @@ import Stack from '@mui/material/Stack';
 import { MdShoppingCart } from "react-icons/md";
 import ProductImage from "../../../assets/images/MacbookPro.png"
 import { MdFavorite } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+
 
 function ProductCard() {
+
+    const navigate = useNavigate();
+
+    const handleProduct = () => {
+        navigate('/bilgisayar/macbook');
+    }
+
     return (
-        <div className='product-card'>
+        <div onClick={handleProduct} className='product-card'>
 
             <button className='add-favorite-btn' >
                 <MdFavorite />
@@ -17,7 +26,7 @@ function ProductCard() {
             <button className='remove-favorite-btn' >
                 <MdFavorite />
             </button>
-            
+
             <div className='image-box'>
                 <img src={ProductImage} />
             </div>

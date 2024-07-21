@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useLocation, Navigate, Route, Routes } from "react-router-dom";
+import {Navigate, Route, Routes } from "react-router-dom";
 import FAQ from "../pages/HelpAndSupportPage/FAQ/FAQ.jsx";
 import PrivacyPolicy from "../pages/HelpAndSupportPage/PrivacyPolicy/PrivacyPolicy.jsx";
 import DeliveryInformation from "../pages/HelpAndSupportPage/DeliveryInformation/DeliveryInformation.jsx";
 import ReturnAndExchangePolicy from "../pages/HelpAndSupportPage/ReturnAndExchangePolicy/ReturnAndExchangePolicy.jsx";
 
 function HelpAndSupportRoutes() {
- 
+
   return (
     <Routes>
       <Route path="/" element={<FAQ />} />

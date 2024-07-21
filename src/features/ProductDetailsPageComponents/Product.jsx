@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import { TfiCommentAlt } from "react-icons/tfi";
-import { TbShoppingCartPlus } from "react-icons/tb";
+import { HiMiniShoppingBag } from "react-icons/hi2";
+import { TiShoppingCart } from "react-icons/ti";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { HiShoppingCart } from "react-icons/hi";
+
 import { MdFavorite } from "react-icons/md";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
 
+
 import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts"
+import ProductSlider from './ProductSlider';
 
 function Product() {
 
@@ -31,7 +37,7 @@ function Product() {
     const copyUrl = () => {
         const currentUrl = window.location.href;
         navigator.clipboard.writeText(currentUrl).then(() => {
-           customSuccessToast("Bağlantı Kopyalandı");
+            customSuccessToast("Bağlantı Kopyalandı");
         }).catch(err => {
             customErrorToast("Bağlantı Kopyalanamadı");
         });
@@ -56,7 +62,7 @@ function Product() {
         <div className='product-general-box'>
             <div className='product-box'>
                 <div className='product-image-box'>
-
+                    <ProductSlider />
                 </div>
                 <div className='product-details-box'>
                     <div className='about-the-product'>
@@ -75,10 +81,8 @@ function Product() {
                         </div>
                         <p className='distinction'></p>
                     </div>
-
-
                     <div className='product-buy-process-box'>
-                        <p className='color-title'>Renk</p>
+                        <p className='color-title'>Renkler</p>
                         <div className='choose-color-box'>
                             {colors.map((color) => (
                                 <button
@@ -108,7 +112,7 @@ function Product() {
                             </div>
 
                             <button className='add-basket'>
-                                <TbShoppingCartPlus />
+                                <HiMiniShoppingBag />
                                 <span>Sepete Ekle</span>
                             </button>
                         </div>

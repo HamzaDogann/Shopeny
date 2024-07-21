@@ -14,8 +14,6 @@ const Breadcrumbs = () => {
         return null;
     }
 
-    // İlk harfi büyük yapma fonksiyonu ve '-' karakterlerini boşluk ile değiştirme
-    // İlk harfi büyük yapma fonksiyonu ve '-' karakterlerini boşluk ile değiştirme
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1).replace(/-/g, ' ');
     };
