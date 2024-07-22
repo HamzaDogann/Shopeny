@@ -1,0 +1,201 @@
+@import "../../styles/main.scss";
+
+.basket-information-box {
+    background-color: $shopenySmoothWhite;
+    padding: 10px 35px 15px 35px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+
+    @media (max-width:450px) {
+        border-radius: 0px;
+        border-top: 4px solid $shopenyOrange;
+        padding-top: 40px;
+        background-color: transparent;
+        padding: 25px 0px 15px 0px;
+    }
+
+    h2 {
+        font-size: 20px;
+        font-weight: 600;
+        color: rgb(69, 74, 77);
+        margin: 12px 0px;
+
+        @media (max-width:1200px) {
+            font-size: 17px;
+        }
+    }
+
+    .dividing-line {
+        border-radius: 30px;
+        background-color: rgb(229, 229, 229);
+        width: 100%;
+        height: 4px;
+        margin: 10px 0px;
+    }
+
+    .product-amount-and-price-box {
+        @include flex-row-center;
+        justify-content: space-between;
+
+        p {
+            font-size: 17px;
+            font-weight: 500;
+            color: rgb(105, 105, 105);
+
+            @media (max-width:1200px) {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .choose-cargo-box {
+        select {
+            width: 100%;
+            border-radius: 4px;
+            border: 0;
+            padding-left: 10px;
+            font-size: 15px;
+            background-color: $shopenySmoothWhite;
+            border: 3px solid rgb(223, 223, 223);
+            cursor: pointer;
+
+            @media (max-width:1200px) {
+                font-size: 10px;
+            }
+
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+            margin-left: 5px;
+            color: rgb(105, 105, 105);
+            font-weight: 500;
+
+            @media (max-width:1200px) {
+                font-size: 10px;
+            }
+        }
+    }
+
+    .promotion-box {
+
+        input {
+            width: 100%;
+            border-radius: 4px;
+            border: 0;
+            padding-left: 10px;
+            font-size: 15px;
+            background-color: $shopenySmoothWhite;
+            border: 3px solid rgb(223, 223, 223);
+
+            @media (max-width:1200px) {
+                font-size: 10px;
+            }
+        }
+
+        .confirm-promotion-btn {
+            margin-top: 10px;
+            background-color: rgb(226, 226, 226);
+            color: rgb(115, 115, 115);
+            font-weight: 500;
+            padding: 5px 11px;
+            font-size: 15px;
+            border-radius: 4px;
+            @include click-scale(0.8, 0.3s);
+
+            @media (max-width:1200px) {
+                font-size: 10px;
+            }
+
+            @media (max-width:500px) {
+                padding: 8px 11px;
+                width: 100%;
+            }
+        }
+    }
+
+    .total-promotion-and-cargo-prices-box {
+        @include flex-column;
+        gap: 10px;
+
+        .price-box {
+            @include flex-row-center;
+            justify-content: space-between;
+
+            p,
+            span {
+                font-size: 15px;
+                font-weight: 500;
+                color: rgb(105, 105, 105);
+
+                @media (max-width:1200px) {
+                    font-size: 12px;
+                }
+            }
+
+            .promotion-discount {
+                color: rgb(47, 180, 96);
+            }
+
+            .cargo-price {
+                color: rgb(235, 90, 90);
+            }
+        }
+
+    }
+
+    .basket-total-price-box {
+        margin-top: 20px;
+        @include flex-row-center;
+        justify-content: space-between;
+        color: rgb(105, 105, 105);
+
+        p {
+            font-size: 18px;
+            font-weight: 500;
+
+            @media (max-width:1200px) {
+                font-size: 13px;
+            }
+        }
+
+        .total-price {
+            font-size: 22px;
+            color: rgb(52, 52, 52);
+
+            @media (max-width:1200px) {
+                font-size: 17px;
+            }
+        }
+    }
+
+    .checkout-button-box {
+        margin-top: 20px;
+        @include flex-row-center;
+        justify-content: center;
+
+        .checkout-btn {
+            padding: 8px 16px;
+            background-color: $shopenyOrange;
+            color: white;
+            border-radius: 20px;
+            width: 160px;
+            font-weight: 500;
+            @include click-scale(0.8, 0.5s);
+
+            &:hover {
+                transition: 0.3s ease-in-out;
+                background-color: darken($shopenyOrange, 4%);
+            }
+
+            @media (max-width:500px) {
+                padding: 12px;
+                width: 60%;
+                border-radius: 30px;
+            }
+
+        }
+    }
+
+}

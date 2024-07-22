@@ -1,0 +1,383 @@
+@import "../../shared/styles/main.scss";
+
+.basket-general-box {
+
+    .top-box {
+        margin: 20px 70px;
+        @include flex-row-center;
+        justify-content: space-between;
+
+        @media (max-width:1000px) {
+            margin: 20px 0px;
+        }
+
+        .basket-title {
+            @include flex-row-center;
+            gap: 10px;
+            color: rgb(63, 63, 63);
+
+            .basket-icon {
+                font-size: 55px;
+
+                @media (max-width:1200px) {
+                    font-size: 40px;
+                }
+
+                @media (max-width:770px) {
+                    font-size: 24px;
+                }
+            }
+
+            p {
+                font-size: 46px;
+                font-weight: 500;
+
+                @media (max-width:1200px) {
+                    font-size: 40px;
+                }
+
+                @media (max-width:770px) {
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .clear-basket-btn {
+            @include flex-row-center;
+            gap: 5px;
+            border-radius: 30px;
+            color: rgb(81, 81, 81);
+            background-color: $shopenySmoothWhite;
+            padding: 11px 18px;
+            @include click-scale(0.8, 0.4s);
+
+            @media (max-width:770px) {
+                padding: 9px 15px;
+            }
+
+
+            &:hover {
+                background-color: rgba(243, 72, 72, 0.867);
+                color: rgb(255, 255, 255);
+            }
+
+            .delete-icon {
+                font-size: 24px;
+
+                @media (max-width:770px) {
+                    font-size: 20px;
+                }
+            }
+
+            span {
+                font-size: 16px;
+                font-weight: 500;
+
+                @media (max-width:770px) {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+
+    .basket-boxs {
+        border-top: 5px solid rgb(237, 237, 237);
+        padding: 40px 50px;
+        @include flex-row;
+        justify-content: center;
+
+
+        @media (max-width:1450px) {
+            padding: 40px 0px;
+        }
+
+        @media (max-width:1150px) {
+            @include flex-column;
+            justify-content: center;
+            padding: 40px 130px;
+        }
+
+        @media (max-width:1000px) {
+            padding: 40px 0px;
+        }
+
+        @media (max-width:770px) {
+            border-top: 0px;
+            padding: 0px;
+        }
+
+        .products-box {
+            width: 60%;
+            @include flex-column;
+            gap: 20px;
+
+            @media (max-width:1150px) {
+                width: 100%;
+                padding: 0px;
+            }
+
+            .basket-product {
+                @include flex-row-center;
+                background-color: $shopenySmoothWhite;
+                border-radius: 30px;
+                height: 140px;
+                padding: 0px 20px;
+                position: relative;
+                font-weight: 500;
+
+                @media (max-width:1350px) {
+                    height: 120px;
+                }
+
+                @media (max-width:770px) {
+                    height: 100px;
+                    border-radius: 5px;
+                    padding: 0px 10px;
+                }
+
+                img {
+                    width: 110px;
+                    height: 110px;
+                    border-radius: 21px;
+                    cursor: pointer;
+
+                    @media (max-width:1350px) {
+                        width: 90px;
+                        height: 90px;
+                    }
+
+                    @media (max-width:770px) {
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 5px;
+                    }
+        
+                }
+
+                .product-infos-box {
+                    padding-top: 10px;
+                    margin-left: 16px;
+                    @include flex-column;
+                    gap: 2px;
+
+                    @media (max-width:770px) {
+                        margin-left: 8px;
+                    }
+
+                    .product-brand {
+                        color: rgb(125, 125, 125);
+                        font-size: 17px;
+
+                        @media (max-width:1350px) {
+                            font-size: 15px;
+                        }
+
+                        @media (max-width:1200px) {
+                            font-size: 13px;
+                        }
+
+                        @media (max-width:770px) {
+                            font-size: 9px;
+                        }
+    
+
+                    }
+
+                    .product-name {
+                        font-size: 20px;
+                        color: rgb(74, 80, 90);
+                        cursor: pointer;
+
+                        @media (max-width:1350px) {
+                            font-size: 17px;
+                        }
+
+                        @media (max-width:1200px) {
+                            font-size: 15px;
+                        }
+                        @media (max-width:770px) {
+                            font-size: 11px;
+                        }
+
+                    }
+
+                    .product-price {
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: rgb(100, 100, 100);
+
+                        @media (max-width:1350px) {
+                            font-size: 14px;
+                        }
+
+                        @media (max-width:1200px) {
+                            font-size: 12px;
+                        }
+
+                        @media (max-width:770px) {
+                            font-size:8px;
+                        }
+                    }
+
+                    .product-color {
+                        border-radius: 30px;
+                        border: 3px solid rgb(212, 212, 212);
+                        width: 40px;
+                        height: 20px;
+
+                        @media (max-width:770px) {
+                            width: 25px;
+                            height:15px;
+                        }
+                    }
+                }
+
+                .amount-box {
+                    margin-left: 30px;
+                    background-color: rgba(230, 230, 230, 0.679);
+                    @include flex-row-center;
+                    border-radius: 30px;
+                    width: 130px;
+                    justify-content: space-between;
+                    padding: 4px 5px;
+
+
+                    @media (max-width:1350px) {
+                        scale: 0.8;
+                    }
+
+
+                    @media (max-width:600px) {
+                        position: absolute;
+                        bottom: 0px;
+                        left: 70px;
+                        scale: 0.7;
+                    }
+
+                    @media (max-width:450px) {
+                        left: 120px;
+                        
+                    }
+            
+                    @media (max-width:400px) {
+                        left: 90px;
+                    }
+            
+
+                    @media (max-width:360px) {
+                        scale: 0.5;
+                        left: 65px;
+                    }
+                
+                    button {
+                        background-color: rgba(220, 220, 220, 0.679);
+                        border-radius: 50%;
+                        font-size: 20px;
+                        padding: 1px 11px;
+                        color: $shopenyOrange;
+                        @include shopenyOrangeBackgroundHoverEffect;
+
+                    }
+
+                    .amount-value {
+                        color: rgb(75, 75, 75);
+                        font-weight: 500;
+                    }
+                }
+
+                .total-price {
+                    position: absolute;
+                    bottom: 12px;
+                    right: 18px;
+                    @include flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    @media (max-width:600px) {
+                        bottom: 6px;
+                        right: 10px;
+                    }
+                    @media (max-width:360px) {
+                        bottom: 8px;
+                        right: 10px;
+                    }
+
+                    p {
+                        margin-top: 10px;
+                        background-color: rgb(230, 230, 230);
+                        padding: 7px 15px;
+                        border-radius: 30px;
+                        font-size: 16px;
+                        color: $shopenyBlue;
+                        font-weight: 600;
+
+
+                        @media (max-width:1350px) {
+                            font-size: 14px;
+                        }
+
+                        @media (max-width:600px) {
+                            font-size: 8px;
+                        }
+
+                        @media (max-width:360px) {
+                            font-size: 5px;
+                            padding: 5px 10px;
+                        }
+                    }
+                }
+
+                .remove-product-from-basket-btn {
+                    position: absolute;
+                    top: 18px;
+                    right: 17px;
+                    font-size: 20px;
+                    padding: 8px;
+                    border-radius: 10px;
+                    background-color: rgb(219, 219, 219);
+                    @include flex-center;
+                    color: rgb(118, 118, 118);
+                    font-size: 22px;
+                    @include click-scale(0.7, 0.4s);
+
+                    &:hover {
+                        background-color: rgba(243, 72, 72, 0.867);
+                        color: white;
+                    }
+
+                    @media (max-width:770px) {
+                        top: 12px;
+                        right:10px;
+                        font-size: 16px;
+                    }
+
+                    @media (max-width:360px) {
+                        font-size: 12px;
+                        padding: 5px;
+                        border-radius: 5px;
+                    }
+
+                }
+            }
+        }
+
+        .basket-info-box {
+            width: 30%;
+            margin-left: 50px;
+            padding: 0px 20px;
+
+            @media (max-width:1150px) {
+                margin-left: 0px;
+                width: 100%;
+                padding: 0px 100px;
+                margin-top: 50px;
+            }
+
+            @media (max-width:1000px) {
+                padding: 0px;
+            }
+        }
+    }
+
+
+}

@@ -8,7 +8,7 @@ function AddComment() {
         <p className="title">Bu ürüne bir yorum ekleyin</p>
       </div>
       <div className='warning-box'>
-          <p>Bu ürüne bir yorum yapabilmek için önce bu ürünü satın almalısınız.</p>
+        <p>Bu ürüne bir yorum yapabilmek için önce bu ürünü satın almalısınız.</p>
       </div>
     </div>
   )

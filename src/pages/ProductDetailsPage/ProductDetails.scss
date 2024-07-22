@@ -12,7 +12,6 @@
         padding: 10px 0px;
     }
 
-
 }
 
 .product-titles-box {
@@ -73,7 +72,7 @@
         }
 
         @media (max-width:500px) {
-            padding: 25px 5px;
+            padding: 0px 5px;
             background-color: rgb(255, 255, 255);
         }
 
@@ -430,10 +429,10 @@
                         padding: 8px 24px;
 
                         @media (max-width:500px) {
-                            padding: 10px 0px;
+                            padding: 13px 0px;
                             width: 80%;
                             border-radius: 30px;
-                            font-size: 30px;
+                            font-size: 28px;
                         }
 
                         &:hover {

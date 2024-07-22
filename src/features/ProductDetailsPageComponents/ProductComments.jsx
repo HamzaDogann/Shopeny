@@ -69,13 +69,13 @@ function ProductComments() {
           <div className='comment-user-and-rating-info-box'>
             <CommentUser name="Hasan Emre Doğan" limit={12} />
             <div className='comment-rating-box'>
-            <Rating name="half-rating-read" defaultValue={0.5} precision={0.5} readOnly size='small' />
+            <Rating name="half-rating-read" defaultValue={5} precision={0.5} readOnly size='small' />
             </div>
           </div>
 
           <p className='dividing-line'></p>
           <div className='user-comment'>
-            <p>Ben bu ürünü beğenmedim! Roblox oynayamıyorum.</p>
+            <p>Ben bu bilgisayarı çok sevdim. Minecraft oynayabilirim </p>
           </div>
           <div className='comment-date-box'>
             <MdOutlineDateRange style={{ fontSize: "20px" }} />

@@ -38,7 +38,7 @@ function App() {
             <Header />
             <Categories />
           </Container>
-            <Breadcrumbs />
+          <Breadcrumbs />
           <Container>
             <AppRoutes />
           </Container>
