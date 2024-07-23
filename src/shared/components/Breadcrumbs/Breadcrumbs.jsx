@@ -6,10 +6,8 @@ const Breadcrumbs = () => {
     const location = useLocation();
     const { pathname } = location;
 
-    // Patikayı parçalayarak her bir segmenti alıyoruz
     const pathnames = pathname.split('/').filter(x => x);
 
-    // Eğer sadece anasayfa ise Breadcrumbs render etme
     if (pathname === '/') {
         return null;
     }

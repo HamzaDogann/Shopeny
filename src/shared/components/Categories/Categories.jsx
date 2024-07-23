@@ -27,7 +27,7 @@ const Categories = React.memo(() => {
         setCategoryMenu(false);
     }, [location]);
 
-    if (location.pathname.includes("hesabim") || location.pathname.includes("sepetim") || location.pathname.includes("odeme-islemleri")) {
+    if (location.pathname.includes("hesabim") || location.pathname.includes("sepetim") || location.pathname.includes("favori-urunler") || location.pathname.includes("odeme-islemleri")) {
         return null;
     }
 

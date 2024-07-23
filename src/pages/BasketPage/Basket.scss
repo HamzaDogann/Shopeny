@@ -80,6 +80,43 @@
         }
     }
 
+
+    .there-are-no-content-box {
+        width: 100%;
+        height: 300px;
+        @include flex-column;
+        align-items: center;
+        justify-content: center;
+        color: rgb(153, 153, 153);
+        font-size: 20px;
+        font-weight: 500;
+
+        @media (max-width:750px) {
+            font-size: 16px;
+            height: 100px;
+            margin-top: 40px;
+        }
+
+        a {
+            font-size: 16px;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: $shopenyOrange;
+            color: white;
+            border-radius: 30px;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                background-color: darken($shopenyOrange, 4%);
+            }
+
+            @media (max-width:750px) {
+                font-size: 14px;
+            }
+
+        }
+    }
+
     .basket-boxs {
         border-top: 5px solid rgb(237, 237, 237);
         padding: 40px 50px;
@@ -151,7 +188,7 @@
                         height: 60px;
                         border-radius: 5px;
                     }
-        
+
                 }
 
                 .product-infos-box {
@@ -179,7 +216,7 @@
                         @media (max-width:770px) {
                             font-size: 9px;
                         }
-    
+
 
                     }
 
@@ -195,6 +232,7 @@
                         @media (max-width:1200px) {
                             font-size: 15px;
                         }
+
                         @media (max-width:770px) {
                             font-size: 11px;
                         }
@@ -215,7 +253,7 @@
                         }
 
                         @media (max-width:770px) {
-                            font-size:8px;
+                            font-size: 8px;
                         }
                     }
 
@@ -227,7 +265,7 @@
 
                         @media (max-width:770px) {
                             width: 25px;
-                            height:15px;
+                            height: 15px;
                         }
                     }
                 }
@@ -256,19 +294,19 @@
 
                     @media (max-width:450px) {
                         left: 120px;
-                        
+
                     }
-            
+
                     @media (max-width:400px) {
                         left: 90px;
                     }
-            
+
 
                     @media (max-width:360px) {
                         scale: 0.5;
                         left: 65px;
                     }
-                
+
                     button {
                         background-color: rgba(220, 220, 220, 0.679);
                         border-radius: 50%;
@@ -297,6 +335,7 @@
                         bottom: 6px;
                         right: 10px;
                     }
+
                     @media (max-width:360px) {
                         bottom: 8px;
                         right: 10px;
@@ -347,7 +386,7 @@
 
                     @media (max-width:770px) {
                         top: 12px;
-                        right:10px;
+                        right: 10px;
                         font-size: 16px;
                     }
 
