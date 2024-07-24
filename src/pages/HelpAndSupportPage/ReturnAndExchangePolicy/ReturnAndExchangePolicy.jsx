@@ -3,7 +3,9 @@ import "./ReturnAndExchangePolicy.scss";
 
 function ReturnAndExchangePolicy() {
   return (
-    <div>ReturnAndExchangePolicy</div>
+    <div>
+      <h2>İade ve Değişim Politikası</h2>
+    </div>
   )
 }
 

@@ -1,15 +1,15 @@
-import ShopenyBag from "../../assets/logo/ShopenyBag.png";
+import { Link } from "react-router-dom";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
 import BasketProduct from "../../features/BasketPageComponents/BasketProduct";
 import BasketInformations from "../../shared/components/BasketInfo/BasketInformations";
 
 import "./Basket.scss";
-import { Link } from "react-router-dom";
+
 
 function Basket() {
 
-  const basketProduct = false;
+  const basketProduct = true;
 
   return (
     <div className="basket-general-box">

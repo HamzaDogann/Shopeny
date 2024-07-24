@@ -16,7 +16,6 @@ import { RiCloseCircleFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 
 
-
 const Categories = React.memo(() => {
 
     const [categoryMenu, setCategoryMenu] = useState(false);
@@ -27,9 +26,19 @@ const Categories = React.memo(() => {
         setCategoryMenu(false);
     }, [location]);
 
-    if (location.pathname.includes("hesabim") || location.pathname.includes("sepetim") || location.pathname.includes("favori-urunler") || location.pathname.includes("odeme-islemleri")) {
+    const hiddenPaths = [
+        "hesabim",
+        "sepetim",
+        "favori-urunler",
+        "yardim-ve-destek",
+        "odeme-islemleri"
+      ];
+    
+      const shouldHideComponent = hiddenPaths.some(path => location.pathname.includes(path));
+    
+      if (shouldHideComponent) {
         return null;
-    }
+      }
 
     return (
         <>

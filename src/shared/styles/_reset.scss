@@ -9,7 +9,7 @@
 body,
 ul,
 ol,
-p {
+p{
   margin: 0;
   padding: 0;
 }
@@ -29,6 +29,10 @@ a {
 // Reset list item styles
 li {
   list-style: none;
+}
+
+h2{
+  font-weight: 500;
 }
 
 button {

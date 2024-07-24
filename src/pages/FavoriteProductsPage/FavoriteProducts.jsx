@@ -15,7 +15,7 @@ function FavoriteProducts() {
 
   //Favori Ürün olup olmadgığına göre conditional rendering yapıcaz
   //!Denemelik
-  const favoriteProducts = false;
+  const favoriteProducts = true;
 
   useEffect(() => {
     const updateItemsPerPage = () => {

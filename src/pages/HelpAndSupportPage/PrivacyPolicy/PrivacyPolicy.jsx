@@ -2,7 +2,9 @@ import React from 'react'
 import "./PrivacyPolicy.scss";
 function PrivacyPolicy() {
     return (
-        <div>PrivacyPolicy</div>
+        <div>
+             <h2>Gizlilik Politikası</h2>
+        </div>
     )
 }
 

@@ -3,7 +3,10 @@ import "./DeliveryInformation.scss";
 
 function DeliveryInformation() {
   return (
-    <div>DeliveryInformation</div>
+    <div>
+        <h2>Teslimat Bilgisi</h2>
+        
+    </div>
   )
 }
 
