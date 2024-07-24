@@ -1,0 +1,93 @@
+@import "../../../shared/styles/main.scss";
+
+.delivery-information-box {
+
+    p {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 30px;
+        color: rgb(85, 85, 85);
+    }
+
+    h4 {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 42px 0 15px 0px;
+    }
+
+    h5 {
+        font-weight: 500;
+        font-size: 16px;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+
+    .advantages-box {
+        margin-top: 37px;
+        width: 100%;
+        @include flex-row-center;
+        justify-content: space-between;
+        padding: 0px 50px 0px;
+        background-color: rgba(234, 234, 234, 0.427);
+        border-radius: 10px;
+
+        .advantage {
+            @include flex-row-center;
+            gap: 10px;
+
+
+            img {
+                width: 80px;
+                height: 80px;
+            }
+
+            span {
+                font-weight: 500;
+                color: rgb(83, 83, 83);
+            }
+        }
+
+        .advantage:nth-child(2) {
+            img {
+                width: 60px;
+                height: 58px;
+            }
+        }
+
+        .advantage:nth-child(3) {
+            img {
+                width: 65px;
+                height: 58px;
+            }
+
+        }
+    }
+
+    ul {
+        @include flex-column;
+        gap: 20px;
+        padding-left: 5px;
+        padding-top: 5px;
+
+        li {
+            color: rgb(85, 85, 85);
+            list-style: inside;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 30px;
+        }
+    }
+
+
+    .cargo-box {
+        margin-top: 30px;
+        @include flex-row-center;
+
+        .shopeny-cargo-truck {
+            width: 370px;
+            margin-right: 20px;
+        }
+
+    }
+
+}

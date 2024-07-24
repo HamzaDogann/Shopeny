@@ -1,0 +1,72 @@
+@import "../../../shared/styles/main.scss";
+
+.faq-box {
+    .questions {
+      .question-item {
+        margin-bottom: 1rem;
+        border: 2px solid #eaeaea;
+        border-radius:12px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: box-shadow 0.3s ease-in-out;
+  
+        &:hover {
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+  
+        .question-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.75rem 1rem;
+          background-color: #f9f9f9;
+          transition: background-color 0.6s ease;
+  
+          h3 {
+            margin: 0;
+            font-weight: 500;
+            font-size: 17px;
+            color: $shopenyDarkGray;
+          }
+  
+          .icon {
+            font-size: 22px;
+            border: 2px solid rgb(227, 227, 227);
+            border-radius: 30px;
+            padding: 3px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.6s ease;
+  
+            transform: rotate(0deg);
+  
+            &.open {
+              transform: rotate(180deg); 
+            }
+          }
+        }
+  
+        .answer {
+          padding: 0 1rem;
+          background-color: #fff;
+          max-height: 0;
+          opacity: 0;
+          overflow: hidden;
+          transition: max-height 0.7s ease, opacity 0.6s ease-in-out;
+  
+          p {
+            margin: 1rem 0;
+            font-size: 16px;
+            font-weight: 500;
+            color: rgb(85, 85, 85);
+          }
+        }
+  
+        .answer.open {
+          max-height: 200px; 
+          opacity: 1;
+        }
+      }
+    }
+  }
+  

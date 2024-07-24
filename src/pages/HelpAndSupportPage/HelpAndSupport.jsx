@@ -1,8 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../features/HelpAndSupportPageComponents/Sidebar.jsx";
-import "./HelpAndSupport.scss";
 import { MdSupportAgent } from "react-icons/md";
-
+import "./HelpAndSupport.scss";
 
 function HelpAndSupport() {
   return (

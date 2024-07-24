@@ -1,0 +1,26 @@
+@import "../../../shared/styles/main.scss";
+
+.privacy-policy {
+    padding: 0px;
+    line-height: 1.6;
+    color: #333;
+    border-radius: 8px;
+
+    .privacy-section {
+        margin-bottom: 25px;
+
+        h3 {
+            color: #3c3c3c;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 30px;
+            color: rgb(85, 85, 85);
+        }
+    } 
+}

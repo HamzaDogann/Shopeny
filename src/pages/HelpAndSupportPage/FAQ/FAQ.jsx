@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import './FAQ.scss';
+import React, { useState, useCallback, memo } from 'react';
+import { IoIosArrowDown } from 'react-icons/io';
 import { questionsAnswers } from '../../../constants/FAQ';
 
-const FAQ = () => {
+import './FAQ.scss';
+
+const FAQ = memo(() => {
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const handleToggle = (index) => {
+  const handleToggle = useCallback((index) => {
     setActiveIndex(index === activeIndex ? null : index);
-  };
+  }, [activeIndex]);
 
   return (
     <div className='faq-box'>
@@ -21,26 +22,18 @@ const FAQ = () => {
               onClick={() => handleToggle(index)}
             >
               <h3>{qa.question}</h3>
-              <span>{activeIndex === index ? '-' : '+'}</span>
+              <span className={`icon ${activeIndex === index ? 'open' : ''}`}>
+                <IoIosArrowDown />
+              </span>
             </div>
-            <AnimatePresence>
-              {activeIndex === index && (
-                <motion.div
-                  className='answer'
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <p>{qa.answer}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div className={`answer ${activeIndex === index ? 'open' : ''}`}>
+              <p>{qa.answer}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
-};
+});
 
 export default FAQ;
