@@ -1,7 +1,7 @@
 @import "../../styles/main.scss";
 
 .basket-information-box {
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(247, 247, 247);
     padding: 10px 35px 15px 35px;
     padding-bottom: 20px;
     border-radius: 20px;
@@ -49,31 +49,83 @@
     }
 
     .choose-cargo-box {
-        select {
-            width: 100%;
-            border-radius: 4px;
-            border: 0;
-            padding-left: 10px;
-            font-size: 15px;
-            background-color: $shopenySmoothWhite;
-            border: 3px solid rgb(223, 223, 223);
+        .custom-select {
+            position: relative;
             cursor: pointer;
 
-            @media (max-width:1200px) {
-                font-size: 10px;
+            .selected-box {
+                display: flex;
+                align-items: center;
+                justify-content: space-between; // Alanı boşluklarla doldurur
+                padding: 10px;
+                border: 3px solid rgb(223, 223, 223);
+                border-radius: 4px;
+                background-color: rgb(247, 247, 247);
+                font-family: "Poppins";
+                font-size: 15px;
+                font-weight: 500;
+                color: $shopenyTextGray;
+
+                @media (max-width:1200px) {
+                    font-size: 12px;
+                    background-color: rgb(255, 255, 255);
+                }
             }
 
+            .dropdown-icon {
+                transition: transform 0.6s ease;
+                font-size: 23px;
+            }
+
+            .dropdown-icon.open {
+                transform: rotate(180deg); // 180 derece döndür
+            }
+
+            .select-options {
+                position: absolute;
+                border: 3px solid rgb(223, 223, 223);
+                top: 110%;
+                left: 0;
+                width: 100%;
+                background-color: rgb(247, 247, 247);
+                border-radius: 4px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+            }
+
+            .option {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                font-size: 14px;
+                
+                @media (max-width:1200px) {
+                    font-size: 12px;
+                    background-color: rgb(255, 255, 255);
+                }
+
+                &:hover {
+                    background-color: rgba(177, 177, 177, 0.138);
+                }
+
+                span {
+                    margin-left: 10px;
+
+                }
+            }
         }
 
-        p {
-            margin-top: 10px;
+        .fast-cargo-warning {
             font-size: 14px;
-            margin-left: 5px;
-            color: rgb(105, 105, 105);
             font-weight: 500;
-
+            margin-top: 10px;
+            padding-left: 5px;
+            color: $shopenyTextGray;
+         
             @media (max-width:1200px) {
-                font-size: 10px;
+                font-size: 12px;
             }
         }
     }
@@ -86,18 +138,21 @@
             border: 0;
             padding-left: 10px;
             font-size: 15px;
-            background-color: $shopenySmoothWhite;
+            background-color: rgb(247, 247, 247);
             border: 3px solid rgb(223, 223, 223);
+            font-weight: 500;
+            color: $shopenyTextGray;
 
             @media (max-width:1200px) {
-                font-size: 10px;
+                font-size: 12px;
+                background-color: rgb(255, 255, 255);
             }
         }
 
         .confirm-promotion-btn {
             margin-top: 10px;
-            background-color: rgb(226, 226, 226);
-            color: rgb(115, 115, 115);
+            background-color: rgb(235, 235, 235);
+            color: rgb(79, 79, 79);
             font-weight: 500;
             padding: 5px 11px;
             font-size: 15px;
@@ -105,7 +160,7 @@
             @include click-scale(0.8, 0.3s);
 
             @media (max-width:1200px) {
-                font-size: 10px;
+                font-size: 12px;
             }
 
             @media (max-width:500px) {

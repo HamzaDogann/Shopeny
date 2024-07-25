@@ -7,12 +7,17 @@
         font-size: 16px;
         line-height: 30px;
         color: rgb(85, 85, 85);
+
+        @media (max-width:1020px) {
+            font-size: 14px;
+         }
     }
 
     h4 {
         font-size: 20px;
         font-weight: 500;
         margin: 35px 0 15px 0px;
+        color: $shopenyTextGray;
     }
 
     h5 {
@@ -20,6 +25,7 @@
         font-size: 16px;
         margin: 0;
         margin-bottom: 15px;
+        color: $shopenyTextGray;
     }
 
 
@@ -34,6 +40,11 @@
              font-weight: 500;
              font-size: 15px;
              line-height: 30px;
+
+             @media (max-width:1020px) {
+                font-size: 14px;
+                list-style: none;
+             }
          }
      }
 }

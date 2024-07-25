@@ -7,7 +7,7 @@ function HelpAndSupport() {
   return (
     <div className="help-and-support-general-box">
       <div className="top-box">
-        <div className="basket-title">
+        <div className="help-and-support-title">
           <MdSupportAgent className="support-agent-icon" />
           <p>Yardım ve Destek</p>
         </div>
