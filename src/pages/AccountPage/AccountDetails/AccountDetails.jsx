@@ -1,32 +1,22 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
-import { authActions } from '../../../store/features/auth/authActions';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import GeneralUserDetailsCard from '../../../features/AccountPageComponents/GeneralUserDetailsCard';
+
+//Styles
+import "./AccountDetails.scss";
 
 function AccountDetails() {
     const user = useSelector(state => state.auth.user);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        dispatch(authActions.logout())
-            .then(() => {
-                navigate('/');
-            });
-    };
-
     return (
-        <div>
-            <h1>Hesap Bilgilerim</h1>
-            <hr />
-            <img src={user.profilePhotoURL} style={{ with: "140px", borderRadius: "50%" }} alt="" />
-            <p>{user.nameAndSurname}</p>
-            <p>Telefon Numarası: {user.phoneNumber}</p>
-            <hr />
-            <button onClick={handleLogout} style={{ borderRadius: "5px", backgroundColor: "tomato", padding: "6px", color: "white" }}>Çıkış yap</button>
+        <div className='account-details-box'>
+            <h2>Hesap Bilgilerim</h2>
+            <GeneralUserDetailsCard />
+            <div className='change-user-infos-box'>
+               
+            </div>
         </div>
-    )
+    );
 }
 
-export default AccountDetails
+export default AccountDetails;

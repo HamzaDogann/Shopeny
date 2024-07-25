@@ -2,7 +2,9 @@ import React from 'react'
 
 function Addresses() {
   return (
-    <div>Addresses</div>
+    <div className='addresses-box'>
+    <h2>Adreslerim</h2>
+</div>
   )
 }
 

@@ -1,0 +1,156 @@
+@import "./../../../shared/styles/main.scss";
+
+.account-details-box {
+    width: 100%;
+    .general-user-details-box {
+        @include flex-row-center;
+        background-color: rgba(243, 243, 243, 0.749);
+        padding: 15px 30px;
+        border-radius: 20px;
+        width: 80%;
+
+        .user-infos {
+            margin-left: 15px;
+            font-weight: 500;
+            @include flex-column;
+            gap:4px;
+
+            .user-name {
+                font-size: 23px;
+                color: $shopenyTextGray;
+            }
+
+            .user-email, .user-phone-number {
+                font-size: 15px;
+                color: rgb(116, 116, 116);
+            }
+        }
+
+
+
+    
+        .image-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+
+            img {
+                width: 120px;
+                border-radius: 50%;
+                border: 4px solid rgba(228, 228, 228, 0.886);
+                padding: 3px;
+            }
+    
+            .overlay {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(47, 47, 47, 0.196);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              opacity: 0;
+              transition: opacity 0.3s ease;
+              border-radius: 50%;
+              cursor: pointer;
+        
+              &:hover {
+                opacity: 1;
+              }
+        
+              .icon {
+                color: white;
+                font-size: 36px;
+              }
+            }
+          }
+        
+        .user-infos {
+            margin-left: 20px;
+        }
+
+        .change-user-infos-box {
+            margin-top: 20px;
+        
+            .input-group {
+              margin-bottom: 15px;
+        
+              label {
+                font-weight: bold;
+                display: block;
+              }
+        
+              .input-box {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border: 1px solid #ccc;
+                padding: 8px;
+                border-radius: 4px;
+        
+                p {
+                  margin: 0;
+                }
+        
+                svg {
+                  cursor: pointer;
+                }
+              }
+        
+              input {
+                width: calc(100% - 20px);
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+              }
+        
+              .dropdown {
+                position: relative;
+        
+                .dropdown-menu {
+                  position: absolute;
+                  background: #fff;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  width: 100%;
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                  z-index: 1000;
+        
+                  div {
+                    padding: 10px;
+                    cursor: pointer;
+        
+                    &:hover {
+                      background: #f0f0f0;
+                    }
+                  }
+                }
+              }
+            }
+        
+            button {
+              padding: 10px 20px;
+              margin-right: 10px;
+              border: none;
+              border-radius: 4px;
+              background: #007bff;
+              color: #fff;
+              cursor: pointer;
+        
+              &:hover {
+                background: #0056b3;
+              }
+        
+              &:nth-of-type(2) {
+                background: #6c757d;
+        
+                &:hover {
+                  background: #5a6268;
+                }
+              }
+            }
+          }
+    }
+}
