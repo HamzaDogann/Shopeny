@@ -1,0 +1,42 @@
+@import "../../../shared/styles/main.scss";
+.cargo-tracking-box {
+   @include flex-column;
+    padding-top: 30px;
+    padding-left: 200px;
+
+    .cargo-box {
+        width: max-content;
+        @include flex-column-align-center;
+        gap: 15px;
+
+        .no-cargo-image-box {
+            background-color: rgb(236, 236, 236);
+            border-radius: 50%;
+            width:100px;
+            height: 100px;
+            @include flex-center;
+         
+            
+            img {
+                width: 60px;
+            }
+
+        }
+        p{
+            font-size: 18px;
+            color: rgb(122, 122, 122);
+            font-weight: 500;
+        }
+
+        a{
+            padding: 12px 25px;
+            background-color: $shopenyOrange;
+            border-radius: 30px;
+            font-weight: 500;
+            color: white;
+            font-size: 15px;
+            @include click-scale(0.7,0.3s)
+        }
+    }
+
+}

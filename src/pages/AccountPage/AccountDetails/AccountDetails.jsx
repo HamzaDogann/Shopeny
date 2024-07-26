@@ -13,7 +13,7 @@ function AccountDetails() {
             <h2>Hesap Bilgilerim</h2>
             <GeneralUserDetailsCard />
             <div className='change-user-infos-box'>
-               
+
             </div>
         </div>
     );

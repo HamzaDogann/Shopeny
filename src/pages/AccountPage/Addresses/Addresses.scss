@@ -1,0 +1,94 @@
+@import "../../../shared/styles/main.scss";
+
+.addresses-box {
+    position: relative;
+
+    h2 {
+        @include flex-row-center;
+        gap: 10px;
+
+        .home-icon {
+            font-size: 34px
+        }
+
+    }
+
+    .addresses {
+        .address-card {
+            @include flex-row-center;
+            justify-content: space-between;
+            width: 70%;
+            background-color: #f6f6f6;
+            padding: 20px 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+
+            @media (max-width: 1300px) {
+                width: 100%;
+            }
+
+            .address-informations {
+                font-weight: 500;
+
+                .address-title {
+                    font-size: 20px;
+                    color: $shopenyTextGray;
+                }
+
+                .address-name {
+                    font-size: 16px;
+                    color: rgb(93, 93, 93);
+                }
+
+                .address-recipient {
+                    font-size: 14px;
+                    color: rgb(107, 107, 107);
+                }
+            }
+
+            .manage-address-box {
+                @include flex-row;
+                gap: 15px;
+
+                .icons {
+                    @include flex-center;
+                    font-size: 33px;
+                    padding: 0px;
+                    background-color: rgb(230, 230, 230);
+                    color: rgb(109, 109, 109);
+                    padding: 5px;
+                    border-radius: 23%;
+                    cursor: pointer;
+                    @include click-scale(0.7, 0.5s);
+
+                    &:hover {
+                        background-color: rgb(203, 203, 203);
+                    }
+                }
+            }
+        }
+    }
+
+    .add-new-address {
+        @include flex-row-center;
+        position: absolute;
+        top: 0;
+        right: 50px;
+        padding: 12px 22px;
+        background-color: $shopenyBlue;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 30px;
+        gap: 6px;
+        @include click-scale(0.8, 0.4s);
+
+        .icon {
+            font-size: 22px;
+        }
+
+        &:hover {
+            background-color: #385be6;
+        }
+    }
+}
