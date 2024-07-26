@@ -1,9 +1,21 @@
-import React from 'react'
-
+import OrderCard from "../../../features/AccountPageComponents/OrderCard"
+import "./Order.scss";
 function Order() {
+
+  const siparisVarMi = true;
   return (
     <div className='orders-box'>
-      <h2>Siparişlerim</h2>
+      {siparisVarMi 
+      ?  <>
+          <h2>Siparişlerim</h2>
+          <div className='orders'>
+            <OrderCard />
+            <OrderCard />
+          </div>
+        </>
+      : <div></div>
+      }
+
     </div>
   )
 }
