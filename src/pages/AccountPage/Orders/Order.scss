@@ -158,6 +158,78 @@
                         }
                     }
                 }
+
+                .dividing-line {
+                    border-radius: 3px;
+                    background-color: rgb(233, 233, 233);
+                    width: 100%;
+                    height: 4px;
+                }
+
+                .address-informations {
+                    font-weight: 500;
+                    margin: 15px 8px;
+
+                    h2 {
+                        margin: 5px 0;
+                        font-size: 20px !important;
+                        color: $shopenyTextGray;
+                    }
+
+                    .address {
+                        @include flex-column;
+                        gap: 4px;
+
+                        .address-title {
+                            font-size: 16px;
+                            color: rgb(67, 67, 67);
+                        }
+
+                        .address-name {
+                            font-weight: 400;
+                            font-size: 14px;
+                            color: rgb(67, 67, 67);
+                        }
+
+                        .address-recipient {
+                            font-weight: 400;
+                            font-size: 14px;
+                            color: rgb(67, 67, 67);
+
+                            span {
+                                font-weight: 500;
+                                color: $shopenyOrange;
+                            }
+                        }
+                    }
+                }
+
+                .manage-order-box {
+                    @include flex-row-center;
+                    justify-content: space-between;
+                    margin: 20px 0px 25px 0px;
+
+                    button {
+                        padding: 8px 18px;
+                        font-weight: 500;
+                        background-color: transparent;
+                        border-radius: 30px;
+                        color: rgb(229, 86, 86);
+                        transition: all 0.3s ease-in-out;
+
+                        &:hover {
+                            background-color: rgb(237, 237, 237);
+                        }
+                    }
+
+                    span {
+                        font-size: 17px;
+                        font-weight: 500;
+                        color: $shopenyTextGray;
+                    }
+
+                }
+
             }
 
             &.open {
@@ -167,77 +239,6 @@
                 .order-card-details {
                     max-height: 1000px;
                     opacity: 1;
-
-                    .dividing-line {
-                        border-radius: 3px;
-                        background-color: rgb(233, 233, 233);
-                        width: 100%;
-                        height: 4px;
-                    }
-
-                    .address-informations {
-                        font-weight: 500;
-                        margin: 15px 8px;
-
-                        h2 {
-                            margin: 5px 0;
-                            font-size: 20px;
-                            color: $shopenyTextGray;
-                        }
-
-                        .address {
-                            @include flex-column;
-                            gap: 4px;
-
-                            .address-title {
-                                font-size: 16px;
-                                color: rgb(67, 67, 67);
-                            }
-
-                            .address-name {
-                                font-weight: 400;
-                                font-size: 14px;
-                                color: rgb(67, 67, 67);
-                            }
-
-                            .address-recipient {
-                                font-weight: 400;
-                                font-size: 14px;
-                                color: rgb(67, 67, 67);
-
-                                span {
-                                    font-weight: 500;
-                                    color: $shopenyOrange;
-                                }
-                            }
-                        }
-                    }
-
-                    .manage-order-box {
-                        @include flex-row-center;
-                        justify-content: space-between;
-                        margin: 20px 0px 25px 0px;
-
-                        button {
-                            padding: 8px 18px;
-                            font-weight: 500;
-                            background-color: transparent;
-                            border-radius: 30px;
-                            color: rgb(229, 86, 86);
-                            transition: all 0.3s ease-in-out;
-
-                            &:hover {
-                                background-color: rgb(237, 237, 237);
-                            }
-                        }
-
-                        span {
-                            font-size: 17px;
-                            font-weight: 500;
-                            color: $shopenyTextGray;
-                        }
-
-                    }
                 }
 
                 .arrow-icon {

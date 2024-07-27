@@ -88,7 +88,8 @@
         gap: 20px;
         width: 100%;
 
-        a,.logout-btn {
+        a,
+        .logout-btn {
           @include flex-row-center;
           gap: 10px;
           background-color: rgb(236, 236, 236);
@@ -122,11 +123,11 @@
           }
         }
 
-        .logout-btn{
-            &:hover{
-                background-color: rgb(236, 88, 88);
-                color: white
-            }
+        .logout-btn {
+          &:hover {
+            background-color: rgb(236, 88, 88);
+            color: white
+          }
         }
 
         .logout {
@@ -196,5 +197,70 @@
         }
       }
     }
+  }
+
+
+  .no-content-box {
+    @include flex-row-center;
+    padding-top: 30px;
+    justify-content: center;
+    width: 80%;
+
+    .content-flex {
+      @include flex-column;
+      align-items: center;
+      gap: 15px;
+
+      .image-box {
+        background-color: rgb(236, 236, 236);
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        @include flex-center;
+
+        img {
+          width: 70px;
+        }
+      }
+
+      p {
+        font-size: 18px;
+        color: rgb(122, 122, 122);
+        font-weight: 500;
+      }
+
+      a {
+        padding: 12px 25px;
+        background-color: $shopenyOrange;
+        border-radius: 30px;
+        font-weight: 500;
+        color: white;
+        font-size: 15px;
+        @include click-scale(0.7, 0.3s);
+      }
+
+      button {
+        @include flex-row-center;
+        top: 0;
+        right: 50px;
+        padding: 12px 22px;
+        background-color: $shopenyBlue;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 30px;
+        gap: 6px;
+        @include click-scale(0.8, 0.4s);
+
+        .icon {
+          font-size: 22px;
+        }
+
+        &:hover {
+          background-color: #385be6;
+        }
+      }
+    }
+
   }
 }
