@@ -1,1 +1,1 @@
-Son Güncelleme 26.07.2024 Cuma
+Son Güncelleme 27.07.2024 Cumartesi
