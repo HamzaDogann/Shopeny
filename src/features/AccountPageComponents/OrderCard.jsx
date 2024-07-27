@@ -4,13 +4,37 @@ import ProductBox from "./../../assets/images/Orders/ProductBox.png";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import Macbook from "../../assets/images/productPhotoMain.jpg"
+import { useDispatch } from 'react-redux';
+import { showModal } from '../../store/features/ConfirmationModal/Modal';
+import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
+import { customSuccessToast } from '../../shared/utils/CustomToasts';
 
 function OrderCard() {
+
+    const dispatch = useDispatch();
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleCard = () => {
         setIsOpen(!isOpen);
     };
+
+
+    const handleCancelOrder = () => {
+        dispatch(showModal({
+            message: 'Bu siparişi iptal etmek istediğine emin misin?',
+            confirmText: 'Evet',
+            cancelText: 'Hayır',
+        }));
+    };
+
+    const handleConfirm = () => {
+        customSuccessToast("Sipariş iptal edildi");
+    };
+
+    const handleCancel = () => {
+    };
+
 
     return (
         <div className={`order-card ${isOpen ? 'open' : ''}`} >
@@ -77,10 +101,11 @@ function OrderCard() {
                 <p className='dividing-line'></p>
 
                 <div className='manage-order-box'>
-                    <button>Siparişi İptal Et</button>
+                    <button onClick={handleCancelOrder}>Siparişi İptal Et</button>
                     <span>Toplam : 250.000₺</span>
                 </div>
             </div>
+            <ConfirmationModal onConfirm={handleConfirm} onCancel={handleCancel} />
         </div>
     );
 }

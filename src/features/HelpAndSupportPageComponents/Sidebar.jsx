@@ -5,8 +5,10 @@ import { FaTruckRampBox } from "react-icons/fa6";
 import { MdPrivacyTip } from "react-icons/md";
 
 function Sidebar() {
+  
   const navigate = useNavigate();
   const location = useLocation();
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {

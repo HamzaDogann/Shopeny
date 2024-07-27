@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(27, 27, 27, 0.5);
+    background: $overlayBackground;
     z-index: 9999;
     @include opacity-effect(0.5s);
   }

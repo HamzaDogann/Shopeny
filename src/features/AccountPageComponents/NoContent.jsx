@@ -9,8 +9,7 @@ function NoContent({ image, description, buttonText, path, func, icon }) {
                 </div>
                 <p>{description}</p>
 
-                {func
-                    ?
+                {func ?
                     <button onClick={() => func()} className="button">
                         {icon}
                         <span>{buttonText}</span>

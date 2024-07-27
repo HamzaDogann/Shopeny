@@ -1,0 +1,68 @@
+/* ConfirmationModal.scss */
+@import "../../styles/main.scss";
+
+.confirmation-modal {
+    @include opacity-effect(0.5s);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $overlayBackground;
+    z-index: 9999;
+
+
+    .confirmation-modal-content {
+        background: #f9f9f9;
+        padding: 24px 30px;
+        border-radius: 12px;
+        text-align: center;
+        @include move-opacity-effect(0.5s);
+        font-weight: 500;
+
+        p {
+            margin: 0;
+            font-size: 18px;
+            color: rgb(87, 87, 87);
+            text-align: center;
+            max-width: 430px;
+        }
+
+        .confirmation-modal-buttons {
+            margin-top: 20px;
+
+            button {
+                margin: 0 10px;
+                padding: 11px 31px;
+                border: none;
+                border-radius: 8px;
+                color: #fff;
+                font-size: 15px;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+
+                &:first-child {
+                    background-color: $shopenyOrange;
+
+                    &:hover {
+                        @include shopenyOrangeHoverBackground;
+                    }
+                }
+
+                &:last-child {
+                    background-color: #e8e8e8;
+                    color: rgb(105, 105, 105);
+
+                    &:hover{
+                        background-color: #dfdfdf;
+                        color: rgb(78, 78, 78);
+                    }
+                }
+            }
+        }
+    }
+}

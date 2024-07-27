@@ -13,7 +13,7 @@ function Addresses() {
   const [isEditMode, setEditMode] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
-  const adresVarMi = false; // Örnek veri
+  const adresVarMi = true;
 
   const handleAddAddress = () => {
     setEditMode(false);

@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import { FaQuestion, FaExchangeAlt } from "react-icons/fa";
-import { FaTruckRampBox } from "react-icons/fa6";
-import { MdPrivacyTip } from "react-icons/md";
 import { FaAddressCard } from "react-icons/fa";
 import { FaBox } from "react-icons/fa6";
 import { FaLocationDot } from "react-icons/fa6";

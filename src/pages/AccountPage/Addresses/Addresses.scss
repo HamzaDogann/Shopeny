@@ -151,8 +151,7 @@
                 }
             }
 
-           
-
+        
             .button-box{
                 @include flex-center;
                 margin-top: 15px;
@@ -166,8 +165,13 @@
                     cursor: pointer;
                     font-size: 15px;
                     margin-top: 10px;
-                    border-radius: 29px;
+                    border-radius: 30px;
                     width:180px;
+                    @include click-scale(0.8,0.5s);
+
+                    &:hover{
+                        @include shopenyOrangeHoverBackground;
+                    }
                 }
             }
         }
