@@ -4,7 +4,7 @@ import React from 'react';
 import './Fullsize.scss';
 import { IoClose } from 'react-icons/io5'; // Kapatma ikonu
 
-const Fullsize = ({ isVisible, onClose, children }) => {
+const Fullsize = ({ isVisible, children }) => {
   if (!isVisible) return null;
 
   return (

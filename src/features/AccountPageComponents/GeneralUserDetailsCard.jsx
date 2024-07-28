@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@mui/material';
 import { TbCameraPlus } from "react-icons/tb";
-
+import { TbCameraCog } from "react-icons/tb";
+import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
+import UploadPPModal from './UploadProfilePhoto.jsx';
+import Modal from '../../shared/components/Modal/Modal';
+import UploadProfilePhoto from './UploadProfilePhoto.jsx';
 
 function GeneralUserDetailsCard() {
 
     const user = useSelector(state => state.auth.user);
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -22,6 +27,8 @@ function GeneralUserDetailsCard() {
         }
     }, [user.profilePhotoURL]);
 
+    const UserProfilePhoto = user.profilePhotoURL;
+
     return (
         <div className='general-user-details-box'>
             <div className='image-container'>
@@ -33,18 +40,22 @@ function GeneralUserDetailsCard() {
                         sx={{ bgcolor: 'grey.300' }}
                     />
                     :
-                    <>
+
+                    <div className='profile-photo-box'>
                         <img
                             src={user.profilePhotoURL}
                             alt="Profile"
                             style={{ display: imageLoaded ? 'block' : 'none' }}
                             onLoad={handleImageLoad}
                             className='profile-image'
+
                         />
-                        <div className='overlay'>
+                        <TbCameraCog className='edit-icon' />
+                        <div onClick={() => setModalVisible(true)} className='overlay'>
                             <TbCameraPlus className='icon' />
                         </div>
-                    </>
+                    </div>
+
                 }
 
             </div>
@@ -55,6 +66,12 @@ function GeneralUserDetailsCard() {
                     {user.phoneNumber === "belirtilmedi" ? "Telefon numarası belirtilmedi" : `+0${user.phoneNumber}`}
                 </p>
             </div>
+
+            <Fullsize isVisible={isModalVisible}>
+                <Modal setModalVisible={setModalVisible}>
+                    <UploadProfilePhoto UserProfilePhoto={UserProfilePhoto} />
+                </Modal>
+            </Fullsize>
         </div>
     )
 }

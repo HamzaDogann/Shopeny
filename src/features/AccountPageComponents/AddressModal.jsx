@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 
-const AddressModal = ({ isVisible, onClose, isEditMode, initialAddress, onSubmit }) => {
+const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit }) => {
 
     const [form, setForm] = useState({
         addressTitle: "",
@@ -42,89 +42,85 @@ const AddressModal = ({ isVisible, onClose, isEditMode, initialAddress, onSubmit
     if (!isVisible) return null;
 
     return (
-        <div className="modal">
-            <IoClose className="close-button" onClick={onClose} />
-
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+            <label>
+                Adres Başlığı
+                <input
+                    type="text"
+                    name="addressTitle"
+                    value={form.addressTitle}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                İl
+                <input
+                    type="text"
+                    name="city"
+                    value={form.city}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                Semt/İlçe
+                <input
+                    type="text"
+                    name="district"
+                    value={form.district}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                Mahalle/Köy
+                <input
+                    type="text"
+                    name="neighborhood"
+                    value={form.neighborhood}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <label>
+                Cadde/Sokak/Bulvar
+                <input
+                    type="text"
+                    name="street"
+                    value={form.street}
+                    onChange={handleChange}
+                    required
+                />
+            </label>
+            <div className="row">
                 <label>
-                    Adres Başlığı
+                    Posta Kodu
                     <input
                         type="text"
-                        name="addressTitle"
-                        value={form.addressTitle}
+                        name="postalCode"
+                        value={form.postalCode}
                         onChange={handleChange}
                         required
                     />
                 </label>
                 <label>
-                    İl
+                    Alıcı Adı ve Soyadı
                     <input
                         type="text"
-                        name="city"
-                        value={form.city}
+                        name="recipientName"
+                        value={form.recipientName}
                         onChange={handleChange}
                         required
                     />
                 </label>
-                <label>
-                    Semt/İlçe
-                    <input
-                        type="text"
-                        name="district"
-                        value={form.district}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label>
-                    Mahalle/Köy
-                    <input
-                        type="text"
-                        name="neighborhood"
-                        value={form.neighborhood}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label>
-                    Cadde/Sokak/Bulvar
-                    <input
-                        type="text"
-                        name="street"
-                        value={form.street}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <div className="row">
-                    <label>
-                        Posta Kodu
-                        <input
-                            type="text"
-                            name="postalCode"
-                            value={form.postalCode}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Alıcı Adı ve Soyadı
-                        <input
-                            type="text"
-                            name="recipientName"
-                            value={form.recipientName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                </div>
-                <div className="button-box">
-                    <button type="submit" className="submit-button">
-                        {isEditMode ? "Adresi Güncelle" : "Adresi Ekle"}
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div className="button-box">
+                <button type="submit" className="submit-button">
+                    {isEditMode ? "Adresi Güncelle" : "Adresi Ekle"}
+                </button>
+            </div>
+        </form>
     );
 };
 

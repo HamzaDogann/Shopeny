@@ -7,6 +7,7 @@ import { MdOutlineAddLocationAlt } from "react-icons/md";
 import NoContent from '../../../features/AccountPageComponents/NoContent';
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
 import AddressModal from '../../../features/AccountPageComponents/AddressModal';
+import Modal from '../../../shared/components/Modal/Modal';
 
 function Addresses() {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -72,16 +73,18 @@ function Addresses() {
         />
       )}
 
-      <Fullsize isVisible={isModalVisible} onClose={handleCloseModal}>
-        <AddressModal
-          isVisible={isModalVisible}
-          onClose={handleCloseModal}
-          isEditMode={isEditMode}
-          initialAddress={selectedAddress}
-          onSubmit={isEditMode ? handleUpdateAddress : handleNewAddress}
-        />
+      <Fullsize isVisible={isModalVisible}>
+        <Modal setModalVisible={setModalVisible}>
+          <AddressModal
+            isVisible={isModalVisible}
+            isEditMode={isEditMode}
+            onClose={handleCloseModal}
+            initialAddress={selectedAddress}
+            onSubmit={isEditMode ? handleUpdateAddress : handleNewAddress}
+          />
+        </Modal>
       </Fullsize>
-    </div>
+    </div >
   );
 }
 
