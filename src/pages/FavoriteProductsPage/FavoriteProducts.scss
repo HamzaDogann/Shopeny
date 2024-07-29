@@ -23,6 +23,11 @@
             @include flex-row-center;
             gap: 10px;
             color: rgb(63, 63, 63);
+              
+            @media (max-width:450px) {
+              width: 100%;
+              justify-content: center;
+             }
 
             .favorite-icon {
                 font-size: 50px;
@@ -47,6 +52,8 @@
                 @media (max-width:770px) {
                     font-size: 24px;
                 }
+  
+
 
 
             }

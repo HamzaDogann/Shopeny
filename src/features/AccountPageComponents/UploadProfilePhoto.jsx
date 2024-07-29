@@ -66,7 +66,9 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
                     <img src={preview} className="new-profile-image" />
                 </div>
                 :
-                <img className='active-profil-image' src={UserProfilePhoto} alt="" />
+                <div className='active-image-box'>
+                    <img className='active-profil-image' src={UserProfilePhoto} alt="" />
+                </div>
             }
 
             {preview

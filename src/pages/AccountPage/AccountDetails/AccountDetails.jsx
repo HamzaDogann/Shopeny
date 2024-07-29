@@ -25,12 +25,12 @@ function AccountDetails() {
         nameAndSurname: false,
         phoneNumber: false
     });
+    const [isFormChanged, setIsFormChanged] = useState(false);
 
     const inputRefs = {
         nameAndSurname: useRef(null),
         phoneNumber: useRef(null)
     };
-
 
     useEffect(() => {
         if (editing.nameAndSurname && inputRefs.nameAndSurname.current) {
@@ -40,6 +40,10 @@ function AccountDetails() {
             inputRefs.phoneNumber.current.focus();
         }
     }, [editing]);
+
+    useEffect(() => {
+        setIsFormChanged(JSON.stringify(initialFormState) !== JSON.stringify(formState));
+    }, [formState]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -84,6 +88,8 @@ function AccountDetails() {
         console.log(formState);
     };
 
+    const isEditing = Object.values(editing).some(value => value);
+
     return (
         <div className='account-details-box'>
             <h2>Hesap Bilgilerim</h2>
@@ -103,6 +109,7 @@ function AccountDetails() {
                                             value={formState.nameAndSurname}
                                             onChange={handleInputChange}
                                             ref={inputRefs.nameAndSurname}
+                                            className='name-and-surname-input'
                                         />
                                         <FaCircleCheck
                                             className='check-icon'
@@ -184,8 +191,8 @@ function AccountDetails() {
                     </div>
 
                     <div className='form-actions'>
-                        <button type="submit" className='submit-btn'>Kaydet</button>
-                        <button type="button" className='cancel-btn' onClick={handleCancel}>İptal</button>
+                        <button type="submit" className={`submit-btn ${isFormChanged && !isEditing ? 'enabled' : 'disabled'}`} disabled={!isFormChanged || isEditing}>Kaydet</button>
+                        <button type="button" className={`cancel-btn ${isFormChanged ? 'enabled' : 'disabled'}`} onClick={handleCancel} disabled={!isFormChanged}>İptal</button>
                     </div>
                 </form>
             </div>

@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Skeleton } from '@mui/material';
-import { TbCameraPlus } from "react-icons/tb";
-import { TbCameraCog } from "react-icons/tb";
+import { TbCameraPlus, TbCameraCog } from "react-icons/tb";
 import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
-import UploadPPModal from './UploadProfilePhoto.jsx';
-import Modal from '../../shared/components/Modal/Modal';
 import UploadProfilePhoto from './UploadProfilePhoto.jsx';
+import Modal from '../../shared/components/Modal/Modal';
 
 function GeneralUserDetailsCard() {
-
     const user = useSelector(state => state.auth.user);
     const [isModalVisible, setModalVisible] = useState(false);
-
     const [imageLoaded, setImageLoaded] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 800);
 
     const handleImageLoad = () => {
         setImageLoaded(true);
@@ -27,7 +24,18 @@ function GeneralUserDetailsCard() {
         }
     }, [user.profilePhotoURL]);
 
-    const UserProfilePhoto = user.profilePhotoURL;
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth < 800);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
         <div className='general-user-details-box'>
@@ -40,7 +48,6 @@ function GeneralUserDetailsCard() {
                         sx={{ bgcolor: 'grey.300' }}
                     />
                     :
-
                     <div className='profile-photo-box'>
                         <img
                             src={user.profilePhotoURL}
@@ -48,16 +55,13 @@ function GeneralUserDetailsCard() {
                             style={{ display: imageLoaded ? 'block' : 'none' }}
                             onLoad={handleImageLoad}
                             className='profile-image'
-
                         />
                         <TbCameraCog className='edit-icon' />
                         <div onClick={() => setModalVisible(true)} className='overlay'>
                             <TbCameraPlus className='icon' />
                         </div>
                     </div>
-
                 }
-
             </div>
             <div className='user-infos'>
                 <p className='user-name'>{user.nameAndSurname}</p>
@@ -65,15 +69,21 @@ function GeneralUserDetailsCard() {
                 <p className='user-phone-number'>
                     {user.phoneNumber === "belirtilmedi" ? "Telefon numarası belirtilmedi" : `+0${user.phoneNumber}`}
                 </p>
+
+                {isMobileView && (
+                    <button className='logout-button'>Çıkış yap</button>
+                )}
             </div>
+
+
 
             <Fullsize isVisible={isModalVisible}>
                 <Modal setModalVisible={setModalVisible}>
-                    <UploadProfilePhoto UserProfilePhoto={UserProfilePhoto} />
+                    <UploadProfilePhoto UserProfilePhoto={user.profilePhotoURL} />
                 </Modal>
             </Fullsize>
         </div>
     )
 }
 
-export default GeneralUserDetailsCard
+export default GeneralUserDetailsCard;

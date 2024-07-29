@@ -12,6 +12,7 @@
     background: $overlayBackground;
     z-index: 9999;
     @include opacity-effect(0.5s);
+    padding: 10px;
   }
   
   
