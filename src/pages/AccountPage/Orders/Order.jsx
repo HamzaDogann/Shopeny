@@ -17,7 +17,7 @@ function Order() {
           </div>
         </>
         :
-        <NoContent image={NoOrder} description="Aktif siparişiniz bulunmuyor" buttonText="Alışverişe Başla" path="/"/>
+        <NoContent image={NoOrder} description="Aktif siparişiniz bulunmuyor" buttonText="Alışverişe Başla" path="/" />
       }
 
     </div>

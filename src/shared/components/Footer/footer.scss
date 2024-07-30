@@ -16,7 +16,8 @@
         border-radius: 10px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
-
+        justify-content: start;
+        
         //Animation
         &:hover {
             scale: (1.1);

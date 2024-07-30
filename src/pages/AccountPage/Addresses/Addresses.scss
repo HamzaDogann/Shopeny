@@ -3,6 +3,7 @@
 .addresses-box {
     position: relative;
 
+
     h2 {
         @include flex-row-center;
         gap: 10px;
@@ -14,6 +15,10 @@
     }
 
     .addresses {
+        @media (max-width: 800px) {
+            position: none;
+        }
+
         .address-card {
             @include flex-row-center;
             justify-content: space-between;
@@ -24,7 +29,12 @@
             margin-bottom: 20px;
 
             @media (max-width: 1300px) {
+                width: 90%;
+            }
+
+            @media (max-width:800px) {
                 width: 100%;
+                position: relative;
             }
 
             .address-informations {
@@ -33,22 +43,43 @@
                 .address-title {
                     font-size: 20px;
                     color: $shopenyTextGray;
+
+                    @media (max-width: 1100px) {
+                        font-size: 18px;
+                    }
                 }
 
                 .address-name {
                     font-size: 16px;
                     color: rgb(93, 93, 93);
+
+                    @media (max-width: 1100px) {
+                        font-size: 14px;
+                    }
+                    @media (max-width: 800px) {
+                        margin-top: 10px;
+                    }
                 }
 
                 .address-recipient {
                     font-size: 14px;
                     color: rgb(107, 107, 107);
+
+                    @media (max-width: 1100px) {
+                        font-size: 12px;
+                    }
                 }
             }
 
             .manage-address-box {
                 @include flex-row;
                 gap: 15px;
+
+                @media (max-width:800px) {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                }
 
                 .icons {
                     @include flex-center;
@@ -69,28 +100,48 @@
         }
     }
 
-    .add-new-address {
-        @include flex-row-center;
-        position: absolute;
-        top: 0;
-        right: 50px;
-        padding: 12px 22px;
-        background-color: $shopenyBlue;
-        color: rgb(255, 255, 255);
-        font-weight: 500;
-        font-size: 14px;
-        border-radius: 30px;
-        gap: 6px;
-        @include click-scale(0.8, 0.4s);
 
-        .icon {
-            font-size: 22px;
-        }
+    .add-address-box {
+        @include flex-center;
 
-        &:hover {
-            background-color: #385be6;
+        .add-new-address {
+            @include flex-row-center;
+            position: absolute;
+            top: 0;
+            right: 50px;
+            padding: 12px 22px;
+            background-color: $shopenyBlue;
+            color: rgb(255, 255, 255);
+            font-weight: 500;
+            font-size: 14px;
+            border-radius: 30px;
+            gap: 6px;
+            @include click-scale(0.8, 0.4s);
+
+            @media (max-width:1300px) {
+                right: 0px;
+            }
+
+            @media (max-width:800px) {
+                position: relative;
+                bottom: 0;
+                width: 200px;
+                justify-content: center;
+                margin-top: 30px;
+
+            }
+
+            .icon {
+                font-size: 22px;
+            }
+
+            &:hover {
+                background-color: #385be6;
+            }
         }
     }
+
+
 
     .modal {
         background: white;
@@ -101,14 +152,14 @@
         max-width: 500px;
 
         @include move-opacity-effect(0.5s);
-        
+
         .close-button {
             position: absolute;
             top: 10px;
             right: 10px;
             background: none;
             border: none;
-            font-size:34px;
+            font-size: 34px;
             cursor: pointer;
             padding: 5px;
             border-radius: 30px;
@@ -123,9 +174,15 @@
             gap: 12px;
 
             label {
-              font-weight: 500;
-              font-size: 16px;
-              color: $shopenyTextGray;
+                font-weight: 500;
+                font-size: 16px;
+                color: $shopenyTextGray;
+
+                @media (max-width:800px) {
+                    font-size: 13px;
+                }
+
+
 
                 input {
                     width: 100%;
@@ -135,7 +192,11 @@
                     border-radius: 8px;
                     font-size: 14px;
 
-                    &:focus{
+                    @media (max-width:800px) {
+                        font-size: 12px;
+                    }
+
+                    &:focus {
                         border: 2px solid $shopenyBlue;
                     }
                 }
@@ -151,8 +212,8 @@
                 }
             }
 
-        
-            .button-box{
+
+            .button-box {
                 @include flex-center;
                 margin-top: 15px;
 
@@ -166,10 +227,10 @@
                     font-size: 15px;
                     margin-top: 10px;
                     border-radius: 30px;
-                    width:180px;
-                    @include click-scale(0.8,0.5s);
+                    width: 180px;
+                    @include click-scale(0.8, 0.5s);
 
-                    &:hover{
+                    &:hover {
                         @include shopenyOrangeHoverBackground;
                     }
                 }

@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { showModal } from '../../store/features/ConfirmationModal/Modal';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { customSuccessToast } from '../../shared/utils/CustomToasts';
+import truncateName from "../../shared/utils/truncateName";
 
 function OrderCard() {
 
@@ -50,43 +51,70 @@ function OrderCard() {
                 <IoIosArrowDown className="arrow-icon" />
             </div>
             <div className="order-card-details">
-                <div className="order-item">
-                    <img src={Macbook} alt="" />
-                    <div className="item-info">
-                        <div className='item-name-and-brand-box'>
-                            <span>Apple</span>
-                            <p>MacBook Pro M4</p>
-                        </div>
+                <div className='order-items'>
 
-                        <span className="item-quantity">8</span>
-                        <span className="item-price">150.000 ₺</span>
+                    <div className="order-item">
+                        <img src={Macbook} alt="" />
+                        <div className="item-info">
+                            <div className='item-name-and-brand-box'>
+                                <span>Apple</span>
+                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
+                            </div>
+                            <span className="item-quantity">82</span>
+                            <span className="item-price">22.150.000 ₺</span>
+                        </div>
+                    </div>
+
+                    <div className="order-item">
+                        <img src={Macbook} alt="" />
+                        <div className="item-info">
+                            <div className='item-name-and-brand-box'>
+                                <span>Apple</span>
+                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
+                            </div>
+                            <span className="item-quantity">82</span>
+                            <span className="item-price">22.150.000 ₺</span>
+                        </div>
+                    </div>
+
+                    <div className="order-item">
+                        <img src={Macbook} alt="" />
+                        <div className="item-info">
+                            <div className='item-name-and-brand-box'>
+                                <span>Apple</span>
+                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
+                            </div>
+                            <span className="item-quantity">82</span>
+                            <span className="item-price">22.150.000 ₺</span>
+                        </div>
+                    </div>
+
+                    <div className="order-item">
+                        <img src={Macbook} alt="" />
+                        <div className="item-info">
+                            <div className='item-name-and-brand-box'>
+                                <span>Apple</span>
+                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
+                            </div>
+                            <span className="item-quantity">82</span>
+                            <span className="item-price">22.150.000 ₺</span>
+                        </div>
+                    </div>
+
+                    <div className="order-item">
+                        <img src={Macbook} alt="" />
+                        <div className="item-info">
+                            <div className='item-name-and-brand-box'>
+                                <span>Apple</span>
+                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
+                            </div>
+                            <span className="item-quantity">82</span>
+                            <span className="item-price">22.150.000 ₺</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="order-item">
-                    <img src={Macbook} alt="" />
-                    <div className="item-info">
-                        <div className='item-name-and-brand-box'>
-                            <span>Apple</span>
-                            <p>MacBook Pro M4</p>
-                        </div>
 
-                        <span className="item-quantity">8</span>
-                        <span className="item-price">150.000 ₺</span>
-                    </div>
-                </div>
-                <div className="order-item">
-                    <img src={Macbook} alt="" />
-                    <div className="item-info">
-                        <div className='item-name-and-brand-box'>
-                            <span>Apple</span>
-                            <p>MacBook Pro M4</p>
-                        </div>
-
-                        <span className="item-quantity">8</span>
-                        <span className="item-price">150.000 ₺</span>
-                    </div>
-                </div>
                 <p className='dividing-line'></p>
 
                 <div className='address-informations'>
@@ -102,7 +130,7 @@ function OrderCard() {
 
                 <div className='manage-order-box'>
                     <button onClick={handleCancelOrder}>Siparişi İptal Et</button>
-                    <span>Toplam : 250.000₺</span>
+                    <span>Toplam : 12.250.000₺</span>
                 </div>
             </div>
             <ConfirmationModal onConfirm={handleConfirm} onCancel={handleCancel} />

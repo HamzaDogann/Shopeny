@@ -291,22 +291,7 @@ select {
                 margin-top: 20px;
             }
 
-            /* Custom scroll bar styles */
-            &::-webkit-scrollbar {
-                width: 6px;
-                cursor: pointer;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background: linear-gradient(180deg, $shopenyOrange, $shopenyBlue);
-                border-radius: 6px;
-                cursor: pointer;
-            }
-
-            &::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 6px;
-            }
+            @include CustomScroll;
         }
     }
 

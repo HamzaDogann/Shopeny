@@ -2,7 +2,7 @@
 @import "../../styles/main.scss";
 
 .confirmation-modal {
-    @include opacity-effect(0.5s);
+  
     position: fixed;
     top: 0;
     left: 0;
@@ -11,9 +11,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: $overlayBackground;
+    background: rgba(61, 61, 61, 0.077);
     z-index: 9999;
-
+    padding: 10px;
+    @include opacity-effect(0.5s);
 
     .confirmation-modal-content {
         background: #f9f9f9;
@@ -29,6 +30,10 @@
             color: rgb(87, 87, 87);
             text-align: center;
             max-width: 430px;
+
+            @media (max-width:1300px) {
+                font-size: 16px;
+            }
         }
 
         .confirmation-modal-buttons {
@@ -45,6 +50,10 @@
                 cursor: pointer;
                 transition: all 0.2s ease-in-out;
 
+                @media (max-width:1300px) {
+                    font-size: 14px;
+                }
+
                 &:first-child {
                     background-color: $shopenyOrange;
 
@@ -57,7 +66,7 @@
                     background-color: #e8e8e8;
                     color: rgb(105, 105, 105);
 
-                    &:hover{
+                    &:hover {
                         background-color: #dfdfdf;
                         color: rgb(78, 78, 78);
                     }

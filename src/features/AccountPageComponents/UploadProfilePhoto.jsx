@@ -10,10 +10,22 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
     const [preview, setPreview] = useState(null);
     const [uploading, setUploading] = useState(false);
 
-    //!UploadProfilePhotoSlice içinde yapılacak bir takım işlemler.
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
+            const maxSize = 5 * 1024 * 1024; // 5MB
+
+            if (!validTypes.includes(file.type)) {
+                alert('Yalnızca JPEG, PNG ve SVG dosya türlerine izin veriliyor.');
+                return;
+            }
+
+            if (file.size > maxSize) {
+                alert('Dosya boyutu 5MB\'yi aşmamalıdır.');
+                return;
+            }
+
             setSelectedImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -81,7 +93,6 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
                         <button className="reset-button" onClick={handleReset}>Sıfırla</button>
                     </div>
 
-
                     <div className="info">
                         <p>Profil fotoğrafınız, ürün yorumları ve hesap ayarlarınızda görüntülenecektir.</p>
                     </div>
@@ -95,7 +106,7 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
                     </div>
 
                     <div className="info">
-                        <p>İzin verilen dosya türleri: JPEG, PNG, GIF, SVG</p>
+                        <p>İzin verilen dosya türleri: JPEG, PNG, SVG</p>
                         <p>Maksimum dosya boyutu: 5MB</p>
                         <p>Profil fotoğrafınız, ürün yorumları ve hesap ayarlarınızda görüntülenecektir.</p>
                     </div>

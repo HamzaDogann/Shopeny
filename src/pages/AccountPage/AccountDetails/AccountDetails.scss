@@ -155,10 +155,12 @@
     .upload-profile-photo {
       text-align: center;
       border-radius: 10px;
+      margin-top: 10px;
       @include flex-column-align-center;
 
       h1 {
-        margin-bottom: 20px;
+        margin: 0px 12px 20px 15px;
+        padding: 5px;
         color: #333;
         font-size: 24px;
       }

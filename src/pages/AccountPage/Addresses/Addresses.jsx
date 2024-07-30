@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import AddressCard from '../../../features/AccountPageComponents/AddressCard';
 import { TbHomeDot } from "react-icons/tb";
-import "./Addresses.scss";
 import NoAddress from "../../../assets/images/Orders/NoAddress.png";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import NoContent from '../../../features/AccountPageComponents/NoContent';
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
 import AddressModal from '../../../features/AccountPageComponents/AddressModal';
 import Modal from '../../../shared/components/Modal/Modal';
+import "./Addresses.scss";
 
 function Addresses() {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -55,12 +55,18 @@ function Addresses() {
 
           <div className='addresses'>
             <AddressCard onEdit={handleEditAddress} />
+            <AddressCard onEdit={handleEditAddress} />
+            <AddressCard onEdit={handleEditAddress} />
+
           </div>
 
-          <button className='add-new-address' onClick={handleAddAddress}>
-            <MdOutlineAddLocationAlt className='icon' />
-            <span>Adres Ekle</span>
-          </button>
+          <div className='add-address-box'>
+            <button className='add-new-address' onClick={handleAddAddress}>
+              <MdOutlineAddLocationAlt className='icon' />
+              <span>Adres Ekle</span>
+            </button>
+          </div>
+
         </>
       ) : (
         <NoContent
