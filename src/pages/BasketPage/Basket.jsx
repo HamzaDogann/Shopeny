@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
 import BasketProduct from "../../features/BasketPageComponents/BasketProduct";
@@ -10,6 +10,12 @@ import "./Basket.scss";
 function Basket() {
 
   const basketProduct = true;
+  const navigate = useNavigate();
+
+  const handleConfirmCart = () => {
+    // Implement the checkout logic here
+    navigate("/odeme-islemleri");
+  }
 
   return (
     <div className="basket-general-box">
@@ -27,7 +33,6 @@ function Basket() {
       </div>
 
       <div className="basket-boxs">
-
         {basketProduct ?
           <>
             <div className="products-box">
@@ -36,7 +41,8 @@ function Basket() {
               <BasketProduct />
             </div>
             <div className="basket-info-box">
-              <BasketInformations />
+              <BasketInformations checkoutButton={<button onClick={handleConfirmCart} className="checkout-btn">Sepeti Onayla</button>}
+              />
             </div>
           </>
 

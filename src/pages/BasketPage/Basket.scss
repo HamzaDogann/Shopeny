@@ -89,6 +89,7 @@
         justify-content: center;
         color: rgb(153, 153, 153);
         font-size: 20px;
+       
         font-weight: 500;
 
         @media (max-width:750px) {
@@ -105,6 +106,7 @@
             color: white;
             border-radius: 30px;
             transition: 0.3s ease-in-out;
+            @include click-scale(0.8, 0.3s);
 
             &:hover {
                 background-color: darken($shopenyOrange, 4%);

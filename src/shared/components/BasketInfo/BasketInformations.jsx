@@ -4,7 +4,7 @@ import { FaTruckFast } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io"; 
 import "./BasketInformations.scss";
 
-function BasketInformations() {
+function BasketInformations({ checkoutButton }) {
     const [selectedCargo, setSelectedCargo] = useState("Normal Kargo");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -69,7 +69,7 @@ function BasketInformations() {
                 <p className="total-price">450.000₺</p>
             </div>
             <div className="checkout-button-box">
-                <button className="checkout-btn">Sepeti Onayla</button>
+                {checkoutButton}
             </div>
         </div>
     );

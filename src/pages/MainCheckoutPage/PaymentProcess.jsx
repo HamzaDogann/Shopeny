@@ -7,7 +7,7 @@ import PaymentStep from "./PaymentStepComponent/PaymentStep.jsx"
 import PaymentVerification from "./PaymentVerificationComponent/PaymentVerification.jsx"
 
 const PaymentProcess = () => {
-  const [currentStep, setCurrentStep] = useState(3);
+  const [currentStep, setCurrentStep] = useState(1);
 
   //! Payment Process Auth ile mümkün + gerekli bilgileri kullanıcı doldurduysa buraya gelebilir olacak.
   //! Eğer slice bilgisi ile dolan step varsa diğerine geçebilecek.
@@ -40,7 +40,7 @@ const PaymentProcess = () => {
   return (
     <div className="payment-process">
       <div className="steps-navigation">
-        {/* Adım Göstergesi  Özel Navigasyon */}
+        
         <h1>Mevcut Step : {currentStep}</h1>
       </div>
       <div className="step-content">
