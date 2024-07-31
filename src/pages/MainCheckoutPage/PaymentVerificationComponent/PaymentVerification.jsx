@@ -1,12 +1,12 @@
 import React from 'react'
 import "./PaymentVerification.scss";
-function PaymentVerification() {
+function PaymentVerification({onBack}) {
   return (
     <div className='payment-verification-box'>
       <div className='payment-verification-modal'>
 
         {/* İdarelik Düzen Daha Profesyonel yapılacak */}
-        <button>X</button>
+        <button onClick={onBack}>X</button>
         <hr />
         Ödeme Doğrulama Telefon Doğrulaması
 

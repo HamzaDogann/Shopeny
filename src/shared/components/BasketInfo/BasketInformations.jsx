@@ -4,7 +4,8 @@ import { FaTruckFast } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io"; 
 import "./BasketInformations.scss";
 
-function BasketInformations({ checkoutButton }) {
+function BasketInformations({checkoutButton, currentStep, onGoPayment, onGoConfirm, onGoVerification }) {
+  
     const [selectedCargo, setSelectedCargo] = useState("Normal Kargo");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -17,6 +18,19 @@ function BasketInformations({ checkoutButton }) {
         { path: 'normal', label: 'Normal Kargo', description: "Standart teslimat süresi", icon: <FaTruck /> },
         { path: 'fast', label: 'Hızlı Kargo', description: "Ek ücret uygulanır", icon: <FaTruckFast /> }
     ];
+
+    const renderCheckoutButton = () => {
+        switch (currentStep) {
+            case 0:
+                return <button onClick={onGoPayment} className="checkout-btn">Ödemeye Geç</button>;
+            case 1:
+                return <button onClick={onGoConfirm} className="checkout-btn">Siparişi Onayla</button>;
+            case 2:
+                return <button className="checkout-btn">Onayla</button>;
+            default:
+                return null;
+        }
+    };
 
     return (
         <div className="basket-information-box">
@@ -69,7 +83,7 @@ function BasketInformations({ checkoutButton }) {
                 <p className="total-price">450.000₺</p>
             </div>
             <div className="checkout-button-box">
-                {checkoutButton}
+                {checkoutButton ? checkoutButton : renderCheckoutButton()}
             </div>
         </div>
     );

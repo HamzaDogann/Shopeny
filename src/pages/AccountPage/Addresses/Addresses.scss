@@ -14,225 +14,226 @@
 
     }
 
-    .addresses {
-        @media (max-width: 800px) {
-            position: none;
+   
+}
+
+.addresses {
+    @media (max-width: 800px) {
+        position: none;
+    }
+
+    .address-card {
+        @include flex-row-center;
+        justify-content: space-between;
+        width: 70%;
+        background-color: #f6f6f6;
+        padding: 20px 30px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+
+        @media (max-width: 1300px) {
+            width: 90%;
         }
 
-        .address-card {
-            @include flex-row-center;
-            justify-content: space-between;
-            width: 70%;
-            background-color: #f6f6f6;
-            padding: 20px 30px;
-            border-radius: 20px;
-            margin-bottom: 20px;
+        @media (max-width:800px) {
+            width: 100%;
+            position: relative;
+        }
 
-            @media (max-width: 1300px) {
-                width: 90%;
+        .address-informations {
+            font-weight: 500;
+
+            .address-title {
+                font-size: 20px;
+                color: $shopenyOrange;
+
+                @media (max-width: 1100px) {
+                    font-size: 18px;
+                }
             }
+
+            .address-name {
+                font-size: 16px;
+                color: rgb(93, 93, 93);
+
+                @media (max-width: 1100px) {
+                    font-size: 14px;
+                }
+                @media (max-width: 800px) {
+                    margin-top: 10px;
+                }
+            }
+
+            .address-recipient {
+                font-size: 14px;
+                color: rgb(107, 107, 107);
+
+                @media (max-width: 1100px) {
+                    font-size: 12px;
+                }
+            }
+        }
+
+        .manage-address-box {
+            @include flex-row;
+            gap: 15px;
 
             @media (max-width:800px) {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+
+            .icons {
+                @include flex-center;
+                font-size: 33px;
+                padding: 0px;
+                background-color: rgb(230, 230, 230);
+                color: rgb(109, 109, 109);
+                padding: 5px;
+                border-radius: 23%;
+                cursor: pointer;
+                @include click-scale(0.7, 0.5s);
+
+                &:hover {
+                    background-color: rgb(203, 203, 203);
+                }
+            }
+        }
+    }
+}
+
+
+.add-address-box {
+    @include flex-center;
+
+    .add-new-address {
+        @include flex-row-center;
+        position: absolute;
+        top: 0;
+        right: 50px;
+        padding: 12px 22px;
+        background-color: $shopenyBlue;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+        font-size: 14px;
+        border-radius: 30px;
+        gap: 6px;
+        @include click-scale(0.8, 0.4s);
+
+        @media (max-width:1300px) {
+            right: 0px;
+        }
+
+        @media (max-width:800px) {
+            position: relative;
+            bottom: 0;
+            width: 200px;
+            justify-content: center;
+            margin-top: 30px;
+
+        }
+
+        .icon {
+            font-size: 22px;
+        }
+
+        &:hover {
+            background-color: #385be6;
+        }
+    }
+}
+
+
+.modal {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 500px;
+
+    @include move-opacity-effect(0.5s);
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 34px;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 30px;
+        background-color: $shopenyLightGray;
+        @include shopenyOrangeBackgroundHoverEffect;
+        color: rgb(82, 82, 82);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        label {
+            font-weight: 500;
+            font-size: 16px;
+            color: $shopenyTextGray;
+
+            @media (max-width:800px) {
+                font-size: 13px;
+            }
+
+
+
+            input {
                 width: 100%;
-                position: relative;
-            }
-
-            .address-informations {
-                font-weight: 500;
-
-                .address-title {
-                    font-size: 20px;
-                    color: $shopenyTextGray;
-
-                    @media (max-width: 1100px) {
-                        font-size: 18px;
-                    }
-                }
-
-                .address-name {
-                    font-size: 16px;
-                    color: rgb(93, 93, 93);
-
-                    @media (max-width: 1100px) {
-                        font-size: 14px;
-                    }
-                    @media (max-width: 800px) {
-                        margin-top: 10px;
-                    }
-                }
-
-                .address-recipient {
-                    font-size: 14px;
-                    color: rgb(107, 107, 107);
-
-                    @media (max-width: 1100px) {
-                        font-size: 12px;
-                    }
-                }
-            }
-
-            .manage-address-box {
-                @include flex-row;
-                gap: 15px;
+                padding: 8px;
+                margin-top: 5px;
+                border: 2px solid #e5e5e5;
+                border-radius: 8px;
+                font-size: 14px;
 
                 @media (max-width:800px) {
-                    position: absolute;
-                    top: 15px;
-                    right: 15px;
+                    font-size: 12px;
                 }
 
-                .icons {
-                    @include flex-center;
-                    font-size: 33px;
-                    padding: 0px;
-                    background-color: rgb(230, 230, 230);
-                    color: rgb(109, 109, 109);
-                    padding: 5px;
-                    border-radius: 23%;
-                    cursor: pointer;
-                    @include click-scale(0.7, 0.5s);
-
-                    &:hover {
-                        background-color: rgb(203, 203, 203);
-                    }
+                &:focus {
+                    border: 2px solid $shopenyBlue;
                 }
             }
         }
-    }
 
-
-    .add-address-box {
-        @include flex-center;
-
-        .add-new-address {
-            @include flex-row-center;
-            position: absolute;
-            top: 0;
-            right: 50px;
-            padding: 12px 22px;
-            background-color: $shopenyBlue;
-            color: rgb(255, 255, 255);
-            font-weight: 500;
-            font-size: 14px;
-            border-radius: 30px;
-            gap: 6px;
-            @include click-scale(0.8, 0.4s);
-
-            @media (max-width:1300px) {
-                right: 0px;
-            }
-
-            @media (max-width:800px) {
-                position: relative;
-                bottom: 0;
-                width: 200px;
-                justify-content: center;
-                margin-top: 30px;
-
-            }
-
-            .icon {
-                font-size: 22px;
-            }
-
-            &:hover {
-                background-color: #385be6;
-            }
-        }
-    }
-
-
-
-    .modal {
-        background: white;
-        padding: 25px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        position: relative;
-        max-width: 500px;
-
-        @include move-opacity-effect(0.5s);
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 34px;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 30px;
-            background-color: $shopenyLightGray;
-            @include shopenyOrangeBackgroundHoverEffect;
-            color: rgb(82, 82, 82);
-        }
-
-        form {
+        .row {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            justify-content: space-between;
+            gap: 10px;
 
             label {
+                flex: 1;
+            }
+        }
+
+
+        .button-box {
+            @include flex-center;
+            margin-top: 15px;
+
+            .submit-button {
+                padding: 12px;
+                background-color: $shopenyOrange;
+                border: none;
+                color: white;
                 font-weight: 500;
-                font-size: 16px;
-                color: $shopenyTextGray;
+                cursor: pointer;
+                font-size: 15px;
+                margin-top: 10px;
+                border-radius: 30px;
+                width: 180px;
+                @include click-scale(0.8, 0.5s);
 
-                @media (max-width:800px) {
-                    font-size: 13px;
-                }
-
-
-
-                input {
-                    width: 100%;
-                    padding: 8px;
-                    margin-top: 5px;
-                    border: 2px solid #e5e5e5;
-                    border-radius: 8px;
-                    font-size: 14px;
-
-                    @media (max-width:800px) {
-                        font-size: 12px;
-                    }
-
-                    &:focus {
-                        border: 2px solid $shopenyBlue;
-                    }
-                }
-            }
-
-            .row {
-                display: flex;
-                justify-content: space-between;
-                gap: 10px;
-
-                label {
-                    flex: 1;
-                }
-            }
-
-
-            .button-box {
-                @include flex-center;
-                margin-top: 15px;
-
-                .submit-button {
-                    padding: 12px;
-                    background-color: $shopenyOrange;
-                    border: none;
-                    color: white;
-                    font-weight: 500;
-                    cursor: pointer;
-                    font-size: 15px;
-                    margin-top: 10px;
-                    border-radius: 30px;
-                    width: 180px;
-                    @include click-scale(0.8, 0.5s);
-
-                    &:hover {
-                        @include shopenyOrangeHoverBackground;
-                    }
+                &:hover {
+                    @include shopenyOrangeHoverBackground;
                 }
             }
         }

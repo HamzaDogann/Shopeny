@@ -1,50 +1,97 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import CustomStepperComponent from '../../shared/components/Stepper/CustomStepper.jsx';
 
-import AddressStep from "./AddressStepComponent/AddressStep.jsx"
-import ConfirmationStep from "./ConfirmationStepComponent/ConfirmationStep.jsx"
-import PaymentStep from "./PaymentStepComponent/PaymentStep.jsx"
-import PaymentVerification from "./PaymentVerificationComponent/PaymentVerification.jsx"
+import AddressStep from "./AddressStepComponent/AddressStep.jsx";
+import PaymentStep from "./PaymentStepComponent/PaymentStep.jsx";
+import ConfirmationStep from "./ConfirmationStepComponent/ConfirmationStep.jsx";
+import PaymentVerification from "./PaymentVerificationComponent/PaymentVerification.jsx";
+import BasketInformations from '../../shared/components/BasketInfo/BasketInformations.jsx';
+import MiniBasketInfo from '../../shared/components/MiniBasketInfo/MiniBasketInfo.jsx';
 
+
+import "./PaymentProcess.scss";
 const PaymentProcess = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
 
-  //! Payment Process Auth ile mümkün + gerekli bilgileri kullanıcı doldurduysa buraya gelebilir olacak.
-  //! Eğer slice bilgisi ile dolan step varsa diğerine geçebilecek.
-  //! eğer bilgiler doluysa önceki sayfaya gidebilecek.
-  //! düzenleyebilecek geçmiş bilgilerini
-  // const isAddressValid = useSelector((state) => state.payment.isAddressValid);
-  // const isPaymentProcessed = useSelector((state) => state.payment.isPaymentProcessed);
+  const handleNext = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  const handleBack = () => {
+    setCurrentStep((prevStep) => prevStep - 1);
+  };
+
+  //! Redux Slice bilgilerine göre denetimler ile diğer adıma geçilecek.
+  const handleGoPayment = () => {
+    handleNext();
+  };
+
+  const handleGoConfirm = () => {
+    handleNext();
+  };
+
+  const handleGoVerification = () => {
+    handleNext();
+  };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [currentStep]);
+
+
+
 
   const renderStep = () => {
+
     switch (currentStep) {
+      case 0:
+        return <AddressStep onNext={handleNext} />;
       case 1:
-        return <AddressStep onNext={() => setCurrentStep(2)} />;
+        return <PaymentStep onNext={handleNext} onBack={handleBack} />;
       case 2:
-        return <PaymentStep onNext={() => setCurrentStep(3)} />
-
-      // ) : (
-      //   <div>Please complete the address step first.</div>
-      // );
+        return <ConfirmationStep onNext={handleNext} onBack={handleBack} />;
       case 3:
-        return <ConfirmationStep onNext={() => setCurrentStep(4)} />
-
-
-      case 4:
-        return <PaymentVerification />;
+        return <PaymentVerification onBack={handleBack} />;
       default:
         return null;
     }
   };
 
+
   return (
     <div className="payment-process">
-      <div className="steps-navigation">
-        
-        <h1>Mevcut Step : {currentStep}</h1>
+      {/* Stepper */}
+      <div className='stepper-general-box'>
+        <CustomStepperComponent
+          activeStep={currentStep}
+          handleNext={handleNext}
+          handleBack={handleBack}
+        />
       </div>
-      <div className="step-content">
-        {renderStep()}
+
+      {/* Content */}
+      <div className='content'>
+        <div className='content-box'>
+          {renderStep()}
+        </div>
+
+        {/* Basket Informations */}
+        <div className='basket-info-box'>
+          {currentStep != 2
+            ?
+            <BasketInformations
+              currentStep={currentStep}
+              onGoPayment={handleGoPayment}
+              onGoConfirm={handleGoConfirm}
+
+            />
+            :
+            <MiniBasketInfo onGoVerification={handleGoVerification} handleBack={handleBack} />}
+        </div>
+
       </div>
     </div>
   );

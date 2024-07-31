@@ -43,6 +43,7 @@ function CategoryProducts() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  console.log()
 
   return (
     <div className='category-products-box'>

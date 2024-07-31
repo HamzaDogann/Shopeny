@@ -1,0 +1,74 @@
+@import "../../../shared/styles/main.scss";
+
+.choose-address-box {
+
+    .address-card {
+        background-color: $shopenyLightGray;
+        padding: 20px 30px;
+        padding-right: 40px;
+        border-radius: 20px;
+        @include flex-row-center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        .address-informations {
+            @include flex-column;
+            gap: 5px;
+            font-weight: 500;
+
+            .address-title {
+                font-size: 20px;
+                color: $shopenyOrange;
+            }
+
+            .address-name {
+                font-size: 16px;
+                color: rgb(118, 118, 118);
+            }
+
+            .address-recipient {
+                font-size: 14px;
+                color: rgb(141, 141, 141);
+            }
+        }
+    }
+}
+
+.no-address-box {
+    background-color: rgba(255, 200, 152, 0.495);
+    border-radius: 10px;
+    padding: 15px 20px;
+
+    p {
+        font-weight: 500;
+        font-size: 15px;
+        color: $shopenyOrange;
+    }
+}
+
+.new-address-box {
+    margin-top: 40px;
+
+
+    button {
+        padding: 12px 20px;
+        @include flex-center;
+        gap: 10px;
+        font-size: 15px;
+        border-radius: 30px;
+        background-color: $shopenyOrange;
+        color: white;
+        font-weight: 500;
+        @include click-scale(0.8, 0.4s);
+
+        &:Hover {
+            @include shopenyOrangeHoverBackground();
+        }
+
+
+
+        .icon {
+            font-size: 23px;
+        }
+    }
+}

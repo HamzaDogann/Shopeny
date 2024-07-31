@@ -1,13 +1,13 @@
 import React from 'react';
 import "../BasketInfo/BasketInformations.scss";
 
-function BasketInformations() {
+function MiniBasketInfo({ onGoVerification}) {
 
     return (
         <div className="basket-information-box">
-            <h2>Siparişin Özeti</h2>
+            <h2>Sipariş Özeti</h2>
             <p className="dividing-line"></p>
-            <div  style={{marginBottom:"10px"}} className="product-amount-and-price-box">
+            <div style={{ marginBottom: "10px" }} className="product-amount-and-price-box">
                 <p>8 Ürün</p>
                 <p>350.000₺</p>
             </div>
@@ -25,13 +25,13 @@ function BasketInformations() {
 
             <div className="basket-total-price-box">
                 <p>Toplam Tutar</p>
-                <p className="total-price">450.000₺</p>
+                <p style={{marginLeft:"20px"}} className="total-price">12.450.000₺</p>
             </div>
             <div className="checkout-button-box">
-                <button className="checkout-btn">Onayla</button>
+                <button onClick={onGoVerification} className="checkout-btn">Onayla</button>
             </div>
         </div>
     );
 }
 
-export default BasketInformations;
+export default MiniBasketInfo;

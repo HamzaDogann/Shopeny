@@ -1,8 +1,11 @@
 import React from 'react'
 import "./ConfirmationStep.scss";
-function ConfirmationStep() {
+function ConfirmationStep({onBack}) {
   return (
-    <div>Onay aşaması</div>
+    <div>Onay aşaması
+
+      <button onClick={onBack}>Geri</button>
+    </div>
   )
 }
 
