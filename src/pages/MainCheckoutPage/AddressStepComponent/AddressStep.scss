@@ -10,7 +10,7 @@
         @include flex-row-center;
         justify-content: space-between;
         margin-bottom: 30px;
-
+       
         .address-informations {
             @include flex-column;
             gap: 5px;

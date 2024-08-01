@@ -17,7 +17,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
                     <button onClick={() => { onConfirm(); dispatch(hideModal()); }}>
                         {confirmText}
                     </button>
-                    <button onClick={() => { onCancel(); dispatch(hideModal()); }}>
+                    <button onClick={() => {dispatch(hideModal()); }}>
                         {cancelText}
                     </button>
                 </div>
