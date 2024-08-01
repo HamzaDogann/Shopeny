@@ -13,8 +13,7 @@
         right: 10px;
         width: max-content;
         z-index: 1000;
-        // Diğer gerekli stiller, örneğin arka plan rengi, gölge vb.
-        transition: all 0.3s ease-in-out; // Geçiş efekti
+        transition: all 0.3s ease-in-out; 
     }
 
     @media (max-width:450px) {
