@@ -3,8 +3,19 @@
 .basket-information-box {
     background-color: rgb(247, 247, 247);
     padding: 10px 35px 15px 35px;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
     border-radius: 20px;
+    height: max-content;
+
+    &.fixedBar {
+        position: sticky;
+        top: 23px;
+        right: 10px;
+        width: max-content;
+        z-index: 1000;
+        // Diğer gerekli stiller, örneğin arka plan rengi, gölge vb.
+        transition: all 0.3s ease-in-out; // Geçiş efekti
+    }
 
     @media (max-width:450px) {
         border-radius: 0px;

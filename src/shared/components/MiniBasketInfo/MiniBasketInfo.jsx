@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../BasketInfo/BasketInformations.scss";
 
-function MiniBasketInfo({ onGoVerification}) {
+function MiniBasketInfo({ onGoVerification }) {
+    const [isFixed, setIsFixed] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition > 200) {
+                setIsFixed(true);
+            } else {
+                setIsFixed(false);
+            }
+
+            if (scrollPosition > 1400) {
+                setIsFixed(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
-        <div className="basket-information-box">
+        <div className={`basket-information-box ${isFixed ? 'fixedBar' : ''}`}>
             <h2>Sipariş Özeti</h2>
             <p className="dividing-line"></p>
             <div style={{ marginBottom: "10px" }} className="product-amount-and-price-box">

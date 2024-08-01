@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import CustomStepperComponent from '../../shared/components/Stepper/CustomStepper.jsx';
-
 import AddressStep from "./AddressStepComponent/AddressStep.jsx";
 import PaymentStep from "./PaymentStepComponent/PaymentStep.jsx";
 import ConfirmationStep from "./ConfirmationStepComponent/ConfirmationStep.jsx";
@@ -8,9 +7,10 @@ import PaymentVerification from "./PaymentVerificationComponent/PaymentVerificat
 import BasketInformations from '../../shared/components/BasketInfo/BasketInformations.jsx';
 import MiniBasketInfo from '../../shared/components/MiniBasketInfo/MiniBasketInfo.jsx';
 
-
 import "./PaymentProcess.scss";
+
 const PaymentProcess = () => {
+
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNext = () => {
@@ -40,8 +40,6 @@ const PaymentProcess = () => {
       behavior: 'smooth',
     });
   }, [currentStep]);
-
-
 
 
   const renderStep = () => {

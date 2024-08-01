@@ -1,0 +1,71 @@
+@import "../../../shared/styles/main.scss";
+
+.payment-general-box {
+    @include flex-row;
+    margin-top: 40px;
+
+    .payment-form-box {
+        width: 50%;
+
+        form {
+            @include flex-column;
+            gap: 20px;
+            font-size: 17px;
+            font-weight: 500;
+            color: $shopenyTextGray;
+
+            input {
+                border: 2px solid rgb(210, 210, 210);
+                border-radius: 6px;
+                font-size: 16px;
+
+                &:focus {
+                    border: 2px solid $shopenyBlue;
+                }
+            }
+
+            .input-item {
+                @include flex-column;
+                gap: 10px;
+            }
+
+            .multi-input-items {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 32px;
+
+
+                input {
+                    width: 100px;
+                    height: 44px;
+                    margin-top: 6px;
+                }
+
+                select {
+                    border-bottom: 2px solid rgb(210, 210, 210);
+                    width: 100px;
+                    font-family: "Poppins";
+                    margin-top: 7px;
+                    cursor: pointer;
+
+
+                    &:focus {
+                        border-bottom: 2px solid $shopenyBlue;
+                    }
+
+                    option {
+                        font-family: "Poppins";
+                    }
+                }
+            }
+        }
+    }
+
+    .payment-credit-card-box {
+        width: 50%;
+        margin-left: 50px;
+        height: max-content;
+    }
+}

@@ -1,9 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
 import BasketProduct from "../../features/BasketPageComponents/BasketProduct";
 import BasketInformations from "../../shared/components/BasketInfo/BasketInformations";
-
+import { useLocation } from 'react-router-dom';
 import "./Basket.scss";
 
 
@@ -11,10 +11,12 @@ function Basket() {
 
   const basketProduct = true;
   const navigate = useNavigate();
+  const location = useLocation();
+
 
   const handleConfirmCart = () => {
     // Implement the checkout logic here
-    navigate("/odeme-islemleri");
+    navigate("/sepetim/odeme-islemleri");
   }
 
   return (
@@ -53,7 +55,6 @@ function Basket() {
           </div>
         }
       </div>
-
     </div>
   )
 }

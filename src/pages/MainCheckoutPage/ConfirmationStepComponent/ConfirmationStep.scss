@@ -1,0 +1,123 @@
+@import "../../../shared/styles/main.scss";
+
+.order-details-box {
+    margin-top: 40px;
+
+    .title-box {
+        font-weight: 500;
+        @include flex-row-center;
+        gap: 10px;
+
+        p {
+            font-size: 22px;
+            color: $shopenyTextGray;
+        }
+
+        .icon {
+            font-size: 40px;
+            color: $shopenyOrange;
+        }
+    }
+
+    .products-general-box {
+        font-weight: 500;
+
+        .products-title-box {
+            @include flex-row-center;
+            gap: 15px;
+
+            img {
+                width: 55px;
+            }
+
+            p {
+                font-size: 22px;
+                color: $shopenyTextGray;
+            }
+        }
+
+        .all-products {
+            margin-top: 30px;
+            background-color: $shopenyLightGray;
+            padding: 20px 10px 20px 25px;
+            border-radius: 20px;
+
+            .products-box {
+                @include CustomScroll;
+                height: 330px;
+                padding: 0px 5px;
+            }
+        }
+    }
+
+    .delivery-address-box {
+        margin: 40px 0px;
+
+        .address-card {
+            margin-top: 30px;
+            background-color: $shopenyLightGray;
+            padding: 20px 10px 20px 25px;
+            border-radius: 15px;
+            font-weight: 500;
+
+            .address-informations {
+                @include flex-column;
+                gap: 7px;
+                .address-title {
+                    font-size: 20px;
+                    color: $shopenyOrange;
+
+                    @media (max-width: 1100px) {
+                        font-size: 18px;
+                    }
+                }
+
+                .address-name {
+                    font-size: 16px;
+                    color: rgb(93, 93, 93);
+
+                    @media (max-width: 1100px) {
+                        font-size: 14px;
+                    }
+
+                    @media (max-width: 800px) {
+                        margin-top: 10px;
+                    }
+                }
+
+                .address-recipient {
+                    font-size: 14px;
+                    color: rgb(107, 107, 107);
+
+                    @media (max-width: 1100px) {
+                        font-size: 12px;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .payment-info-box {
+        .icon {
+            margin-right: 7px;
+        }
+
+        .payment-card-informations {
+            margin-top: 30px;
+            background-color: $shopenyLightGray;
+            padding: 20px 10px 20px 25px;
+            border-radius: 15px;
+
+            p {
+                font-size: 16px;
+                color: $shopenyTextGray;
+                font-weight: 500;
+
+                strong {
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

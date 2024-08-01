@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { showModal } from '../../store/features/ConfirmationModal/Modal';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { customSuccessToast } from '../../shared/utils/CustomToasts';
-import truncateName from "../../shared/utils/truncateName";
+import ProductItemCard from '../../shared/components/OrderProductItemCard/ProductItemCard';
 
 function OrderCard() {
 
@@ -52,69 +52,35 @@ function OrderCard() {
             </div>
             <div className="order-card-details">
                 <div className='order-items'>
-
-                    <div className="order-item">
-                        <img src={Macbook} alt="" />
-                        <div className="item-info">
-                            <div className='item-name-and-brand-box'>
-                                <span>Apple</span>
-                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
-                            </div>
-                            <span className="item-quantity">82</span>
-                            <span className="item-price">22.150.000 ₺</span>
-                        </div>
-                    </div>
-
-                    <div className="order-item">
-                        <img src={Macbook} alt="" />
-                        <div className="item-info">
-                            <div className='item-name-and-brand-box'>
-                                <span>Apple</span>
-                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
-                            </div>
-                            <span className="item-quantity">82</span>
-                            <span className="item-price">22.150.000 ₺</span>
-                        </div>
-                    </div>
-
-                    <div className="order-item">
-                        <img src={Macbook} alt="" />
-                        <div className="item-info">
-                            <div className='item-name-and-brand-box'>
-                                <span>Apple</span>
-                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
-                            </div>
-                            <span className="item-quantity">82</span>
-                            <span className="item-price">22.150.000 ₺</span>
-                        </div>
-                    </div>
-
-                    <div className="order-item">
-                        <img src={Macbook} alt="" />
-                        <div className="item-info">
-                            <div className='item-name-and-brand-box'>
-                                <span>Apple</span>
-                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
-                            </div>
-                            <span className="item-quantity">82</span>
-                            <span className="item-price">22.150.000 ₺</span>
-                        </div>
-                    </div>
-
-                    <div className="order-item">
-                        <img src={Macbook} alt="" />
-                        <div className="item-info">
-                            <div className='item-name-and-brand-box'>
-                                <span>Apple</span>
-                                <p>{truncateName("MacBook Pro 16 Inc Ultra Plus Premium", 30)}</p>
-                            </div>
-                            <span className="item-quantity">82</span>
-                            <span className="item-price">22.150.000 ₺</span>
-                        </div>
-                    </div>
+                    <ProductItemCard
+                        image={Macbook}
+                        brand={"Apple"}
+                        productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
+                        price={120.000}
+                        quantity={10}
+                    />
+                    <ProductItemCard
+                        image={Macbook}
+                        brand={"Apple"}
+                        productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
+                        price={120000}
+                        quantity={10}
+                    />
+                    <ProductItemCard
+                        image={Macbook}
+                        brand={"Apple"}
+                        productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
+                        price={434424}
+                        quantity={10}
+                    />
+                    <ProductItemCard
+                        image={Macbook}
+                        brand={"Apple"}
+                        productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
+                        price={120.000}
+                        quantity={10}
+                    />
                 </div>
-
-
                 <p className='dividing-line'></p>
 
                 <div className='address-informations'>
