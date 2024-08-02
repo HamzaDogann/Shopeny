@@ -1,5 +1,6 @@
 
 import "./AnimationBackground.scss";
+
 const AnimationBackground = () => {
     return (
         <div className='main-background'>
