@@ -35,7 +35,7 @@ function PaymentStep({ onBack }) {
 
   return (
     <>
-      <h2>Ödeme Bilgilerinizi Girin</h2>
+      <h2 style={{marginBottom:"50px"}}>Ödeme Bilgilerinizi Girin</h2>
       <div className='payment-general-box'>
         <div className='payment-form-box'>
           <form>

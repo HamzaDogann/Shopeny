@@ -1,7 +1,11 @@
 @import "../../../shared/styles/main.scss";
 
 .choose-address-box {
+    @media (max-width:1000px) {
+        @include flex-column;
+        align-items: center;
 
+      }
     .address-card {
         background-color: $shopenyLightGray;
         padding: 20px 30px;
@@ -10,7 +14,19 @@
         @include flex-row-center;
         justify-content: space-between;
         margin-bottom: 30px;
-       
+
+        @media (max-width:1000px) {
+            width: 60%;
+        }
+        @media (max-width:800px) {
+            width:90%;
+        }
+        @media (max-width:700px) {
+            width:100%;
+        }
+
+
+
         .address-informations {
             @include flex-column;
             gap: 5px;
@@ -19,16 +35,35 @@
             .address-title {
                 font-size: 20px;
                 color: $shopenyOrange;
+
+                @media (max-width:1200px) {
+                    font-size: 18px;
+                }
+
             }
 
             .address-name {
                 font-size: 16px;
                 color: rgb(118, 118, 118);
+
+                @media (max-width:1200px) {
+                    font-size: 14px;
+                }
+                @media (max-width:500px) {
+                    font-size:12px
+                }
             }
 
             .address-recipient {
                 font-size: 14px;
                 color: rgb(141, 141, 141);
+
+                @media (max-width:1200px) {
+                    font-size: 12px;
+                }
+                @media (max-width:500px) {
+                    font-size:11px
+                }
             }
         }
     }
@@ -43,12 +78,19 @@
         font-weight: 500;
         font-size: 15px;
         color: $shopenyOrange;
+
+        @media (max-width:500px) {
+            font-size: 13px;
+        }
     }
 }
 
 .new-address-box {
     margin-top: 40px;
-
+    @media (max-width:1000px) {
+        width: 100%;
+        @include flex-center;
+     }
 
     button {
         padding: 12px 20px;
@@ -64,6 +106,10 @@
         &:Hover {
             @include shopenyOrangeHoverBackground();
         }
+
+        @media (max-width:1000px) {
+            width: 200px;
+         }
 
 
 

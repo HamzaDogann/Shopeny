@@ -23,6 +23,7 @@ function ConfirmationStep({ onBack }) {
   return (
     <>
       <h2>Sipariş Detayları</h2>
+     
       <div className='order-details-box'>
         <div className="products-general-box">
           <div className="products-title-box">
@@ -96,8 +97,6 @@ function ConfirmationStep({ onBack }) {
           </div>
         </div>
 
-
-
         <div className="payment-info-box">
           <div className="title-box">
             <FaCreditCard className="icon" />
@@ -109,8 +108,6 @@ function ConfirmationStep({ onBack }) {
           </div>
         </div>
 
-
-        
       </div>
       <GoBackStepButton onBack={onBack} />
     </>

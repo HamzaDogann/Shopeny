@@ -27,15 +27,14 @@ function PaymentVerification({ onBack }) {
  
   };
 
-  
-  console.log("Verification Component Rendered");
+
   return (
     <div className='payment-verification-box'>
       <div className='payment-verification-modal'>
         <p className='title'>Doğrulama kodu giriniz</p>
         <div className='payment-informations'>
           <div className='info-item'>
-            <p>İş yeri Adı :</p>
+            <p>İşyeri Adı :</p>
             <span>Shopeny</span>
           </div>
           <div className='info-item'>

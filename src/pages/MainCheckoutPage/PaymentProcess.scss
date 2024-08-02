@@ -12,14 +12,47 @@
         @include flex-row;
         padding: 0px 120px;
 
+        @media (max-width:1300px) {
+            padding: 0px 70px;
+        }
+
+        @media (max-width:1040px) {
+            padding: 0px 20px;
+        }
+
+        @media (max-width:1000px) {
+            flex-direction: column;
+        }
+
+        @media (max-width:500px) {
+            padding: 0px;
+        }
+
         .content-box {
             width: 60%;
+
+            @media (max-width:1000px) {
+                width: 100%;
+            }
 
             h2 {
                 color: $shopenyTextGray;
                 font-size: 25px;
-                margin: 0px 0px 35px 0px; 
+                margin: 0px 0px 35px 0px;
                 font-weight: 600;
+
+                @media (max-width:1450px) {
+                    text-align: center;
+                }
+
+                @media (max-width:1200px) {
+                    font-size: 22px;
+                }
+
+                @media (max-width:1000px) {
+                    font-size: 20px;
+
+                }
             }
         }
 
@@ -27,6 +60,16 @@
             display: flex;
             justify-content: center;
             width: 40%;
+
+            @media (max-width:1450px) {
+                justify-content: end;
+            }
+
+            @media (max-width:1000px) {
+                justify-content: center;
+                width: 100%;
+                margin-top: 50px;
+            }
         }
     }
 }
@@ -41,6 +84,10 @@
     color: $shopenyTextGray;
     font-weight: 500;
     transition: all 0.3s ease-in-out;
+
+    @media (max-width:1000px) {
+        display: none;
+    }
 
     &:hover {
         background-color: rgb(230, 230, 230);

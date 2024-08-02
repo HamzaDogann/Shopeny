@@ -3,4 +3,17 @@
     font-family: "Poppins";
     font-weight: 500;
     color: rgb(74, 74, 74);
+
+    @media (max-width:1300px) {
+        font-size: 14px;
+    }
+    @media (max-width:420px) {
+        font-size: 12px;
+    }
+    @media (max-width:360px) {
+        font-size: 11px;
+    }
+    @media (max-width:350px) {
+      display: none;
+    }
 }

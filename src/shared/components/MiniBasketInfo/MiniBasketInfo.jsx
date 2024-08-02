@@ -27,31 +27,33 @@ function MiniBasketInfo({ onGoVerification }) {
     }, []);
 
     return (
-        <div className={`basket-information-box ${isFixed ? 'fixedBar' : ''}`}>
-            <h2>Sipariş Özeti</h2>
-            <p className="dividing-line"></p>
-            <div style={{ marginBottom: "10px" }} className="product-amount-and-price-box">
-                <p>8 Ürün</p>
-                <p>350.000₺</p>
-            </div>
-            <div className="total-promotion-and-cargo-prices-box">
-                <div className="price-box">
-                    <p>Promosyon İndirimi</p>
-                    <span className="promotion-discount">20%</span>
+        <div className='mini-basket-general-box'>
+            <div className={`basket-information-box ${isFixed ? 'fixedBar' : ''}`} id='mini-basket-box'>
+                <h2>Sipariş Özeti</h2>
+                <p className="dividing-line"></p>
+                <div style={{ marginBottom: "10px" }} className="product-amount-and-price-box">
+                    <p>8 Ürün</p>
+                    <p>350.000₺</p>
                 </div>
-                <div className="price-box">
-                    <p>Kargo Ücreti</p>
-                    <span className="cargo-price">+70₺</span>
+                <div className="total-promotion-and-cargo-prices-box">
+                    <div className="price-box">
+                        <p>Promosyon İndirimi</p>
+                        <span className="promotion-discount">20%</span>
+                    </div>
+                    <div className="price-box">
+                        <p>Kargo Ücreti</p>
+                        <span className="cargo-price">+70₺</span>
+                    </div>
                 </div>
-            </div>
-            <p className="dividing-line"></p>
+                <p className="dividing-line"></p>
 
-            <div className="basket-total-price-box">
-                <p>Toplam Tutar</p>
-                <p style={{marginLeft:"20px"}} className="total-price">12.450.000₺</p>
-            </div>
-            <div className="checkout-button-box">
-                <button onClick={onGoVerification} className="checkout-btn">Onayla</button>
+                <div className="basket-total-price-box">
+                    <p>Toplam Tutar</p>
+                    <p style={{ marginLeft: "20px" }} className="total-price">12.450.000₺</p>
+                </div>
+                <div className="checkout-button-box">
+                    <button onClick={onGoVerification} className="checkout-btn">Onayla</button>
+                </div>
             </div>
         </div>
     );

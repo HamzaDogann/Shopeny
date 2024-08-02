@@ -22,6 +22,10 @@ const CustomStepIconRoot = styled('div')(({ theme, ownerState }) => ({
         backgroundImage: 'linear-gradient(40deg, #f27d59 20%, #496aee 100%)',
         boxShadow: '0 4px 12px 0px rgba(0,0,0,.25)',
     }),
+    [theme.breakpoints.down('450')]: {
+        width: 42,
+        height: 42,
+    },
 }));
 
 function CustomStepIcon(props) {
