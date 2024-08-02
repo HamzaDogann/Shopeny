@@ -6,6 +6,7 @@ import "./Auth.scss";
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/features/auth/authActions';
 import { Link } from 'react-router-dom';
+import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
 
 function ResetPassword() {
 
@@ -45,6 +46,7 @@ function ResetPassword() {
             </form>
           </div>
         </div>
+        <AnimationBackground />
       </div>
 
     </>

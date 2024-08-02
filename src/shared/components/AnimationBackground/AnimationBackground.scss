@@ -1,0 +1,122 @@
+$opacity: 0.6;
+$blur-value: 160px;
+$shopenyOrange: #f27d59;
+$shopenyBlue: #496aee;
+$colors: (
+    primary: #a8b9ff,
+    teal: #ff9c7b,
+    purple: #5e72c0,
+);
+
+@mixin bg-shape($size, $animation) {
+    width: $size;
+    height: $size;
+    border-radius: 9999px;
+    position: relative;
+    animation: $animation 10s infinite;
+}
+
+.main-background {
+    position: fixed;
+    padding-top: 15% !important;
+    inset: 0;
+    justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+    overflow: hidden;
+    z-index: -10;
+    background-color: white;
+
+    @media (max-width: 500px) {
+        display: none;
+    }
+
+
+    .bg-shape1 {
+        @include bg-shape(560px, one);
+    }
+
+    .bg-shape2 {
+        @include bg-shape(620px, two);
+    }
+}
+
+@keyframes one {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        left: -100px;
+        top: 70px;
+    }
+
+    50% {
+        left: 20px;
+        top: -150px;
+    }
+
+    75% {
+        left: 50px;
+        top: -100px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+}
+
+@keyframes two {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        left: 50px;
+        top: 10px;
+    }
+
+    50% {
+        left: 100px;
+        top: 50px;
+    }
+
+    75% {
+        left: 50px;
+        top: 100px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+}
+
+.opacity-50 {
+    opacity: $opacity;
+}
+
+.bg-blur {
+    filter: blur($blur-value);
+}
+
+.bg-primary {
+    background-color: map-get($colors, primary);
+}
+
+.bg-teal {
+    background-color: map-get($colors, teal);
+}
+
+.bg-purple {
+    background-color: map-get($colors, purple);
+}
+
+
+.light-theme {
+    transition: 0.5s background-color;
+    background-color: rgb(255, 255, 255);
+}

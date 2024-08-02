@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-
+//Configurations
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../store/features/auth/authActions.js';
+import { Link, useNavigate } from 'react-router-dom';
+import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground.jsx';
 //Styles - Images - Icons
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import "./Auth.scss";
@@ -11,10 +15,7 @@ import { LuEyeOff } from "react-icons/lu";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
-//Configurations
-import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../../store/features/auth/authActions.js';
-import { Link, useNavigate } from 'react-router-dom';
+
 
 
 function SignIn() {
@@ -115,6 +116,8 @@ function SignIn() {
       </div >
       <div>
       </div>
+
+      <AnimationBackground />
     </div >
   )
 }

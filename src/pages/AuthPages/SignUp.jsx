@@ -7,6 +7,7 @@ import { LuEyeOff } from "react-icons/lu";
 import RadioButton from '../../shared/helpers/RadioButton';
 import "./Auth.scss";
 import { Link } from 'react-router-dom';
+import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
 
 function SignUp() {
 
@@ -58,9 +59,6 @@ function SignUp() {
 
     <>
       <div className='sign-box' style={{ marginBottom: "70px" }}>
-        {/* Background Theme */}
-        <div className='background-theme'></div>
-
         {/* Sign-Up Modal */}
         <div className='sign-modal sign-up-box'>
           <h2>Üye Ol</h2>
@@ -175,7 +173,7 @@ function SignUp() {
       </div>
 
       {showAgreement && <MembershipAgreement handleAgreement={handleAgreement} />}
-
+      <AnimationBackground />
     </>
 
   )
