@@ -20,6 +20,8 @@ import {
 //Cookie
 import Cookies from 'js-cookie';
 
+//Router Dom
+import { useNavigate } from 'react-router-dom';
 
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
@@ -46,11 +48,10 @@ const handleUserLogin = async (userCredential, dispatch) => {
     }
 };
 
-
 export const authActions = {
 
     //========== Register Method | Email/Password/UserInformations ==========\\
-    registerWithEmail: (formData) => async (dispatch) => {
+    registerWithEmail: (formData, callback) => async (dispatch) => {
         dispatch(startLoading());
         const { email, password } = formData;
 
@@ -61,7 +62,12 @@ export const authActions = {
             const uid = userCredential.user.uid;
             await newUserRegistration(uid, formData);
 
-            customSuccessToast("Giriş Yapabilisiniz");
+            customSuccessToast("Hesap Oluşturuldu");
+
+            if (callback) {
+                callback();
+            }
+
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 customErrorToast("Bu e-mail ile kayıtlı kullanıcı bulunuyor.");
@@ -74,7 +80,6 @@ export const authActions = {
             dispatch(stopLoading());
         }
     },
-
 
     //========== Login Method | Email/Password ==========\\
     loginWithEmail: (email, password) => async (dispatch) => {

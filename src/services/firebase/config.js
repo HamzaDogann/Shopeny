@@ -16,10 +16,8 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Auth and Realtime Database
 const auth = getAuth(app);
 const db = getDatabase(app);
 const storage = getStorage(app);

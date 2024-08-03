@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import MembershipAgreement from '../../features/AuthPageComponents/MembershipAgreement';
 import { authActions } from '../../store/features/auth/authActions';
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import RadioButton from '../../shared/helpers/RadioButton';
-import "./Auth.scss";
-import { Link } from 'react-router-dom';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
-
+import "./Auth.scss";
 function SignUp() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -42,7 +42,6 @@ function SignUp() {
   const handleRadioButtonChange = () => {
     setFormData((prevFormData) => {
       const newAgreementAccepted = !prevFormData.agreementAccepted;
-      console.log(newAgreementAccepted);
       return { ...prevFormData, agreementAccepted: newAgreementAccepted };
     });
   };
@@ -52,11 +51,14 @@ function SignUp() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    dispatch(authActions.registerWithEmail(formData));
-  }
+    dispatch(authActions.registerWithEmail(formData, () => {
+        setTimeout(() => {
+            navigate('/giris-yap');
+        }, 2000);
+    }));
+};
 
   return (
-
     <>
       <div className='sign-box' style={{ marginBottom: "70px" }}>
         {/* Sign-Up Modal */}

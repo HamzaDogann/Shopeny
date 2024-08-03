@@ -9,7 +9,19 @@
     backdrop-filter: blur(5px);
     gap: 20px;
     border-top: 2px solid rgb(230, 230, 230);
-    z-index: 999!important;
+    z-index: 999 !important;
+    overflow: auto;
+
+    @media (max-width:1100px) {
+        gap: 5px;
+        padding: 10px 5px;
+    }
+
+    @media (max-width:800px) {
+        padding: 10px;
+        gap: 20px;
+
+    }
 
     h3 {
         display: none
@@ -19,11 +31,27 @@
         @include flex-center;
         @include white-button-hover;
         background-color: transparent;
-        padding: 5px 10px;
-        border-radius: 5px;
+        padding: 10px 10px;
+        border-radius: 10px;
         gap: 5px;
         font-size: 15px;
+
+
+        @media (max-width:1100px) {
+            font-size: 12px;
+            padding: 5px 8px;
+        }
+
+        @media (max-width:800px) {
+            padding: 5px 10px;
+            font-size: 15px;
+
+        }
     }
+}
+
+.categories-box .active-link {
+    background-color: rgb(240, 240, 240);
 }
 
 //================Media Query===============//
@@ -34,13 +62,18 @@
     top: 46px;
     left: 20;
     font-size: 40px;
-    color: rgb(111, 111, 111);
-    background-color: rgb(236, 236, 236);
+    color: rgb(107, 107, 107);
+    background-color: $shopenySmoothWhite;
     border-radius: 10px;
     padding: 3px;
+
+    @media (max-width:330px) {
+        background-color: white;
+        left: 10px;
+    }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 800px) {
 
     .categories-box {
         display: none;
@@ -48,35 +81,74 @@
         position: fixed;
         width: 100%;
         height: 100%;
+        justify-content: start;
         top: 0px;
-        left: 0;
-        margin: 0;
-        padding: 0;
-        padding-top: 20px;
-        background-color: rgba(255, 255, 255, 0.69);
-        animation: animationMobileMenu 0.8s ease-in;
+        left: 0px;
+        background-color: rgb(255, 255, 255);
+        animation: animationMobileMenu 0.6s ease-in;
 
         h3 {
             display: inline;
             text-align: center;
             @include opacity-effect(0.6s);
-
+            color: $shopenyTextGray;
             font-size: 30px;
+            font-weight: 600;
             margin: 0;
-            font-weight: 700;
-            margin-top: -20px;
-            padding-bottom: 10px;
+            margin-top: 20px;
+            border-bottom: 2px solid rgb(229, 229, 229);
+            padding-bottom: 20px;
+            animation: CategoriesAnimation 1.1s ease-in-out;
         }
 
         .category-item {
             width: 100%;
-            scale: 1.5;
             padding: 10px;
             display: flex;
             justify-content: center;
+            color: $shopenyTextGray;
+            font-weight: 500;
+            font-size: 20px;
+            align-items: center;
+            animation: CategoriesAnimation 1.1s ease-in-out;
+
+            @media (max-height:630px) {
+                font-size: 18px;
+            }
+
+
+            @keyframes CategoriesAnimation {
+                0% {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+
+                60% {
+                    opacity: 0;
+                    transform: translateX(-25px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .icon {
+                @media (max-width:800px) {
+                    font-size: 28px;
+                    margin-right: 5px;
+                }
+
+                @media (max-height:630px) {
+                    font-size: 25px;
+                }
+            }
         }
 
     }
+
+
 
     @keyframes animationMobileMenu {
         0% {
@@ -100,12 +172,12 @@
 
     .category-menu-close-icon {
         display: none;
-        @include opacity-effect(1.7s);
         z-index: 999;
         font-size: 50px;
         position: fixed;
-        top: 30px;
+        top: 27px;
         right: 20px;
         color: $shopenyOrange;
+        animation: CategoriesAnimation 0.9s ease-in-out;
     }
 }

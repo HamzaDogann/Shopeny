@@ -1,7 +1,7 @@
 import { ref as dbRef, set } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../../services/firebase/config';
-import userDefaultProfileImage from "../../../assets/images/User/userDefaultProfileImage.png";
+import userDefaultProfilePhoto from "../../../assets/images/User/userDefaultProfilePhoto.png"
 import { customErrorToast} from '../../../shared/utils/CustomToasts';
 
 
@@ -83,7 +83,7 @@ export const newUserRegistrationWithFacebook = async (uid, userInfo) => {
 
 //=================== Upload profile photo to Firebase Storage ===================
 
-const uploadProfilePhoto = async (uid, photoURL = userDefaultProfileImage) => {
+const uploadProfilePhoto = async (uid, photoURL = userDefaultProfilePhoto) => {
     const imageRef = storageRef(storage, `users/${uid}/images/profilePhoto.png`);
     const response = await fetch(photoURL);
     const blob = await response.blob();

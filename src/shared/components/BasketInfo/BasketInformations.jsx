@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { FaTruck } from "react-icons/fa";
 import { FaTruckFast } from "react-icons/fa6";
-import { IoMdArrowDropdown } from "react-icons/io"; 
+import { RiArrowDownSLine } from "react-icons/ri";
+
 import "./BasketInformations.scss";
 
 function BasketInformations({checkoutButton, currentStep, onGoPayment, onGoConfirm, onGoVerification }) {
@@ -39,13 +40,13 @@ function BasketInformations({checkoutButton, currentStep, onGoPayment, onGoConfi
                 <p>8 Ürün</p>
                 <p>350.000₺</p>
             </div>
-            <p className="dividing-line"></p>
+        
             <h2>Teslimat</h2>
             <div className="choose-cargo-box">
                 <div className="custom-select" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                     <div className="selected-box">
                         <span className="selected">{selectedCargo}</span>
-                        <IoMdArrowDropdown className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`} />
+                        <RiArrowDownSLine className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`} />
                     </div>
                     {isDropdownOpen && (
                         <div className="select-options">
@@ -60,7 +61,7 @@ function BasketInformations({checkoutButton, currentStep, onGoPayment, onGoConfi
                 </div>
                 <p className='fast-cargo-warning'>{selectedCargo === "Hızlı Kargo" && "Hızlı kargolar için ek ücret uygulanır"}</p>
             </div>
-            <p className="dividing-line"></p>
+         
             <h2>Promosyon</h2>
             <div className="promotion-box">
                 <input type="text" placeholder="İndirim için promosyon kodu giriniz" />
@@ -80,7 +81,7 @@ function BasketInformations({checkoutButton, currentStep, onGoPayment, onGoConfi
             <p className="dividing-line"></p>
             <div className="basket-total-price-box">
                 <p>Toplam Tutar</p>
-                <p className="total-price">450.000₺</p>
+                <p className="total-price">122.450.000₺</p>
             </div>
             <div className="checkout-button-box">
                 {checkoutButton ? checkoutButton : renderCheckoutButton()}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
@@ -21,7 +20,7 @@ import Breadcrumbs from './shared/components/Breadcrumbs/Breadcrumbs.jsx';
 function App() {
 
   const isLoading = useSelector((state) => state.preLoader.isLoading);
-
+  
   return (
     <>
       {isLoading && <PreLoader />}

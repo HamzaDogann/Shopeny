@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import "./FavoriteProducts.scss";
-import { BsStars } from "react-icons/bs";
+import { Link } from 'react-router-dom';
+import { PiHeartStraightFill } from "react-icons/pi";
 import Pagination from '@mui/material/Pagination';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
-import { Link } from 'react-router-dom';
+import "./FavoriteProducts.scss";
 
 // Örnek ürün verisi
 const productList = Array.from({ length: 15 }, (_, i) => ({ id: i, name: `Product ${i + 1}` }));
@@ -43,18 +43,16 @@ function FavoriteProducts() {
     });
   }, [currentPage]);
 
-  // Gösterilecek ürünlerin başlangıç ve bitiş indekslerini hesapla
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = productList.slice(startIndex, endIndex);
-
-  console.log("Favorite Produc component Rendered");
 
   return (
     <div className='favorite-product-general-box'>
       <div className="top-box">
         <div className="favorite-title">
-          <BsStars className='favorite-icon' />
+          <PiHeartStraightFill className='favorite-icon' />
           <p>Favori Ürünlerim</p>
         </div>
         {favoriteProducts &&

@@ -35,9 +35,9 @@
     h2 {
 
         font-weight: 600;
-        color: rgb(69, 74, 77);
-        margin: 12px 0px;
-        font-size: 22px;
+        color: $shopenyTextGray;
+        margin: 16px 0px;
+        font-size: 20px;
 
         @media (max-width:1200px) {
             font-size: 17px;
@@ -83,7 +83,7 @@
                 padding: 8px;
                 border: 3px solid rgb(223, 223, 223);
                 background-color: rgb(247, 247, 247);
-                border-radius: 10px;
+                border-radius: 7px;
                 font-family: "Poppins";
                 font-size: 14px;
                 font-weight: 500;
@@ -111,10 +111,9 @@
                 left: 0;
                 width: 100%;
                 background-color: rgb(247, 247, 247);
-                border-radius: 4px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 z-index: 1;
-                border-radius: 10px;
+                border-radius: 7px;
             }
 
             .option {
@@ -159,10 +158,12 @@
 
         input {
             width: 100%;
-            border-radius: 10px;
             border: 0;
+            border-radius: 7px;
             padding-left: 10px;
             font-size: 14px;
+            padding-top: 9px;
+            padding-bottom: 9px;
             background-color: rgb(247, 247, 247);
             border: 3px solid rgb(223, 223, 223);
             font-weight: 500;
@@ -171,6 +172,8 @@
             @media (max-width:1200px) {
                 font-size: 12px;
                 background-color: rgb(255, 255, 255);
+                padding-top: 11px;
+                padding-bottom: 11px;
             }
         }
 
@@ -182,6 +185,7 @@
             padding: 6px 10px;
             font-size: 14px;
             border-radius: 4px;
+            margin-bottom: 10px;
             @include click-scale(0.8, 0.3s);
 
             @media (max-width:1200px) {
@@ -189,8 +193,10 @@
             }
 
             @media (max-width:500px) {
-                padding: 8px 11px;
+                padding: 10px;
                 width: 100%;
+                border-radius: 7px;
+                margin-top: 20px;
             }
         }
     }
@@ -229,12 +235,14 @@
         margin-top: 20px;
         @include flex-row-center;
         justify-content: space-between;
-        color: rgb(105, 105, 105);
+       color: rgb(106, 106, 106);
 
         p {
             font-size: 18px;
             font-weight: 500;
-
+            @media (max-width:1350px) {
+                font-size:16px;
+            }
             @media (max-width:1200px) {
                 font-size: 13px;
             }
@@ -242,7 +250,11 @@
 
         .total-price {
             font-size: 22px;
-            color: rgb(79, 79, 79);
+            color: $shopenyTextGray;
+
+            @media (max-width:1350px) {
+                font-size:19px;
+            }
 
             @media (max-width:1200px) {
                 font-size: 17px;

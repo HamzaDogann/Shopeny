@@ -7,10 +7,13 @@ import { TiShoppingCart } from "react-icons/ti";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import truncateName from "../../shared/utils/truncateName";
+
 function UserActions() {
 
   const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
+
 
   const handleUserAccount = () => {
     navigate('/hesabim');
@@ -29,7 +32,7 @@ function UserActions() {
         <FaUserLarge className='user-icon' />
         <div className='user-actions-buttons-detail-info'>
           <span>{user ? user == "nologinuser" ? "Üye ol veya" : "Hesap" : "Üye ol veya"}</span>
-          <p>{user ? user == "nologinuser" ? "Giriş Yap" : user.nameAndSurname : "Giriş Yap"}</p>
+          <p>{user ? user == "nologinuser" ? "Giriş Yap" : truncateName(user.nameAndSurname,15) : "Giriş Yap"}</p>
         </div>
       </div>
 
