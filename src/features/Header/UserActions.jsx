@@ -32,7 +32,7 @@ function UserActions() {
         <FaUserLarge className='user-icon' />
         <div className='user-actions-buttons-detail-info'>
           <span>{user ? user == "nologinuser" ? "Üye ol veya" : "Hesap" : "Üye ol veya"}</span>
-          <p>{user ? user == "nologinuser" ? "Giriş Yap" : truncateName(user.nameAndSurname,15) : "Giriş Yap"}</p>
+          <p>{user ? user == "nologinuser" ? "Giriş Yap" : truncateName(user.nameAndSurname,10) : "Giriş Yap"}</p>
         </div>
       </div>
 

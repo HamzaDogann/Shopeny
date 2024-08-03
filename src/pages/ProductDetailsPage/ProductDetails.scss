@@ -12,6 +12,36 @@
         padding: 10px 0px;
     }
 
+    .no-product-box {
+        @include flex-column;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
+
+        span {
+            color: rgb(91, 91, 91);
+            font-weight: 500;
+            font-size: 19px;
+        }
+
+        a {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border-radius: 30px;
+            background-color: $shopenyOrange;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+
+            @include click-scale(0.7, 0.3s);
+
+            &:Hover {
+                @include shopenyOrangeHoverBackground;
+            }
+
+        }
+    }
+
 }
 
 .product-titles-box {
@@ -61,7 +91,7 @@
     @include flex-center;
 
     .product-box {
-        background-color:  #f6f6f6;
+        background-color: #f6f6f6;
         width: 100%;
         border-radius: 20px;
         padding: 25px 35px;
@@ -303,6 +333,7 @@
                     @include flex-row;
                     gap: 15px;
                     margin-bottom: 15px;
+
                     @media (max-width:500px) {
                         justify-content: center;
                         gap: 25px;
@@ -366,6 +397,7 @@
                     font-weight: 500;
                     color: rgb(60, 60, 60);
                     margin-bottom: 15px;
+
                     @media (max-width:500px) {
                         margin: 15px;
                         display: flex;

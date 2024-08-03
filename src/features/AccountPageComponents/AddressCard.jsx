@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { showModal } from '../../store/features/ConfirmationModal/Modal';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { customErrorToast } from '../../shared/utils/CustomToasts';
+import truncateName from '../../shared/utils/truncateName';
 
 function AddressCard({ onEdit }) {
 
@@ -39,7 +40,7 @@ function AddressCard({ onEdit }) {
     return (
         <div className='address-card'>
             <div className='address-informations'>
-                <p className='address-title'>{dummyAddress.addressTitle}</p>
+                <p className='address-title'>{truncateName(dummyAddress.addressTitle,25)}</p>
                 <p className='address-name'>{dummyAddress.street}, {dummyAddress.neighborhood}, {dummyAddress.district}, {dummyAddress.city} {dummyAddress.postalCode}</p>
                 <p className='address-recipient'>Alıcı: {dummyAddress.recipientName}</p>
             </div>

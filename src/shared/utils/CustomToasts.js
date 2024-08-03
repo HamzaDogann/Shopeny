@@ -1,8 +1,8 @@
 import { toast } from 'react-hot-toast';
 
-export const customSuccessToast = (message) => {
+export const customSuccessToast = (message,duration=3500) => {
   toast.success(message, {
-    duration: 3500,
+    duration: duration,
     style: {
       border: '0px solid #713200',
       padding: '16px 20px',
