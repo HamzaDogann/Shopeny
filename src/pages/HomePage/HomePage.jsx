@@ -1,7 +1,7 @@
 import React from 'react'
-import AutoPlaySlider from '../../features/HomePageComponents/AutoPlaySlider';
-import PopularProductsSlider from '../../features/HomePageComponents/PopularProductsSlider';
-import SuperDealCards from '../../features/HomePageComponents/SuperDealCards';
+import AutoPlaySlider from '../../components/HomePageComponents/AutoPlaySlider';
+import PopularProductsSlider from '../../components/HomePageComponents/PopularProductsSlider';
+import SuperDealCards from '../../components/HomePageComponents/SuperDealCards';
 import "./HomePage.scss";
 
 function HomePage() {

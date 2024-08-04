@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
 import { showModal } from '../../../store/features/ConfirmationModal/Modal';
-import RemainingTime from '../../../features/CheckoutPagesComponents/RemainingTime';
+import RemainingTime from '../../../components/CheckoutPagesComponents/RemainingTime';
 import "./PaymentVerification.scss";
 function PaymentVerification({ onBack }) {
   

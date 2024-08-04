@@ -1,8 +1,8 @@
 import React from 'react';
-import HighlightsBenefits from '../../../features/Footer/HighlightsBenefits';
-import InfiniteBrands from '../../../features/Footer/InfiniteBrands';
-import SocialContent from '../../../features/Footer/SocialContent';
-import Links from '../../../features/Footer/Links';
+import HighlightsBenefits from '../../../components/Footer/HighlightsBenefits';
+import InfiniteBrands from '../../../components/Footer/InfiniteBrands';
+import SocialContent from '../../../components/Footer/SocialContent';
+import Links from '../../../components/Footer/Links';
 import "./footer.scss";
 import Container from '../../container/Container';
 

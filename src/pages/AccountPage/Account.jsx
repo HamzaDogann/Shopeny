@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { MdOutlineAccountCircle } from "react-icons/md";
-import Sidebar from '../../features/AccountPageComponents/Sidebar';
+import Sidebar from '../../components/AccountPageComponents/Sidebar';
 
 
 import "./Account.scss";

@@ -2,7 +2,7 @@ import { useState } from "react";
 import RadioButton from "../../../shared/helpers/RadioButton";
 import Fullsize from "../../../shared/components/FullsizeOverlay/Fullsize";
 import Modal from "../../../shared/components/Modal/Modal";
-import AddressModal from "../../../features/AccountPageComponents/AddressModal";
+import AddressModal from "../../../components/AccountPageComponents/AddressModal";
 
 //Styles
 import { MdAddLocationAlt } from "react-icons/md";

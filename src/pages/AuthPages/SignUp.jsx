@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import MembershipAgreement from '../../features/AuthPageComponents/MembershipAgreement';
+import MembershipAgreement from '../../components/AuthPageComponents/MembershipAgreement';
 import { authActions } from '../../store/features/auth/authActions';
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";

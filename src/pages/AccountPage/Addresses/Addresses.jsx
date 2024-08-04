@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import AddressCard from '../../../features/AccountPageComponents/AddressCard';
+import AddressCard from '../../../components/AccountPageComponents/AddressCard';
 import { TbHomeDot } from "react-icons/tb";
 import NoAddress from "../../../assets/images/Orders/NoAddress.png";
 import { MdOutlineAddLocationAlt } from "react-icons/md";
-import NoContent from '../../../features/AccountPageComponents/NoContent';
+import NoContent from '../../../components/AccountPageComponents/NoContent';
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
-import AddressModal from '../../../features/AccountPageComponents/AddressModal';
+import AddressModal from '../../../components/AccountPageComponents/AddressModal';
 import Modal from '../../../shared/components/Modal/Modal';
 import "./Addresses.scss";
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 // Components
-import Logo from '../../../features/Header/Logo';
-import SearchBar from '../../../features/Header/SearchBar';
-import UserActions from '../../../features/Header/UserActions';
+import Logo from '../../../components/Header/Logo';
+import SearchBar from '../../../components/Header/SearchBar';
+import UserActions from '../../../components/Header/UserActions';
 
 // Styles
 import "./header.scss";

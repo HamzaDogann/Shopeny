@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
-import Product from '../../features/ProductDetailsPageComponents/Product';
-import TechnicialSpecifications from '../../features/ProductDetailsPageComponents/TechnicialSpecifications';
-import ProductComments from '../../features/ProductDetailsPageComponents/ProductComments';
-import AddComment from '../../features/ProductDetailsPageComponents/AddComment';
+import Product from '../../components/ProductDetailsPageComponents/Product';
+import TechnicialSpecifications from '../../components/ProductDetailsPageComponents/TechnicialSpecifications';
+import ProductComments from '../../components/ProductDetailsPageComponents/ProductComments';
+import AddComment from '../../components/ProductDetailsPageComponents/AddComment';
 import "./ProductDetails.scss";
 
 const validCategories = [

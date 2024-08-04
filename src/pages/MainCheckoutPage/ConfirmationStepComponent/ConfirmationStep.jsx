@@ -1,7 +1,7 @@
 import "./ConfirmationStep.scss";
 import ProductBox from "../../../assets/images/Orders/ProductBox.png";
 import MacBookPro from "../../../assets/images/productPhotoMain.jpg"
-import GoBackStepButton from '../../../features/CheckoutPagesComponents/GoBackStepButton';
+import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
 import ProductItemCard from "../../../shared/components/OrderProductItemCard/ProductItemCard";
 
 import { FaLocationDot } from "react-icons/fa6";

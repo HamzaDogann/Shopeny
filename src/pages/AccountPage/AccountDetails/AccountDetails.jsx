@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import GeneralUserDetailsCard from '../../../features/AccountPageComponents/GeneralUserDetailsCard';
+import GeneralUserDetailsCard from '../../../components/AccountPageComponents/GeneralUserDetailsCard';
 import { TbPencilCog } from "react-icons/tb";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";

@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
-import BasketProduct from "../../features/BasketPageComponents/BasketProduct";
+import BasketProduct from "../../components/BasketPageComponents/BasketProduct";
 import BasketInformations from "../../shared/components/BasketInfo/BasketInformations";
 import { useLocation } from 'react-router-dom';
 import "./Basket.scss";

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import OrderCard from "../../../features/AccountPageComponents/OrderCard"
+import OrderCard from "../../../components/AccountPageComponents/OrderCard"
 import "./Order.scss";
 import NoOrder from "../../../assets/images/Orders/NoOrder.png"
-import NoContent from "../../../features/AccountPageComponents/NoContent";
+import NoContent from "../../../components/AccountPageComponents/NoContent";
 function Order() {
 
   const siparisVarMi = true;

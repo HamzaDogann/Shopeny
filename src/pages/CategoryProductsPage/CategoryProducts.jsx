@@ -4,8 +4,8 @@ import { validCategories } from "../../constants/categories"
 import { MdFilterListAlt } from "react-icons/md";
 
 import RadioButton from "../../shared/helpers/RadioButton"
-import CategoryFilterBar from '../../features/CategoryProductPageComponents/CategoryFilterBar';
-import CategoryProductList from '../../features/CategoryProductPageComponents/CategoryProductList';
+import CategoryFilterBar from '../../components/CategoryProductPageComponents/CategoryFilterBar';
+import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
 import "./CategoryProducts.scss"
 function CategoryProducts() {
 

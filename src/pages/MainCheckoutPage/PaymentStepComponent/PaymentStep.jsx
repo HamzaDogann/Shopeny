@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./PaymentStep.scss";
 import Cards from 'react-credit-cards-2';
 import "react-credit-cards-2/dist/lib/styles.scss";
-import GoBackStepButton from '../../../features/CheckoutPagesComponents/GoBackStepButton';
+import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
 
 function PaymentStep({ onBack }) {
   const [cardInformations, setCardInformations] = useState({
