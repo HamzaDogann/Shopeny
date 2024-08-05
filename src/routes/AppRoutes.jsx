@@ -13,6 +13,7 @@ import CategoryProducts from '../pages/CategoryProductsPage/CategoryProducts';
 import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.jsx"
 import PaymentProcess from "../pages/MainCheckoutPage/PaymentProcess.jsx";
 
+
 const AppRoutes = () => {
 
   const location = useLocation();
@@ -30,14 +31,11 @@ const AppRoutes = () => {
         <Route path='sepetim/odeme-islemleri' element={<ProtectedRoute element={<PaymentProcess />} />} />
         <Route path='favori-urunler' element={<ProtectedRoute element={<FavoriteProducts />} />} />
         <Route path="/hesabim/*" element={<ProtectedRoute element={<AccountRoutes />} />} />
-
+      
         {/* Global Routes */}
         <Route path="/yardim-ve-destek/*" element={<HelpAndSupportRoutes />} />
         <Route path="/:categoryName" element={<CategoryProducts />} />
         <Route path="/:categoryName/:productName" element={<ProductDetails />} />
-
-        {/* Diğer korumalı rotalar */}
-        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   )

@@ -16,6 +16,7 @@ import Layout from './shared/layout/Layout.jsx';
 import AppRoutes from './routes/AppRoutes.jsx';
 import Container from './shared/container/Container.jsx';
 import Breadcrumbs from './shared/components/Breadcrumbs/Breadcrumbs.jsx';
+import About from './components/AboutShopeny/About.jsx';
 
 
 function App() {
@@ -28,10 +29,12 @@ function App() {
 
       {/* Necessary Data & Pages */}
       <DataLoader>
+        {/* Fullsize Page Routes */}
         <Routes>
           <Route path="giris-yap" element={<AuthProtectedRoute element={<SignIn />} />} />
           <Route path="uye-ol" element={<AuthProtectedRoute element={<SignUp />} />} />
           <Route path="sifre-yenileme" element={<AuthProtectedRoute element={<ResetPassword />} />} />
+          <Route path="hakkimizda" element={<About />} />
         </Routes>
         <Layout>
           <Container>
@@ -40,6 +43,7 @@ function App() {
           </Container>
           <Breadcrumbs />
           <Container>
+            {/* Header - *AppRoutes* - Footer*/}
             <AppRoutes />
           </Container>
           <Footer />

@@ -1,0 +1,217 @@
+@import "../../shared//styles/main.scss";
+
+.about-general-box {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    @include flex-column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+
+    h3 {
+        margin-top: 40px;
+        font-size: 25px;
+        font-weight: 600;
+        color: rgb(67, 67, 67);
+        width: 65%;
+        text-align: center;
+
+        @media (max-width: 700px) {
+            font-size: 23px;
+        }
+
+        @media (max-width: 400px) {
+            width: 100%;
+            font-size: 23px;
+        }
+    }
+
+    .shopeny-logo-box {
+        margin-top: 30px;
+        width: 100%;
+        @include flex-center;
+
+        img {
+            width: 350px;
+
+            @media (max-width: 700px) {
+                width: 240px;
+            }
+        }
+    }
+
+    .about-description-box {
+        margin-top: 20px;
+        width: 100%;
+        @include flex-center;
+        flex-direction: column;
+
+
+        p {
+            width: 65%;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: "Poppins";
+            color: $shopenyTextGray;
+            text-align: justify;
+
+            @media (max-width: 1350px) {
+                width: 80%;
+            }
+
+            @media (max-width: 1075px) {
+                width: 95%;
+            }
+
+            @media (max-width: 1000px) {
+                font-size: 14px
+            }
+
+            @media (max-width: 400px) {
+                width: 100%;
+                text-align: center;
+            }
+
+
+        }
+
+    }
+
+    .about-developer-box {
+        background-color: rgba(154, 154, 154, 0.112);
+        padding: 15px;
+        border-radius: 15px;
+        padding-top: 20px;
+        width: 65%;
+        margin-top: 20px;
+        @include flex-row;
+
+        @media (max-width: 1350px) {
+            width: 80%;
+        }
+
+        @media (max-width: 1075px) {
+            width: 95%;
+        }
+
+        @media (max-width: 900px) {
+            flex-direction: column;
+            align-items: center;
+
+            padding: 10px;
+        }
+
+        .developer {
+            @include flex-column;
+
+            align-items: center;
+            border-radius: 20px;
+            font-weight: 500;
+            padding: 15px;
+            width: 30%;
+
+            @media (max-width: 900px) {
+                margin-top: 20px;
+                width: 90%;
+
+            }
+
+
+            img {
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                border: 10px solid rgba(246, 246, 246, 0.26);
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    scale: 1.1;
+                }
+            }
+
+            p {
+                margin: 10px;
+                padding: 5px 25px;
+                border-radius: 5px;
+                color: $shopenyTextGray;
+                font-weight: 600;
+                font-size: 17px;
+
+
+
+            }
+
+            span {
+                background-color: rgba(4, 43, 153, 0.736);
+
+                padding: 10px 25px;
+                border-radius: 20px;
+                color: rgb(255, 255, 255);
+                font-size: 15px;
+
+                @media (max-width: 1000px) {
+                    font-size: 13px
+                }
+
+
+
+            }
+        }
+
+        .developer-description {
+            margin-left: 20px;
+            width: 70%;
+            font-weight: 500;
+            font-size: 16px;
+            color: $shopenyTextGray;
+            border-left: 4px solid rgba(134, 134, 134, 0.158);
+            padding-left: 20px;
+
+            @media (max-width: 1000px) {
+                font-size: 14px
+            }
+
+            @media (max-width: 900px) {
+                margin-top: 20px;
+                width: 90%;
+                border-left: 0px;
+                padding: 10px;
+            }
+
+            @media (max-width: 700px) {
+                width: 100%;
+                padding-left: 0px;
+            }
+
+            .social-media-addresses-box {
+                margin-top: 20px;
+                @include flex-row;
+                gap: 20px;
+
+                @media (max-width: 500px) {
+                    justify-content: center;
+                }
+
+                a {
+                    font-size: 22px;
+                    color: rgb(18, 86, 187);
+                    padding: 8px;
+                    border-radius: 50%;
+                    @include flex-center;
+                    background-color: rgba(240, 240, 240, 0.281);
+                    transition: all 0.1s ease-in-out;
+
+                    &:hover {
+                        scale: 1.2;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+}

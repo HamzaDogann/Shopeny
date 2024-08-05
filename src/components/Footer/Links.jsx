@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import { IoIosArrowRoundForward } from "react-icons/io";
-
 function Links() {
   return (
 
@@ -11,7 +10,7 @@ function Links() {
           <img style={{ width: "220px" }} src={ShopenyLogo} alt="Shopeny Logo" />
           <h3> Shopeny herhangi bir ticaret faaliyetinde bulunmayı amaçlamamaktadır. Bir React E-Ticaret Sitesi projesi olarak tasarlanmıştır.</h3>
           <button>
-            <span>Daha Fazla</span>
+           <Link to={"/hakkimizda"}>Daha fazla</Link>
             <IoIosArrowRoundForward style={{ fontSize: "22px" }} />
           </button>
         </div>
@@ -54,7 +53,6 @@ function Links() {
             <Link to={"/sepetim"}>Sepetim</Link>
             <Link to={"/hesabim/adreslerim"}>Adreslerim</Link>
             <Link to={"/hesabim/hesap-bilgilerim"}>Hesap Bilgilerim</Link>
-
           </div>
         </div>
 
@@ -64,6 +62,7 @@ function Links() {
       <span className="copyright-text">Copyright © 2024 All Right Reserved | This Website was created by
         <a href="https://www.linkedin.com/in/hamzadogann/" target="_blank">Hamza Dogan</a>
       </span>
+
     </div>
 
   )
