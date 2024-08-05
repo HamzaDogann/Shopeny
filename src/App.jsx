@@ -1,6 +1,6 @@
+import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
-import { Route, Routes } from 'react-router-dom';
 import AuthProtectedRoute from "./routes/AuthProtectedRoute.jsx"
 
 import PreLoader from "./components/PreLoader/PreLoader.jsx";
@@ -17,15 +17,16 @@ import AppRoutes from './routes/AppRoutes.jsx';
 import Container from './shared/container/Container.jsx';
 import Breadcrumbs from './shared/components/Breadcrumbs/Breadcrumbs.jsx';
 
-function App() {
 
+function App() {
   const isLoading = useSelector((state) => state.preLoader.isLoading);
-  
   return (
     <>
+      {/* General Components */}
       {isLoading && <PreLoader />}
       <Toaster position="top-center" />
 
+      {/* Necessary Data & Pages */}
       <DataLoader>
         <Routes>
           <Route path="giris-yap" element={<AuthProtectedRoute element={<SignIn />} />} />
