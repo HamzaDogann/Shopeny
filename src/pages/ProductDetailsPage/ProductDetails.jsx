@@ -25,7 +25,7 @@ function ProductDetails() {
         return <Navigate to="/" />;
     }
 
-    const BulunamayanUrun = true;
+    const BulunamayanUrun = false;
 
     return (
         <div className='product-details-page-box'>

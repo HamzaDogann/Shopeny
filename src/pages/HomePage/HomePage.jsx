@@ -3,8 +3,15 @@ import AutoPlaySlider from '../../components/HomePageComponents/AutoPlaySlider';
 import PopularProductsSlider from '../../components/HomePageComponents/PopularProductsSlider';
 import SuperDealCards from '../../components/HomePageComponents/SuperDealCards';
 import "./HomePage.scss";
+import { useSelector } from 'react-redux';
+import useDiscountModal from '../../shared/hooks/useDiscountModal';
+import DiscountModal from '../../components/DiscountModal/DiscountModal';
+
 
 function HomePage() {
+  const isLoading = useSelector((state) => state.preLoader.isLoading);
+  const [isModalOpen, closeModal] = useDiscountModal();
+
   return (
     <div className='home-page-box'>
       <AutoPlaySlider />
@@ -18,6 +25,7 @@ function HomePage() {
         <p></p>
       </div>
       <SuperDealCards />
+      {!isLoading && <DiscountModal isOpen={isModalOpen} onClose={closeModal} />}
     </div>
   )
 }

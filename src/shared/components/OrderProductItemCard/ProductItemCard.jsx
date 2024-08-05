@@ -16,7 +16,6 @@ function ProductItemCard({ image, brand, productName, quantity, price}) {
                 <div className='item-price-box'>
                     <span className="item-price">{price}₺</span>
                 </div>
-
             </div>
         </div>
     )

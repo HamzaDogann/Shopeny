@@ -12,8 +12,11 @@ const Breadcrumbs = () => {
         return null;
     }
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1).replace(/-/g, ' ');
+    const capitalizeFirstLetters = (string) => {
+        return string
+            .split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
     };
 
     return (
@@ -25,10 +28,10 @@ const Breadcrumbs = () => {
                         const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
                         const isLast = index === pathnames.length - 1;
                         return isLast ? (
-                            <li key={index} className="breadcrumb-item">{capitalizeFirstLetter(name)}</li>
+                            <li key={index} className="breadcrumb-item">{capitalizeFirstLetters(name)}</li>
                         ) : (
                             <li key={index}>
-                                <Link to={routeTo}>{capitalizeFirstLetter(name)}</Link>
+                                <Link to={routeTo}>{capitalizeFirstLetters(name)}</Link>
                             </li>
                         );
                     })}
