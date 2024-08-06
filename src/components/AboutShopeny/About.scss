@@ -139,6 +139,9 @@
                 color: $shopenyTextGray;
                 font-weight: 600;
                 font-size: 17px;
+                @media (max-width:330px) {
+                    font-size: 15px;
+                }
 
 
 
