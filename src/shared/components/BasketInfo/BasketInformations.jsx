@@ -64,7 +64,7 @@ function BasketInformations({checkoutButton, currentStep, onGoPayment, onGoConfi
          
             <h2>Promosyon</h2>
             <div className="promotion-box">
-                <input type="text" placeholder="İndirim için promosyon kodu giriniz" />
+                <input type="text" placeholder="Bir promosyon kodu giriniz" />
                 <button className="confirm-promotion-btn">Uygula</button>
             </div>
             <p className="dividing-line"></p>

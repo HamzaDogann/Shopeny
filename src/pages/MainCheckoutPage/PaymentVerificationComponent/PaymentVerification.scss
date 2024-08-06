@@ -53,6 +53,10 @@
             font-size: 14px;
             gap: 5px;
 
+            @media (max-width:340px) {
+                font-size: 12px;  
+            }
+
             span {
                 font-weight: 400;
             }

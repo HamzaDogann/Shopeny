@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 
 import { FaLinkedin } from "react-icons/fa";
@@ -9,8 +9,13 @@ import { FaSquareUpwork } from "react-icons/fa6";
 import "./About.scss";
 import Container from '../../shared/container/Container';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 function About() {
+
+    const location = useLocation();
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }, [location]);
     return (
         <Container>
             <div className='about-general-box'>

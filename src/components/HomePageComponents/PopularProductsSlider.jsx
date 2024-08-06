@@ -42,6 +42,9 @@ export default function PopularProductsSlider() {
                         0: {
                             slidesPerView: 1,
                         },
+                        600: {
+                            slidesPerView: 1,
+                        },
                         900: {
                             slidesPerView: 2,
                         },

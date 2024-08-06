@@ -69,6 +69,19 @@
         font-size: 15px;
         color: rgb(116, 116, 116);
 
+
+      }
+
+      @media (max-width:570px) {
+        .user-phone-number {
+         margin-top: 5px;
+        }
+      }
+
+      @media (max-width:350px) {
+        .user-phone-number {
+          text-align: center;
+        }
       }
     }
 
@@ -243,8 +256,9 @@
           @media (max-width:360px) {
             font-size: 10px;
           }
+
           @media (max-width:332px) {
-            padding:15px;
+            padding: 15px;
           }
 
 

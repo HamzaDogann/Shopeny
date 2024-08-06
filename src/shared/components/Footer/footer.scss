@@ -34,7 +34,7 @@
             padding: 0 10px;
         }
 
-        @media (max-width: 420px) {
+        @media (max-width: 550px) {
             width: 100%;
             padding: 0 10px;
         }
@@ -143,6 +143,10 @@
         img {
             width: 100px;
             cursor: pointer;
+
+            @media (max-width:350px) {
+                width: 80px;
+            }
         }
     }
 }

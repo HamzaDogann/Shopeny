@@ -14,7 +14,7 @@
         @media (max-width:450px) {
             @include flex-column;
             justify-content: start;
-            align-items: start;
+            align-items: center;
 
         }
 
@@ -76,8 +76,9 @@
 
             @media (max-width:450px) {
                 margin-top: 15px;
-                width: 100%;
+                width: 70%;
                 @include flex-center;
+                height: 50px;
             }
 
             &:hover {
@@ -122,6 +123,10 @@
             @media (max-width:370px) {
                 font-size: 14px;
             }
+            @media (max-width:330px) {
+                text-align: center;
+            }
+
 
             a {
                 font-size: 16px;
@@ -131,6 +136,7 @@
                 color: white;
                 border-radius: 30px;
                 transition: 0.3s ease-in-out;
+                @include click-scale(0.8, 0.3s);
 
                 &:hover {
                     background-color: darken($shopenyOrange, 4%);
@@ -139,7 +145,7 @@
                 @media (max-width:750px) {
                     font-size: 14px;
                 }
-
+           
 
             }
         }

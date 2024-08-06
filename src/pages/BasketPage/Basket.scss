@@ -97,6 +97,9 @@
             height: 100px;
             margin-top: 40px;
         }
+        @media (max-width:330px) {
+            text-align: center;
+        }
 
         a {
             font-size: 16px;
@@ -137,7 +140,10 @@
         }
 
         @media (max-width:1000px) {
-            padding: 40px 0px;
+            padding: 40px 80px;
+        }
+        @media (max-width:850px) {
+            padding: 40px 20px;
         }
 
         @media (max-width:770px) {

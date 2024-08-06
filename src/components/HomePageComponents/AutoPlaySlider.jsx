@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SliderBanner1 from "../../assets/images/SliderBanners/SliderBanner1.jpg";
 import SliderBanner2 from "../../assets/images/SliderBanners/SliderBanner2.png";
+import macbookyeni from "../../assets/images/SliderBanners/macbookyeni.webp";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -35,16 +36,16 @@ export default function AutoPlaySlider() {
                         <img style={{ width: "100%" }} src={SliderBanner2} alt="" />
                     </SwiperSlide>
                     <SwiperSlide>
-                        <img style={{ width: "100%" }} src={SliderBanner1} alt="" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img style={{ width: "100%" }} src={SliderBanner2} alt="" />
+                        <img style={{ width: "100%" }} src={macbookyeni} alt="" />
                     </SwiperSlide>
                     <SwiperSlide>
                         <img style={{ width: "100%" }} src={SliderBanner1} alt="" />
                     </SwiperSlide>
                     <SwiperSlide>
                         <img style={{ width: "100%" }} src={SliderBanner2} alt="" />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img style={{ width: "100%" }} src={macbookyeni} alt="" />
                     </SwiperSlide>
 
                 </Swiper>
