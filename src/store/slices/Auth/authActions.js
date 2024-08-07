@@ -276,3 +276,4 @@ const checkUserFromDatabase = async (uid) => {
         return null;
     }
 };
+

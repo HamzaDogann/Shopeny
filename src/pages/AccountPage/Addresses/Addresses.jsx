@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AddressCard from '../../../components/AccountPageComponents/AddressCard';
 import { TbHomeDot } from "react-icons/tb";
 import NoAddress from "../../../assets/images/Orders/NoAddress.png";
@@ -7,14 +8,27 @@ import NoContent from '../../../components/AccountPageComponents/NoContent';
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
 import AddressModal from '../../../components/AccountPageComponents/AddressModal';
 import Modal from '../../../shared/components/Modal/Modal';
+
+import { addUserAddress, updateUserAddress, removeUserAddress, getUserAddresses } from "../../../store/thunks/User/addressesThunk";
 import "./Addresses.scss";
+import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
+import { getUserId } from '../../../store/utils/getUserId';
 
 function Addresses() {
+
+  const dispatch = useDispatch();
+  const addresses = useSelector(state => state.addresses.addresses);
+  const userId = getUserId(); // Kullanıcının ID'sini almak
   const [isModalVisible, setModalVisible] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
-  const adresVarMi = true;
+  useEffect(() => {
+    if (userId) {
+      dispatch(getUserAddresses({ userId }));
+    }
+  }, [userId, dispatch]);
+
 
   const handleAddAddress = () => {
     setEditMode(false);
@@ -34,9 +48,14 @@ function Addresses() {
     setSelectedAddress(null);
   }
 
-  const handleNewAddress = (newAddress) => {
-    // Yeni adres ekleme işlemleri
-    console.log("Yeni adres eklendi:", newAddress);
+  const handleNewAddress = async (newAddress) => {
+    try {
+      const result = await dispatch(addUserAddress(newAddress)).unwrap();
+      customSuccessToast("Adres Eklendi");
+
+    } catch (error) {
+      customErrorToast(error.message);
+    }
   }
 
   const handleUpdateAddress = (updatedAddress) => {
@@ -44,9 +63,10 @@ function Addresses() {
     console.log("Adres güncellendi:", updatedAddress);
   }
 
+
   return (
     <div className='addresses-box'>
-      {adresVarMi ? (
+      {Array.isArray(addresses) && addresses.length > 0 ? (
         <>
           <h2>
             <TbHomeDot className='home-icon' />
@@ -54,9 +74,9 @@ function Addresses() {
           </h2>
 
           <div className='addresses'>
-            <AddressCard onEdit={handleEditAddress} />
-            <AddressCard onEdit={handleEditAddress} />
-            <AddressCard onEdit={handleEditAddress} />
+            {addresses.map((address, index) => (
+              <AddressCard key={index} address={address} onEdit={handleEditAddress} />
+            ))}
           </div>
 
           <div className='add-address-box'>
@@ -65,7 +85,6 @@ function Addresses() {
               <span>Adres Ekle</span>
             </button>
           </div>
-
         </>
       ) : (
         <NoContent
@@ -89,7 +108,7 @@ function Addresses() {
           />
         </Modal>
       </Fullsize>
-    </div >
+    </div>
   );
 }
 

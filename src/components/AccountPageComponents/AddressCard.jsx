@@ -7,7 +7,7 @@ import ConfirmationModal from '../../shared/components/ConfirmationModal/Confirm
 import { customErrorToast } from '../../shared/utils/CustomToasts';
 import truncateName from '../../shared/utils/truncateName';
 
-function AddressCard({ onEdit }) {
+function AddressCard({ onEdit,address }) {
 
     const dispatch = useDispatch();
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -24,16 +24,6 @@ function AddressCard({ onEdit }) {
     }, []);
 
 
-    const dummyAddress = {
-        addressTitle: "İş yeri Burası Baya uzun cümle",
-        city: "İstanbul",
-        district: "Kadıköy",
-        neighborhood: "Barbaros",
-        street: "Ata Cad. No:123 D:5",
-        postalCode: "34750",
-        recipientName: "Hamza Doğan"
-    };
-
     const handleDeleteAddress = () => {
         dispatch(showModal({
             message: 'Bu adresi silmek istediğinize emin misiniz?',
@@ -43,7 +33,7 @@ function AddressCard({ onEdit }) {
     };
 
     const handleConfirm = () => {
-        customErrorToast("Adres Silindi")
+        customErrorToast("Adres Silindi");
     };
 
     const handleCancel = () => {
@@ -55,12 +45,12 @@ function AddressCard({ onEdit }) {
     return (
         <div className='address-card'>
             <div className='address-informations'>
-                <p className='address-title'>{truncateName(dummyAddress.addressTitle, truncateLength)}</p>
-                <p className='address-name'>{dummyAddress.street}, {dummyAddress.neighborhood}, {dummyAddress.district}, {dummyAddress.city} {dummyAddress.postalCode}</p>
-                <p className='address-recipient'>Alıcı: {dummyAddress.recipientName}</p>
+                <p className='address-title'>{truncateName(address.addressTitle, truncateLength)}</p>
+                <p className='address-name'>{address.street}, {address.neighborhood}, {address.district}, {address.city} {address.postalCode}</p>
+                <p className='address-recipient'>Alıcı: {address.recipientName}</p>
             </div>
             <div className='manage-address-box'>
-                <TbPencilCog className='icons' onClick={() => onEdit(dummyAddress)} />
+                <TbPencilCog className='icons' onClick={() => onEdit(address)} />
                 <IoClose className='icons' onClick={handleDeleteAddress} />
             </div>
 

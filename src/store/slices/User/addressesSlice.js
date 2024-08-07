@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { startLoading, stopLoading } from '../PreLoader/preLoaderSlice';
-import { addUserAddress, getUserAddresses, removeUserAddress, updateUserAddress } from '../AccountDetails/addressesThunk';
+import { startLoading, stopLoading } from '../preLoaderSlice';
+import { addUserAddress, getUserAddresses, removeUserAddress, updateUserAddress } from "../../thunks//User/addressesThunk";
 
 const initialState = {
     addresses: [],
@@ -24,7 +24,8 @@ const addressesSlice = createSlice({
                 startLoading();
             })
             .addCase(getUserAddresses.fulfilled, (state, action) => {
-                state.addresses = action.payload;
+                state.addresses = action.payload ? Object.values(action.payload) : [];
+
                 stopLoading();
             })
             .addCase(getUserAddresses.rejected, (state, action) => {
