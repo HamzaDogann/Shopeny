@@ -25,7 +25,7 @@ import { useNavigate } from 'react-router-dom';
 
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
-import { startLoading, stopLoading } from "../PreLoader/preLoaderSlice";
+import { startLoading, stopLoading } from "../preLoaderSlice";
 import { newUserRegistration, newUserRegistrationWithGoogle, newUserRegistrationWithFacebook } from '../../../services/firebase/database/newUserRegisterOperations';
 
 const handleUserLogin = async (userCredential, dispatch) => {
@@ -258,7 +258,7 @@ export const fetchUserData = () => async (dispatch) => {
     }
 };
 
-//===== Get User From Database =====
+//===== Check User From Database =====
 
 const checkUserFromDatabase = async (uid) => {
     try {

@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-// Import Swiper React components
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
+
 import 'swiper/css';
 import 'swiper/css/free-mode';
-// import required modules
+
 import { FreeMode, Navigation } from 'swiper/modules';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
 

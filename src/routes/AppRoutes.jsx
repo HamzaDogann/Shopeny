@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ProtectedRoute.jsx';
 
 import Basket from '../pages/BasketPage/Basket.jsx';
 import FavoriteProducts from '../pages/FavoriteProductsPage/FavoriteProducts.jsx';
 
 import HelpAndSupportRoutes from './HelpAndSupportRoutes.jsx';
-import AccountRoutes from './AccountRoutes';
+import AccountRoutes from './AccountRoutes.jsx';
 
-import HomePage from '../pages/HomePage/HomePage';
-import CategoryProducts from '../pages/CategoryProductsPage/CategoryProducts';
+import HomePage from '../pages/HomePage/HomePage.jsx';
+import CategoryProducts from '../pages/CategoryProductsPage/CategoryProducts.jsx';
 import ProductDetails from "../pages/ProductDetailsPage/ProductDetails.jsx"
 import PaymentProcess from "../pages/MainCheckoutPage/PaymentProcess.jsx";
 

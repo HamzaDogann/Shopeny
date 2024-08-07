@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
-import { showModal } from '../../../store/features/ConfirmationModal/Modal';
+import { showModal } from '../../../store/slices/confirmationModalSlice';
 import RemainingTime from '../../../components/CheckoutPagesComponents/RemainingTime';
 import "./PaymentVerification.scss";
 function PaymentVerification({ onBack }) {
-  
+
   const dispatch = useDispatch();
 
   //Modal Methods
@@ -20,11 +20,11 @@ function PaymentVerification({ onBack }) {
     onBack();
   };
 
-//-------------------------------------------------
+  //-------------------------------------------------
 
   //Ödeme İşlemini Onayladıktan Sonra yapılacak işlemler.
   const handleAcceptVerification = () => {
- 
+
   };
 
 

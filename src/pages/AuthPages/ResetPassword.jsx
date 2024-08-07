@@ -4,7 +4,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import "./Auth.scss";
 import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/features/auth/authActions';
+import { authActions } from '../../store/slices/Auth/authActions';
 import { Link } from 'react-router-dom';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
 

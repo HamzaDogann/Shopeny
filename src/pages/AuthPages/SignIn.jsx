@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 //Configurations
 import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../../store/features/auth/authActions.js';
+import { authActions } from '../../store/slices/Auth/authActions.js';
 import { Link, useNavigate } from 'react-router-dom';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground.jsx';
 //Styles - Images - Icons

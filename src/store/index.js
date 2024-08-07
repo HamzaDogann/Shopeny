@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import preLoaderReducer from './features/PreLoader/preLoaderSlice'
-import authReducer from './features/auth/authSlice'
-import modalReducer from './features/ConfirmationModal/Modal'
+import preLoaderReducer from './slices/preLoaderSlice'
+import authReducer from './slices/Auth/authSlice'
+import modalReducer from './slices/confirmationModalSlice'
 
 export const store = configureStore({
   reducer: {

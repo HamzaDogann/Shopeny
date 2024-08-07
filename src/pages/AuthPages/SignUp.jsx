@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import MembershipAgreement from '../../components/AuthPageComponents/MembershipAgreement';
-import { authActions } from '../../store/features/auth/authActions';
+import { authActions } from '../../store/slices/Auth/authActions';
 import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import RadioButton from '../../shared/helpers/RadioButton';
@@ -52,11 +52,11 @@ function SignUp() {
   const handleRegister = (e) => {
     e.preventDefault();
     dispatch(authActions.registerWithEmail(formData, () => {
-        setTimeout(() => {
-            navigate('/giris-yap');
-        }, 2000);
+      setTimeout(() => {
+        navigate('/giris-yap');
+      }, 2000);
     }));
-};
+  };
 
   return (
     <>

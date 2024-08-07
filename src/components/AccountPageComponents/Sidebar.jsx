@@ -6,7 +6,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaTruck } from "react-icons/fa";
 import { FaDoorOpen } from "react-icons/fa6";
 import { useDispatch } from 'react-redux';
-import { authActions } from '../../store/features/auth/authActions';
+import { authActions } from '../../store/slices/Auth/authActions';
 
 
 function Sidebar() {
@@ -59,8 +59,8 @@ function Sidebar() {
                             <span>{link.label}</span>
                         </NavLink>
                     ))}
-                    <button onClick={()=> handleLogout()} className='logout-btn'>
-                        {<div className='icons'><FaDoorOpen/></div>}
+                    <button onClick={() => handleLogout()} className='logout-btn'>
+                        {<div className='icons'><FaDoorOpen /></div>}
                         <span>Çıkış Yap</span>
                     </button>
                 </ul>

@@ -57,7 +57,6 @@ function Addresses() {
             <AddressCard onEdit={handleEditAddress} />
             <AddressCard onEdit={handleEditAddress} />
             <AddressCard onEdit={handleEditAddress} />
-
           </div>
 
           <div className='add-address-box'>
@@ -73,7 +72,7 @@ function Addresses() {
           image={NoAddress}
           description="Adres bilgileriniz bulunmuyor"
           buttonText="Adres Ekleyin"
-          path="/hesabim/siparislerim"
+          path=""
           func={handleAddAddress}
           icon={<MdOutlineAddLocationAlt className='icon' />}
         />

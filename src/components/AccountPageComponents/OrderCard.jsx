@@ -5,7 +5,7 @@ import { MdAccessTimeFilled } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
 import Macbook from "../../assets/images/productPhotoMain.jpg"
 import { useDispatch } from 'react-redux';
-import { showModal } from '../../store/features/ConfirmationModal/Modal';
+import { showModal } from '../../store/slices/confirmationModalSlice';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { customSuccessToast } from '../../shared/utils/CustomToasts';
 import ProductItemCard from '../../shared/components/OrderProductItemCard/ProductItemCard';

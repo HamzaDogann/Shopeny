@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IoClose } from "react-icons/io5";
 import { TbPencilCog } from "react-icons/tb";
 import { useDispatch } from 'react-redux';
-import { showModal } from '../../store/features/ConfirmationModal/Modal';
+import { showModal } from '../../store/slices/confirmationModalSlice';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { customErrorToast } from '../../shared/utils/CustomToasts';
 import truncateName from '../../shared/utils/truncateName';
@@ -13,14 +13,14 @@ function AddressCard({ onEdit }) {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
-      const handleResize = () => {
-        setWindowWidth(window.innerWidth);
-      };
-  
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
 
@@ -47,7 +47,7 @@ function AddressCard({ onEdit }) {
     };
 
     const handleCancel = () => {
-        
+
     };
 
     const truncateLength = windowWidth < 500 ? 15 : 25;
@@ -55,7 +55,7 @@ function AddressCard({ onEdit }) {
     return (
         <div className='address-card'>
             <div className='address-informations'>
-                <p className='address-title'>{truncateName(dummyAddress.addressTitle,truncateLength)}</p>
+                <p className='address-title'>{truncateName(dummyAddress.addressTitle, truncateLength)}</p>
                 <p className='address-name'>{dummyAddress.street}, {dummyAddress.neighborhood}, {dummyAddress.district}, {dummyAddress.city} {dummyAddress.postalCode}</p>
                 <p className='address-recipient'>Alıcı: {dummyAddress.recipientName}</p>
             </div>
