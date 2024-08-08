@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
-
-import { addUserAddress, updateUserAddress, getUserAddresses } from "../../../store/thunks/User/addressesThunk";
-import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
-import { getUserId } from '../../../store/utils/getUserId';
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { TbHomeDot } from "react-icons/tb";
+
+import { addUserAddress, updateUserAddress, getUserAddresses, removeUserAddress } from "../../../store/thunks/User/addressesThunk";
+import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations";
 
 import AddressCard from '../../../components/AccountPageComponents/AddressCard';
@@ -15,6 +14,8 @@ import NoContent from '../../../components/AccountPageComponents/NoContent';
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
 import Modal from '../../../shared/components/Modal/Modal';
 import AddressModal from '../../../components/AccountPageComponents/AddressModal';
+import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
+import { hideModal, showModal } from '../../../store/slices/confirmationModalSlice';
 
 import "./Addresses.scss";
 
@@ -28,16 +29,17 @@ function Addresses() {
   const [isModalVisible, setModalVisible] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const [addressToDelete, setAddressToDelete] = useState(null);
 
-  //--------Get All Address--------
+  //--------Get All Addresses--------
 
   useEffect(() => {
-    if ((!addresses || addresses.length === 0)) {
+    if (!addresses || addresses.length === 0) {
       dispatch(getUserAddresses());
     }
-  }, [dispatch, addresses]);;
+  }, [dispatch, addresses]);
 
-  //--------For Modal--------
+  //--------Modal Handlers--------
 
   const handleAddingProcess = () => {
     if (addresses.length >= 3) {
@@ -47,23 +49,33 @@ function Addresses() {
     setEditMode(false);
     setSelectedAddress(null);
     setModalVisible(true);
-  }
+  };
 
   const handleEditingProcess = (address) => {
     setEditMode(true);
     setSelectedAddress(address);
     setModalVisible(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setModalVisible(false);
     setEditMode(false);
     setSelectedAddress(null);
-  }
+  };
+
+  const handleDeleteAddress = (address) => {
+    dispatch(showModal({
+      message: "Bu adresi silmek istediğinize emin misiniz?",
+      confirmText: "Evet",
+      cancelText: "Hayır"
+    }));
+    setAddressToDelete(address);
+  };
+
 
   //--------Functionality--------
 
-  //! ADD
+  //!ADD
   const handleNewAddress = async (newAddress) => {
     try {
       await dispatch(addUserAddress(newAddress)).unwrap();
@@ -71,24 +83,40 @@ function Addresses() {
     } catch {
       customErrorToast("Adres Eklenemedi");
     }
-  }
+  };
 
-  //! UPDATE
-  const handleUpdateAddress = async (UpdatedAddress) => {
+  //!UPDATE
+  const handleUpdateAddress = async (updatedAddress) => {
     try {
-      await dispatch(updateUserAddress(UpdatedAddress)).unwrap();
+      await dispatch(updateUserAddress(updatedAddress)).unwrap();
       customSuccessToast("Adres Güncellendi", 2000);
     } catch (error) {
       customErrorToast("Güncelleme Başarısız");
       customErrorToast(error.message);
     }
-  }
+  };
+
+  //!DELETE
+  const handleConfirmDelete = async () => {
+    try {
+      await dispatch(removeUserAddress(addressToDelete.addressId)).unwrap();
+      customSuccessToast("Adres başarıyla silindi.", 2000);
+    } catch (error) {
+      customErrorToast("Adres silinirken bir hata oluştu.");
+    } finally {
+      dispatch(hideModal());
+    }
+  };
+  //DELETE CANCEL
+  const handleCancelDelete = () => {
+    dispatch(hideModal());
+  };
 
   return (
     <motion.div className='addresses-box'
       {...opacityAndTransformEffect('y', 20, 0.5)}>
       {isLoading ? (
-        <div className='loading-box'>Loading</div>
+        null
       ) : (
         <motion.div
           variants={createContainerVariants}
@@ -96,7 +124,7 @@ function Addresses() {
           animate="visible"
           className="addresses-container"
         >
-          {Array.isArray(addresses) && addresses.length > 0 ? (
+          {addresses.length > 0 ? (
             <>
               <motion.h2 {...opacityAndTransformEffect('y', 20, 0.4)}>
                 <TbHomeDot className='home-icon' />
@@ -106,7 +134,11 @@ function Addresses() {
               <motion.div className='addresses' variants={createContainerVariants(0.6, 0.3)} initial="hidden" animate="visible">
                 {addresses.map((address, index) => (
                   <motion.div className='address-item' key={index} variants={createItemVariants(20, 0)}>
-                    <AddressCard address={address} onEdit={handleEditingProcess} />
+                    <AddressCard
+                      address={address}
+                      onEdit={handleEditingProcess}
+                      onDelete={handleDeleteAddress}
+                    />
                   </motion.div>
                 ))}
               </motion.div>
@@ -117,7 +149,6 @@ function Addresses() {
                   <span>Adres Ekle</span>
                 </button>
               </div>
-
             </>
           ) : (
             <NoContent
@@ -143,6 +174,11 @@ function Addresses() {
           />
         </Modal>
       </Fullsize>
+
+      <ConfirmationModal
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </motion.div>
   );
 }

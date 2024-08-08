@@ -1,8 +1,5 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import './ConfirmationModal.scss';
-import { hideModal } from '../../../store/slices/confirmationModalSlice';
-
+import { useDispatch, useSelector } from "react-redux";
+import "./ConfirmationModal.scss";
 const ConfirmationModal = ({ onConfirm, onCancel }) => {
     const dispatch = useDispatch();
     const { isVisible, message, confirmText, cancelText } = useSelector((state) => state.modal);
@@ -17,7 +14,7 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
                     <button onClick={() => { onConfirm(); dispatch(hideModal()); }}>
                         {confirmText}
                     </button>
-                    <button onClick={() => { dispatch(hideModal()); }}>
+                    <button onClick={() => { onCancel(); dispatch(hideModal()); }}>
                         {cancelText}
                     </button>
                 </div>
@@ -25,5 +22,6 @@ const ConfirmationModal = ({ onConfirm, onCancel }) => {
         </div>
     );
 };
+
 
 export default ConfirmationModal;
