@@ -14,12 +14,11 @@ export const addData = async (path, data) => {
 export const addDataWithAutoId = async (path, data) => {
     try {
         const dbRef = ref(db, path);
-        const newRef = push(dbRef); 
-        await set(newRef, data); 
-        return newRef.key; 
+        const newRef = push(dbRef);
+        const addressId = newRef.key;
+        await set(newRef, { ...data, addressId });
+        return addressId;
     } catch (error) {
-      
         throw new Error(error.message);
-       
     }
 };

@@ -5,11 +5,11 @@ import { fetchData } from '../../utils/classicalFetchData';
 import { addDataWithAutoId } from '../../utils/classicalAddData';
 import { getUserId } from '../../utils/getUserId';
 
-
 // Get User Addresses
 export const getUserAddresses = createAsyncThunk(
     'addresses/getUserAddresses',
-    async ({ userId }) => {
+    async () => {
+        const userId = getUserId();
         const path = `Data/Users/${userId}/addresses/`;
         const data = await fetchData(path);
         console.log("veri alındı ve bir kez çalıştı.")
@@ -27,8 +27,8 @@ export const addUserAddress = createAsyncThunk(
 
         const path = `Data/Users/${userId}/addresses/`;
         try {
-            const id = await addDataWithAutoId(path, address);
-            return { id, ...address };
+            const addressId = await addDataWithAutoId(path, address);
+            return { addressId: addressId, ...address };
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -38,12 +38,14 @@ export const addUserAddress = createAsyncThunk(
 // Update User Address
 export const updateUserAddress = createAsyncThunk(
     'addresses/updateUserAddress',
-    async ({ userId, address }) => {
+    async (address) => {
+        const userId = getUserId();
         try {
-            const dbRef = ref(db, `Data/Users/${userId}/addresses/${address.id}`);
+            const dbRef = ref(db, `Data/Users/${userId}/addresses/${address.addressId}`);
             await update(dbRef, address);
-            return address;
+            return address; 
         } catch (error) {
+            
             console.log(error.message);
             throw new Error(error.message);
         }
@@ -53,13 +55,13 @@ export const updateUserAddress = createAsyncThunk(
 // Remove User Address
 export const removeUserAddress = createAsyncThunk(
     'addresses/removeUserAddress',
-    async ({ userId, addressId }) => {
+    async (addressId) => {
+        const userId = getUserId();
         try {
             const dbRef = ref(db, `Data/Users/${userId}/addresses/${addressId}`);
             await remove(dbRef);
-            return addressId;
         } catch (error) {
-            throw new Error(error.message);
+            console.log(error.message);
         }
     }
 );

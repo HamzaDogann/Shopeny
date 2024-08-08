@@ -16,13 +16,14 @@ export const customSuccessToast = (message,duration=3500) => {
   });
 };
 
-export const customErrorToast = (message) => {
+export const customErrorToast = (message,fontSize=16) => {
   toast.error(message, {
-    duration: 5000,
+    duration: 4000,
     style: {
       border: '0px solid #713200',
       padding: '16px 20px',
       color: '#202020',
+      fontSize: fontSize? fontSize : "16px"
     },
     iconTheme: {
       primary: '#d43636',

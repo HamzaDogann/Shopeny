@@ -12,7 +12,7 @@ export const fetchData = async (path) => {
             throw new Error("Veri alınamadı");
         }
     } catch (error) {
-        console.error(error.message);
+        console.log(error.message);
         throw new Error(error.message);
     }
 };

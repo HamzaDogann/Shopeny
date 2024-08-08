@@ -4,13 +4,16 @@ import { TbPencilCog } from "react-icons/tb";
 import { useDispatch } from 'react-redux';
 import { showModal } from '../../store/slices/confirmationModalSlice';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
-import { customErrorToast } from '../../shared/utils/CustomToasts';
+import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
 import truncateName from '../../shared/utils/truncateName';
+import { removeUserAddress } from '../../store/thunks/User/addressesThunk';
 
-function AddressCard({ onEdit,address }) {
+function AddressCard({ onEdit, address }) {
 
     const dispatch = useDispatch();
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const addressId = address.addressId;
 
     useEffect(() => {
         const handleResize = () => {
@@ -24,18 +27,26 @@ function AddressCard({ onEdit,address }) {
     }, []);
 
 
-    const handleDeleteAddress = () => {
-        dispatch(showModal({
-            message: 'Bu adresi silmek istediğinize emin misiniz?',
-            confirmText: 'Evet',
-            cancelText: 'Hayır',
-        }));
+    const handleDeleteAddress = async (addressId) => {
+        try {
+            await dispatch(removeUserAddress(addressId)).unwrap();
+            customSuccessToast("Adres başarıyla silindi.",2000);
+        } catch (error) {
+            customErrorToast("Adres silinirken bir hata oluştu.");
+        }
+
+        // dispatch(showModal({
+        //     message: 'Bu adresi silmek istediğinize emin misiniz?',
+        //     confirmText: 'Evet',
+        //     cancelText: 'Hayır',
+        // }));
     };
 
-    const handleConfirm = () => {
-        customErrorToast("Adres Silindi");
-    };
+    //DELETE ADDRESS
+    const handleConfirm = async () => {
 
+
+    };
     const handleCancel = () => {
 
     };
@@ -51,12 +62,11 @@ function AddressCard({ onEdit,address }) {
             </div>
             <div className='manage-address-box'>
                 <TbPencilCog className='icons' onClick={() => onEdit(address)} />
-                <IoClose className='icons' onClick={handleDeleteAddress} />
+                <IoClose className='icons' onClick={() => handleDeleteAddress(address.addressId)} />
             </div>
-
             <ConfirmationModal onConfirm={handleConfirm} onCancel={handleCancel} />
         </div>
-    );
+    )
 }
 
 export default AddressCard;
