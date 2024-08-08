@@ -1,42 +1,45 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
 import AddressCard from '../../../components/AccountPageComponents/AddressCard';
-import { TbHomeDot } from "react-icons/tb";
 import NoAddress from "../../../assets/images/Orders/NoAddress.png";
-import { MdOutlineAddLocationAlt } from "react-icons/md";
 import NoContent from '../../../components/AccountPageComponents/NoContent';
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
-import AddressModal from '../../../components/AccountPageComponents/AddressModal';
 import Modal from '../../../shared/components/Modal/Modal';
-
+import AddressModal from '../../../components/AccountPageComponents/AddressModal';
 import { addUserAddress, updateUserAddress, removeUserAddress, getUserAddresses } from "../../../store/thunks/User/addressesThunk";
-import "./Addresses.scss";
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { getUserId } from '../../../store/utils/getUserId';
+import { MdOutlineAddLocationAlt } from "react-icons/md";
+import { TbHomeDot } from "react-icons/tb";
+import "./Addresses.scss";
+import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations"; // Animasyonları import et
+
 
 function Addresses() {
-
   const dispatch = useDispatch();
+  const userId = getUserId();
   const addresses = useSelector(state => state.addresses.addresses);
-  const userId = getUserId(); // Kullanıcının ID'sini almak
+  const isLoading = useSelector(state => state.addresses.loading);
+
   const [isModalVisible, setModalVisible] = useState(false);
   const [isEditMode, setEditMode] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
 
   useEffect(() => {
-    if (userId) {
+    if ((!addresses || addresses.length === 0)) {
       dispatch(getUserAddresses({ userId }));
+      console.log("Veri çekme için useEffect çalıştı");
     }
-  }, [userId, dispatch]);
+  }, [dispatch, addresses]);;
 
-
-  const handleAddAddress = () => {
+  const handleAddingProcess = () => {
     setEditMode(false);
     setSelectedAddress(null);
     setModalVisible(true);
   }
 
-  const handleEditAddress = (address) => {
+  const handleEditingProcess = (address) => {
     setEditMode(true);
     setSelectedAddress(address);
     setModalVisible(true);
@@ -48,53 +51,75 @@ function Addresses() {
     setSelectedAddress(null);
   }
 
+  // ADD
   const handleNewAddress = async (newAddress) => {
     try {
-      const result = await dispatch(addUserAddress(newAddress)).unwrap();
-      customSuccessToast("Adres Eklendi");
-
-    } catch (error) {
-      customErrorToast(error.message);
+      await dispatch(addUserAddress(newAddress)).unwrap();
+      customSuccessToast("Adres Eklendi", 2000);
+    } catch {
+      customErrorToast("Adres Eklenemedi");
     }
   }
 
+  // UPDATE
   const handleUpdateAddress = (updatedAddress) => {
-    // Adres güncelleme işlemleri
     console.log("Adres güncellendi:", updatedAddress);
   }
 
-
   return (
-    <div className='addresses-box'>
-      {Array.isArray(addresses) && addresses.length > 0 ? (
-        <>
-          <h2>
-            <TbHomeDot className='home-icon' />
-            <span>Adreslerim</span>
-          </h2>
-
-          <div className='addresses'>
-            {addresses.map((address, index) => (
-              <AddressCard key={index} address={address} onEdit={handleEditAddress} />
-            ))}
-          </div>
-
-          <div className='add-address-box'>
-            <button className='add-new-address' onClick={handleAddAddress}>
-              <MdOutlineAddLocationAlt className='icon' />
-              <span>Adres Ekle</span>
-            </button>
-          </div>
-        </>
+    <motion.div className='addresses-box'
+      {...opacityAndTransformEffect('y', 20, 0.5)}>
+      {isLoading ? (
+        null
       ) : (
-        <NoContent
-          image={NoAddress}
-          description="Adres bilgileriniz bulunmuyor"
-          buttonText="Adres Ekleyin"
-          path=""
-          func={handleAddAddress}
-          icon={<MdOutlineAddLocationAlt className='icon' />}
-        />
+        <motion.div
+          variants={createContainerVariants}
+          initial="hidden"
+          animate="visible"
+          className="addresses-container"
+        >
+          {Array.isArray(addresses) && addresses.length > 0 ? (
+            <>
+              <motion.h2 {...opacityAndTransformEffect('y', 20, 0.4)}>
+                <TbHomeDot className='home-icon' />
+                <span>Adreslerim</span>
+              </motion.h2>
+
+              <motion.div
+                className='addresses'
+                variants={createContainerVariants(0.6, 0.3)}
+                initial="hidden"
+                animate="visible"
+              >
+                {addresses.map((address, index) => (
+                  <motion.div className='address-item'
+                    key={index} variants={createItemVariants(20, 0)}>
+                    <AddressCard address={address} onEdit={handleEditingProcess} />
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <div className='add-address-box'>
+                <button
+                  className='add-new-address'
+                  onClick={handleAddingProcess}>
+                  <MdOutlineAddLocationAlt className='icon' />
+                  <span>Adres Ekle</span>
+                </button>
+              </div>
+
+            </>
+          ) : (
+            <NoContent
+              image={NoAddress}
+              description="Adres bilgileriniz bulunmuyor"
+              buttonText="Adres Ekleyin"
+              path=""
+              func={handleAddingProcess}
+              icon={<MdOutlineAddLocationAlt className='icon' />}
+            />
+          )}
+        </motion.div>
       )}
 
       <Fullsize isVisible={isModalVisible}>
@@ -108,7 +133,7 @@ function Addresses() {
           />
         </Modal>
       </Fullsize>
-    </div>
+    </motion.div>
   );
 }
 

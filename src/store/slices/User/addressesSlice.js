@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { startLoading, stopLoading } from '../preLoaderSlice';
-import { addUserAddress, getUserAddresses, removeUserAddress, updateUserAddress } from "../../thunks//User/addressesThunk";
+import { addUserAddress, getUserAddresses, removeUserAddress, updateUserAddress } from "../../thunks/User/addressesThunk";
 
 const initialState = {
     addresses: [],
     error: null,
-
+    loading: false,  // Loading state ekleyin
 };
 
 const addressesSlice = createSlice({
@@ -14,73 +13,71 @@ const addressesSlice = createSlice({
     reducers: {
         clearError: (state) => {
             state.error = null;
+        },
+        clearAddresses: (state) => {
+            state.addresses = [];
         }
     },
     extraReducers: (builder) => {
         builder
-            //Get Addresses from Realtime Database
+            // Get All Addresses
             .addCase(getUserAddresses.pending, (state) => {
+                state.loading = true;  // Loading başlat
                 state.error = null;
-                startLoading();
             })
             .addCase(getUserAddresses.fulfilled, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.addresses = action.payload ? Object.values(action.payload) : [];
-
-                stopLoading();
             })
             .addCase(getUserAddresses.rejected, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.error = action.error.message;
-                stopLoading();
             })
 
-            //Add Address
+            // Add Address
             .addCase(addUserAddress.pending, (state) => {
+                state.loading = true;  // Loading başlat
                 state.error = null;
-                startLoading();
             })
             .addCase(addUserAddress.fulfilled, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.addresses.push(action.payload);
-                stopLoading();
             })
             .addCase(addUserAddress.rejected, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.error = action.error.message;
-                stopLoading();
             })
 
-            //Update Address
-
+            // Update Address
             .addCase(updateUserAddress.pending, (state) => {
+                state.loading = true;  // Loading başlat
                 state.error = null;
-                startLoading();
             })
             .addCase(updateUserAddress.fulfilled, (state, action) => {
+                state.loading = false;  // Loading durdur
                 const updatedAddress = action.payload;
                 state.addresses = state.addresses.map(address => address.id === updatedAddress.id ? updatedAddress : address);
-                stopLoading();
-            }
-            )
+            })
             .addCase(updateUserAddress.rejected, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.error = action.error.message;
-                stopLoading();
             })
 
-            //Remove Address
-
+            // Remove Address
             .addCase(removeUserAddress.pending, (state) => {
+                state.loading = true;  // Loading başlat
                 state.error = null;
-                startLoading();
             })
-
             .addCase(removeUserAddress.fulfilled, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.addresses = state.addresses.filter(address => address.id !== action.payload);
-                stopLoading();
             })
             .addCase(removeUserAddress.rejected, (state, action) => {
+                state.loading = false;  // Loading durdur
                 state.error = action.error.message;
-                stopLoading();
             })
     }
 });
 
-export const { } = addressesSlice.actions;
+export const { clearAddresses } = addressesSlice.actions;
 export default addressesSlice.reducer;

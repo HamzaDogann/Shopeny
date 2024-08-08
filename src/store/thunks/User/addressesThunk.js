@@ -5,12 +5,14 @@ import { fetchData } from '../../utils/classicalFetchData';
 import { addDataWithAutoId } from '../../utils/classicalAddData';
 import { getUserId } from '../../utils/getUserId';
 
+
 // Get User Addresses
 export const getUserAddresses = createAsyncThunk(
     'addresses/getUserAddresses',
     async ({ userId }) => {
         const path = `Data/Users/${userId}/addresses/`;
         const data = await fetchData(path);
+        console.log("veri alındı ve bir kez çalıştı.")
         return data;
     }
 );

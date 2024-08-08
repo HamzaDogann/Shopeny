@@ -1,9 +1,3 @@
-//Auth Slice
-import {
-    setUser,
-    clearUser,
-} from './authSlice';
-
 //Firebase Configuration
 import { auth, db } from "../../../services/firebase/config";
 import { get, query, ref, orderByChild, equalTo } from 'firebase/database';
@@ -20,6 +14,16 @@ import {
 //Cookie
 import Cookies from 'js-cookie';
 
+//Auth Slice
+import {
+    setUser,
+    clearUser,
+} from './authSlice';
+
+//Remove All User Datas
+import { clearAddresses } from "../User/addressesSlice";
+
+
 //Router Dom
 import { useNavigate } from 'react-router-dom';
 
@@ -27,26 +31,8 @@ import { useNavigate } from 'react-router-dom';
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { startLoading, stopLoading } from "../preLoaderSlice";
 import { newUserRegistration, newUserRegistrationWithGoogle, newUserRegistrationWithFacebook } from '../../../services/firebase/database/newUserRegisterOperations';
+import { useDispatch, useSelector } from 'react-redux';
 
-const handleUserLogin = async (userCredential, dispatch) => {
-    const uid = userCredential.user.uid;
-    const userRef = ref(db, `Data/Users/${uid}`);
-    const snapshot = await get(userRef);
-
-    if (snapshot.exists()) {
-        const userData = snapshot.val();
-        dispatch(setUser(userData));
-
-        let token = Cookies.get('JWT');
-
-        if (!token) {
-            token = await userCredential.user.getIdToken();
-            Cookies.set('JWT', token, { expires: 7 });
-        }
-
-        customSuccessToast(`Hoşgeldin, ${userData.nameAndSurname}`);
-    }
-};
 
 export const authActions = {
 
@@ -217,14 +203,41 @@ export const authActions = {
         try {
             await signOut(auth);
             dispatch(clearUser());
+            clearUserDatas(dispatch);
             Cookies.remove('JWT');
             customSuccessToast("Çıkış yapıldı");
-        } catch {
+
+        } catch (error) {
             customErrorToast("Çıkış işlemi başarısız.");
+
         } finally {
             dispatch(stopLoading());
         }
     },
+};
+
+
+
+// ==== User Login Process ==== \\
+
+const handleUserLogin = async (userCredential, dispatch) => {
+    const uid = userCredential.user.uid;
+    const userRef = ref(db, `Data/Users/${uid}`);
+    const snapshot = await get(userRef);
+
+    if (snapshot.exists()) {
+        const userData = snapshot.val();
+        dispatch(setUser(userData));
+
+        let token = Cookies.get('JWT');
+
+        if (!token) {
+            token = await userCredential.user.getIdToken();
+            Cookies.set('JWT', token, { expires: 7 });
+        }
+
+        customSuccessToast(`Hoşgeldin, ${userData.nameAndSurname}`);
+    }
 };
 
 
@@ -277,3 +290,8 @@ const checkUserFromDatabase = async (uid) => {
     }
 };
 
+
+//===== Remove User's data when logout =====\\
+const clearUserDatas = (dispatch) => {
+    dispatch(clearAddresses());
+}

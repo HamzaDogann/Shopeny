@@ -16,10 +16,13 @@ import PaymentProcess from "../pages/MainCheckoutPage/PaymentProcess.jsx";
 
 const AppRoutes = () => {
 
-  const location = useLocation();
 
+  const location = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (!location.pathname.startsWith('/hesabim')) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [location]);
 
   return (
@@ -31,7 +34,7 @@ const AppRoutes = () => {
         <Route path='sepetim/odeme-islemleri' element={<ProtectedRoute element={<PaymentProcess />} />} />
         <Route path='favori-urunler' element={<ProtectedRoute element={<FavoriteProducts />} />} />
         <Route path="/hesabim/*" element={<ProtectedRoute element={<AccountRoutes />} />} />
-      
+
         {/* Global Routes */}
         <Route path="/yardim-ve-destek/*" element={<HelpAndSupportRoutes />} />
         <Route path="/:categoryName" element={<CategoryProducts />} />
