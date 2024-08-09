@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { validCategories } from "../../constants/categories"
+import { validCategories } from "../../constants/categories";
 import { MdFilterListAlt } from "react-icons/md";
-
-import RadioButton from "../../shared/helpers/RadioButton"
+import RadioButton from "../../shared/helpers/RadioButton";
 import CategoryFilterBar from '../../components/CategoryProductPageComponents/CategoryFilterBar';
 import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
-import "./CategoryProducts.scss"
-function CategoryProducts() {
+import { useDispatch, useSelector } from 'react-redux';
+import "./CategoryProducts.scss";
+import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
 
+function CategoryProducts() {
   const { categoryName } = useParams();
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector(state => state.categoryProducts);
+  const productsInState = products[categoryName] || [];
 
   if (!validCategories.includes(categoryName)) {
     return <Navigate to="/" />;
@@ -19,6 +23,13 @@ function CategoryProducts() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
 
+  useEffect(() => {
+    if (!productsInState.length) {
+      dispatch(getCategoryProducts(categoryName));
+    }
+  }, [dispatch, categoryName, productsInState.length]);
+
+  console.log(categoryName, " yenilendi");
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
   };
@@ -43,11 +54,8 @@ function CategoryProducts() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  console.log()
-
   return (
     <div className='category-products-box'>
-
       <div className='top-filter-options-box'>
         <div className='stock-and-sorting-box'>
           <div className='is-stock-box'>
@@ -73,17 +81,14 @@ function CategoryProducts() {
 
       <div className='category-products'>
         <div className='category-filter-bar' style={{ display: isMobile && isFilterVisible ? 'flex' : !isMobile ? 'flex' : 'none' }}>
-          {/* Bazı propslar alıcaklar */}
           <CategoryFilterBar closeFilterMenuFunc={hideFilterMenu} />
         </div>
         <div className='category-products-bar'>
-          {/* Bazı propslar alıcaklar */}
-          <CategoryProductList />
+          <CategoryProductList products={productsInState} loading={loading} error={error} />
         </div>
       </div>
-
     </div>
-  )
+  );
 }
 
-export default CategoryProducts
+export default CategoryProducts;

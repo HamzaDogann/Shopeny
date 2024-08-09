@@ -1,46 +1,47 @@
-
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { MdShoppingCart, MdFavorite } from "react-icons/md";
 import { TbShoppingCartCopy } from "react-icons/tb";
+import CircularProgress from '@mui/material/CircularProgress';
 
-import ProductImage from "../../../assets/images/MacbookPro.png";
 import { useNavigate } from 'react-router-dom';
-import "./ProductCard.scss";
 import { useState } from 'react';
 import { customSuccessToast } from '../../utils/CustomToasts';
 
-function ProductCard() {
+import "./ProductCard.scss";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+function ProductCard({ product }) {
 
     const navigate = useNavigate();
+
     const [isBasketProduct, setIsBasketProduct] = useState(false);
     const [isFavoriteProduct, setIsFavoriteProduct] = useState(false);
-
+    const [loadingImage, setLoadingImage] = useState(true);
     const handleProduct = () => {
-        navigate('/bilgisayar/macbook');
+        navigate(`/${product.categoryName}/${product.productName}`); // Ürünü detaylı görmek için dinamik rota
     }
 
     const handleAddToFavorites = (event) => {
         event.stopPropagation();
-        setIsFavoriteProduct(true)
-        customSuccessToast("Favorilere Eklendi", 1800)
+        setIsFavoriteProduct(true);
+        customSuccessToast("Favorilere Eklendi", 1800);
         // Favori ekleme işlemleri burada yapılacak
     }
 
     const handleRemoveFromFavorites = (event) => {
         event.stopPropagation();
         setIsFavoriteProduct(false);
-        customSuccessToast("Favorilerden Çıkarıldı", 1800)
+        customSuccessToast("Favorilerden Çıkarıldı", 1800);
         // Favori çıkarma işlemleri burada yapılacak
     }
 
     const handleAddToCart = (event) => {
         event.stopPropagation();
         setIsBasketProduct(!isBasketProduct);
-        customSuccessToast("Sepete Eklendi", 1500)
+        customSuccessToast("Sepete Eklendi", 1500);
         // Sepete ekleme işlemleri burada yapılacak
     }
-
     return (
         <div onClick={handleProduct} className='product-card'>
             {
@@ -55,24 +56,42 @@ function ProductCard() {
             }
 
             <div className='image-box'>
-                <img src={ProductImage} alt="Product" />
+                {loadingImage && (
+                    <div className='spinner-overlay'>
+                       <CircularProgress style={{ color: '#496aee' }} />
+                    </div>
+                )}
+                <LazyLoadImage
+                    alt={product.productName}
+                    effect="blur"
+                    src={product.productImages.mainImage}
+                    afterLoad={() => setLoadingImage(false)}
+                    onError={() => setLoadingImage(false)}
+                />
             </div>
+
             <div className='product-name-box'>
-                <p>Ultra pro Iphone telefonlar</p>
-                <span>Apple</span>
+                <p>{product.productName}</p>
+                <span>{product.productBrand}</span>
             </div>
             <div className='rating-box'>
                 <Stack spacing={1}>
-                    <Rating name="half-rating-read" defaultValue={4.5} precision={0.5} size="small" readOnly />
+                    <Rating
+                        name="half-rating-read"
+                        defaultValue={product.productStar}
+                        precision={0.5}
+                        size="small"
+                        readOnly
+                    />
                 </Stack>
-                <p>4.5</p>
+                <p>{product.productStar}</p>
             </div>
             <div className='original-price-box'>
-                <strike>350₺</strike>
-                <span>%50</span>
+                <strike>{product.productNormalPrice}₺</strike>
+                <span>%{product.discountRate}</span>
             </div>
             <p className='discount-price'>
-                202.175₺
+                {product.discountedPrice}₺
             </p>
 
             <button className='basket-btn' onClick={handleAddToCart} style={{ backgroundColor: isBasketProduct ? '#f27d59' : '' }}>
@@ -82,7 +101,7 @@ function ProductCard() {
                 }
             </button>
         </div>
-    )
+    );
 }
 
 export default ProductCard;
