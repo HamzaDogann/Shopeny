@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getCategoryProducts } from '../../thunks/Products/categoryProductsThunk';
 
 const initialState = {
-    products: {}, // Kategori adı anahtar olarak kullanılan nesne
+    products: {}, 
     loading: false,
     error: null,
 };

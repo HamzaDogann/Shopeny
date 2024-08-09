@@ -3,7 +3,7 @@ import Checkbox from '../../shared/helpers/Checkbox';
 import { Slider, Box, Rating } from '@mui/material';
 import { MdClose } from "react-icons/md";
 
-function CategoryFilterBar({closeFilterMenuFunc}) {
+function CategoryFilterBar({ closeFilterMenuFunc }) {
 
   //Filter Options
   const brands = ['Apple', 'Samsung', 'Sony', 'LG', 'Huawei', 'Xiaomi', 'Oppo'];
@@ -19,7 +19,7 @@ function CategoryFilterBar({closeFilterMenuFunc}) {
 
   //Filter States
   const [checkedBrands, setCheckedBrands] = useState([]);
-  const [priceRange, setPriceRange] = useState([20, 180]);
+  const [priceRange, setPriceRange] = useState([0, 100000]);
   const [checkedColors, setCheckedColors] = useState([]);
   const [rating, setRating] = useState(0);
   //! ======= HANDLE FILTER METHODS =======
@@ -108,7 +108,7 @@ function CategoryFilterBar({closeFilterMenuFunc}) {
                 value={priceRange[1]}
                 onChange={handleInputChange}
                 min={priceRange[0]}
-                max={1000}
+                max={200000}
               />
               <p>₺</p>
             </div>
@@ -118,7 +118,7 @@ function CategoryFilterBar({closeFilterMenuFunc}) {
             onChange={handleSliderChange}
             valueLabelDisplay="auto"
             min={0}
-            max={1000}
+            max={200000}
             step={10}
           />
         </Box>

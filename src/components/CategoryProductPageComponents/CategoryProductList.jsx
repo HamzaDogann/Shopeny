@@ -5,13 +5,12 @@ import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { CircularProgress } from '@mui/material';
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
 
 const ProductList = memo(({ products, loading, error }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
-    const location = useLocation(); // URL'yi almak için
+    const location = useLocation(); 
 
     useEffect(() => {
         const handleResize = () => {
