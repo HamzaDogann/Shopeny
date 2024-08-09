@@ -10,8 +10,10 @@ import "./CategoryProducts.scss";
 import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
 
 function CategoryProducts() {
-  const { categoryName } = useParams();
+
   const dispatch = useDispatch();
+  const { categoryName } = useParams();
+
   const { products, loading, error } = useSelector(state => state.categoryProducts);
   const productsInState = products[categoryName] || [];
 
@@ -19,21 +21,27 @@ function CategoryProducts() {
     return <Navigate to="/" />;
   }
 
+  //States
   const [sortOption, setSortOption] = useState('priceAsc');
+  const [isStock, setIsStock] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
 
+
+  //Get all products by categoryName
   useEffect(() => {
     if (!productsInState.length) {
       dispatch(getCategoryProducts(categoryName));
     }
   }, [dispatch, categoryName, productsInState.length]);
 
-  console.log(categoryName, " yenilendi");
+
+  //------Filter Functionality------
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
   };
 
+  //------Responsive Handlers------
   const showFilterMenu = () => {
     setIsFilterVisible(true);
   };
@@ -54,12 +62,14 @@ function CategoryProducts() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  //-----------------------JSX----------------------
+
   return (
     <div className='category-products-box'>
       <div className='top-filter-options-box'>
         <div className='stock-and-sorting-box'>
           <div className='is-stock-box'>
-            <RadioButton />
+            <RadioButton checked={isStock} name={isStock} onChange={() => setIsStock(!isStock)} />
             <span>Stoktakiler</span>
           </div>
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
+import { useLocation } from 'react-router-dom'; // React Router v6 kullanıyorsanız
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
@@ -10,6 +11,7 @@ import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
 const ProductList = memo(({ products, loading, error }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
+    const location = useLocation(); // URL'yi almak için
 
     useEffect(() => {
         const handleResize = () => {
@@ -34,6 +36,11 @@ const ProductList = memo(({ products, loading, error }) => {
             behavior: 'smooth',
         });
     }, [currentPage]);
+
+    useEffect(() => {
+        // URL değiştiğinde currentPage'i 1 olarak ayarla
+        setCurrentPage(1);
+    }, [location]);
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
