@@ -8,12 +8,12 @@ const initialState = {
     error: null,
     filters: {
         brands: [],
-        priceRange: [0, 100000],
+        priceRange: [0, 200000],
         colors: [],
         rating: 0,
         sortOption: 'priceAsc',
         isStock: false,
-    }
+    },
 };
 
 const categoryProductSlice = createSlice({
@@ -38,6 +38,9 @@ const categoryProductSlice = createSlice({
         setIsStock: (state, action) => {
             state.filters.isStock = action.payload;
         },
+        clearFilters: (state) => {
+            state.filters = initialState.filters;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -57,5 +60,5 @@ const categoryProductSlice = createSlice({
     },
 });
 
-export const { setBrands, setPriceRange, setColors, setRating, setSortOption, setIsStock } = categoryProductSlice.actions;
+export const { setBrands, setPriceRange, setColors, setRating, setSortOption, setIsStock, clearFilters, SetIsFilterOpen } = categoryProductSlice.actions;
 export default categoryProductSlice.reducer;

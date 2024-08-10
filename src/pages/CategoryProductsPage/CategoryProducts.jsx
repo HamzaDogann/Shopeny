@@ -1,37 +1,54 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { validCategories } from "../../constants/categories";
 import { useDispatch, useSelector } from 'react-redux';
 import { MdFilterListAlt } from "react-icons/md";
 import { filterProducts } from '../../store/utils/filterUtils';
+import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
+import { setBrands, setColors, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/categoryProductsSlice';
+import { clearFilters } from "../../store/slices/Products/categoryProductsSlice.js"
+
 import CategoryFilterBar from '../../components/CategoryProductPageComponents/CategoryFilterBar';
 import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
-import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
-import "./CategoryProducts.scss";
-import { setBrands, setColors, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/categoryProductsSlice';
 import RadioButton from '../../shared/helpers/RadioButton';
+import "./CategoryProducts.scss";
 
 function CategoryProducts() {
+
   const dispatch = useDispatch();
+  const location = useLocation();
   const { categoryName } = useParams();
+
+
+  if (!validCategories.includes(categoryName)) {
+    return <Navigate to="/" />;
+  }
+
+  //=========STATES=========
+
+  //For Responsive Design
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
+
+  //Products
   const { products, filters, loading, error } = useSelector(state => state.categoryProducts);
   const productsInState = products[categoryName] || [];
-
-  // Filtrelenmiş ürünleri useMemo ile elde et
   const filteredProducts = useMemo(() => filterProducts(productsInState, filters), [productsInState, filters]);
 
-  console.log('Ürünler:', productsInState);
-  console.log('Filtreler:', filters);
-  console.log('Filtrelenmiş Ürünler:', filteredProducts);
+  //Clear Filter
+  const [clearStates, setClearStates] = useState(false);
 
-  // Sayfa yüklendiğinde ürünleri al
+  //=========FUNCTIONALITY=========
+
+  //Get All Products
   useEffect(() => {
     if (!productsInState.length) {
       dispatch(getCategoryProducts(categoryName));
     }
   }, [dispatch, categoryName, productsInState.length]);
 
-  // Filtre seçeneklerini güncelle
+
+  //Apply Filters
   const handleFilterApply = (newFilters) => {
     dispatch(setBrands(newFilters.brands));
     dispatch(setPriceRange(newFilters.priceRange));
@@ -41,7 +58,18 @@ function CategoryProducts() {
     dispatch(setSortOption(newFilters.sortOption));
   };
 
-  // Filtre seçeneklerini güncelle
+  //==== Clear Filters ====
+  const handleClearFilters = () => {
+    dispatch(clearFilters());
+    setClearStates(!clearStates);
+  };
+
+  useEffect(() => {
+    handleClearFilters();
+  }, [location])
+
+  //====Filter Options, Sort and isStock====
+
   const handleSortChange = (event) => {
     dispatch(setSortOption(event.target.value));
   };
@@ -50,11 +78,7 @@ function CategoryProducts() {
     dispatch(setIsStock(!filters.isStock));
   };
 
-  // Responsive tasarım için state
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
-
-  // Responsive değişiklikleri yönet
+  //Handler for Responsive Design
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1100);
@@ -67,7 +91,7 @@ function CategoryProducts() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Filtre menüsünü göster/gizle
+
   const showFilterMenu = () => {
     setIsFilterVisible(true);
   };
@@ -76,10 +100,8 @@ function CategoryProducts() {
     setIsFilterVisible(false);
   };
 
-  // Geçerli kategori geçerli değilse anasayfaya yönlendir
-  if (!validCategories.includes(categoryName)) {
-    return <Navigate to="/" />;
-  }
+
+  //============================JSX==================================
 
   return (
     <div className='category-products-box'>
@@ -111,10 +133,10 @@ function CategoryProducts() {
 
       <div className='category-products'>
         <div className='category-filter-bar' style={{ display: isMobile && isFilterVisible ? 'flex' : !isMobile ? 'flex' : 'none' }}>
-          <CategoryFilterBar onFilterApply={handleFilterApply} closeFilterMenuFunc={hideFilterMenu} />
+          <CategoryFilterBar setClearStates={setClearStates} onClearFilters={clearStates} onFilterApply={handleFilterApply} closeFilterMenuFunc={hideFilterMenu} />
         </div>
         <div className='category-products-bar'>
-          <CategoryProductList  filters={filters} products={filteredProducts} loading={loading} error={error} />
+          <CategoryProductList ClearFilters={handleClearFilters} filters={filters} products={filteredProducts} loading={loading} error={error} />
         </div>
       </div>
     </div>

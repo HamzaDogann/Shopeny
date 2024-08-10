@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Checkbox from '../../shared/helpers/Checkbox';
 import { Slider, Box, Rating } from '@mui/material';
 import { MdClose } from "react-icons/md";
 
-function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
+function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters }) {
 
-  //Filter Options
   const brands = ['Apple', 'Samsung', 'Sony', 'LG', 'Huawei', 'Xiaomi', 'Oppo'];
   const colors = [
     { name: 'Siyah', code: '#1a1a1a' },
@@ -19,12 +18,18 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
 
   //Filter States
   const [checkedBrands, setCheckedBrands] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceRange, setPriceRange] = useState([0, 200000]);
   const [checkedColors, setCheckedColors] = useState([]);
   const [rating, setRating] = useState(0);
 
-  //! ======= HANDLE FILTER METHODS =======
+  useEffect(() => {
+    setCheckedBrands([])
+    setPriceRange([0, 200000])
+    setCheckedColors([])
+    setRating(0)
+  }, [onClearFilters])
 
+  //! ======= Handle Filter Methods =======
 
   // Handle Brands
   const handleCheckboxChange = (brand) => {
@@ -34,7 +39,6 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
         : [...prevState, brand]
     );
   };
-
 
   //Handle Price
   const handleInputChange = (event) => {
@@ -50,7 +54,7 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
     setPriceRange(newValue);
   };
 
-  //Handle Color
+  //Handle Colors
   const handleColorCheckboxChange = (color) => {
     setCheckedColors(prevState =>
       prevState.includes(color)
@@ -59,12 +63,12 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
     );
   };
 
-
-
   //Handle Rating
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
   };
+
+  //! ======= Apply Filters ======= 
 
   const applyFilters = () => {
     onFilterApply({
@@ -74,7 +78,9 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
       rating
     });
     closeFilterMenuFunc();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
 
   return (
     <div className="filter-box">

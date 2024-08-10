@@ -1,15 +1,17 @@
 import React, { useState, useEffect, memo } from 'react';
-import { useLocation } from 'react-router-dom'; // React Router v6 kullanıyorsanız
+import { useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
+import { AiFillProduct } from "react-icons/ai";
 
-const ProductList = memo(({ products, loading, error, filters }) => {
+const ProductList = memo(({ products, loading, error, filters, ClearFilters }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
+
     const location = useLocation();
 
     useEffect(() => {
@@ -48,6 +50,7 @@ const ProductList = memo(({ products, loading, error, filters }) => {
         setCurrentPage(value);
     };
 
+
     const totalPages = Math.ceil(products.length / productsPerPage);
 
     if (loading) {
@@ -61,26 +64,39 @@ const ProductList = memo(({ products, loading, error, filters }) => {
     return (
         <div>
             <div className="products-box">
-                {currentProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} loading={loading} />
-                ))}
+                <p className='total-product-number'>
+                    <AiFillProduct className='icon' />
+                    <span>Toplam {products.length} Ürün Listeleniyor.</span>
+                </p>
+                {currentProducts.length > 0 ? (
+                    currentProducts.map((product) => (
+                        <ProductCard key={product.Id} product={product} loading={loading} />
+                    ))
+                ) : (
+                    <div className='no-products-box'>
+                        <p>Filtreleme işleminize göre bir ürün bulunamadı.</p>
+                        <button className='clear-filter' onClick={ClearFilters}>Filtreyi Temizle</button>
+                    </div>
+                )}
             </div>
-            <div className='pagination'>
-                <Stack spacing={2} style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
-                    <Pagination
-                        count={totalPages}
-                        page={currentPage}
-                        size="large"
-                        onChange={handlePageChange}
-                        renderItem={(item) => (
-                            <PaginationItem
-                                slots={{ previous: NavigateBeforeIcon, next: NavigateNextIcon }}
-                                {...item}
-                            />
-                        )}
-                    />
-                </Stack>
-            </div>
+            {currentProducts.length > 0 && (
+                <div className='pagination'>
+                    <Stack spacing={2} style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
+                        <Pagination
+                            count={totalPages}
+                            page={currentPage}
+                            size="large"
+                            onChange={handlePageChange}
+                            renderItem={(item) => (
+                                <PaginationItem
+                                    slots={{ previous: NavigateBeforeIcon, next: NavigateNextIcon }}
+                                    {...item}
+                                />
+                            )}
+                        />
+                    </Stack>
+                </div>
+            )}
         </div>
     );
 });
