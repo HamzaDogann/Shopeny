@@ -2,19 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Checkbox from '../../shared/helpers/Checkbox';
 import { Slider, Box, Rating } from '@mui/material';
 import { MdClose } from "react-icons/md";
+import { colors } from "../../constants/FilterColors";
 
-function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters }) {
-
-  const brands = ['Apple', 'Samsung', 'Sony', 'LG', 'Huawei', 'Xiaomi', 'Oppo'];
-  const colors = [
-    { name: 'Siyah', code: '#1a1a1a' },
-    { name: 'Beyaz', code: '#ffffff' },
-    { name: 'Gri', code: '#60676b' },
-    { name: 'Kırmızı', code: '#d93f3f' },
-    { name: 'Yeşil', code: '#19d47a' },
-    { name: 'Mavi', code: '#3c6ade' },
-    { name: 'Turuncu', code: '#f27d59' }
-  ];
+function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClearFilters, closeFilterMenuFunc, clearFilters, isFilterButtonEnable, setIsFilterButtonEnable }) {
 
   //Filter States
   const [checkedBrands, setCheckedBrands] = useState([]);
@@ -38,6 +28,7 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters 
         ? prevState.filter(item => item !== brand)
         : [...prevState, brand]
     );
+    setIsFilterButtonEnable(true);
   };
 
   //Handle Price
@@ -48,10 +39,12 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters 
         ? [Math.min(value, prevPriceRange[1]), prevPriceRange[1]]
         : [prevPriceRange[0], Math.max(value, prevPriceRange[0])];
     });
+    setIsFilterButtonEnable(true);
   };
 
   const handleSliderChange = (event, newValue) => {
     setPriceRange(newValue);
+    setIsFilterButtonEnable(true);
   };
 
   //Handle Colors
@@ -61,11 +54,13 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters 
         ? prevState.filter(item => item !== color)
         : [...prevState, color]
     );
+    setIsFilterButtonEnable(true);
   };
 
   //Handle Rating
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
+    setIsFilterButtonEnable(true);
   };
 
   //! ======= Apply Filters ======= 
@@ -81,6 +76,13 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleClearFilters = () => {
+    clearFilters();
+    closeFilterMenuFunc(false);
+    setIsFilterButtonEnable(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
 
   return (
     <div className="filter-box">
@@ -88,7 +90,7 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters 
         {/* Brands */}
         <p className='brands-title'>Markalar</p>
         <ul>
-          {brands.map((brand, index) => (
+          {categoryBrands.map((brand, index) => (
             <li key={index}>
               <Checkbox
                 id={`brand-${index}`}
@@ -177,7 +179,10 @@ function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply, onClearFilters 
         </div>
 
         {/* Filter Button */}
-        <button className='filter-btn' onClick={applyFilters}>Filtreyi Uygula</button>
+        <div className='filter-buttons'>
+          {isFilterButtonEnable && <button className='filter-btn' onClick={applyFilters}>Filtreyi Uygula</button>}
+          {isFilterOpen && <button className='remove-filter-btn' onClick={handleClearFilters}>Filtreyi Temizle</button>}
+        </div>
         <button onClick={closeFilterMenuFunc} className='close-filter-menu-btn'><MdClose /></button>
       </div>
     </div>

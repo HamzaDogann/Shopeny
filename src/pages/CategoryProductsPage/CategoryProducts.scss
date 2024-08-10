@@ -38,7 +38,7 @@
       font-size: 17px;
       margin-top: 15px;
       padding: 8px;
-      border-radius: 30px;
+      border-radius: 8px;
 
       .filter-icon {
         font-size: 25px;
@@ -105,10 +105,13 @@
       height: max-content;
 
       @media (max-width:1100px) {
-        width: 100%;
+        width: 70%;
         border: 0px;
         margin-top: 25px;
         margin-bottom: 20px;
+      }
+      @media (max-width:500px) {
+        width: 100%;
       }
 
       .filter-options-box {
@@ -255,30 +258,49 @@
         }
       }
 
-      .filter-btn {
-        margin-top: 20px;
-        background-color: $shopenyOrange;
-        color: white;
-        font-weight: 500;
-        padding: 8px 20px;
-        border-radius: 30px;
+      .filter-buttons {
+        @include flex-column;
+        align-items: center;
 
-        @include click-scale(0.7);
-
-        &:hover {
-          transition: 0.3s ease-in-out;
-          background-color: darken($shopenyOrange, 6%);
-        }
-
-        @media (max-width:1100px) {
-          position: sticky;
-          bottom: 20px;
-          padding: 12px;
-          left: 0;
+        .filter-btn,
+        .remove-filter-btn {
+          margin-top: 20px;
+          background-color: $shopenyOrange;
+          color: white;
+          font-weight: 500;
+          padding: 12px 20px;
           border-radius: 30px;
-          width: 100%;
+          width: 75%;
+          @include click-scale(0.7);
+
+          @media (max-width:1300px) {
+            width: 100%;
+          }
+
+          @media (max-width:500px) {
+            padding: 15px 22px;
+          
+          }
+          
+          &:hover {
+            transition: 0.3s ease-in-out;
+            background-color: darken($shopenyOrange, 6%);
+          }
+
         }
+
+        .remove-filter-btn {
+          background-color: rgb(241, 241, 241);
+          color: rgb(97, 97, 97);
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            background-color: rgb(227, 227, 227);
+          }
+        }
+
       }
+
 
       .close-filter-menu-btn {
         @include flex-center;
@@ -331,7 +353,32 @@
 
       }
 
+      .total-product-number {
+        width: 100%;
+        margin-left: 10px;
+        color: $shopenyTextGray;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 5px;
+        @include flex-row-center;
+        gap: 5px;
+        font-size: 18px;
+        margin-bottom: 6px;
+
+        @media (max-width:1100px) {
+          margin-left: 0px;
+          justify-content: center;
+        }
+
+        .icon {
+          font-size: 25px;
+          color: $shopenyOrange;
+        }
+      }
+
+
       .products-box {
+        margin-top: 15px;
         @include flex-row;
         gap: 20px;
         padding: 0px;
@@ -339,24 +386,7 @@
         flex-wrap: wrap;
 
 
-        .total-product-number {
-          width: 100%;
-          margin-left: 10px;
-          color: $shopenyTextGray;
-          font-weight: 500;
-          padding: 5px 10px;
-          border-radius: 5px;
-          @include flex-row-center;
-          gap: 5px;
-          font-size: 18px;
-          margin-bottom: -5px;
-
-          .icon {
-            font-size: 23px;
-            color: $shopenyOrange;
-          }
-        }
-
+       
         .product-card {
           @media (max-width:"1100px") {
             gap: 0px;
@@ -370,11 +400,30 @@
           padding-left: 25px;
           font-weight: 500;
 
+          @media (max-width:1100px) {
+            width: 60%;
+          }
+    
+          @media (max-width:630px) {
+            width: 90%;
+          }
+    
+          @media (max-width:500px) {
+            width: 100%;
+            padding-left: 0px;
+            @include flex-column;
+            justify-content: center;
+          }
+
           p {
             width: 100%;
             text-align: start;
             color: $shopenyTextGray;
             font-size: 17px;
+            font-weight:400;
+            @media (max-width:500px) {
+              text-align: center;
+            }
           }
 
           .clear-filter {
@@ -385,6 +434,12 @@
             border-radius: 10px;
             font-size: 15px;
             transition: all 0.3s ease-in-out;
+
+            @media (max-width:500px) {
+              border-radius: 30px;
+              padding: 15px 22px;
+            }
+            
 
             &:hover {
               background-color: rgb(227, 227, 227);

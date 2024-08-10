@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdFilterListAlt } from "react-icons/md";
 import { filterProducts } from '../../store/utils/filterUtils';
 import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
-import { setBrands, setColors, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/categoryProductsSlice';
-import { clearFilters } from "../../store/slices/Products/categoryProductsSlice.js"
+import { setBrands, setColors, setIsFilterMode, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/filteredCategoryProductsSlice.js';
+import { clearFilters } from "../../store/slices/Products/filteredCategoryProductsSlice.js"
 
 import CategoryFilterBar from '../../components/CategoryProductPageComponents/CategoryFilterBar';
 import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
 import RadioButton from '../../shared/helpers/RadioButton';
+import { getCategoryBrands } from '../../store/utils/getCategoryBrands.js';
 import "./CategoryProducts.scss";
 
 function CategoryProducts() {
@@ -30,23 +31,31 @@ function CategoryProducts() {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
 
-  //Products
-  const { products, filters, loading, error } = useSelector(state => state.categoryProducts);
+  //Products & Filters
+  const { products, loading, error } = useSelector(state => state.categoryProducts);
+  const { filters, isFilterOpen } = useSelector(state => state.filteredCategoryProducts);
+  const { categoryBrands } = useSelector(state => state.filteredCategoryProducts);
+
   const productsInState = products[categoryName] || [];
   const filteredProducts = useMemo(() => filterProducts(productsInState, filters), [productsInState, filters]);
 
-  //Clear Filter
-  const [clearStates, setClearStates] = useState(false);
+  //Clear Filter States
+  const [clearFilterStates, setClearFilterStates] = useState(false);
+
+  //Other States
+  const [isFilterButtonEnable, setIsFilterButtonEnable] = useState(false);
 
   //=========FUNCTIONALITY=========
 
   //Get All Products
+
   useEffect(() => {
     if (!productsInState.length) {
       dispatch(getCategoryProducts(categoryName));
+    } else {
+      dispatch(getCategoryBrands(categoryName));
     }
   }, [dispatch, categoryName, productsInState.length]);
-
 
   //Apply Filters
   const handleFilterApply = (newFilters) => {
@@ -54,14 +63,15 @@ function CategoryProducts() {
     dispatch(setPriceRange(newFilters.priceRange));
     dispatch(setColors(newFilters.colors));
     dispatch(setRating(newFilters.rating));
-    dispatch(setIsStock(newFilters.isStock));
-    dispatch(setSortOption(newFilters.sortOption));
+    dispatch(setIsFilterMode(true));
   };
 
   //==== Clear Filters ====
   const handleClearFilters = () => {
     dispatch(clearFilters());
-    setClearStates(!clearStates);
+    setClearFilterStates(!clearFilterStates);
+    dispatch(setIsFilterMode(false));
+    setIsFilterButtonEnable(false)
   };
 
   useEffect(() => {
@@ -133,10 +143,26 @@ function CategoryProducts() {
 
       <div className='category-products'>
         <div className='category-filter-bar' style={{ display: isMobile && isFilterVisible ? 'flex' : !isMobile ? 'flex' : 'none' }}>
-          <CategoryFilterBar setClearStates={setClearStates} onClearFilters={clearStates} onFilterApply={handleFilterApply} closeFilterMenuFunc={hideFilterMenu} />
+          <CategoryFilterBar
+            categoryBrands={categoryBrands}
+            setClearStates={setClearFilterStates}
+            onClearFilters={clearFilterStates}
+            onFilterApply={handleFilterApply}
+            clearFilters={handleClearFilters}
+            closeFilterMenuFunc={hideFilterMenu}
+            isFilterOpen={isFilterOpen}
+            isFilterButtonEnable={isFilterButtonEnable}
+            setIsFilterButtonEnable={setIsFilterButtonEnable}
+            filters={filters}
+          />
         </div>
         <div className='category-products-bar'>
-          <CategoryProductList ClearFilters={handleClearFilters} filters={filters} products={filteredProducts} loading={loading} error={error} />
+          <CategoryProductList
+            ClearFilters={handleClearFilters}
+            filters={filters}
+            products={filteredProducts}
+            loading={loading} error={error}
+            setIsFilterButtonEnable={setIsFilterButtonEnable} />
         </div>
       </div>
     </div>

@@ -67,6 +67,7 @@ function ProductCard({ product }) {
                     src={product.productImages.mainImage}
                     afterLoad={() => setLoadingImage(false)}
                     onError={() => setLoadingImage(false)}
+                    className='product-image'
                 />
             </div>
 

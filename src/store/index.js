@@ -4,6 +4,7 @@ import authReducer from './slices/Auth/authSlice'
 import modalReducer from './slices/confirmationModalSlice'
 import addressesReducer from './slices/User/addressesSlice'
 import categoryProductsReducer from './slices/Products/categoryProductsSlice'
+import filteredCategoryProductsReducer from './slices/Products/filteredCategoryProductsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     auth: authReducer,
     modal: modalReducer,
     addresses: addressesReducer,
-    categoryProducts: categoryProductsReducer
+    categoryProducts: categoryProductsReducer,
+    filteredCategoryProducts: filteredCategoryProductsReducer
   },
 })

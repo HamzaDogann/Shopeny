@@ -8,7 +8,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
 import { AiFillProduct } from "react-icons/ai";
 
-const ProductList = memo(({ products, loading, error, filters, ClearFilters }) => {
+const ProductList = memo(({ products, loading, error, filters, ClearFilters, setIsFilterButtonEnable }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
 
@@ -50,7 +50,6 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
         setCurrentPage(value);
     };
 
-
     const totalPages = Math.ceil(products.length / productsPerPage);
 
     if (loading) {
@@ -63,11 +62,12 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
 
     return (
         <div>
+            <p className='total-product-number'>
+                <AiFillProduct className='icon' />
+                <span>Toplam  <strong>{products.length}</strong> Ürün Listeleniyor</span>
+            </p>
+
             <div className="products-box">
-                <p className='total-product-number'>
-                    <AiFillProduct className='icon' />
-                    <span>Toplam {products.length} Ürün Listeleniyor.</span>
-                </p>
                 {currentProducts.length > 0 ? (
                     currentProducts.map((product) => (
                         <ProductCard key={product.Id} product={product} loading={loading} />
@@ -79,7 +79,7 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
                     </div>
                 )}
             </div>
-            {currentProducts.length > 0 && (
+            {currentProducts.length > 0 && totalPages > 1 && (
                 <div className='pagination'>
                     <Stack spacing={2} style={{ marginTop: '20px', display: 'flex', justifyContent: 'center' }}>
                         <Pagination
