@@ -3,7 +3,7 @@ import Checkbox from '../../shared/helpers/Checkbox';
 import { Slider, Box, Rating } from '@mui/material';
 import { MdClose } from "react-icons/md";
 
-function CategoryFilterBar({ closeFilterMenuFunc }) {
+function CategoryFilterBar({ closeFilterMenuFunc, onFilterApply }) {
 
   //Filter Options
   const brands = ['Apple', 'Samsung', 'Sony', 'LG', 'Huawei', 'Xiaomi', 'Oppo'];
@@ -22,7 +22,9 @@ function CategoryFilterBar({ closeFilterMenuFunc }) {
   const [priceRange, setPriceRange] = useState([0, 100000]);
   const [checkedColors, setCheckedColors] = useState([]);
   const [rating, setRating] = useState(0);
+
   //! ======= HANDLE FILTER METHODS =======
+
 
   // Handle Brands
   const handleCheckboxChange = (brand) => {
@@ -32,6 +34,7 @@ function CategoryFilterBar({ closeFilterMenuFunc }) {
         : [...prevState, brand]
     );
   };
+
 
   //Handle Price
   const handleInputChange = (event) => {
@@ -57,9 +60,20 @@ function CategoryFilterBar({ closeFilterMenuFunc }) {
   };
 
 
+
   //Handle Rating
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
+  };
+
+  const applyFilters = () => {
+    onFilterApply({
+      brands: checkedBrands,
+      priceRange,
+      colors: checkedColors,
+      rating
+    });
+    closeFilterMenuFunc();
   };
 
   return (
@@ -157,7 +171,7 @@ function CategoryFilterBar({ closeFilterMenuFunc }) {
         </div>
 
         {/* Filter Button */}
-        <button className='filter-btn'>Filtreyi Uygula</button>
+        <button className='filter-btn' onClick={applyFilters}>Filtreyi Uygula</button>
         <button onClick={closeFilterMenuFunc} className='close-filter-menu-btn'><MdClose /></button>
       </div>
     </div>

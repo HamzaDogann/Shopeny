@@ -7,10 +7,10 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
 
-const ProductList = memo(({ products, loading, error }) => {
+const ProductList = memo(({ products, loading, error, filters }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
-    const location = useLocation(); 
+    const location = useLocation();
 
     useEffect(() => {
         const handleResize = () => {
@@ -37,9 +37,8 @@ const ProductList = memo(({ products, loading, error }) => {
     }, [currentPage]);
 
     useEffect(() => {
-        // URL değiştiğinde currentPage'i 1 olarak ayarla
         setCurrentPage(1);
-    }, [location]);
+    }, [location, filters]);
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;

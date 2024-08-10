@@ -1,55 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { validCategories } from "../../constants/categories";
+import { useDispatch, useSelector } from 'react-redux';
 import { MdFilterListAlt } from "react-icons/md";
-import RadioButton from "../../shared/helpers/RadioButton";
+import { filterProducts } from '../../store/utils/filterUtils';
 import CategoryFilterBar from '../../components/CategoryProductPageComponents/CategoryFilterBar';
 import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
-import { useDispatch, useSelector } from 'react-redux';
-import "./CategoryProducts.scss";
 import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
+import "./CategoryProducts.scss";
+import { setBrands, setColors, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/categoryProductsSlice';
+import RadioButton from '../../shared/helpers/RadioButton';
 
 function CategoryProducts() {
-
   const dispatch = useDispatch();
   const { categoryName } = useParams();
-
-  const { products, loading, error } = useSelector(state => state.categoryProducts);
+  const { products, filters, loading, error } = useSelector(state => state.categoryProducts);
   const productsInState = products[categoryName] || [];
 
-  if (!validCategories.includes(categoryName)) {
-    return <Navigate to="/" />;
-  }
+  // Filtrelenmiş ürünleri useMemo ile elde et
+  const filteredProducts = useMemo(() => filterProducts(productsInState, filters), [productsInState, filters]);
 
-  //States
-  const [sortOption, setSortOption] = useState('priceAsc');
-  const [isStock, setIsStock] = useState(false);
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
+  console.log('Ürünler:', productsInState);
+  console.log('Filtreler:', filters);
+  console.log('Filtrelenmiş Ürünler:', filteredProducts);
 
-
-  //Get all products by categoryName
+  // Sayfa yüklendiğinde ürünleri al
   useEffect(() => {
     if (!productsInState.length) {
       dispatch(getCategoryProducts(categoryName));
     }
   }, [dispatch, categoryName, productsInState.length]);
 
+  // Filtre seçeneklerini güncelle
+  const handleFilterApply = (newFilters) => {
+    dispatch(setBrands(newFilters.brands));
+    dispatch(setPriceRange(newFilters.priceRange));
+    dispatch(setColors(newFilters.colors));
+    dispatch(setRating(newFilters.rating));
+    dispatch(setIsStock(newFilters.isStock));
+    dispatch(setSortOption(newFilters.sortOption));
+  };
 
-  //------Filter Functionality------
+  // Filtre seçeneklerini güncelle
   const handleSortChange = (event) => {
-    setSortOption(event.target.value);
+    dispatch(setSortOption(event.target.value));
   };
 
-  //------Responsive Handlers------
-  const showFilterMenu = () => {
-    setIsFilterVisible(true);
+  const handleStockChange = () => {
+    dispatch(setIsStock(!filters.isStock));
   };
 
-  const hideFilterMenu = () => {
-    setIsFilterVisible(false);
-  };
+  // Responsive tasarım için state
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1100);
 
+  // Responsive değişiklikleri yönet
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1100);
@@ -62,18 +67,33 @@ function CategoryProducts() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  //-----------------------JSX----------------------
+  // Filtre menüsünü göster/gizle
+  const showFilterMenu = () => {
+    setIsFilterVisible(true);
+  };
+
+  const hideFilterMenu = () => {
+    setIsFilterVisible(false);
+  };
+
+  // Geçerli kategori geçerli değilse anasayfaya yönlendir
+  if (!validCategories.includes(categoryName)) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className='category-products-box'>
       <div className='top-filter-options-box'>
         <div className='stock-and-sorting-box'>
           <div className='is-stock-box'>
-            <RadioButton checked={isStock} name={isStock} onChange={() => setIsStock(!isStock)} />
+            <RadioButton
+              checked={filters.isStock}
+              onChange={handleStockChange}
+            />
             <span>Stoktakiler</span>
           </div>
 
-          <select name="sorting" id="sorting" value={sortOption} onChange={handleSortChange}>
+          <select name="sorting" id="sorting" value={filters.sortOption} onChange={handleSortChange}>
             <option value="priceAsc">Fiyata Göre Artan</option>
             <option value="priceDesc">Fiyata Göre Azalan</option>
             <option value="oldToNew">Eskiden Yeniye</option>
@@ -91,10 +111,10 @@ function CategoryProducts() {
 
       <div className='category-products'>
         <div className='category-filter-bar' style={{ display: isMobile && isFilterVisible ? 'flex' : !isMobile ? 'flex' : 'none' }}>
-          <CategoryFilterBar closeFilterMenuFunc={hideFilterMenu} />
+          <CategoryFilterBar onFilterApply={handleFilterApply} closeFilterMenuFunc={hideFilterMenu} />
         </div>
         <div className='category-products-bar'>
-          <CategoryProductList products={productsInState} loading={loading} error={error} />
+          <CategoryProductList  filters={filters} products={filteredProducts} loading={loading} error={error} />
         </div>
       </div>
     </div>

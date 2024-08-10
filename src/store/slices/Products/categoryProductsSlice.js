@@ -1,16 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCategoryProducts } from '../../thunks/Products/categoryProductsThunk';
+import { filterProducts } from '../../utils/filterUtils';
 
 const initialState = {
-    products: {}, 
+    products: {},
     loading: false,
     error: null,
+    filters: {
+        brands: [],
+        priceRange: [0, 100000],
+        colors: [],
+        rating: 0,
+        sortOption: 'priceAsc',
+        isStock: false,
+    }
 };
 
 const categoryProductSlice = createSlice({
     name: 'categoryProducts',
     initialState,
-    reducers: {},
+    reducers: {
+        setBrands: (state, action) => {
+            state.filters.brands = action.payload;
+        },
+        setPriceRange: (state, action) => {
+            state.filters.priceRange = action.payload;
+        },
+        setColors: (state, action) => {
+            state.filters.colors = action.payload;
+        },
+        setRating: (state, action) => {
+            state.filters.rating = action.payload;
+        },
+        setSortOption: (state, action) => {
+            state.filters.sortOption = action.payload;
+        },
+        setIsStock: (state, action) => {
+            state.filters.isStock = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getCategoryProducts.pending, (state) => {
@@ -29,4 +57,5 @@ const categoryProductSlice = createSlice({
     },
 });
 
+export const { setBrands, setPriceRange, setColors, setRating, setSortOption, setIsStock } = categoryProductSlice.actions;
 export default categoryProductSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function RadioButton({ checked, name, onChange }) {
+function RadioButton({ checked,  onChange }) {
 
     return (
         <div className="checkbox-wrapper-12">
@@ -9,7 +9,6 @@ function RadioButton({ checked, name, onChange }) {
                     id="cbx-12"
                     type="checkbox"
                     checked={checked}
-                    name={name}
                     onChange={onChange}
                 />
                 <label htmlFor="cbx-12"></label>
