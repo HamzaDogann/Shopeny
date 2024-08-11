@@ -37,7 +37,7 @@ function ProductDetails() {
     }, [dispatch, categoryName, productName, product]);
 
     if (loading) {
-        return <div style={{ height: "400px" }}>Yükleniyor...</div>;
+        return <div style={{ height: "400px" }}></div>;
     }
     return (
         <div className='product-details-page-box'>

@@ -1,13 +1,18 @@
-import React from 'react';
-import { Rating } from '@mui/material';
+import React, { useState } from 'react';
+import { Rating, Skeleton } from '@mui/material';
 import { MdOutlineDateRange } from "react-icons/md";
+import truncateName from '../../shared/utils/truncateName';
+import zIndex from '@mui/material/styles/zIndex';
 
-const CommentUser = ({ name, limit }) => {
-  const truncatedName = name.length > limit ? `${name.substring(0, limit)}...` : name;
-  return <p className='comment-user'>{truncatedName}</p>;
-};
 
 function ProductComments({ comments }) {
+
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setIsImageLoading(false);
+  };
+
   return (
     <div className='product-comments-general-box'>
       <div className="product-titles-box">
@@ -19,10 +24,17 @@ function ProductComments({ comments }) {
         {comments.map((comment, index) => (
           <div key={index} className='comment-box'>
             <div className='profile-image'>
-              <img src={comment.userProfilePhoto} alt="" />
+              {isImageLoading && (
+                <Skeleton variant="circular" sx={{ zIndex: "2" }} width={120} height={120} />
+              )}
+              <img
+                onLoad={handleImageLoad}
+                src={comment.userProfilePhoto} alt=""
+                style={{ display: isImageLoading ? 'none' : 'block' }}
+              />
             </div>
             <div className='comment-user-and-rating-info-box'>
-              <CommentUser name={comment.user} limit={12} />
+              <p className='comment-user'>{truncateName(comment.user, 12)}</p>
               <div className='comment-rating-box'>
                 <Rating name="read-only" value={comment.starRating} readOnly size={"small"} />
               </div>

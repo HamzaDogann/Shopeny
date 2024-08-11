@@ -105,19 +105,22 @@ function Product({ product }) {
                         </div>
                         <p className='discounted-price'>{formatPrice(product.discountedPrice)}₺</p>
 
-                        <div className='amount-and-add-basket-box'>
-                            <div className='amount-box'>
-                                <button className='amount-buttons' onClick={decrementAmount}>-</button>
-                                <span className='amount-value'>{amount}</span>
-                                <button className='amount-buttons' onClick={incrementAmount}>+</button>
-                            </div>
+                        {!product.isStock
+                            ?
+                            <div className='no-stock'>Bu ürün stokta kalmadı</div>
+                            :
+                            <div className='amount-and-add-basket-box'>
+                                <div className='amount-box'>
+                                    <button className='amount-buttons' onClick={decrementAmount}>-</button>
+                                    <span className='amount-value'>{amount}</span>
+                                    <button className='amount-buttons' onClick={incrementAmount}>+</button>
+                                </div>
 
-                            <button className='add-basket'>
-                                <HiMiniShoppingBag />
-                                <span>Sepete Ekle</span>
-                            </button>
-                        </div>
-
+                                <button className='add-basket'>
+                                    <HiMiniShoppingBag />
+                                    <span>Sepete Ekle</span>
+                                </button>
+                            </div>}
                     </div>
 
                     <div className='top-buttons'>
