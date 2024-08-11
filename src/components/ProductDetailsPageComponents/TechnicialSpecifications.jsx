@@ -11,7 +11,7 @@ const properties = [
   { propertyName: 'HDMI', propertyDescription: 'Var' },
 ];
 
-function TechnicialSpecifications() {
+function TechnicialSpecifications({technicalSpecifications}) {
   return (
     <div className='technicial-specifications-box'>
       <div className="product-titles-box">
@@ -19,10 +19,10 @@ function TechnicialSpecifications() {
         <p className="title">Teknik Özellikler</p>
       </div>
       <div className="properties-box">
-        {properties.map((property, index) => (
+        {technicalSpecifications.map((property, index) => (
           <div key={index} className={`property-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
             <div className='property-name'>{property.propertyName}</div>
-            <div className='property-description'>{property.propertyDescription}</div>
+            <div className='property-description'>{property.propertyDetail}</div>
           </div>
         ))}
       </div>

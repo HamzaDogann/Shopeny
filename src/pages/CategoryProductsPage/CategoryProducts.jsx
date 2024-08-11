@@ -3,7 +3,7 @@ import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { validCategories } from "../../constants/categories";
 import { useDispatch, useSelector } from 'react-redux';
 import { MdFilterListAlt } from "react-icons/md";
-import { filterProducts } from '../../store/utils/filterUtils';
+import { filterProducts } from '../../store/utils/filterProducts.js';
 import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
 import { setBrands, setColors, setIsFilterMode, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/filteredCategoryProductsSlice.js';
 import { clearFilters } from "../../store/slices/Products/filteredCategoryProductsSlice.js"
@@ -47,7 +47,7 @@ function CategoryProducts() {
 
   //=========FUNCTIONALITY=========
 
-  //Get All Products
+  //====Get All Products====
 
   useEffect(() => {
     if (!productsInState.length) {
@@ -57,7 +57,8 @@ function CategoryProducts() {
     }
   }, [dispatch, categoryName, productsInState.length]);
 
-  //Apply Filters
+  //====Apply Filters====
+
   const handleFilterApply = (newFilters) => {
     dispatch(setBrands(newFilters.brands));
     dispatch(setPriceRange(newFilters.priceRange));

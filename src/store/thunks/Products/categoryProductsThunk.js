@@ -1,16 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchCategoryProducts } from "../../utils/fetchCategoryProducts";
-
-const categoryTranslation = {
-    'bilgisayar': 'computers',
-    'telefon': 'phones',
-    'televizyon': 'televisions',
-    'kulaklik': 'headphones',
-    'mikrofon': 'microphones',
-    'oyuncu-fareleri': 'gaming-mice',
-    'klavye': 'keyboards',
-    'kamera': 'cameras'
-};
+import {categoryTranslation} from "../../../constants/categories"
 
 export const getCategoryProducts = createAsyncThunk(
     'categoryProducts/fetchCategoryProducts',

@@ -7,10 +7,17 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
 import { AiFillProduct } from "react-icons/ai";
+import { categoryTranslation } from '../../constants/categories.js';
 
-const ProductList = memo(({ products, loading, error, filters, ClearFilters, setIsFilterButtonEnable }) => {
+const ProductList = memo(({ products, loading, error, filters, ClearFilters }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
+
+
+    const translatedProducts = products.map(product => ({
+        ...product,
+        categoryName: Object.keys(categoryTranslation).find(key => categoryTranslation[key] === product.categoryName) || product.categoryName
+    }));
 
     const location = useLocation();
 
@@ -33,7 +40,7 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters, set
 
     useEffect(() => {
         window.scrollTo({
-            top: 0,
+            top: 180,
             behavior: 'smooth',
         });
     }, [currentPage]);
@@ -44,13 +51,13 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters, set
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = translatedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
     };
 
-    const totalPages = Math.ceil(products.length / productsPerPage);
+    const totalPages = Math.ceil(translatedProducts.length / productsPerPage);
 
     if (loading) {
         return null;

@@ -1,16 +1,18 @@
 import Rating from '@mui/material/Rating';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import { MdShoppingCart, MdFavorite } from "react-icons/md";
 import { TbShoppingCartCopy } from "react-icons/tb";
-import CircularProgress from '@mui/material/CircularProgress';
 
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { slugify } from '../../utils/slugify';
 import { customSuccessToast } from '../../utils/CustomToasts';
 
-import "./ProductCard.scss";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+
+import "./ProductCard.scss";
 function ProductCard({ product }) {
 
     const navigate = useNavigate();
@@ -18,8 +20,12 @@ function ProductCard({ product }) {
     const [isBasketProduct, setIsBasketProduct] = useState(false);
     const [isFavoriteProduct, setIsFavoriteProduct] = useState(false);
     const [loadingImage, setLoadingImage] = useState(true);
+
+    //For URL Format
+    const productName = slugify(product.productName);
+
     const handleProduct = () => {
-        navigate(`/${product.categoryName}/${product.productName}`); // Ürünü detaylı görmek için dinamik rota
+        navigate(`/${product.categoryName}/${productName}`);
     }
 
     const handleAddToFavorites = (event) => {
@@ -58,7 +64,7 @@ function ProductCard({ product }) {
             <div className='image-box'>
                 {loadingImage && (
                     <div className='spinner-overlay'>
-                       <CircularProgress style={{ color: '#496aee' }} />
+                        <CircularProgress style={{ color: '#496aee' }} />
                     </div>
                 )}
                 <LazyLoadImage

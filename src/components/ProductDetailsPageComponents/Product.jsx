@@ -10,11 +10,11 @@ import { MdFavorite } from "react-icons/md";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
 
-
 import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts"
 import ProductSlider from './ProductSlider';
+import { formatPrice } from '../../shared/utils/formatPrice';
 
-function Product() {
+function Product({ product }) {
 
     const colors = [
         { name: "Siyah", colorCode: "#1c1c1c" },
@@ -25,12 +25,12 @@ function Product() {
     ]
 
     //States
-    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedColor, setSelectedColor] = useState(product.productColors[0]);
     const [amount, setAmount] = useState(1);
 
     // Handle Color
     const handleColorClick = (color) => {
-        setSelectedColor(color.name);
+        setSelectedColor(color);
     };
 
     //Handle Copy
@@ -57,26 +57,26 @@ function Product() {
             setAmount(amount - 1);
         }
     };
-
+    console.log(product)
     return (
         <div className='product-general-box'>
             <div className='product-box'>
                 <div className='product-image-box'>
-                    <ProductSlider />
+                    <ProductSlider productImages={product.productImages} />
                 </div>
                 <div className='product-details-box'>
                     <div className='about-the-product'>
-                        <p className='product-brand'>Apple</p>
-                        <h2 className='product-name'>MacBook Pro 16 Inc M2 Pro</h2>
-                        <span className='product-description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus laborum dolorum magni quia, recusandae.</span>
+                        <p className='product-brand'>{product.productBrand}</p>
+                        <h2 className='product-name'>{product.productName}</h2>
+                        <span className='product-description'>{product.productDescription}</span>
                         <div className='reviews-box'>
                             <div className='rating-box'>
-                                <Rating name="read-only" value={5} size="small" readOnly />
-                                <span>5</span>
+                                <Rating name="read-only" value={product.productStar} precision={0.5} size="small" readOnly />
+                                <span>{product.productStar}</span>
                             </div>
                             <span className='comment-status'>
                                 <TfiCommentAlt />
-                                <p>Bu ürüne 2 yorum var</p>
+                                <p>Bu ürüne {product.productComments.length} yorum var</p>
                             </span>
                         </div>
                         <p className='distinction'></p>
@@ -84,25 +84,26 @@ function Product() {
                     <div className='product-buy-process-box'>
                         <p className='color-title'>Renkler</p>
                         <div className='choose-color-box'>
-                            {colors.map((color) => (
+                            {product.productColors.map((color, index) => (
                                 <button
-                                    key={color.name}
+                                    key={index}
                                     onClick={() => handleColorClick(color)}
                                     style={{
-                                        backgroundColor: color.colorCode,
-                                        border: selectedColor === color.name ? '4px solid #b0b0b0' : '4px solid #e0e0e0',
+                                        backgroundColor: color,
+                                        border: selectedColor === color ? '4px solid #b0b0b0' : '4px solid #e0e0e0',
                                     }}
                                 >
                                 </button>
                             ))}
+
                         </div>
                         <div className='product-price-info'>
-                            <strike>80.000₺</strike>
+                            <strike>{formatPrice(product.productNormalPrice)}₺</strike>
                             <span className='discount'>
-                                <BiSolidDiscount style={{ fontSize: "20px" }} /> %50
+                                <BiSolidDiscount style={{ fontSize: "20px" }} /> %{product.discountRate}
                             </span>
                         </div>
-                        <p className='discounted-price'>40.000₺</p>
+                        <p className='discounted-price'>{formatPrice(product.discountedPrice)}₺</p>
 
                         <div className='amount-and-add-basket-box'>
                             <div className='amount-box'>

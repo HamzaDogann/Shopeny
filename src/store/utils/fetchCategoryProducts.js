@@ -14,6 +14,7 @@ export const fetchCategoryProducts = async (categoryName) => {
                 productBrand: productsData[productId].productBrand,
                 productName: productsData[productId].productName,
                 productStar: productsData[productId].productStar,
+                productColors: productsData[productId].productColors,
                 createdDate: productsData[productId].createdDate,
                 productNormalPrice: productsData[productId].productNormalPrice,
                 discountRate: productsData[productId].discountRate,

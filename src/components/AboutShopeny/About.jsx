@@ -13,9 +13,11 @@ import { Link, useLocation } from 'react-router-dom';
 function About() {
 
     const location = useLocation();
+    
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [location]);
+
     return (
         <Container>
             <div className='about-general-box'>

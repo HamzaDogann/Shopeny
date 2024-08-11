@@ -73,14 +73,14 @@ function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClea
       rating
     });
     closeFilterMenuFunc();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 180, behavior: 'smooth' });
   };
 
   const handleClearFilters = () => {
     clearFilters();
     closeFilterMenuFunc(false);
     setIsFilterButtonEnable(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 180, behavior: 'smooth' });
   };
 
 
@@ -153,8 +153,8 @@ function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClea
               <Checkbox
                 id={`color-${index}`}
                 label={color.name}
-                checked={checkedColors.includes(color.name)}
-                onChange={() => handleColorCheckboxChange(color.name)}
+                checked={checkedColors.includes(color.code)}
+                onChange={() => handleColorCheckboxChange(color.code)}
               />
               <label className='color-box' htmlFor={`color-${index}`}>
                 <span

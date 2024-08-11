@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
-import ProductMain from "../../assets/images/productPhotoMain.jpg"
-import ProductPhotoOther1 from "../../assets/images/ProductPhotoOther1.jpg"
-import ProductPhotoOther2 from "../../assets/images/ProductPhotoOther2.jpg"
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 
-const images = [
-    ProductMain,
-    ProductPhotoOther1,
-    ProductPhotoOther2
-];
-
-const ProductSlider = () => {
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+const ProductSlider = ({ productImages }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const goToNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % productImages.otherImages.length);
     };
 
     const goToPrevious = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+        setCurrentIndex((prevIndex) => (prevIndex - 1 + productImages.otherImages.length) % productImages.otherImages.length);
     };
 
     const goToImage = (index) => {
@@ -33,14 +26,14 @@ const ProductSlider = () => {
                     <IoIosArrowDropleftCircle />
                 </button>
                 {/* Main Product Image */}
-                <img src={images[currentIndex]} alt="main" key={currentIndex} />
+                <img src={productImages.otherImages[currentIndex]} alt={`main-${currentIndex}`} />
                 <button className='next-btn' onClick={goToNext}>
                     <IoIosArrowDroprightCircle />
                 </button>
             </div>
             <div className="thumbnails">
                 {/* Other Product Images */}
-                {images.map((image, index) => (
+                {productImages.otherImages.map((image, index) => (
                     <img
                         key={index}
                         src={image}

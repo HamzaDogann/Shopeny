@@ -69,7 +69,6 @@ function SearchBar() {
   const handleLinkClick = (e, categoryName, productName) => {
     e.preventDefault();
     const slug = slugify(productName);
-    console.log(slug);
     setInputValue("");
     navigate(`/${categoryName}/${slug}`);
     setIsVisible(false);

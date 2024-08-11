@@ -1,6 +1,6 @@
 import React from 'react'
 
-function AddComment() {
+function AddComment({productId}) {
   return (
     <div className='add-comment-general-box'>
       <div className="product-titles-box">
