@@ -57,7 +57,7 @@ function Product({ product }) {
             setAmount(amount - 1);
         }
     };
-    console.log(product)
+
     return (
         <div className='product-general-box'>
             <div className='product-box'>

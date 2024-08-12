@@ -47,7 +47,14 @@
         padding: 12px;
         @include flex-center;
         border-bottom: 3px solid rgb(220, 220, 220);
-
+        position: relative;
+        
+        .spinner-overlay {
+            width: 100%;
+            height: 100%;
+            @include flex-center;
+            position: absolute;
+        }
 
         img {
             width: 100%;

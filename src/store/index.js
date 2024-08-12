@@ -7,6 +7,7 @@ import categoryProductsReducer from './slices/Products/categoryProductsSlice'
 import filteredCategoryProductsReducer from './slices/Products/filteredCategoryProductsSlice'
 import productDetailsReducer from './slices/Products/productDetailsSlice'
 import popularProductsReducer from './slices/Products/popularProductsSlice'
+import searchProductsReducer from './slices/searchProductsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     filteredCategoryProducts: filteredCategoryProductsReducer,
     productDetails: productDetailsReducer,
     popularProducts: popularProductsReducer,
+    searchProducts:searchProductsReducer
   },
 })

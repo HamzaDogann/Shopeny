@@ -3,69 +3,68 @@ import { useNavigate } from 'react-router-dom';
 import { CgSearch } from "react-icons/cg";
 import { slugify } from "../../shared/utils/slugify";
 import truncateName from '../../shared/utils/truncateName';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchProductsThunk } from '../../store/thunks/searchProductsThunk';
+import { clearSearchResults } from '../../store/slices/searchProductsSlice';
+import useDebounce from '../../shared/hooks/useDebounce';
 
 function SearchBar() {
   const [isVisible, setIsVisible] = useState(false);
-  const [searching, setSearching] = useState(false);
-  const [timeoutId, setTimeoutId] = useState(null);
-  const [focusState, setFocusState] = useState(false);
-  const [products, setProducts] = useState([
-    { categoryName: 'bilgisayar', productName: 'Macbook Pro 2 Ultra Vip' },
-    { categoryName: 'telefon', productName: 'iPhone 12 Ultra Premium Siyah Siyah Siyah SiyahSiyah' },
-    { categoryName: 'kulaklik', productName: 'Lenovo Oyuncu Kulaklık Lenovo Oyuncu Kulaklık Oyuncu ' },
-    { categoryName: 'kamera', productName: 'Sony Ultra Çözünürlük Kamera' },
-    { categoryName: 'telefon', productName: 'Redmi Note 9 Pro Yeşil' },
-  ]);
   const [inputValue, setInputValue] = useState('');
+  const [focusState, setFocusState] = useState(false);
   const searchBarRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    setIsVisible(true);
+  // Redux'dan arama sonuçlarını ve yüklenme durumunu al
+  const { resultProducts, loading } = useSelector((state) => state.searchProducts);
 
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+  // Debounce edilmiş arama terimi
+  const debouncedInputValue = useDebounce(inputValue, 500);
+
+  // Arama terimi değiştiğinde
+  useEffect(() => {
+    if (debouncedInputValue) {
+      dispatch(searchProductsThunk(debouncedInputValue));
+      setIsVisible(true);
+    } else {
+      dispatch(clearSearchResults());
+      setIsVisible(false);
     }
+  }, [debouncedInputValue, dispatch]);
 
-    setSearching(true);
-
-    setTimeoutId(
-      setTimeout(() => {
-        if (value.length > 0) {
-          setTimeout(() => {
-            setSearching(false);
-          }, 500);
-        } else {
-          setIsVisible(false);
-          setSearching(false);
-        }
-      }, 500)
-    );
+  // Input değiştiğinde
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   };
 
+  // Focus event'ini işleme
   const handleFocus = () => {
     setFocusState(true);
   };
 
+  // Blur event'ini işleme
   const handleBlur = () => {
     setFocusState(false);
   };
 
+  // Dış tıklama işlemlerini yönetme
   const handleClickOutside = (event) => {
     if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
       setIsVisible(false);
-      setSearching(false);
+      dispatch(clearSearchResults());
     }
   };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      setIsVisible(true);
+      if (inputValue.trim()) {
+        dispatch(searchProductsThunk(inputValue.trim()));
+        setIsVisible(true);
+      }
     }
   };
-
+  // Sonuçların üzerine tıklama işlemi
   const handleLinkClick = (e, categoryName, productName) => {
     e.preventDefault();
     const slug = slugify(productName);
@@ -74,12 +73,13 @@ function SearchBar() {
     setIsVisible(false);
   };
 
+  // Dış tıklama event'lerini dinleme
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <div className={`search-bar ${isVisible ? 'search-active' : ''}`} ref={searchBarRef}>
@@ -97,12 +97,12 @@ function SearchBar() {
         <CgSearch className={`icon ${focusState ? 'hidden' : ''}`} />
       </div>
 
-      <div className={`search-results ${isVisible ? 'visible' : ''} ${searching ? 'spinner-active' : ''}`}>
-        {searching ? (
+      <div className={`search-results ${isVisible ? 'visible' : ''} ${loading ? 'spinner-active' : ''}`}>
+        {loading ? (
           <div className="spinner"></div>
         ) :
-          products.length > 0 ?
-            products.map(product => (
+          resultProducts.length > 0 ?
+            resultProducts.map(product => (
               <div
                 key={product.productName}
                 onClick={(e) => handleLinkClick(e, product.categoryName, product.productName)}

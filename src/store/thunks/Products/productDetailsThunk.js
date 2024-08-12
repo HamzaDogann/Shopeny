@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { get, ref, query, orderByChild, equalTo } from 'firebase/database';
+import { get, ref } from 'firebase/database';
 import { db } from '../../../services/firebase/config';
 import { formatProductName } from '../../../shared/utils/formatProductName';
 import { categoryTranslation } from '../../../constants/categories';
@@ -10,22 +10,30 @@ export const fetchProductDetailsByName = createAsyncThunk(
     try {
 
       const englishCategoryName = categoryTranslation[categoryName];
-      const formattedProductName = formatProductName(productName);
-
+      const formattedProductName = formatProductName(productName).toLowerCase();
+  
       const productsRef = ref(db, `Data/Categories/${englishCategoryName}`);
-      const productQuery = query(productsRef, orderByChild('productName'), equalTo(formattedProductName));
-      const snapshot = await get(productQuery);
+      const snapshot = await get(productsRef);
 
       if (snapshot.exists()) {
-        const productId = Object.keys(snapshot.val())[0];
-        const productData = snapshot.val()[productId];
-        return { productId, productData };
+  
+        const products = snapshot.val();
+        const matchingProductId = Object.keys(products).find(productId => 
+          products[productId].productName.toLowerCase() === formattedProductName
+        );
+        
+        if (matchingProductId) {
+          const productData = products[matchingProductId];
+          return { productId: matchingProductId, productData };
+        } else {
+          return thunkAPI.rejectWithValue("product-not-found");
+        }
       } else {
         return thunkAPI.rejectWithValue("product-not-found");
       }
-    } catch {
+    } catch (error) {
+      console.error(error);
       return thunkAPI.rejectWithValue("Bilinmeyen bir hata meydana geldi");
     }
   }
 );
-

@@ -1,3 +1,3 @@
 export function formatProductName(productName) {
-  return productName.replace(/-/g, ' ').toLowerCase();
+  return productName.replace(/-/g, ' ');
 }
