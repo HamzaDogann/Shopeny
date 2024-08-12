@@ -10,13 +10,25 @@ export const validCategories = [
 ];
 
 export const categoryTranslation = {
-  'bilgisayar': 'computers',
-  'telefon': 'phones',
-  'televizyon': 'televisions',
-  'kulaklik': 'headphones',
-  'mikrofon': 'microphones',
-  'oyuncu-fareleri': 'gaming-mice',
-  'klavye': 'keyboards',
-  'kamera': 'cameras'
+  'computers': 'bilgisayar',
+  'phones': 'telefon',
+  'televisions': 'televizyon',
+  'headphones': 'kulaklik',
+  'microphones': 'mikrofon',
+  'gaming-mice': 'oyuncu-fareleri',
+  'keyboards': 'klavye',
+  'cameras': 'kamera'
 };
 
+
+export function translateCategoryNameToTurkish(englishCategoryName) {
+
+  const entry = Object.entries(categoryTranslation).find(([key, value]) => key === englishCategoryName);
+  return entry ? entry[1] : englishCategoryName; 
+}
+
+
+export function translateCategoryNameToEnglish(turkishCategoryName) {
+  const entry = Object.entries(categoryTranslation).find(([key, value]) => value === turkishCategoryName);
+  return entry ? entry[0] : turkishCategoryName;
+}

@@ -3,19 +3,33 @@ import { Link } from 'react-router-dom';
 import { PiHeartStraightFill } from "react-icons/pi";
 import Pagination from '@mui/material/Pagination';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchFavoriteProductsRef, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
 import "./FavoriteProducts.scss";
-
-// Örnek ürün verisi
-const productList = Array.from({ length: 15 }, (_, i) => ({ id: i, name: `Product ${i + 1}` }));
+import { getUserId } from '../../store/utils/getUserId';
+import { CircularProgress, Divider } from '@mui/material';
+import { startLoading, stopLoading } from '../../store/slices/preLoaderSlice';
 
 function FavoriteProducts() {
+  
+  const dispatch = useDispatch();
+  const { favoriteProductsRef, favoriteProducts, loading, error } = useSelector(state => state.favoriteProducts);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
-  const totalItems = productList.length;
 
-  //Favori Ürün olup olmadgığına göre conditional rendering yapıcaz
-  //!Denemelik
-  const favoriteProducts = true;
+  const userId = getUserId();
+
+  useEffect(() => {
+    dispatch(fetchFavoriteProductsRef({ userId }));
+  }, [dispatch, userId]);
+
+  useEffect(() => {
+    if (favoriteProductsRef.length > 0) {
+      dispatch(startLoading());
+      dispatch(fetchProducts(favoriteProductsRef));
+      dispatch(stopLoading());
+    }
+  }, [dispatch, favoriteProductsRef]);
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -26,10 +40,10 @@ function FavoriteProducts() {
       }
     };
 
-    updateItemsPerPage(); // İlk yükleme
-    window.addEventListener('resize', updateItemsPerPage); // Resize event'i dinleyici
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
 
-    return () => window.removeEventListener('resize', updateItemsPerPage); // Temizlik
+    return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
   const handlePageChange = (event, value) => {
@@ -43,10 +57,14 @@ function FavoriteProducts() {
     });
   }, [currentPage]);
 
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentItems = productList.slice(startIndex, endIndex);
+  const currentItems = favoriteProducts.slice(startIndex, endIndex);
+
+
+  if (error) {
+    return <div>Beklenmedik bir hata meydana geldi</div>
+  }
 
   return (
     <div className='favorite-product-general-box'>
@@ -55,32 +73,34 @@ function FavoriteProducts() {
           <PiHeartStraightFill className='favorite-icon' />
           <p>Favori Ürünlerim</p>
         </div>
-        {favoriteProducts &&
+        {favoriteProducts.length > 0 &&
           <button className='clear-favorites-btn'>
             Tümünü Kaldır
           </button>
         }
       </div>
       <div className='favorite-products-box'>
-        {favoriteProducts ? currentItems.map(product => (
-          <ProductCard key={product.id} product={product} />
+        {favoriteProducts.length > 0 ? currentItems.map(product => (
+          <ProductCard key={product.Id} product={product} />
         )) :
-          <div className='there-are-no-content-box'>
-            Favorilere eklenmiş bir ürün bulunmuyor.
-            <Link to={"/"}>Ürünleri Keşfet</Link>
-          </div>
+          !loading && (
+            <div className='there-are-no-content-box'>
+              Favorilere eklenmiş bir ürün bulunmuyor.
+              <Link to={"/"}>Ürünleri Keşfet</Link>
+            </div>
+          )
         }
       </div>
-      {favoriteProducts ? Math.ceil(totalItems / itemsPerPage) > 1 && (
+      {favoriteProducts.length > 0 && Math.ceil(favoriteProducts.length / itemsPerPage) > 1 && (
         <div className='pagination-box'>
           <Pagination
             size="large"
-            count={Math.ceil(totalItems / itemsPerPage)}
+            count={Math.ceil(favoriteProducts.length / itemsPerPage)}
             page={currentPage}
             onChange={handlePageChange}
           />
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

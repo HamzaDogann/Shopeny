@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ref, get } from 'firebase/database'; // Doğru importları yapıyoruz
 import { db } from '../../services/firebase/config'; // Firebase bağlantısını import ediyoruz
-import { categoryTranslation } from '../../constants/categories';
+import { translateCategoryNameToTurkish } from '../../constants/categories';
 
 export const searchProductsThunk = createAsyncThunk(
     'searchProducts/searchProductsThunk',
@@ -20,7 +20,7 @@ export const searchProductsThunk = createAsyncThunk(
                 for (const productId in products) {
                     const product = products[productId];
                     if (product.productName.toLowerCase().includes(query.toLowerCase())) {
-                        const translatedCategoryName = Object.keys(categoryTranslation).find(key => categoryTranslation[key] === categoryName) || categoryName;
+                        const translatedCategoryName = translateCategoryNameToTurkish(categoryName);
                         results.push({ ...product, categoryName: translatedCategoryName });
                     }
                 }

@@ -52,7 +52,7 @@ function SearchBar() {
   const handleClickOutside = (event) => {
     if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
       setIsVisible(false);
-      dispatch(clearSearchResults());
+
     }
   };
 

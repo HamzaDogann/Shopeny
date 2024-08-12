@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchCategoryProducts } from "../../utils/fetchCategoryProducts";
-import {categoryTranslation} from "../../../constants/categories"
+import { translateCategoryNameToEnglish } from "../../../constants/categories";
 
 export const getCategoryProducts = createAsyncThunk(
     'categoryProducts/fetchCategoryProducts',
@@ -12,7 +12,7 @@ export const getCategoryProducts = createAsyncThunk(
                 return { categoryName, products: products[categoryName] };
             }
 
-            const englishCategoryName = categoryTranslation[categoryName] || categoryName;
+            const englishCategoryName = translateCategoryNameToEnglish(categoryName);
             const categoryProducts = await fetchCategoryProducts(englishCategoryName);
 
             return { categoryName, categoryProducts };

@@ -1,46 +1,92 @@
-import Rating from '@mui/material/Rating';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
+import Rating from '@mui/material/Rating';
 import { MdShoppingCart, MdFavorite } from "react-icons/md";
 import { TbShoppingCartCopy } from "react-icons/tb";
 
 import { slugify } from '../../utils/slugify';
-import { customSuccessToast } from '../../utils/CustomToasts';
-
+import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import "./ProductCard.scss";
-function ProductCard({ product }) {
+import { addFavoriteProduct, removeFavoriteProduct } from '../../../store/thunks/User/favoriteProductThunk';
+import { getUserId } from '../../../store/utils/getUserId';
 
+import "./ProductCard.scss";
+import { translateCategoryNameToEnglish, translateCategoryNameToTurkish } from '../../../constants/categories';
+
+function ProductCard({ product }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const userId = getUserId();
+
+    const { favoriteProductsRef } = useSelector(state => state.favoriteProducts)
 
     const [isBasketProduct, setIsBasketProduct] = useState(false);
     const [isFavoriteProduct, setIsFavoriteProduct] = useState(false);
     const [loadingImage, setLoadingImage] = useState(true);
 
-    //For URL Format
+    // For URL Format
     const productName = slugify(product.productName);
 
+ 
+    useEffect(() => {
+        const isFavorite = favoriteProductsRef.some(ref =>
+            ref.categoryName === translateCategoryNameToEnglish(product.categoryName) &&
+            ref.productId === product.Id
+        );
+        setIsFavoriteProduct(isFavorite);
+    }, [favoriteProductsRef, product.categoryName, product.Id]);
+
     const handleProduct = () => {
-        navigate(`/${product.categoryName}/${productName}`);
+        navigate(`/${translateCategoryNameToTurkish(product.categoryName)}/${productName}`);
     }
 
-    const handleAddToFavorites = (event) => {
+    const handleAddToFavorites = async (event) => {
         event.stopPropagation();
         setIsFavoriteProduct(true);
         customSuccessToast("Favorilere Eklendi", 1800);
-        // Favori ekleme işlemleri burada yapılacak
+        try {
+            await dispatch(addFavoriteProduct({
+                userId,
+                categoryName: translateCategoryNameToEnglish(product.categoryName),
+                productId: product.Id
+            }));
+
+        } catch (error) {
+            customErrorToast("Favorilere Eklenemedi");
+        }
     }
 
-    const handleRemoveFromFavorites = (event) => {
+    const handleRemoveFromFavorites = async (event) => {
         event.stopPropagation();
         setIsFavoriteProduct(false);
         customSuccessToast("Favorilerden Çıkarıldı", 1800);
-        // Favori çıkarma işlemleri burada yapılacak
-    }
+        try {
+            // Find the favorite product reference to remove
+            const favoriteProduct = favoriteProductsRef.find(
+                ref => ref.categoryName === translateCategoryNameToEnglish(product.categoryName) && ref.productId === product.Id
+            );
+
+            if (favoriteProduct) {
+
+                await dispatch(removeFavoriteProduct({
+                    userId,
+                    categoryName: favoriteProduct.categoryName,
+                    productId: favoriteProduct.productId
+                }));
+
+
+            } else {
+                customErrorToast("Favori ürün bulunamadı");
+            }
+        } catch (error) {
+            customErrorToast("Favorilerden çıkarılamadı");
+        }
+    };
 
     const handleAddToCart = (event) => {
         event.stopPropagation();
@@ -48,6 +94,7 @@ function ProductCard({ product }) {
         customSuccessToast("Sepete Eklendi", 1500);
         // Sepete ekleme işlemleri burada yapılacak
     }
+
     return (
         <div onClick={handleProduct} className='product-card'>
             {

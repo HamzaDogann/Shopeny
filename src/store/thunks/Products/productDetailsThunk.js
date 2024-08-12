@@ -2,14 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { get, ref } from 'firebase/database';
 import { db } from '../../../services/firebase/config';
 import { formatProductName } from '../../../shared/utils/formatProductName';
-import { categoryTranslation } from '../../../constants/categories';
+import { translateCategoryNameToEnglish } from '../../../constants/categories';
+
 
 export const fetchProductDetailsByName = createAsyncThunk(
   'productDetails/fetchProductDetailsByName',
   async ({ categoryName, productName }, thunkAPI) => {
     try {
 
-      const englishCategoryName = categoryTranslation[categoryName];
+      const englishCategoryName = translateCategoryNameToEnglish(categoryName);
       const formattedProductName = formatProductName(productName).toLowerCase();
   
       const productsRef = ref(db, `Data/Categories/${englishCategoryName}`);

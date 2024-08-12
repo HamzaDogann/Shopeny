@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AutoPlaySlider from '../../components/HomePageComponents/AutoPlaySlider';
 import PopularProductsSlider from '../../components/HomePageComponents/PopularProductsSlider';
 import SuperDealCards from '../../components/HomePageComponents/SuperDealCards';
 import "./HomePage.scss";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useDiscountModal from '../../shared/hooks/useDiscountModal';
 import DiscountModal from '../../components/DiscountModal/DiscountModal';
+import { getUserId } from '../../store/utils/getUserId';
+import { fetchFavoriteProductsRef, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
 
 
 function HomePage() {
