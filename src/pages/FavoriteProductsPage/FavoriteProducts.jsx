@@ -10,9 +10,9 @@ import { PiHeartStraightFill } from "react-icons/pi";
 
 import { clearFavoriteProducts, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
 import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
-import "./FavoriteProducts.scss";
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { showModal } from '../../store/slices/confirmationModalSlice';
+import "./FavoriteProducts.scss";
 
 
 function FavoriteProducts() {

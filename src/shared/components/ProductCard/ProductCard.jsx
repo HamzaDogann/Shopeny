@@ -1,51 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { addFavoriteProduct, removeFavoriteProduct } from '../../../store/thunks/User/favoriteProductThunk';
+
+import { getUserId } from '../../../store/utils/getUserId';
+import { slugify } from '../../utils/slugify';
+import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
+import { translateCategoryNameToEnglish, translateCategoryNameToTurkish } from '../../../constants/categories';
+
 import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import { MdShoppingCart, MdFavorite } from "react-icons/md";
 import { TbShoppingCartCopy } from "react-icons/tb";
 
-
-import { slugify } from '../../utils/slugify';
-import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { addFavoriteProduct, removeFavoriteProduct } from '../../../store/thunks/User/favoriteProductThunk';
-import { getUserId } from '../../../store/utils/getUserId';
-
 import "./ProductCard.scss";
-import { translateCategoryNameToEnglish, translateCategoryNameToTurkish } from '../../../constants/categories';
 
 function ProductCard({ product }) {
+
+    const userId = getUserId();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const userId = getUserId();
+
+    //=====================States=======================
 
     const { favoriteProductsRef } = useSelector(state => state.favoriteProducts)
-
     const [isBasketProduct, setIsBasketProduct] = useState(false);
     const [isFavoriteProduct, setIsFavoriteProduct] = useState(false);
     const [loadingImage, setLoadingImage] = useState(true);
 
+
+    //=====================Navigation=======================
+
     // For URL Format
     const productName = slugify(product.productName);
-
-
-    useEffect(() => {
-        const isFavorite = favoriteProductsRef.some(ref =>
-            ref.categoryName === translateCategoryNameToEnglish(product.categoryName) &&
-            ref.productId === product.Id
-        );
-        setIsFavoriteProduct(isFavorite);
-    }, [favoriteProductsRef, product.categoryName, product.Id]);
 
     const handleProduct = () => {
         navigate(`/${translateCategoryNameToTurkish(product.categoryName)}/${productName}`);
     }
 
+    //=====================Favorites Process=======================
+
+    //Is Favorite?
+    useEffect(() => {
+        const isFavorite = favoriteProductsRef
+            .some(ref => ref.categoryName === translateCategoryNameToEnglish(product.categoryName) && ref.productId === product.Id);
+        setIsFavoriteProduct(isFavorite);
+    }, [favoriteProductsRef, product.categoryName, product.Id]);
+
+    //Add Favorite Product
     const handleAddToFavorites = async (event) => {
         event.stopPropagation();
         setIsFavoriteProduct(true);
@@ -62,6 +68,7 @@ function ProductCard({ product }) {
         }
     }
 
+    //Remove Favorite Product
     const handleRemoveFromFavorites = async (event) => {
         event.stopPropagation();
         setIsFavoriteProduct(false);
@@ -86,6 +93,8 @@ function ProductCard({ product }) {
         }
     };
 
+    //=====================Cart Process=======================
+
     const handleAddToCart = (event) => {
         event.stopPropagation();
         setIsBasketProduct(!isBasketProduct);
@@ -93,17 +102,18 @@ function ProductCard({ product }) {
         // Sepete ekleme işlemleri burada yapılacak
     }
 
+    //=========================JSX===========================
     return (
         <div onClick={handleProduct} className='product-card'>
-            {
-                isFavoriteProduct
-                    ?
-                    <button className='remove-favorite-btn' onClick={handleRemoveFromFavorites}>
-                        <MdFavorite />
-                    </button>
-                    : <button className='add-favorite-btn' onClick={handleAddToFavorites}>
-                        <MdFavorite />
-                    </button>
+            {isFavoriteProduct
+                ?
+                <button className='remove-favorite-btn' onClick={handleRemoveFromFavorites}>
+                    <MdFavorite />
+                </button>
+                :
+                <button className='add-favorite-btn' onClick={handleAddToFavorites}>
+                    <MdFavorite />
+                </button>
             }
 
             <div className='image-box'>
@@ -126,6 +136,7 @@ function ProductCard({ product }) {
                 <p>{product.productName}</p>
                 <span>{product.productBrand}</span>
             </div>
+
             <div className='rating-box'>
                 <Stack spacing={1}>
                     <Rating
@@ -138,10 +149,12 @@ function ProductCard({ product }) {
                 </Stack>
                 <p>{product.productStar}</p>
             </div>
+
             <div className='original-price-box'>
                 <strike>{product.productNormalPrice}₺</strike>
                 <span>%{product.discountRate}</span>
             </div>
+
             <p className='discount-price'>
                 {product.discountedPrice}₺
             </p>
