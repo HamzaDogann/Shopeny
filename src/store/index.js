@@ -9,6 +9,7 @@ import productDetailsReducer from './slices/Products/productDetailsSlice'
 import popularProductsReducer from './slices/Products/popularProductsSlice'
 import searchProductsReducer from './slices/searchProductsSlice'
 import favoriteProductsReducer from './slices/User/favoriteProductsSlice'
+import accountDetailsReducer from './slices/User/accountDetailsSlice'
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     productDetails: productDetailsReducer,
     popularProducts: popularProductsReducer,
     searchProducts: searchProductsReducer,
-    favoriteProducts: favoriteProductsReducer
+    favoriteProducts: favoriteProductsReducer,
+    accountDetails: accountDetailsReducer
   },
 })

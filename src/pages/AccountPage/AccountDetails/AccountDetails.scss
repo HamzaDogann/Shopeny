@@ -74,7 +74,7 @@
 
       @media (max-width:570px) {
         .user-phone-number {
-         margin-top: 5px;
+          margin-top: 5px;
         }
       }
 
@@ -100,9 +100,11 @@
 
         img {
           width: 120px;
+          height: 120px;
           border-radius: 50%;
           border: 4px solid rgba(228, 228, 228, 0.886);
           padding: 3px;
+          object-fit: cover;
 
           @media (max-width:570px) {
             width: 130px;
@@ -206,6 +208,7 @@
       .active-profil-image {
         border-radius: 50%;
         width: 100px;
+        height: 100px;
         object-fit: cover;
 
         @media (max-width:570px) {
@@ -276,6 +279,13 @@
             background-color: rgb(218, 218, 218);
           }
         }
+      }
+
+      .error-message {
+        font-weight: 500;
+        font-size: 16px;
+        color: rgb(220, 63, 63);
+        margin-top: 15px;
       }
 
       .info {

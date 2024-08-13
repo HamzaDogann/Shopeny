@@ -1,8 +1,8 @@
 import { ref as dbRef, set } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../../../services/firebase/config';
-import userDefaultProfilePhoto from "../../../assets/images/User/userDefaultProfilePhoto.png"
-import { customErrorToast} from '../../../shared/utils/CustomToasts';
+import { defaultProfilePhotoURL } from "../../../constants/defaultProfilePhoto"
+import { customErrorToast } from '../../../shared/utils/CustomToasts';
 
 
 
@@ -26,7 +26,7 @@ export const newUserRegistration = async (uid, formData) => {
         await set(userRef, userData);
     } catch (error) {
         customErrorToast("Bir sorun meydana geldi");
-        throw error; 
+        throw error;
     }
 };
 
@@ -37,11 +37,11 @@ export const newUserRegistration = async (uid, formData) => {
 export const newUserRegistrationWithGoogle = async (uid, userInfo) => {
 
     const { email, displayName, photoURL } = userInfo;
-    
+
     const userData = {
         email: email,
         nameAndSurname: displayName,
-        phoneNumber: 'belirtilmedi', 
+        phoneNumber: 'belirtilmedi',
         gender: 'belirtilmedi',
         profilePhotoURL: '',
     };
@@ -66,8 +66,8 @@ export const newUserRegistrationWithFacebook = async (uid, userInfo) => {
         email: email,
         nameAndSurname: displayName,
         phoneNumber: 'belirtilmedi',
-        gender: 'belirtilmedi', 
-        profilePhotoURL: '', 
+        gender: 'belirtilmedi',
+        profilePhotoURL: '',
     };
 
     const userRef = dbRef(db, `Data/Users/${uid}`);
@@ -77,17 +77,27 @@ export const newUserRegistrationWithFacebook = async (uid, userInfo) => {
         await set(userRef, userData);
     } catch (error) {
         customErrorToast("Bir sorun meydana geldi");
-        throw error; 
+        throw error;
     }
 };
 
 //=================== Upload profile photo to Firebase Storage ===================
 
-const uploadProfilePhoto = async (uid, photoURL = userDefaultProfilePhoto) => {
+
+const uploadProfilePhoto = async (uid, photoURL = defaultProfilePhotoURL) => {
+    // Eğer verilen photoURL varsayılan URL ise, direkt olarak döndür
+    if (photoURL === defaultProfilePhotoURL) {
+        return photoURL;
+    }
+
     const imageRef = storageRef(storage, `users/${uid}/images/profilePhoto.png`);
-    const response = await fetch(photoURL);
-    const blob = await response.blob();
-    await uploadBytes(imageRef, blob);
-    const profilePhotoURL = await getDownloadURL(imageRef);
-    return profilePhotoURL;
+    try {
+        const response = await fetch(photoURL);
+        const blob = await response.blob();
+        await uploadBytes(imageRef, blob);
+        const profilePhotoURL = await getDownloadURL(imageRef);
+        return profilePhotoURL;
+    } catch (error) {
+        throw new Error('Fotoğraf yüklenirken bir hata oluştu.');
+    }
 };

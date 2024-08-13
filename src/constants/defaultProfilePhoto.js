@@ -1,0 +1,1 @@
+export const defaultProfilePhotoURL = "https://firebasestorage.googleapis.com/v0/b/shopeny-e-commerce.appspot.com/o/userDefaultProfilePhoto.png?alt=media&token=c7040570-577f-4a34-8c82-be10fbdfd194"

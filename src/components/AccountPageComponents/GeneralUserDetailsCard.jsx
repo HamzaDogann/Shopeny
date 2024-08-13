@@ -30,8 +30,6 @@ function GeneralUserDetailsCard() {
         };
 
         window.addEventListener('resize', handleResize);
-
-        // Cleanup on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -79,7 +77,7 @@ function GeneralUserDetailsCard() {
 
             <Fullsize isVisible={isModalVisible}>
                 <Modal setModalVisible={setModalVisible}>
-                    <UploadProfilePhoto UserProfilePhoto={user.profilePhotoURL} />
+                    <UploadProfilePhoto UserProfilePhoto={user.profilePhotoURL} setModalVisible={setModalVisible} />
                 </Modal>
             </Fullsize>
         </div>

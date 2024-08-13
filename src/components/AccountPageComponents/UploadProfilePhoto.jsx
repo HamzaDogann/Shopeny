@@ -1,55 +1,77 @@
-import React, { useState } from 'react';
-//!Firebase işlemleri Redux Toolkit ile implemente edilecek.
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { storage } from '../../services/firebase/config';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { TbArrowBigRightLinesFilled } from "react-icons/tb";
+import { removeProfilePhoto, updateProfilePhoto } from '../../store/thunks/User/accountDetailsThunk';
+import { getUserId } from '../../store/utils/getUserId';
+import PreLoader from "../PreLoader/PreLoader"
+import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
+import { setUser } from '../../store/slices/Auth/authSlice';
+import { defaultProfilePhotoURL } from '../../constants/defaultProfilePhoto';
 
-function UploadProfilePhoto({ UserProfilePhoto }) {
+function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
+    const dispatch = useDispatch();
+    const userId = getUserId();
 
+    const { loading, error, updatedProfilePhoto } = useSelector((state) => state.accountDetails);
+    const { user } = useSelector((state) => state.auth);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
     const [preview, setPreview] = useState(null);
-    const [uploading, setUploading] = useState(false);
+
+    useEffect(() => {
+        if (updatedProfilePhoto) {
+            dispatch(setUser({ ...user, profilePhotoURL: updatedProfilePhoto }));
+        }
+    }, [updatedProfilePhoto])
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
+        const validTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
+        const maxSize = 5 * 1024 * 1024; // 5MB
+
         if (file) {
-            const validTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
-            const maxSize = 5 * 1024 * 1024; // 5MB
-
             if (!validTypes.includes(file.type)) {
-                alert('Yalnızca JPEG, PNG ve SVG dosya türlerine izin veriliyor.');
+                setErrorMsg("Uygunsuz Dosya Tipi")
                 return;
             }
-
             if (file.size > maxSize) {
-                alert('Dosya boyutu 5MB\'yi aşmamalıdır.');
+                setErrorMsg('Dosya boyutu 5MB aşmamalıdır.');
                 return;
             }
-
-            setSelectedImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setPreview(reader.result);
             };
             reader.readAsDataURL(file);
+            setErrorMsg(null);
+            setSelectedImage(file);
         }
     };
-
     const handleUpload = async () => {
         if (selectedImage) {
-            setUploading(true);
-            const storageRef = ref(storage, `profile_pictures/${selectedImage.name}`);
             try {
-                await uploadBytes(storageRef, selectedImage);
-                const downloadURL = await getDownloadURL(storageRef);
-                console.log('Dosya başarıyla yüklendi:', downloadURL);
-            } catch (error) {
-                console.error('Yükleme hatası:', error);
-            } finally {
-                setUploading(false);
+                await dispatch(updateProfilePhoto({ uid: userId, file: selectedImage }));
+                customSuccessToast("Profil Fotoğrafı Güncellendi");
+                setModalVisible(false);
+                setPreview(null);
+            }
+            catch {
+                customErrorToast("Profil Fotoğrafı Güncellenemedi");
             }
         }
+
     };
+
+    const handleRemoveProfilePhoto = async () => {
+        try {
+            await dispatch(removeProfilePhoto({ uid: userId }));
+            customSuccessToast("Profil Fotoğrafı Kaldırıldı");
+            setModalVisible(false);
+            setPreview(null);
+        } catch (error) {
+            customErrorToast("Fotoğraf Kaldırılamadı");
+        }
+    }
 
     const handleReset = () => {
         setSelectedImage(null);
@@ -62,6 +84,7 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
 
     return (
         <div className="upload-profile-photo">
+            {loading && <PreLoader />}
             <h1>Profil Fotoğrafınızı Düzenleyin</h1>
             <input
                 type="file"
@@ -70,40 +93,45 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
                 onChange={handleImageChange}
             />
 
-            {preview
-                ?
+            {preview ? (
                 <div className='profile-photo-status-box'>
                     <img className='active-profil-image' src={UserProfilePhoto} alt="" />
                     <TbArrowBigRightLinesFilled className='icon' />
-                    <img src={preview} className="new-profile-image" />
+                    <img src={preview} className="new-profile-image" alt="Preview" />
                 </div>
-                :
+            ) : (
                 <div className='active-image-box'>
                     <img className='active-profil-image' src={UserProfilePhoto} alt="" />
                 </div>
-            }
+            )}
 
-            {preview
-                ?
+            {preview ? (
                 <>
                     <div className="confirm-buttons">
-                        <button className="save-button" onClick={handleUpload} disabled={uploading}>
-                            {uploading ? 'Yükleniyor...' : 'Fotoğrafı Kaydet'}
+                        <button className="save-button" onClick={handleUpload} disabled={loading}>
+                            {loading ? 'Kaydediliyor...' : 'Fotoğrafı Kaydet'}
                         </button>
                         <button className="reset-button" onClick={handleReset}>Sıfırla</button>
                     </div>
-
+                    {error && <p className="error-message">{error}</p>}
                     <div className="info">
                         <p>Profil fotoğrafınız, ürün yorumları ve hesap ayarlarınızda görüntülenecektir.</p>
                     </div>
-
                 </>
-                :
+            ) : (
                 <>
                     <div className='change-and-remove-photo-buttons'>
-                        <button onClick={handleChooseImageClick}>Fotoğrafı Değiştir</button>
-                        <button>Fotoğrafı Kaldır</button>
+                        {user.profilePhotoURL == defaultProfilePhotoURL ?
+                            <button onClick={handleChooseImageClick}>Fotoğraf Ekle</button>
+                            :
+                            <>
+                                <button onClick={handleChooseImageClick}>Fotoğrafı Değiştir</button>
+                                <button onClick={handleRemoveProfilePhoto}>Fotoğrafı Kaldır</button>
+                            </>
+                        }
                     </div>
+
+                    <span className='error-message'>{errorMsg}</span>
 
                     <div className="info">
                         <p>İzin verilen dosya türleri: JPEG, PNG, SVG</p>
@@ -111,7 +139,7 @@ function UploadProfilePhoto({ UserProfilePhoto }) {
                         <p>Profil fotoğrafınız, ürün yorumları ve hesap ayarlarınızda görüntülenecektir.</p>
                     </div>
                 </>
-            }
+            )}
         </div>
     );
 }
