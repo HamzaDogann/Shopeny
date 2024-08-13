@@ -17,7 +17,9 @@ export const addFavoriteProduct = createAsyncThunk(
             const newRef = await push(newFavoriteRef, favoriteProduct);
             return { ...favoriteProduct, favoriteProductKey: newRef.key };
         } catch (error) {
+            console.log(error.message)
             return rejectWithValue(error.message);
+
         }
     }
 );
@@ -57,10 +59,10 @@ export const fetchProducts = createAsyncThunk(
     'favoriteProducts/fetchProductDetails',
     async (favoriteProductsRef, { rejectWithValue }) => {
         try {
-            // Array to hold product details
             const productsArray = [];
-
+            console.log("veri çekme yine başladı")
             for (const { categoryName, productId } of favoriteProductsRef) {
+
                 const path = `Data/Categories/${categoryName}/${productId}`;
                 const productRef = ref(db, path);
                 const snapshot = await get(productRef);
@@ -122,6 +124,23 @@ export const removeFavoriteProduct = createAsyncThunk(
             } else {
                 throw new Error('No favorite products found');
             }
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+//Clear Favorite Products
+
+export const clearFavoriteProducts = createAsyncThunk(
+    'favoriteProducts/clearFavoriteProducts',
+    async ({ userId }, { rejectWithValue }) => {
+        try {
+            const path = `Data/Users/${userId}/favoriteProducts`;
+            const favoriteProductsRef = ref(db, path);
+            console.log(`favoriteProducts: ${favoriteProductsRef}`);
+            await remove(favoriteProductsRef);
+
         } catch (error) {
             return rejectWithValue(error.message);
         }

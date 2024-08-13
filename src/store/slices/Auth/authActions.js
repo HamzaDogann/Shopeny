@@ -32,6 +32,8 @@ import { customErrorToast, customSuccessToast } from '../../../shared/utils/Cust
 import { startLoading, stopLoading } from "../preLoaderSlice";
 import { newUserRegistration, newUserRegistrationWithGoogle, newUserRegistrationWithFacebook } from '../../../services/firebase/database/newUserRegisterOperations';
 import { useDispatch, useSelector } from 'react-redux';
+import { clearFavoriteProducts } from "../../thunks/User/favoriteProductThunk";
+import { clearFavorites } from "../User/favoriteProductsSlice";
 
 
 export const authActions = {
@@ -294,4 +296,5 @@ const checkUserFromDatabase = async (uid) => {
 //===== Remove User's data when logout =====\\
 const clearUserDatas = (dispatch) => {
     dispatch(clearAddresses());
+    dispatch(clearFavorites());
 }

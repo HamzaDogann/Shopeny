@@ -17,17 +17,15 @@
     .add-favorite-btn,
     .remove-favorite-btn {
         position: absolute;
-        @include flex-center;
         background-color: rgba(213, 213, 213, 0.321);
         backdrop-filter: blur(4px);
         border-radius: 30px;
         top: 12px;
         right: 12px;
-        justify-content: center;
-        align-items: center;
-        font-size: 24px;
+        font-size: 22px;
         z-index: 5;
-        padding: 6px;
+        padding: 7px;
+        @include flex-center;
         @include click-scale(0.7, 0.2s);
     }
 
@@ -36,7 +34,7 @@
     }
 
     .remove-favorite-btn {
-        color: rgb(245, 82, 82);
+        color: #f55252;
 
     }
 
@@ -48,7 +46,7 @@
         @include flex-center;
         border-bottom: 3px solid rgb(220, 220, 220);
         position: relative;
-        
+
         .spinner-overlay {
             width: 100%;
             height: 100%;

@@ -1,35 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { PiHeartStraightFill } from "react-icons/pi";
-import Pagination from '@mui/material/Pagination';
-import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFavoriteProductsRef, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
-import "./FavoriteProducts.scss";
 import { getUserId } from '../../store/utils/getUserId';
-import { CircularProgress, Divider } from '@mui/material';
-import { startLoading, stopLoading } from '../../store/slices/preLoaderSlice';
+import { Link } from 'react-router-dom';
+
+import ProductCard from '../../shared/components/ProductCard/ProductCard';
+import PreLoader from '../../components/PreLoader/PreLoader';
+import Pagination from '@mui/material/Pagination';
+import { PiHeartStraightFill } from "react-icons/pi";
+
+import { clearFavoriteProducts, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
+import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
+import "./FavoriteProducts.scss";
+import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
+import { showModal } from '../../store/slices/confirmationModalSlice';
+
 
 function FavoriteProducts() {
-  
+
+  const userId = getUserId();
   const dispatch = useDispatch();
+
+  //--------------------------States-----------------------------
+
   const { favoriteProductsRef, favoriteProducts, loading, error } = useSelector(state => state.favoriteProducts);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  const userId = getUserId();
+  //-----------------------Data Actions---------------------------
 
-  useEffect(() => {
-    dispatch(fetchFavoriteProductsRef({ userId }));
-  }, [dispatch, userId]);
+  const areProductsDifferent = (refArray, productArray) => {
+    if (refArray.length !== productArray.length) {
+      return true;
+    }
+  };
 
+  //!Get Favorite Products
   useEffect(() => {
-    if (favoriteProductsRef.length > 0) {
-      dispatch(startLoading());
+    if (favoriteProductsRef.length > 0 && areProductsDifferent(favoriteProductsRef, favoriteProducts)) {
       dispatch(fetchProducts(favoriteProductsRef));
-      dispatch(stopLoading());
     }
   }, [dispatch, favoriteProductsRef]);
+
+
+  //!Clear Favorite Products
+
+  const handleClearProcess = () => {
+    dispatch(showModal({
+      message: "Favori ürünlerini silmek istediğine emin misin?",
+      confirmText: "Evet",
+      cancelText: "Hayır"
+    }));
+  }
+
+  const handleClearFavoriteProducts = () => {
+    try {
+      dispatch(clearFavoriteProducts({ userId }));
+      customSuccessToast("Favori ürünler kaldırıldı")
+    }
+    catch {
+      customErrorToast("Favori ürünler kaldırılamadı")
+    }
+  }
+
+  //--------------------------Paginations-----------------------------
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -46,6 +79,7 @@ function FavoriteProducts() {
     return () => window.removeEventListener('resize', updateItemsPerPage);
   }, []);
 
+
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -61,10 +95,18 @@ function FavoriteProducts() {
   const endIndex = startIndex + itemsPerPage;
   const currentItems = favoriteProducts.slice(startIndex, endIndex);
 
+  useEffect(() => {
+    if (currentItems.length === 0 && currentPage > 1) {
+      setCurrentPage(1);
+    }
+  }, [currentItems, currentPage]);
 
+  //If error is returned
   if (error) {
-    return <div>Beklenmedik bir hata meydana geldi</div>
+    return <div>Beklenmedik bir hata meydana geldi</div>;
   }
+
+  //--------------------------JSX-----------------------------
 
   return (
     <div className='favorite-product-general-box'>
@@ -74,14 +116,15 @@ function FavoriteProducts() {
           <p>Favori Ürünlerim</p>
         </div>
         {favoriteProducts.length > 0 &&
-          <button className='clear-favorites-btn'>
+          <button onClick={handleClearProcess} className='clear-favorites-btn'>
             Tümünü Kaldır
           </button>
         }
       </div>
       <div className='favorite-products-box'>
+        {loading && <PreLoader />}
         {favoriteProducts.length > 0 ? currentItems.map(product => (
-          <ProductCard key={product.Id} product={product} />
+          <ProductCard key={product.favoriteProductKey} product={product} />
         )) :
           !loading && (
             <div className='there-are-no-content-box'>
@@ -101,6 +144,8 @@ function FavoriteProducts() {
           />
         </div>
       )}
+      {/* Confirmation Modal */}
+      <ConfirmationModal onConfirm={handleClearFavoriteProducts} />
     </div>
   );
 }

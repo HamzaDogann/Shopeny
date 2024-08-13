@@ -18,6 +18,7 @@ import ConfirmationModal from '../../../shared/components/ConfirmationModal/Conf
 import { hideModal, showModal } from '../../../store/slices/confirmationModalSlice';
 
 import "./Addresses.scss";
+import PreLoader from '../../../components/PreLoader/PreLoader';
 
 
 function Addresses() {
@@ -98,13 +99,14 @@ function Addresses() {
 
   //!DELETE
   const handleConfirmDelete = async () => {
+    dispatch(hideModal());
     try {
       await dispatch(removeUserAddress(addressToDelete.addressId)).unwrap();
       customSuccessToast("Adres başarıyla silindi.", 2000);
     } catch (error) {
       customErrorToast("Adres silinirken bir hata oluştu.");
     } finally {
-      dispatch(hideModal());
+
     }
   };
   //DELETE CANCEL
@@ -116,7 +118,7 @@ function Addresses() {
     <motion.div className='addresses-box'
       {...opacityAndTransformEffect('y', 20, 0.5)}>
       {isLoading ? (
-        null
+        <PreLoader />
       ) : (
         <motion.div
           variants={createContainerVariants}

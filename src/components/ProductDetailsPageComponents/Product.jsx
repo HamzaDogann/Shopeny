@@ -1,39 +1,73 @@
-import { useState } from 'react';
-import Rating from '@mui/material/Rating';
-import { TfiCommentAlt } from "react-icons/tfi";
-import { HiMiniShoppingBag } from "react-icons/hi2";
-import { TiShoppingCart } from "react-icons/ti";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { HiShoppingCart } from "react-icons/hi";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserId } from '../../store/utils/getUserId';
+import ProductSlider from './ProductSlider';
+import PreLoader from '../PreLoader/PreLoader';
 
+import Rating from '@mui/material/Rating';
 import { MdFavorite } from "react-icons/md";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
+import { HiMiniShoppingBag } from "react-icons/hi2";
+import { TfiCommentAlt } from "react-icons/tfi";
 
 import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts"
-import ProductSlider from './ProductSlider';
 import { formatPrice } from '../../shared/utils/formatPrice';
+import { translateCategoryNameToEnglish } from '../../constants/categories';
+import { addFavoriteProduct, removeFavoriteProduct } from '../../store/thunks/User/favoriteProductThunk';
 
 function Product({ product }) {
 
-    const colors = [
-        { name: "Siyah", colorCode: "#1c1c1c" },
-        { name: "Beyaz", colorCode: "#ffffff" },
-        { name: "Yesil", colorCode: "#43b084" },
-        { name: "Kırmızı", colorCode: "#d43737" },
-        { name: "Mavi", colorCode: "#1b59cc" },
-    ]
+    const userId = getUserId();
+    const dispatch = useDispatch();
 
-    //States
+    //========================States==========================
+
+    const { favoriteProductsRef, loading } = useSelector(state => state.favoriteProducts)
+    const [isFavoriteProduct, setIsFavoriteProduct] = useState();
     const [selectedColor, setSelectedColor] = useState(product.productColors[0]);
     const [amount, setAmount] = useState(1);
 
-    // Handle Color
-    const handleColorClick = (color) => {
-        setSelectedColor(color);
+    //======================Data Process=======================
+
+    //Is Favorite?
+    useEffect(() => {
+        const isFavorite = favoriteProductsRef.some(ref =>
+            ref.categoryName === translateCategoryNameToEnglish(product.categoryName) &&
+            ref.productId === product.Id
+        );
+        setIsFavoriteProduct(isFavorite);
+    }, [favoriteProductsRef]);
+
+    //Add Favorite Product
+    const handleAddToFavorites = async () => {
+        console.log("Ekleme işlemi başladı.")
+        try {
+            await dispatch(addFavoriteProduct({ userId, categoryName: translateCategoryNameToEnglish(product.categoryName), productId: product.Id }));
+            customSuccessToast("Favorilere Eklendi", 1800);
+            setIsFavoriteProduct(true);
+        } catch (error) {
+            console.log(error.message);
+            customErrorToast("Favorilere Eklenemedi");
+        }
+    }
+    //Remove Favorite Product
+    const handleRemoveFromFavorites = async () => {
+        try {
+            const favoriteProduct = favoriteProductsRef.find(ref => ref.categoryName === translateCategoryNameToEnglish(product.categoryName) && ref.productId === product.Id);
+            if (favoriteProduct) {
+                await dispatch(removeFavoriteProduct({
+                    userId, categoryName: favoriteProduct.categoryName, productId: favoriteProduct.productId
+                }));
+                setIsFavoriteProduct(false);
+                customSuccessToast("Favorilerden Çıkarıldı", 1800);
+            }
+        } catch (error) {
+            customErrorToast("Favorilere çıkarılamadı", error.message);
+        }
     };
 
-    //Handle Copy
+    //Handle Copy Product Link
     const copyUrl = () => {
         const currentUrl = window.location.href;
         navigator.clipboard.writeText(currentUrl).then(() => {
@@ -41,6 +75,13 @@ function Product({ product }) {
         }).catch(err => {
             customErrorToast("Bağlantı Kopyalanamadı");
         });
+    };
+
+    //=========== Data Process for basket===========
+
+    //handle Color
+    const handleColorClick = (color) => {
+        setSelectedColor(color);
     };
 
     //Handle Amount
@@ -57,6 +98,8 @@ function Product({ product }) {
             setAmount(amount - 1);
         }
     };
+
+    //========================JSX==========================
 
     return (
         <div className='product-general-box'>
@@ -124,7 +167,11 @@ function Product({ product }) {
                     </div>
 
                     <div className='top-buttons'>
-                        <button><MdFavorite /></button>
+                        {isFavoriteProduct
+                            ? <button onClick={handleRemoveFromFavorites}><MdFavorite style={{ color: "#f55252" }} /></button>
+                            : <button onClick={handleAddToFavorites} ><MdFavorite /></button>
+                        }
+                        {loading && <PreLoader />}
                         <button onClick={() => copyUrl()}><IoShareSocialSharp /></button>
                     </div>
                 </div>

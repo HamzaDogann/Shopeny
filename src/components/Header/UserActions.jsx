@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Badge from '@mui/material/Badge';
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineHeart } from "react-icons/hi";
@@ -13,7 +13,18 @@ function UserActions() {
 
   const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
+  const { favoriteProductsRef } = useSelector(state => state.favoriteProducts);
+  const [isFavorites, setIsFavorites] = useState(false);
 
+  useEffect(() => {
+    if (favoriteProductsRef.length > 0) {
+      setIsFavorites(true)
+    }
+    else {
+      setIsFavorites(false)
+    }
+    setIsFavorites
+  }, [favoriteProductsRef])
 
   const handleUserAccount = () => {
     navigate('/hesabim');
@@ -32,18 +43,18 @@ function UserActions() {
         <FaUserLarge className='user-icon' />
         <div className='user-actions-buttons-detail-info'>
           <span>{user ? user == "nologinuser" ? "Üye ol veya" : "Hesap" : "Üye ol veya"}</span>
-          <p>{user ? user == "nologinuser" ? "Giriş Yap" : truncateName(user.nameAndSurname,10) : "Giriş Yap"}</p>
+          <p>{user ? user == "nologinuser" ? "Giriş Yap" : truncateName(user.nameAndSurname, 10) : "Giriş Yap"}</p>
         </div>
       </div>
 
-      <div onClick={()=> handleFavoriteProductsButton()} className='favorite-products-button'>
-        <Badge color="error" variant="dot">
+      <div onClick={() => handleFavoriteProductsButton()} className='favorite-products-button'>
+        <Badge color="error" variant={isFavorites ? "dot" : ""}>
           <HiOutlineHeart className='heart-icon' />
         </Badge>
       </div>
 
       <div onClick={() => handleBasketButton()} className='basket-button'>
-        <Badge color="error" variant="dot">
+        <Badge color="error" variant="">
           <TiShoppingCart className='basket-icon' />
         </Badge>
         <div className='user-actions-buttons-detail-info'>

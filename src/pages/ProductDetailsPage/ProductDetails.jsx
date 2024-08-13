@@ -1,24 +1,28 @@
 import React, { useEffect } from 'react';
-import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import { validCategories } from '../../constants/categories';
+import { fetchProductDetailsByName } from '../../store/thunks/Products/productDetailsThunk';
+
 import Product from '../../components/ProductDetailsPageComponents/Product';
 import TechnicialSpecifications from '../../components/ProductDetailsPageComponents/TechnicialSpecifications';
 import ProductComments from '../../components/ProductDetailsPageComponents/ProductComments';
 import AddComment from '../../components/ProductDetailsPageComponents/AddComment';
-import { validCategories } from '../../constants/categories';
-import { useDispatch, useSelector } from 'react-redux';
+
 import "./ProductDetails.scss";
-import { fetchProductDetailsByName } from '../../store/thunks/Products/productDetailsThunk';
 
 function ProductDetails() {
+
     const dispatch = useDispatch();
-    const location = useLocation();
     const { categoryName, productName } = useParams();
 
     if (!validCategories.includes(categoryName)) {
         return <Navigate to="/" />;
     }
 
-    const { viewedProducts, loading, error } = useSelector(state => state.productDetails);
+    //=========== Performance  Optimization ===========
+
+    const { viewedProducts, loading } = useSelector(state => state.productDetails);
 
     const normalizeName = name => name.replace(/-/g, ' ').toLowerCase()
     const normalizedProductName = normalizeName(productName);
@@ -30,15 +34,19 @@ function ProductDetails() {
 
     const product = viewedProducts[productId];
 
+    //=========== Get Product Details ===========
+
     useEffect(() => {
         if (!product) {
             dispatch(fetchProductDetailsByName({ categoryName, productName }));
         }
     }, [dispatch, categoryName, productName, product]);
 
+
     if (loading) {
         return <div style={{ height: "400px" }}></div>;
     }
+
     return (
         <div className='product-details-page-box'>
             {product ? (

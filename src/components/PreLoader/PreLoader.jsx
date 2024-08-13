@@ -17,7 +17,7 @@ function PreLoader() {
             animate="visible"
             exit="exit"
             variants={preloaderVariants}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
         >
             <div className="loader"></div>
             <img src={ShopenyBag} alt="" />

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addFavoriteProduct, fetchFavoriteProductsRef, fetchProducts, removeFavoriteProduct } from '../../thunks/User/favoriteProductThunk';
+import { addFavoriteProduct, clearFavoriteProducts, fetchFavoriteProductsRef, fetchProducts, removeFavoriteProduct } from '../../thunks/User/favoriteProductThunk';
 
 const initialState = {
     favoriteProductsRef: [],
@@ -12,13 +12,11 @@ const favoriteProductsSlice = createSlice({
     name: 'favoriteProducts',
     initialState,
     reducers: {
-        clearFavorites: (state) => {
-            state.favoriteProductsRef = [];
-            state.favoriteProducts = [];
-        },
+        clearFavorites: () => initialState,
     },
     extraReducers: (builder) => {
         builder
+            //Add Favorite Product
             .addCase(addFavoriteProduct.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -39,6 +37,8 @@ const favoriteProductsSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             })
+
+            //Fetch Favorite Products Refs
             .addCase(fetchFavoriteProductsRef.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -46,12 +46,13 @@ const favoriteProductsSlice = createSlice({
             .addCase(fetchFavoriteProductsRef.fulfilled, (state, action) => {
                 state.loading = false;
                 state.favoriteProductsRef = action.payload;
-                state.favoriteProducts = [];
             })
             .addCase(fetchFavoriteProductsRef.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             })
+
+            //Fetch Favorite Products
             .addCase(fetchProducts.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -64,6 +65,8 @@ const favoriteProductsSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload || action.error.message;
             })
+
+            //Remove Favorite Product
             .addCase(removeFavoriteProduct.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -83,10 +86,24 @@ const favoriteProductsSlice = createSlice({
             .addCase(removeFavoriteProduct.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || action.error.message;
+            })
+
+            //Clear All Favorite Products
+            .addCase(clearFavoriteProducts.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(clearFavoriteProducts.fulfilled, (state) => {
+                state.loading = false;
+                state.favoriteProductsRef = [];
+                state.favoriteProducts = [];
+            })
+            .addCase(clearFavoriteProducts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || action.error.message;
             });
     },
 });
 
 export const { clearFavorites } = favoriteProductsSlice.actions;
-
 export default favoriteProductsSlice.reducer;

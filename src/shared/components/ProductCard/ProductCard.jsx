@@ -7,6 +7,7 @@ import Rating from '@mui/material/Rating';
 import { MdShoppingCart, MdFavorite } from "react-icons/md";
 import { TbShoppingCartCopy } from "react-icons/tb";
 
+
 import { slugify } from '../../utils/slugify';
 import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -32,7 +33,7 @@ function ProductCard({ product }) {
     // For URL Format
     const productName = slugify(product.productName);
 
- 
+
     useEffect(() => {
         const isFavorite = favoriteProductsRef.some(ref =>
             ref.categoryName === translateCategoryNameToEnglish(product.categoryName) &&
@@ -66,19 +67,16 @@ function ProductCard({ product }) {
         setIsFavoriteProduct(false);
         customSuccessToast("Favorilerden Çıkarıldı", 1800);
         try {
-            // Find the favorite product reference to remove
             const favoriteProduct = favoriteProductsRef.find(
                 ref => ref.categoryName === translateCategoryNameToEnglish(product.categoryName) && ref.productId === product.Id
             );
 
             if (favoriteProduct) {
-
                 await dispatch(removeFavoriteProduct({
                     userId,
                     categoryName: favoriteProduct.categoryName,
                     productId: favoriteProduct.productId
                 }));
-
 
             } else {
                 customErrorToast("Favori ürün bulunamadı");
