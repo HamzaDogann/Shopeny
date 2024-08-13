@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TbArrowBigRightLinesFilled } from "react-icons/tb";
-import { removeProfilePhoto, updateProfilePhoto } from '../../store/thunks/User/accountDetailsThunk';
 import { getUserId } from '../../store/utils/getUserId';
-import PreLoader from "../PreLoader/PreLoader"
-import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
 import { setUser } from '../../store/slices/Auth/authSlice';
+import { removeProfilePhoto, updateProfilePhoto } from '../../store/thunks/User/accountDetailsThunk';
+
+import { TbArrowBigRightLinesFilled } from "react-icons/tb";
+import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
+
 import { defaultProfilePhotoURL } from '../../constants/defaultProfilePhoto';
+import PreLoader from "../PreLoader/PreLoader"
 
 function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
+
     const dispatch = useDispatch();
     const userId = getUserId();
+
+    //=========================States=========================
 
     const { loading, error, updatedProfilePhoto } = useSelector((state) => state.accountDetails);
     const { user } = useSelector((state) => state.auth);
@@ -18,11 +23,15 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
     const [errorMsg, setErrorMsg] = useState(null);
     const [preview, setPreview] = useState(null);
 
+    //=========================Image Actions=========================
+
+    //handle Updated Profile Photo
     useEffect(() => {
         if (updatedProfilePhoto) {
             dispatch(setUser({ ...user, profilePhotoURL: updatedProfilePhoto }));
         }
     }, [updatedProfilePhoto])
+
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -31,11 +40,11 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
 
         if (file) {
             if (!validTypes.includes(file.type)) {
-                setErrorMsg("Uygunsuz Dosya Tipi")
+                setErrorMsg("İzin verilen dosya türleri: JPEG, PNG, SVG")
                 return;
             }
             if (file.size > maxSize) {
-                setErrorMsg('Dosya boyutu 5MB aşmamalıdır.');
+                setErrorMsg('Dosya boyutu 5MB aşmamalıdır');
                 return;
             }
             const reader = new FileReader();
@@ -47,6 +56,21 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
             setSelectedImage(file);
         }
     };
+
+
+    const handleReset = () => {
+        setSelectedImage(null);
+        setPreview(null);
+    };
+
+    const handleChooseImageClick = () => {
+        document.getElementById('fileInput').click();
+    };
+
+
+    //=========================Database Actions=========================
+
+    //Add & Update Profile Photo
     const handleUpload = async () => {
         if (selectedImage) {
             try {
@@ -62,6 +86,7 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
 
     };
 
+    //Remove Profile Photo
     const handleRemoveProfilePhoto = async () => {
         try {
             await dispatch(removeProfilePhoto({ uid: userId }));
@@ -73,25 +98,13 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
         }
     }
 
-    const handleReset = () => {
-        setSelectedImage(null);
-        setPreview(null);
-    };
-
-    const handleChooseImageClick = () => {
-        document.getElementById('fileInput').click();
-    };
+    //=========================JSX=========================
 
     return (
         <div className="upload-profile-photo">
             {loading && <PreLoader />}
             <h1>Profil Fotoğrafınızı Düzenleyin</h1>
-            <input
-                type="file"
-                id="fileInput"
-                style={{ display: 'none' }}
-                onChange={handleImageChange}
-            />
+            <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleImageChange} />
 
             {preview ? (
                 <div className='profile-photo-status-box'>
@@ -121,7 +134,8 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
             ) : (
                 <>
                     <div className='change-and-remove-photo-buttons'>
-                        {user.profilePhotoURL == defaultProfilePhotoURL ?
+                        {user.profilePhotoURL == defaultProfilePhotoURL
+                            ?
                             <button onClick={handleChooseImageClick}>Fotoğraf Ekle</button>
                             :
                             <>

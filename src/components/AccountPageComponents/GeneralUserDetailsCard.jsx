@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Skeleton } from '@mui/material';
-import { TbCameraPlus, TbCameraCog } from "react-icons/tb";
 import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
 import UploadProfilePhoto from './UploadProfilePhoto.jsx';
 import Modal from '../../shared/components/Modal/Modal';
+import { useSelector } from 'react-redux';
+import { Skeleton } from '@mui/material';
+import { TbCameraPlus, TbCameraCog } from "react-icons/tb";
 
 function GeneralUserDetailsCard() {
+
+    //===================States===================
+
     const user = useSelector(state => state.auth.user);
     const [isModalVisible, setModalVisible] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 800);
+
+    //===================Actions===================
 
     const handleImageLoad = () => {
         setImageLoaded(true);
@@ -34,6 +39,8 @@ function GeneralUserDetailsCard() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    //===================JSX===================
 
     return (
         <div className='general-user-details-box'>
@@ -72,8 +79,6 @@ function GeneralUserDetailsCard() {
                     <button className='logout-button'>Çıkış yap</button>
                 )}
             </div>
-
-
 
             <Fullsize isVisible={isModalVisible}>
                 <Modal setModalVisible={setModalVisible}>
