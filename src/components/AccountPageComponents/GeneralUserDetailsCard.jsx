@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
 import UploadProfilePhoto from './UploadProfilePhoto.jsx';
 import Modal from '../../shared/components/Modal/Modal';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Skeleton } from '@mui/material';
 import { TbCameraPlus, TbCameraCog } from "react-icons/tb";
+import { setUser } from '../../store/slices/Auth/authSlice.js';
 
 function GeneralUserDetailsCard() {
 
@@ -14,9 +15,12 @@ function GeneralUserDetailsCard() {
     const [isModalVisible, setModalVisible] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 800);
+    const { updatedProfileDetails, loading, error } = useSelector(state => state.accountDetails);
+
 
     //===================Actions===================
 
+    const dispatch = useDispatch();
     const handleImageLoad = () => {
         setImageLoaded(true);
     };
@@ -28,6 +32,21 @@ function GeneralUserDetailsCard() {
             img.onload = handleImageLoad;
         }
     }, [user.profilePhotoURL]);
+
+    useEffect(() => {
+        if (updatedProfileDetails) {
+            const currentUser = user;
+            const updatedUser = {
+                ...currentUser,
+                nameAndSurname: updatedProfileDetails.nameAndSurname || currentUser.nameAndSurname,
+                phoneNumber: updatedProfileDetails.phoneNumber || currentUser.phoneNumber,
+                gender: updatedProfileDetails.gender || currentUser.gender,
+                email: updatedProfileDetails.email || currentUser.email
+            };
+
+            dispatch(setUser(updatedUser));
+        }
+    }, [dispatch, updatedProfileDetails]);
 
     useEffect(() => {
         const handleResize = () => {

@@ -51,20 +51,25 @@ function ProductCard({ product }) {
         setIsFavoriteProduct(isFavorite);
     }, [favoriteProductsRef, product.categoryName, product.Id]);
 
+    console.log(userId)
     //Add Favorite Product
     const handleAddToFavorites = async (event) => {
         event.stopPropagation();
-        setIsFavoriteProduct(true);
-        customSuccessToast("Favorilere Eklendi", 1800);
-        try {
-            await dispatch(addFavoriteProduct({
-                userId,
-                categoryName: translateCategoryNameToEnglish(product.categoryName),
-                productId: product.Id
-            }));
-
-        } catch (error) {
-            customErrorToast("Favorilere Eklenemedi");
+        if (userId) {
+            customSuccessToast("Favorilere Eklendi", 1800);
+            try {
+                await dispatch(addFavoriteProduct({
+                    userId,
+                    categoryName: translateCategoryNameToEnglish(product.categoryName),
+                    productId: product.Id
+                }));
+                setIsFavoriteProduct(true);
+            } catch (error) {
+                customErrorToast("Favorilere Eklenemedi");
+            }
+        }
+        else {
+            navigate('/giris-yap');
         }
     }
 

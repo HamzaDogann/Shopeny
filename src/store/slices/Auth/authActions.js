@@ -24,8 +24,6 @@ import {
 import { clearAddresses } from "../User/addressesSlice";
 
 
-
-
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { startLoading, stopLoading } from "../preLoaderSlice";
@@ -33,6 +31,7 @@ import { newUserRegistration, newUserRegistrationWithGoogle, newUserRegistration
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFavoriteProducts } from "../../thunks/User/favoriteProductThunk";
 import { clearFavorites } from "../User/favoriteProductsSlice";
+import { clearUpdateInformations } from "../User/accountDetailsSlice";
 
 
 export const authActions = {
@@ -296,4 +295,5 @@ const checkUserFromDatabase = async (uid) => {
 const clearUserDatas = (dispatch) => {
     dispatch(clearAddresses());
     dispatch(clearFavorites());
+    dispatch(clearUpdateInformations());
 }

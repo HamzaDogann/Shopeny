@@ -1,19 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ref as storageRef, deleteObject, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../../services/firebase/config';
-import { ref as dbRef, set } from 'firebase/database';
+import { ref as dbRef, get, ref, set, update } from 'firebase/database';
 import { db } from "../../../services/firebase/config";
 import { defaultProfilePhotoURL } from '../../../constants/defaultProfilePhoto';
-// Varsayılan profil fotoğrafının URL'si
 
-// Thunk for updating the user's profile photo
+
+//==================Profile Photo Process =================
+
 export const updateProfilePhoto = createAsyncThunk(
     'accountDetails/updateProfilePhoto',
     async ({ uid, file }, { rejectWithValue }) => {
         const validTypes = ['image/jpeg', 'image/png', 'image/svg+xml'];
         const maxSize = 5 * 1024 * 1024; // 5MB
 
-        // Check file type and size
         if (!validTypes.includes(file.type)) {
             return rejectWithValue('Geçersiz dosya türü. JPEG, PNG ve SVG formatları desteklenmektedir.');
         }
@@ -38,18 +38,46 @@ export const updateProfilePhoto = createAsyncThunk(
     }
 );
 
-// Thunk for removing the user's profile photo
 export const removeProfilePhoto = createAsyncThunk(
     'accountDetails/removeProfilePhoto',
     async ({ uid }, { rejectWithValue }) => {
         try {
-            // Realtime Database'de profil fotoğrafı URL'sini varsayılan URL ile güncelle
             const userProfileRef = dbRef(db, `Data/Users/${uid}/profilePhotoURL`);
             await set(userProfileRef, defaultProfilePhotoURL);
 
             return defaultProfilePhotoURL;
         } catch (error) {
             return rejectWithValue('Fotoğraf silinirken veya varsayılan fotoğraf URL\'si güncellenirken bir hata oluştu. Lütfen tekrar deneyin.');
+        }
+    }
+);
+
+//==================Profile Details Process =================
+
+export const updateProfileDetails = createAsyncThunk(
+    'accountDetails/updateProfileDetails',
+    async ({ uid, updatedInformations }, { rejectWithValue }) => {
+        try {
+            const userRef = ref(db, `Data/Users/${uid}`);
+
+            const snapshot = await get(userRef);
+            if (!snapshot.exists()) {
+                throw new Error('Kullanıcı bulunamadı.');
+            }
+
+            const currentData = snapshot.val();
+
+            const updatedData = {
+                ...currentData,
+                ...updatedInformations,
+            };
+
+            await update(userRef, updatedData);
+
+            return updatedData;
+        } catch (error) {
+            console.log(error.message);
+            return rejectWithValue('Profil bilgilerini güncellemek için bir hata oluştu. Lütfen tekrar deneyin.');
         }
     }
 );

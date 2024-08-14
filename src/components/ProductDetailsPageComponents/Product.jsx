@@ -15,11 +15,13 @@ import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomT
 import { formatPrice } from '../../shared/utils/formatPrice';
 import { translateCategoryNameToEnglish } from '../../constants/categories';
 import { addFavoriteProduct, removeFavoriteProduct } from '../../store/thunks/User/favoriteProductThunk';
+import { useNavigate } from 'react-router-dom';
 
 function Product({ product }) {
 
     const userId = getUserId();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //========================States==========================
 
@@ -42,14 +44,21 @@ function Product({ product }) {
     //Add Favorite Product
     const handleAddToFavorites = async () => {
         console.log("Ekleme işlemi başladı.")
-        try {
-            await dispatch(addFavoriteProduct({ userId, categoryName: translateCategoryNameToEnglish(product.categoryName), productId: product.Id }));
-            customSuccessToast("Favorilere Eklendi", 1800);
-            setIsFavoriteProduct(true);
-        } catch (error) {
-            console.log(error.message);
-            customErrorToast("Favorilere Eklenemedi");
+
+        if (userId) {
+            try {
+                await dispatch(addFavoriteProduct({ userId, categoryName: translateCategoryNameToEnglish(product.categoryName), productId: product.Id }));
+                customSuccessToast("Favorilere Eklendi", 1800);
+                setIsFavoriteProduct(true);
+            } catch (error) {
+                console.log(error.message);
+                customErrorToast("Favorilere Eklenemedi");
+            }
         }
+        else {
+            navigate("/giris-yap");
+        }
+
     }
     //Remove Favorite Product
     const handleRemoveFromFavorites = async () => {

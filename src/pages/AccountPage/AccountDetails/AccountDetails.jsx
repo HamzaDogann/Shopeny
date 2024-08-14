@@ -1,17 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserId } from '../../../store/utils/getUserId';
 import GeneralUserDetailsCard from '../../../components/AccountPageComponents/GeneralUserDetailsCard';
+import { updateProfileDetails } from '../../../store/thunks/User/accountDetailsThunk';
+
+import truncateName from '../../../shared/utils/truncateName';
+import truncateEmail from '../../../shared/utils/truncateEmail';
+
 import { TbPencilCog } from "react-icons/tb";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 
-// Styles
+import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import "./AccountDetails.scss";
-import truncateName from '../../../shared/utils/truncateName';
-import truncateEmail from '../../../shared/utils/truncateEmail';
 
 function AccountDetails() {
+
+    const userId = getUserId();
+    const dispatch = useDispatch();
+
+    //======================States======================
+
     const user = useSelector(state => state.auth.user);
+    const { updatedProfileDetails } = useSelector(state => state.accountDetails);
 
     const initialFormState = {
         nameAndSurname: user.nameAndSurname,
@@ -21,11 +32,11 @@ function AccountDetails() {
     };
 
     const [formState, setFormState] = useState(initialFormState);
-    const [editing, setEditing] = useState({
-        nameAndSurname: false,
-        phoneNumber: false
-    });
+
+    const [editing, setEditing] = useState({ nameAndSurname: false, phoneNumber: false });
     const [isFormChanged, setIsFormChanged] = useState(false);
+
+    //===================Form Actions===================
 
     const inputRefs = {
         nameAndSurname: useRef(null),
@@ -41,9 +52,22 @@ function AccountDetails() {
         }
     }, [editing]);
 
+
     useEffect(() => {
         setIsFormChanged(JSON.stringify(initialFormState) !== JSON.stringify(formState));
     }, [formState]);
+
+
+    useEffect(() => {
+        if (updatedProfileDetails) {
+            setFormState({
+                nameAndSurname: updatedProfileDetails.nameAndSurname || '',
+                gender: updatedProfileDetails.gender || '',
+                email: updatedProfileDetails.email || '',
+                phoneNumber: updatedProfileDetails.phoneNumber || '',
+            });
+        }
+    }, [updatedProfileDetails])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -83,18 +107,30 @@ function AccountDetails() {
         });
     };
 
-    const handleSubmitForm = (e) => {
+    const isEditing = Object.values(editing).some(value => value);
+
+    //===================Update Process===================
+
+    const handleSubmitForm = async (e) => {
         e.preventDefault();
-        console.log(formState);
+        try {
+            await dispatch(updateProfileDetails({ uid: userId, updatedInformations: formState }));
+            customSuccessToast("Hesap Bilgileri Güncellendi");
+            setIsFormChanged(!isFormChanged);
+
+        } catch (error) {
+            console.log(error.message);
+            customErrorToast("Hesap Bilgileri Güncellenemedi");
+        }
     };
 
-    const isEditing = Object.values(editing).some(value => value);
+    //=======================JSX=========================
 
     return (
         <div className='account-details-box'>
             <h2>Hesap Bilgilerim</h2>
             <GeneralUserDetailsCard />
-            
+
             <div className='change-user-infos-box'>
                 <form className='form-box' onSubmit={handleSubmitForm}>
                     <div className='row'>
