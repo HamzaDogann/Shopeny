@@ -8,11 +8,13 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import truncateName from "../../shared/utils/truncateName";
+import { formatPrice } from '../../shared/utils/formatPrice';
 
 function UserActions() {
 
   const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
+  const { information } = useSelector(state => state.basket);
   const { favoriteProductsRef } = useSelector(state => state.favoriteProducts);
   const { basketProducts } = useSelector(state => state.basket);
 
@@ -76,7 +78,10 @@ function UserActions() {
         </Badge>
         <div className='user-actions-buttons-detail-info'>
           <span>Tutar</span>
-          <p>0.00₺</p>
+          {information.productPrices > 0
+            ? <p>{formatPrice(information.productPrices)}₺</p>
+            : <p>0.00₺</p>
+          }
         </div>
       </div >
     </>

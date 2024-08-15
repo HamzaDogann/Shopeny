@@ -44,7 +44,7 @@ function BasketProduct({ product }) {
     const handleRemoveProductFromBasket = async () => {
         try {
             await dispatch(removeBasketProduct({ referenceId: product.referenceId }));
-            customSuccessToast("Ürün sepetten çıkarıldı");
+            customSuccessToast("Ürün sepetten çıkarıldı", 1500);
         } catch {
             customErrorToast("Sepetten çıkarma başarısız oldu");
         }

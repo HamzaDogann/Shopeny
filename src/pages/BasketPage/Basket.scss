@@ -89,7 +89,7 @@
         justify-content: center;
         color: rgb(153, 153, 153);
         font-size: 19px;
-       
+
         font-weight: 500;
 
         @media (max-width:750px) {
@@ -97,6 +97,7 @@
             height: 100px;
             margin-top: 40px;
         }
+
         @media (max-width:330px) {
             text-align: center;
         }
@@ -142,6 +143,7 @@
         @media (max-width:1000px) {
             padding: 40px 80px;
         }
+
         @media (max-width:850px) {
             padding: 40px 20px;
         }
@@ -163,7 +165,7 @@
 
             .basket-product {
                 @include flex-row-center;
-                background-color:rgb(247, 247, 247);
+                background-color: rgb(247, 247, 247);
                 border-radius: 30px;
                 height: 140px;
                 padding: 0px 20px;
@@ -237,7 +239,7 @@
                         font-size: 20px;
                         color: rgb(74, 80, 90);
                         cursor: pointer;
-                       
+
                         width: 340px;
 
                         @media (max-width:1350px) {
@@ -249,8 +251,9 @@
                             font-size: 15px;
                             width: 280px;
                         }
+
                         @media (max-width:900px) {
-                     
+
                             width: 250px;
                         }
 
@@ -264,6 +267,7 @@
                         font-size: 16px;
                         font-weight: 400;
                         color: rgb(100, 100, 100);
+
 
                         @media (max-width:1350px) {
                             font-size: 14px;
@@ -370,6 +374,7 @@
                         font-size: 16px;
                         color: $shopenyBlue;
                         font-weight: 600;
+                        @include move-opacity-effect(0.4s);
 
 
                         @media (max-width:1350px) {
