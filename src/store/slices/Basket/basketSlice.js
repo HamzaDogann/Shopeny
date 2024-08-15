@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addProductToBasket, fetchBasketData, updateBasketProductAmount } from '../../thunks/Basket/basketThunk';
+import { addProductToBasket, fetchBasketData, removeBasketProduct, updateBasketProductAmount, clearBasket } from '../../thunks/Basket/basketThunk';
 import { updateBasketInformation } from '../../utils/basketHelper';
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
         cargoPrice: 50,
         promotion: false,
         promotionDiscount: 0,
-        totalPrice: 0
+        totalPrice: 0,
     },
     loading: false,
 };
@@ -30,18 +30,6 @@ const basketSlice = createSlice({
             state.information.cargoPrice = action.payload === "express" ? 100 : 50;
             state.information = updateBasketInformation(state.basketProducts, state.information);
         },
-        clearBasket: (state) => {
-            state.basketProducts = [];
-            state.information = {
-                productsNumber: 0,
-                productPrices: 0,
-                cargoType: "normal",
-                cargoPrice: 50,
-                promotion: false,
-                promotionDiscount: 0,
-                totalPrice: 0
-            };
-        }
     },
     extraReducers: (builder) => {
         builder
@@ -101,9 +89,44 @@ const basketSlice = createSlice({
             })
             .addCase(updateBasketProductAmount.rejected, (state) => {
                 state.loading = false;
+            })
+
+            //========== Remove Basket Product ==========
+            .addCase(removeBasketProduct.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(removeBasketProduct.fulfilled, (state, action) => {
+                const { referenceId } = action.payload;
+                state.basketProducts = state.basketProducts.filter(product => product.referenceId !== referenceId);
+                state.information = updateBasketInformation(state.basketProducts, state.information);
+                state.loading = false;
+            })
+            .addCase(removeBasketProduct.rejected, (state) => {
+                state.loading = false;
+            })
+
+            //========== Clear Basket ==========
+            .addCase(clearBasket.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(clearBasket.fulfilled, (state) => {
+                state.basketProducts = [];
+                state.information = {
+                    productsNumber: 0,
+                    productPrices: 0,
+                    cargoType: "normal",
+                    cargoPrice: 50,
+                    promotion: false,
+                    promotionDiscount: 0,
+                    totalPrice: 0
+                };
+                state.loading = false;
+            })
+            .addCase(clearBasket.rejected, (state) => {
+                state.loading = false;
             });
     },
 });
 
-export const { removeProduct, updateCargoType, clearBasket } = basketSlice.actions;
+export const { removeProduct, updateCargoType } = basketSlice.actions;
 export default basketSlice.reducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import "./PreLoader.scss";
 import ShopenyBag from "../../assets/logo/ShopenyBag.png";
+import "./PreLoader.scss";
 
 const preloaderVariants = {
     hidden: { opacity: 0 },

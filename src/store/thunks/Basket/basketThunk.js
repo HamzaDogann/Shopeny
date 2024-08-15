@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from "../../../services/firebase/config";
-import { ref, set, get, push } from 'firebase/database';
+import { ref, set, get, push, remove } from 'firebase/database';
 import { getUserId } from '../../utils/getUserId';
 
 
@@ -13,6 +13,7 @@ const createBasketProduct = (product, color, amount) => ({
     referenceId: `${product.categoryName}_${product.Id}_${color}`,
     productId: product.Id,
     productName: product.productName,
+    categoryName: product.categoryName,
     productBrand: product.productBrand,
     discountedPrice: product.discountedPrice,
     mainImage: product.productImages.mainImage,
@@ -113,8 +114,8 @@ export const updateBasketProductAmount = createAsyncThunk(
             });
 
             if (productToUpdate) {
-                const updatedAmount = productToUpdate.amount + amountDelta; // amountDelta kullanarak güncelle
-                if (updatedAmount > 0) { // Miktarın 0'ın altına düşmemesi için kontrol et
+                const updatedAmount = productToUpdate.amount + amountDelta;
+                if (updatedAmount > 0) {
                     await set(ref(db, `Data/Users/${userId}/basket/${keyToUpdate}`), {
                         ...productToUpdate,
                         amount: updatedAmount
@@ -132,3 +133,31 @@ export const updateBasketProductAmount = createAsyncThunk(
         }
     }
 );
+
+export const removeBasketProduct = createAsyncThunk(
+    'basket/removeBasketProduct',
+    async ({ referenceId }, thunkAPI) => {
+        const userId = getUserId();
+        try {
+            const productRef = ref(db, `Data/Users/${userId}/basket/${referenceId}`);
+            await remove(productRef);
+
+            return { referenceId };
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+);
+
+export const clearBasket = createAsyncThunk(
+    'basket/clearBasket',
+    async (_, thunkAPI) => {
+        const userId = getUserId();
+        try {
+            const basketRef = ref(db, `Data/Users/${userId}/basket`)
+            await remove(basketRef);
+        } catch {
+            return thunkAPI.rejectWithValue(error.message);
+        }
+    }
+)

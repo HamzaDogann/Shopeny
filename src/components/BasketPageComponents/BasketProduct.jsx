@@ -4,21 +4,33 @@ import { AiFillDelete } from "react-icons/ai";
 import { formatPrice } from '../../shared/utils/formatPrice';
 import { useDispatch } from 'react-redux';
 import useDebounce from '../../shared/hooks/useDebounce';
-import { updateBasketProductAmount } from '../../store/thunks/Basket/basketThunk';
-import { customErrorToast } from '../../shared/utils/CustomToasts';
+import { removeBasketProduct, updateBasketProductAmount } from '../../store/thunks/Basket/basketThunk';
+import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
+import { useNavigate } from 'react-router-dom';
+import { translateCategoryNameToTurkish } from "../../constants/categories";
+import { LazyLoadComponent } from 'react-lazy-load-image-component';
+import { slugify } from '../../shared/utils/slugify';
 
 function BasketProduct({ product }) {
 
-
-    const [amount, setAmount] = useState(product.amount);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [amount, setAmount] = useState(product.amount);
     const debouncedAmount = useDebounce(amount, 500);
 
+
+    useEffect(() => {
+        if (debouncedAmount !== product.amount) {
+            const amountDelta = debouncedAmount - product.amount;
+            dispatch(updateBasketProductAmount({ referenceId: product.referenceId, amountDelta }));
+        }
+    }, [debouncedAmount, dispatch, product.amount]);
+
     const incrementAmount = () => {
-        if (amount < 10) {
+        if (amount < 5) {
             setAmount(amount + 1);
         } else {
-            customErrorToast("En fazla 10 tane alabilirsin");
+            customErrorToast("En fazla 5 tane eklenebilir", 16, 1600);
         }
     };
 
@@ -28,20 +40,29 @@ function BasketProduct({ product }) {
         }
     };
 
-    useEffect(() => {
-        if (debouncedAmount !== product.amount) {
-            const amountDelta = debouncedAmount - product.amount; // Hesapla
-            dispatch(updateBasketProductAmount({ referenceId: product.referenceId, amountDelta }));
+
+    const handleRemoveProductFromBasket = async () => {
+        try {
+            await dispatch(removeBasketProduct({ referenceId: product.referenceId }));
+            customSuccessToast("Ürün sepetten çıkarıldı");
+        } catch {
+            customErrorToast("Sepetten çıkarma başarısız oldu");
         }
-    }, [debouncedAmount, dispatch, product.amount]);
+
+    }
+
+
+    const handleProductLink = () => {
+        navigate(`/${translateCategoryNameToTurkish(product.categoryName)}/${slugify(product.productName)}`);
+    }
 
     return (
         <div className='basket-product'>
-            <img src={product.mainImage} alt="" />
+            <img onClick={handleProductLink} src={product.mainImage} alt="" />
             <div className='product-infos-box'>
                 <p className='product-brand'>{product.productBrand}</p>
-                <p className='product-name'>{truncateName(product.productName, 30)}</p>
-                <p className='product-price'>{product.discountedPrice}</p>
+                <p onClick={handleProductLink} className='product-name'>{truncateName(product.productName, 30)}</p>
+                <p className='product-price'>{formatPrice(product.discountedPrice)}₺</p>
                 <p style={{ backgroundColor: product.color }} className='product-color'>
                 </p>
             </div>
@@ -56,7 +77,7 @@ function BasketProduct({ product }) {
                 <p>{formatPrice(product.amount * product.discountedPrice)}₺</p>
             </div>
 
-            <button className='remove-product-from-basket-btn'>
+            <button onClick={handleRemoveProductFromBasket} className='remove-product-from-basket-btn'>
                 <AiFillDelete className='delete-icon' />
             </button>
         </div>
