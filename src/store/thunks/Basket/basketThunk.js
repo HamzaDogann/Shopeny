@@ -70,7 +70,7 @@ export const fetchBasketData = createAsyncThunk(
             const snapshot = await get(basketRef);
 
             if (!snapshot.exists()) {
-                return []; 
+                return [];
             }
 
             const basketData = [];
@@ -82,7 +82,7 @@ export const fetchBasketData = createAsyncThunk(
                 });
             });
 
-            return basketData; 
+            return basketData;
         } catch (error) {
             console.error("Sepet verileri çekilirken bir hata oluştu:", error);
             return thunkAPI.rejectWithValue(error.message);
