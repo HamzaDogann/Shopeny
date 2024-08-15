@@ -16,6 +16,7 @@ import { formatPrice } from '../../shared/utils/formatPrice';
 import { translateCategoryNameToEnglish } from '../../constants/categories';
 import { addFavoriteProduct, removeFavoriteProduct } from '../../store/thunks/User/favoriteProductThunk';
 import { useNavigate } from 'react-router-dom';
+import { addProductToBasket } from '../../store/thunks/Basket/basketThunk';
 
 function Product({ product }) {
 
@@ -87,6 +88,16 @@ function Product({ product }) {
     };
 
     //=========== Data Process for basket===========
+
+    const handleAddToCart = async (event) => {
+        event.stopPropagation();
+        try {
+            await dispatch(addProductToBasket({ uid: userId, product: product, color: selectedColor, amount: amount }));
+            customSuccessToast("Sepete Eklendi", 1800);
+        } catch {
+            customErrorToast("Sepete Eklenemedi", 1800);
+        }
+    }
 
     //handle Color
     const handleColorClick = (color) => {
@@ -168,7 +179,7 @@ function Product({ product }) {
                                     <button className='amount-buttons' onClick={incrementAmount}>+</button>
                                 </div>
 
-                                <button className='add-basket'>
+                                <button onClick={handleAddToCart} className='add-basket'>
                                     <HiMiniShoppingBag />
                                     <span>Sepete Ekle</span>
                                 </button>

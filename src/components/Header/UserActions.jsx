@@ -14,7 +14,12 @@ function UserActions() {
   const navigate = useNavigate();
   const user = useSelector(state => state.auth.user);
   const { favoriteProductsRef } = useSelector(state => state.favoriteProducts);
+  const { basketProducts } = useSelector(state => state.basket);
+
   const [isFavorites, setIsFavorites] = useState(false);
+  const [isBasketProducts, setIsBasketProduct] = useState(false);
+
+
 
   useEffect(() => {
     if (favoriteProductsRef.length > 0) {
@@ -26,6 +31,16 @@ function UserActions() {
     setIsFavorites
   }, [favoriteProductsRef])
 
+  useEffect(() => {
+    if (basketProducts.length > 0) {
+      setIsBasketProduct(true)
+    }
+    else {
+      setIsBasketProduct(false)
+    }
+    setIsFavorites
+  }, [basketProducts])
+
   const handleUserAccount = () => {
     navigate('/hesabim');
   }
@@ -36,6 +51,8 @@ function UserActions() {
   const handleFavoriteProductsButton = () => {
     navigate('/favori-urunler')
   }
+
+
 
   return (
     <>
@@ -54,14 +71,14 @@ function UserActions() {
       </div>
 
       <div onClick={() => handleBasketButton()} className='basket-button'>
-        <Badge color="error" variant="">
+        <Badge color="error" variant={isBasketProducts ? "dot" : ""}>
           <TiShoppingCart className='basket-icon' />
         </Badge>
         <div className='user-actions-buttons-detail-info'>
           <span>Tutar</span>
           <p>0.00₺</p>
         </div>
-      </div>
+      </div >
     </>
   )
 }

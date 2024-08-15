@@ -18,6 +18,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import "./ProductCard.scss";
+import { addProductToBasket } from '../../../store/thunks/Basket/basketThunk';
 
 function ProductCard({ product }) {
 
@@ -51,7 +52,6 @@ function ProductCard({ product }) {
         setIsFavoriteProduct(isFavorite);
     }, [favoriteProductsRef, product.categoryName, product.Id]);
 
-    console.log(userId)
     //Add Favorite Product
     const handleAddToFavorites = async (event) => {
         event.stopPropagation();
@@ -100,11 +100,15 @@ function ProductCard({ product }) {
 
     //=====================Cart Process=======================
 
-    const handleAddToCart = (event) => {
+    const handleAddToCart = async (event) => {
         event.stopPropagation();
         setIsBasketProduct(!isBasketProduct);
-        customSuccessToast("Sepete Eklendi", 1500);
-        // Sepete ekleme işlemleri burada yapılacak
+        try {
+            await dispatch(addProductToBasket({ uid: userId, product: product }));
+            customSuccessToast("Sepete Eklendi", 1800);
+        } catch {
+            customErrorToast("Sepete Eklenemedi", 1800);
+        }
     }
 
     //=========================JSX===========================

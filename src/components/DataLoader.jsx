@@ -4,6 +4,7 @@ import { startLoading, stopLoading } from "../store/slices/preLoaderSlice";
 import { fetchUserData } from "../store/slices/Auth/authActions";
 import { fetchFavoriteProductsRef, fetchProducts } from "../store/thunks/User/favoriteProductThunk";
 import { getUserId } from "../store/utils/getUserId";
+import { fetchBasketData } from "../store/thunks/Basket/basketThunk";
 
 const DataLoader = ({ children }) => {
 
@@ -22,14 +23,17 @@ const DataLoader = ({ children }) => {
         loadData();
     }, []);
 
-
-    //Favorite Products
+    //User's Information Datas
     useEffect(() => {
-        dispatch(fetchFavoriteProductsRef({ userId }));
 
+        //Favorite Products
+        dispatch(fetchFavoriteProductsRef({ userId }));
         if (favoriteProductsRef.length > 0) {
             dispatch(fetchProducts(favoriteProductsRef));
         }
+
+        //Basktet
+        dispatch(fetchBasketData(userId));
     }, [dispatch, userId]);
 
     return <>{children}</>;
