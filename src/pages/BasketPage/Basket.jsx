@@ -5,14 +5,15 @@ import BasketProduct from "../../components/BasketPageComponents/BasketProduct";
 import BasketInformations from "../../shared/components/BasketInfo/BasketInformations";
 import { useLocation } from 'react-router-dom';
 import "./Basket.scss";
+import { useSelector } from "react-redux";
 
 
 function Basket() {
 
-  const basketProduct = true;
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { basketProducts } = useSelector(state => state.basket);
 
+  const thereAreProducts = basketProducts.length > 0;
+  const navigate = useNavigate();
 
   const handleConfirmCart = () => {
     // Implement the checkout logic here
@@ -26,7 +27,7 @@ function Basket() {
           <TiShoppingCart className="basket-icon" />
           <p>Sepetim</p>
         </div>
-        {basketProduct &&
+        {thereAreProducts &&
           <button className="clear-basket-btn">
             <MdOutlineDeleteSweep className="delete-icon" />
             <span>Sepeti Temizle</span>
@@ -35,12 +36,12 @@ function Basket() {
       </div>
 
       <div className="basket-boxs">
-        {basketProduct ?
+        {thereAreProducts ?
           <>
             <div className="products-box">
-              <BasketProduct />
-              <BasketProduct />
-              <BasketProduct />
+              {basketProducts.map(product => (
+                <BasketProduct key={product.referenceId} product={product} />
+              ))}
             </div>
             <div className="basket-info-box">
               <BasketInformations checkoutButton={<button onClick={handleConfirmCart} className="checkout-btn">Sepeti Onayla</button>}

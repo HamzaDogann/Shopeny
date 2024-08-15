@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
-import productPhotoMain from "../../assets/images/productPhotoMain.jpg"
+import React, { useEffect, useState } from 'react'
 import truncateName from "../../shared/utils/truncateName";
 import { AiFillDelete } from "react-icons/ai";
+import { formatPrice } from '../../shared/utils/formatPrice';
+import { useDispatch } from 'react-redux';
+import useDebounce from '../../shared/hooks/useDebounce';
+import { updateBasketProductAmount } from '../../store/thunks/Basket/basketThunk';
+import { customErrorToast } from '../../shared/utils/CustomToasts';
 
-function BasketProduct() {
+function BasketProduct({ product }) {
 
-    const backgroundColor = '#336ecc'; // Example color
-    const truncatedProductName = truncateName("MacBook Pro M4 16 Inc 500GB Ultra", 30);
 
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState(product.amount);
+    const dispatch = useDispatch();
+    const debouncedAmount = useDebounce(amount, 500);
 
-    //Handle Amount
     const incrementAmount = () => {
         if (amount < 10) {
             setAmount(amount + 1);
         } else {
-            customErrorToast("En fazla 10 tane alabilirsin")
+            customErrorToast("En fazla 10 tane alabilirsin");
         }
     };
 
@@ -25,14 +28,21 @@ function BasketProduct() {
         }
     };
 
+    useEffect(() => {
+        if (debouncedAmount !== product.amount) {
+            const amountDelta = debouncedAmount - product.amount; // Hesapla
+            dispatch(updateBasketProductAmount({ referenceId: product.referenceId, amountDelta }));
+        }
+    }, [debouncedAmount, dispatch, product.amount]);
+
     return (
         <div className='basket-product'>
-            <img src={productPhotoMain} alt="" />
+            <img src={product.mainImage} alt="" />
             <div className='product-infos-box'>
-                <p className='product-brand'>Apple</p>
-                <p className='product-name'>{truncatedProductName}</p>
-                <p className='product-price'>128.000₺</p>
-                <p style={{ backgroundColor: backgroundColor }} className='product-color'>
+                <p className='product-brand'>{product.productBrand}</p>
+                <p className='product-name'>{truncateName(product.productName, 30)}</p>
+                <p className='product-price'>{product.discountedPrice}</p>
+                <p style={{ backgroundColor: product.color }} className='product-color'>
                 </p>
             </div>
 
@@ -43,13 +53,14 @@ function BasketProduct() {
             </div>
 
             <div className='total-price'>
-                <p>1.500.000₺</p>
+                <p>{formatPrice(product.amount * product.discountedPrice)}₺</p>
             </div>
 
             <button className='remove-product-from-basket-btn'>
                 <AiFillDelete className='delete-icon' />
             </button>
         </div>
+
     )
 }
 

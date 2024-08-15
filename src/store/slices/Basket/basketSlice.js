@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addProductToBasket, fetchBasketData } from '../../thunks/Basket/basketThunk';
+import { addProductToBasket, fetchBasketData, updateBasketProductAmount } from '../../thunks/Basket/basketThunk';
 import { updateBasketInformation } from '../../utils/basketHelper';
 
 const initialState = {
@@ -12,25 +12,24 @@ const initialState = {
         promotion: false,
         promotionDiscount: 0,
         totalPrice: 0
-    }
+    },
+    loading: false,
 };
 
 const basketSlice = createSlice({
     name: 'basket',
     initialState,
     reducers: {
-        // Ürün silme işlemi
         removeProduct: (state, action) => {
             const { referenceId } = action.payload;
             state.basketProducts = state.basketProducts.filter(product => product.referenceId !== referenceId);
+            state.information = updateBasketInformation(state.basketProducts, state.information);
         },
-        // Kargo türü güncelleme işlemi
         updateCargoType: (state, action) => {
             state.information.cargoType = action.payload;
             state.information.cargoPrice = action.payload === "express" ? 100 : 50;
             state.information = updateBasketInformation(state.basketProducts, state.information);
         },
-        // Sepetteki tüm ürünleri temizleme işlemi
         clearBasket: (state) => {
             state.basketProducts = [];
             state.information = {
@@ -46,6 +45,10 @@ const basketSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            //========== Add product for basket ==========
+            .addCase(addProductToBasket.pending, (state) => {
+                state.loading = true;
+            })
             .addCase(addProductToBasket.fulfilled, (state, action) => {
                 const { referenceId } = action.payload;
 
@@ -63,17 +66,41 @@ const basketSlice = createSlice({
                 }
 
                 state.information = updateBasketInformation(state.basketProducts, state.information);
+                state.loading = false;
             })
+            .addCase(addProductToBasket.rejected, (state) => {
+                state.loading = false;
+            })
+
+            //========== Get all of basket products ==========
+
             .addCase(fetchBasketData.fulfilled, (state, action) => {
                 state.basketProducts = action.payload;
-
                 state.information = updateBasketInformation(state.basketProducts, state.information);
             })
-            .addCase(addProductToBasket.rejected, (action) => {
-                console.error("Ürün eklenirken bir hata oluştu:", action.payload);
+
+            //========== Update Basket Product Amount ==========
+            .addCase(updateBasketProductAmount.pending, (state) => {
+                state.loading = true;
             })
-            .addCase(fetchBasketData.rejected, (state, action) => {
-                console.error("Sepet verileri çekilirken bir hata oluştu:", action.payload);
+            .addCase(updateBasketProductAmount.fulfilled, (state, action) => {
+                const { referenceId } = action.payload;
+
+                const existingProductIndex = state.basketProducts.findIndex(
+                    (product) => product.referenceId === referenceId
+                );
+
+                if (existingProductIndex >= 0) {
+                    state.basketProducts[existingProductIndex] = {
+                        ...action.payload
+                    };
+                }
+
+                state.information = updateBasketInformation(state.basketProducts, state.information);
+                state.loading = false;
+            })
+            .addCase(updateBasketProductAmount.rejected, (state) => {
+                state.loading = false;
             });
     },
 });
