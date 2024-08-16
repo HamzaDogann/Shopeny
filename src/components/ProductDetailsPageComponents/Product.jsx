@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '../../store/utils/getUserId';
+
 import ProductSlider from './ProductSlider';
 import PreLoader from '../PreLoader/PreLoader';
 
@@ -10,6 +11,7 @@ import { IoShareSocialSharp } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
 import { HiMiniShoppingBag } from "react-icons/hi2";
 import { TfiCommentAlt } from "react-icons/tfi";
+import { TbShoppingCartCheck } from "react-icons/tb";
 
 import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts"
 import { formatPrice } from '../../shared/utils/formatPrice';
@@ -17,6 +19,8 @@ import { translateCategoryNameToEnglish } from '../../constants/categories';
 import { addFavoriteProduct, removeFavoriteProduct } from '../../store/thunks/User/favoriteProductThunk';
 import { useNavigate } from 'react-router-dom';
 import { addProductToBasket } from '../../store/thunks/Basket/basketThunk';
+import truncateName from '../../shared/utils/truncateName';
+import { clearError } from '../../store/slices/Basket/basketSlice';
 
 function Product({ product }) {
 
@@ -24,10 +28,13 @@ function Product({ product }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     //========================States==========================
 
     const { favoriteProductsRef, loading } = useSelector(state => state.favoriteProducts)
+    const { error } = useSelector(state => state.basket)
     const [isFavoriteProduct, setIsFavoriteProduct] = useState();
+    const [isAddedBasket, setIsAddedBasket] = useState(false);
     const [selectedColor, setSelectedColor] = useState(product.productColors[0]);
     const [amount, setAmount] = useState(1);
 
@@ -90,14 +97,35 @@ function Product({ product }) {
     //=========== Data Process for basket===========
 
     const handleAddToCart = async (event) => {
-        event.stopPropagation();
-        try {
-            await dispatch(addProductToBasket({ uid: userId, product: product, color: selectedColor, amount: amount }));
-            customSuccessToast("Sepete Eklendi", 1800);
-        } catch {
-            customErrorToast("Sepete Eklenemedi", 1800);
+        if (!isAddedBasket) {
+            event.stopPropagation();
+            dispatch(clearError());
+
+            try {
+                const resultAction = await dispatch(addProductToBasket({
+                    uid: userId, product: product, color: selectedColor, amount: amount
+                }));
+
+                if (addProductToBasket.fulfilled.match(resultAction)) {
+                    customSuccessToast("Sepete Eklendi", 1800);
+                    setIsAddedBasket(true);
+                    setTimeout(() => {
+                        setIsAddedBasket(false);
+                    }, 2000);
+                } else if (addProductToBasket.rejected.match(resultAction)) {
+                    const error = resultAction.payload?.error;
+
+                    if (error === "product-limit") {
+                        customErrorToast(" Aynı üründen en fazla 5 tane ekleyebilirsiniz", 16, 3000);
+                    } else {
+                        customErrorToast("Ürün sepete eklenirken bir hata oluştu", 16, 2000);
+                    }
+                }
+            } catch {
+                customErrorToast("Beklenmeyen bir hata oluştu", 14, 2000);
+            }
         }
-    }
+    };
 
     //handle Color
     const handleColorClick = (color) => {
@@ -106,10 +134,10 @@ function Product({ product }) {
 
     //Handle Amount
     const incrementAmount = () => {
-        if (amount < 10) {
+        if (amount < 5) {
             setAmount(amount + 1);
         } else {
-            customErrorToast("En fazla 10 tane alabilirsin")
+            customErrorToast("En fazla 5 tane alabilirsin")
         }
     };
 
@@ -179,9 +207,20 @@ function Product({ product }) {
                                     <button className='amount-buttons' onClick={incrementAmount}>+</button>
                                 </div>
 
-                                <button onClick={handleAddToCart} className='add-basket'>
-                                    <HiMiniShoppingBag />
-                                    <span>Sepete Ekle</span>
+
+                                <button
+                                    onClick={handleAddToCart}
+                                    className={`add-basket ${isAddedBasket ? 'added' : ''}`}>
+                                    {isAddedBasket ?
+                                        <>  <TbShoppingCartCheck className='icon' />
+                                            <span>Sepete Eklendi</span>
+                                        </>
+                                        :
+                                        <>
+                                            <HiMiniShoppingBag className='icon' />
+                                            <span>Sepete Ekle</span>
+                                        </>
+                                    }
                                 </button>
                             </div>}
                     </div>

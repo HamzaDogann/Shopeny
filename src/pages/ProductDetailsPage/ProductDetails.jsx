@@ -10,6 +10,7 @@ import ProductComments from '../../components/ProductDetailsPageComponents/Produ
 import AddComment from '../../components/ProductDetailsPageComponents/AddComment';
 
 import "./ProductDetails.scss";
+import PreLoader from '../../components/PreLoader/PreLoader';
 
 function ProductDetails() {
 
@@ -23,6 +24,7 @@ function ProductDetails() {
     //=========== Performance  Optimization ===========
 
     const { viewedProducts, loading } = useSelector(state => state.productDetails);
+    const basketLoading = useSelector(state => state.basket.loading);
 
     const normalizeName = name => name.replace(/-/g, ' ').toLowerCase()
     const normalizedProductName = normalizeName(productName);
@@ -62,7 +64,8 @@ function ProductDetails() {
                     <Link to={"/"}>Anasayfaya Dön</Link>
                 </div>
             )}
-        </div>
+            {basketLoading && <PreLoader />}
+        </div >
     );
 }
 

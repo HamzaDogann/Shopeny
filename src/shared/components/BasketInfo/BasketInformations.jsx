@@ -1,27 +1,97 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaTruck } from "react-icons/fa";
 import { FaTruckFast } from "react-icons/fa6";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { RiDiscountPercentFill } from "react-icons/ri";
 import { formatPrice } from "../../utils/formatPrice"
 
 import "./BasketInformations.scss";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearError, removePromotion, updateCargoType, updatePromotion } from '../../../store/slices/Basket/basketSlice';
+import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
+import useEffectSkipFirstRender from '../../utils/useEffectSkipFirstRender';
 
 function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConfirm }) {
 
-    const { information } = useSelector(state => state.basket);
+    const dispatch = useDispatch();
 
-    const [selectedCargo, setSelectedCargo] = useState("Normal Kargo");
+    const [isFixed, setIsFixed] = useState(false);
+    const { information, error } = useSelector(state => state.basket);
+    const [selectedCargo, setSelectedCargo] = useState(information.cargoType);
+    const [promotionCode, setPromotionCode] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const handleSelectChange = (selected) => {
-        setSelectedCargo(selected);
+    useEffect(() => {
+        if (information.cargoType === "normal") {
+            setSelectedCargo("Normal Kargo");
+        }
+        else {
+            setSelectedCargo("Hızlı Kargo");
+        }
+    }, [information.cargoType]);
+
+
+    useEffect(() => {
+        if (error === "wrong-promotion") {
+            customErrorToast("Promosyon Geçersiz", 16, 2500);
+            dispatch(clearError());
+        }
+    }, [error]);
+
+
+    useEffectSkipFirstRender(() => {
+        if (information.promotion) {
+            customSuccessToast("Promosyon Uygulandı");
+            setPromotionCode("");
+        }
+    }, [information.promotion]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+
+            if (scrollPosition > 200) {
+                setIsFixed(true);
+            } else {
+                setIsFixed(false);
+            }
+
+            if (scrollPosition > 1400) {
+                setIsFixed(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
+    const handleSelectChange = (link) => {
+        setSelectedCargo(link.label);
+        dispatch(updateCargoType(link.path));
         setIsDropdownOpen(false);
     };
 
+    const handlePromotion = () => {
+        if (promotionCode.length > 0) {
+            dispatch(updatePromotion(promotionCode));
+        }
+        else {
+            customErrorToast("Lütfen bir promosyon kodu girin", 16, 2600);
+        }
+
+    };
+    const handleRemovePromotion = () => {
+        dispatch(removePromotion());
+        customSuccessToast("Promosyon Kaldırıldı");
+    }
+
     const navLinks = [
         { path: 'normal', label: 'Normal Kargo', description: "Standart teslimat süresi", icon: <FaTruck /> },
-        { path: 'fast', label: 'Hızlı Kargo', description: "Ek ücret uygulanır", icon: <FaTruckFast /> }
+        { path: 'express', label: 'Hızlı Kargo', description: "Ek ücret uygulanır", icon: <FaTruckFast /> }
     ];
 
     const renderCheckoutButton = () => {
@@ -38,7 +108,7 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
     };
 
     return (
-        <div className="basket-information-box">
+        <div className={`basket-information-box ${isFixed ? 'fixedBar' : ''}`}>
             <h2>Sepet Bilgisi</h2>
             <div className="product-amount-and-price-box">
                 <p>{information.productsNumber} Ürün</p>
@@ -55,7 +125,7 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
                     {isDropdownOpen && (
                         <div className="select-options">
                             {navLinks.map((link, index) => (
-                                <div key={index} className="option" onClick={() => handleSelectChange(link.label)}>
+                                <div key={index} className="option" onClick={() => handleSelectChange(link)}>
                                     {link.icon}
                                     <span>{link.label}</span>
                                 </div>
@@ -68,29 +138,48 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
 
             <h2>Promosyon</h2>
             <div className="promotion-box">
-                <input type="text" placeholder="Bir promosyon kodu giriniz" />
-                <button className="confirm-promotion-btn">Uygula</button>
+                {information.promotion ?
+                    <>
+                        <div className='promotion-active'>
+                            <p>
+                                <RiDiscountPercentFill className='icon' />
+                                <span>Promosyon Kullanıldı</span>
+                            </p>
+                            <button onClick={handleRemovePromotion}>Kaldır</button>
+                        </div>
+                    </>
+                    :
+                    <>
+                        <input type="text"
+                            onChange={(e) => setPromotionCode(e.target.value)}
+                            value={promotionCode}
+                            placeholder="Bir promosyon kodu giriniz" />
+                        <button onClick={handlePromotion} className="confirm-promotion-btn">Uygula</button>
+                    </>
+                }
             </div>
             <p className="dividing-line"></p>
             <div className="total-promotion-and-cargo-prices-box">
                 <div className="price-box">
                     <p>Promosyon İndirimi</p>
-                    <span className="promotion-discount">20%</span>
+                    <span className="promotion-discount">{information.promotionDiscount}%</span>
                 </div>
                 <div className="price-box">
                     <p>Kargo Ücreti</p>
-                    <span className="cargo-price">+70₺</span>
+                    <span className="cargo-price" style={{ color: information.cargoType === "express" ? "#eb5a5a" : "#2fb460" }}>
+                        +{information.cargoPrice}₺
+                    </span>
                 </div>
             </div>
             <p className="dividing-line"></p>
             <div className="basket-total-price-box">
                 <p>Toplam Tutar</p>
-                <p className="total-price">122.450.000₺</p>
+                <p className="total-price">{formatPrice(information.totalPrice)}₺</p>
             </div>
             <div className="checkout-button-box">
                 {checkoutButton ? checkoutButton : renderCheckoutButton()}
             </div>
-        </div>
+        </div >
     );
 }
 

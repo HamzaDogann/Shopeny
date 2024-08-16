@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addProductToBasket, fetchBasketData, removeBasketProduct, updateBasketProductAmount, clearBasket } from '../../thunks/Basket/basketThunk';
 import { updateBasketInformation } from '../../utils/basketHelper';
+import { promotions } from '../../../constants/promotions';
 
 const initialState = {
     basketProducts: [],
@@ -8,12 +9,13 @@ const initialState = {
         productsNumber: 0,
         productPrices: 0,
         cargoType: "normal",
-        cargoPrice: 50,
+        cargoPrice: 0,
         promotion: false,
         promotionDiscount: 0,
         totalPrice: 0,
     },
     loading: false,
+    error: null,
 };
 
 const basketSlice = createSlice({
@@ -27,15 +29,39 @@ const basketSlice = createSlice({
         },
         updateCargoType: (state, action) => {
             state.information.cargoType = action.payload;
-            state.information.cargoPrice = action.payload === "express" ? 100 : 50;
+            state.information.cargoPrice = action.payload === "express" ? 80 : 0;
             state.information = updateBasketInformation(state.basketProducts, state.information);
         },
+        updatePromotion: (state, action) => {
+            const promotionCode = action.payload;
+            const foundPromotion = promotions.find(promo => promo.code === promotionCode);
+
+            if (foundPromotion) {
+                state.information.promotion = true;
+                state.information.promotionDiscount = foundPromotion.discount;
+                state.information = updateBasketInformation(state.basketProducts, state.information);
+            } else {
+                state.error = "wrong-promotion";
+                state.information.promotion = false;
+                state.information.promotionDiscount = 0;
+                state.information = updateBasketInformation(state.basketProducts, state.information);
+            }
+        },
+        removePromotion: (state) => {
+            state.information.promotion = false;
+            state.information.promotionDiscount = 0;
+            state.information = updateBasketInformation(state.basketProducts, state.information);
+        },
+        clearError: (state) => {
+            state.error = null;
+        }
     },
     extraReducers: (builder) => {
         builder
             //========== Add product for basket ==========
             .addCase(addProductToBasket.pending, (state) => {
                 state.loading = true;
+                state.error = null;
             })
             .addCase(addProductToBasket.fulfilled, (state, action) => {
                 const { referenceId } = action.payload;
@@ -55,9 +81,11 @@ const basketSlice = createSlice({
 
                 state.information = updateBasketInformation(state.basketProducts, state.information);
                 state.loading = false;
+                state.error = null; // Başarılı işlemde hata olmadığını belirtmek için
             })
-            .addCase(addProductToBasket.rejected, (state) => {
+            .addCase(addProductToBasket.rejected, (state, action) => {
                 state.loading = false;
+                state.error = action.payload?.error
             })
 
             //========== Get all of basket products ==========
@@ -128,5 +156,5 @@ const basketSlice = createSlice({
     },
 });
 
-export const { removeProduct, updateCargoType } = basketSlice.actions;
+export const { removeProduct, updateCargoType, clearError, updatePromotion, removePromotion } = basketSlice.actions;
 export default basketSlice.reducer;

@@ -21,7 +21,7 @@ export const fetchPopularProducts = createAsyncThunk(
                 const products = categoriesData[categoryName];
                 for (const productId in products) {
                     const product = products[productId];
-                    if (product.productStar >= 4) {
+                    if (product.productStar >= 4 && product.isStock == true) {
                         allProducts.push(product);
                     }
                 }

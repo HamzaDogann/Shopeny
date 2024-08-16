@@ -12,13 +12,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import { MdShoppingCart, MdFavorite } from "react-icons/md";
-import { TbShoppingCartCopy } from "react-icons/tb";
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import "./ProductCard.scss";
-import { addProductToBasket } from '../../../store/thunks/Basket/basketThunk';
 
 function ProductCard({ product }) {
 
@@ -28,8 +26,7 @@ function ProductCard({ product }) {
 
     //=====================States=======================
 
-    const { favoriteProductsRef } = useSelector(state => state.favoriteProducts)
-    const [isBasketProduct, setIsBasketProduct] = useState(false);
+    const { favoriteProductsRef } = useSelector(state => state.favoriteProducts);
     const [isFavoriteProduct, setIsFavoriteProduct] = useState(false);
     const [loadingImage, setLoadingImage] = useState(true);
 
@@ -98,19 +95,6 @@ function ProductCard({ product }) {
         }
     };
 
-    //=====================Cart Process=======================
-
-    const handleAddToCart = async (event) => {
-        event.stopPropagation();
-        setIsBasketProduct(!isBasketProduct);
-        try {
-            await dispatch(addProductToBasket({ uid: userId, product: product }));
-            customSuccessToast("Sepete Eklendi", 1800);
-        } catch {
-            customErrorToast("Sepete Eklenemedi", 1800);
-        }
-    }
-
     //=========================JSX===========================
     return (
         <div onClick={handleProduct} className='product-card'>
@@ -168,11 +152,8 @@ function ProductCard({ product }) {
                 {product.discountedPrice}₺
             </p>
 
-            <button className='basket-btn' onClick={handleAddToCart} style={{ backgroundColor: isBasketProduct ? '#f27d59' : '' }}>
-                {isBasketProduct
-                    ? <TbShoppingCartCopy className='icon' />
-                    : <MdShoppingCart className='icon' />
-                }
+            <button className='basket-btn' onClick={handleProduct} >
+                  <MdShoppingCart className='icon' />
             </button>
         </div>
     );

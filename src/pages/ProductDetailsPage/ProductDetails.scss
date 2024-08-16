@@ -140,6 +140,7 @@
                         width: 350px;
                         height: 290px;
                     }
+
                     @media (max-width:360px) {
                         width: 310px;
                         height: 290px;
@@ -477,6 +478,15 @@
 
                         span {
                             font-size: 16px;
+                            @include move-opacity-effect(0.5s);
+                        }
+
+                        .icon {
+                            @include move-opacity-effect(0.4s);
+                        }
+
+                        &.added {
+                            background-color: $shopenyOrange;
                         }
                     }
                 }

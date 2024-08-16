@@ -26,9 +26,7 @@ const createBasketProduct = (product, color, amount) => ({
 export const addProductToBasket = createAsyncThunk(
     'basket/addProductToBasket',
     async ({ uid, product, color, amount = 1 }, thunkAPI) => {
-
         try {
-
             const selectedColor = getSelectedColor(product, color);
             const basketRef = ref(db, `Data/Users/${uid}/basket`);
 
@@ -45,22 +43,34 @@ export const addProductToBasket = createAsyncThunk(
             });
 
             if (existingProduct) {
-                // Ürün mevcut ve renk eşleşiyor, sadece miktarı güncelle
                 const updatedAmount = existingProduct.amount + amount;
+
+                if (existingProduct.amount >= 5 || updatedAmount > 5) {
+                    return thunkAPI.rejectWithValue({
+                        error: 'product-limit',
+                    });
+                }
+
                 await set(ref(db, `Data/Users/${uid}/basket/${referenceIdToUpdate}`), {
                     ...existingProduct,
                     amount: updatedAmount
                 });
                 return { ...existingProduct, amount: updatedAmount, referenceId: referenceIdToUpdate };
             } else {
-                // Ürün mevcut değil ya da renk farklı, yeni ürün ekle
+                if (amount > 5) {
+                    return thunkAPI.rejectWithValue({
+                        error: 'limit',
+                        message: 'Bu üründen en fazla 5 adet ekleyebilirsiniz.'
+                    });
+                }
+
                 const newBasketProduct = createBasketProduct(product, selectedColor, amount);
                 const newProductRef = push(basketRef); // Yeni referans oluştur
                 await set(newProductRef, newBasketProduct); // Yeni ürün ekle
                 return { ...newBasketProduct, referenceId: newProductRef.key }; // Döndür
             }
-        } catch {
-            console.log("Ürün eklenirken bir hata oluştu:");
+        } catch (error) {
+            console.error("Ürün eklenirken bir hata oluştu:", error);
             return thunkAPI.rejectWithValue(error.message);
         }
     }
