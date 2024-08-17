@@ -39,7 +39,7 @@
     }
 
 
-    .item-name-and-brand-box {
+    .name-color-brand-box {
         @include flex-column;
         font-weight: 500;
 
@@ -57,6 +57,14 @@
             @media (max-width:399px) {
                 font-size: 12px;
             }
+        }
+
+        .color-box{
+            margin-top:5px;
+            border-radius: 15px;
+            border: 4px solid rgb(233, 233, 233);
+            width: 30px;
+            height: 20px;
         }
 
         p {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RadioButton from "../../../shared/helpers/RadioButton";
 import Fullsize from "../../../shared/components/FullsizeOverlay/Fullsize";
 import Modal from "../../../shared/components/Modal/Modal";
@@ -8,46 +8,74 @@ import AddressModal from "../../../components/AccountPageComponents/AddressModal
 import { MdAddLocationAlt } from "react-icons/md";
 import "../../AccountPage/Addresses/Addresses.scss";
 import "./AddressStep.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { addUserAddress, getUserAddresses } from "../../../store/thunks/User/addressesThunk";
+import truncateName from "../../../shared/utils/truncateName";
+import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
+import { setIsAddress } from "../../../store/slices/PaymentProcess/PaymentProcessSlice";
 
 const AddressStep = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const { addresses } = useSelector(state => state.addresses);
+  const dispatch = useDispatch();
+
+  const windowWidth = window.innerWidth;
+  const truncateLength = windowWidth < 500 ? 15 : 25;
+  useEffect(() => {
+    dispatch(getUserAddresses());
+  }, [dispatch])
 
   const handleAddressChange = (id) => {
-    setSelectedAddress(prevSelectedAddress => prevSelectedAddress === id ? null : id);
+    setSelectedAddress(prevSelectedAddress => {
+      const newAddress = prevSelectedAddress === id ? null : id;
+      dispatch(setIsAddress(newAddress));
+      return newAddress;
+    });
   };
 
   const handleCloseModal = () => {
     setModalVisible(false);
   };
+  const handleAddProcess = () => {
 
-  const handleNewAddress = (newAddress) => {
-    console.log("Yeni adres eklendi:", newAddress);
+    if (addresses.length >= 4) {
+      customErrorToast("Daha fazla adres ekleyemezsin", 16, 2400);
+      return;
+    }
+    setModalVisible(true);
   };
 
-  const adresVarMi = true;
+  const handleNewAddress = async (newAddress) => {
+    try {
+      await dispatch(addUserAddress(newAddress)).unwrap();
+      customSuccessToast("Adres Eklendi", 2000);
+    } catch {
+      customErrorToast("Adres Eklenemedi", 16, 2400);
+    }
+  };
 
 
   return (
     <>
       <h2>Adresinizi Seçin</h2>
 
-      {adresVarMi
+      {addresses.length > 0
 
         ? <div className="choose-address-box">
           {/* Örnek Adres Kartları */}
-          {['1', '2', '3'].map(id => (
-            <div className="address-card" key={id}>
+          {addresses.map(address => (
+            <div className="address-card" key={address.addressId}>
               <div className="address-informations">
-                <p className="address-title">Ofis Adresi</p>
-                <p className="address-name">Barbaroos Mah. Ata Cad. No:123 D:5, Kadıköy, İstanbul. 34670</p>
-                <p className="address-recipient">Alıcı : Hamza Doğan</p>
+                <p className='address-title'>{truncateName(address.addressTitle, truncateLength)}</p>
+                <p className='address-name'>{address.street}, {address.neighborhood}, {address.district}, {address.city} {address.postalCode}</p>
+                <p className='address-recipient'>Alıcı: {address.recipientName}</p>
               </div>
 
               <RadioButton
                 name="choose-address"
-                checked={selectedAddress === id}
-                onChange={() => handleAddressChange(id)}
+                checked={selectedAddress === address.addressId}
+                onChange={() => handleAddressChange(address.addressId)}
               />
             </div>
           ))}
@@ -60,7 +88,7 @@ const AddressStep = () => {
 
 
       <div className="new-address-box">
-        <button onClick={() => setModalVisible(true)}>
+        <button onClick={() => handleAddProcess()}>
           <span>Adres Ekle</span>
           <MdAddLocationAlt className="icon" />
         </button>

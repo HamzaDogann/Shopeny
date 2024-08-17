@@ -11,6 +11,7 @@ import searchProductsReducer from './slices/searchProductsSlice'
 import favoriteProductsReducer from './slices/User/favoriteProductsSlice'
 import accountDetailsReducer from './slices/User/accountDetailsSlice'
 import basketReducer from './slices/Basket/basketSlice'
+import PaymentProcessReducer from './slices/PaymentProcess/PaymentProcessSlice'
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     searchProducts: searchProductsReducer,
     favoriteProducts: favoriteProductsReducer,
     accountDetails: accountDetailsReducer,
-    basket: basketReducer
+    basket: basketReducer,
+    paymentProcess: PaymentProcessReducer
   },
 })

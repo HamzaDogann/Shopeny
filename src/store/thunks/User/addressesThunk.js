@@ -43,9 +43,9 @@ export const updateUserAddress = createAsyncThunk(
         try {
             const dbRef = ref(db, `Data/Users/${userId}/addresses/${address.addressId}`);
             await update(dbRef, address);
-            return address; 
+            return address;
         } catch (error) {
-            
+
             console.log(error.message);
             throw new Error(error.message);
         }

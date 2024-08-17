@@ -17,9 +17,13 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
 
     const [isFixed, setIsFixed] = useState(false);
     const { information, error } = useSelector(state => state.basket);
+    const { isAddressSelected, isPaymentInfoReceived, isBasketConfirmed, isPaymentConfirmed, }
+        = useSelector(state => state.paymentProcess);
+
     const [selectedCargo, setSelectedCargo] = useState(information.cargoType);
     const [promotionCode, setPromotionCode] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
     useEffect(() => {
         if (information.cargoType === "normal") {
@@ -97,11 +101,36 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
     const renderCheckoutButton = () => {
         switch (currentStep) {
             case 0:
-                return <button onClick={onGoPayment} className="checkout-btn">Ödemeye Geç</button>;
+                return (
+                    <button
+                        onClick={onGoPayment}
+                        className="checkout-btn"
+                        disabled={!isAddressSelected}
+                        style={{ backgroundColor: isAddressSelected ? '' : '#A0A0A0' }}
+                    >
+                        Ödemeye Geç
+                    </button>
+                );
             case 1:
-                return <button onClick={onGoConfirm} className="checkout-btn">Siparişi Onayla</button>;
+                return (
+                    <button
+                        onClick={onGoConfirm}
+                        className="checkout-btn"
+                        disabled={!isPaymentInfoReceived}
+                        style={{ backgroundColor: isPaymentInfoReceived ? '' : '#A0A0A0' }}
+                    >
+                        Siparişi Onayla
+                    </button>
+                );
             case 2:
-                return <button className="checkout-btn">Onayla</button>;
+                return (
+                    <button
+                        className="checkout-btn"
+                   
+                    >
+                        Onayla
+                    </button>
+                );
             default:
                 return null;
         }

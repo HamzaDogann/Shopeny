@@ -1,11 +1,22 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
 import { showModal } from '../../../store/slices/confirmationModalSlice';
 import RemainingTime from '../../../components/CheckoutPagesComponents/RemainingTime';
 import "./PaymentVerification.scss";
+import { formatPrice } from '../../../shared/utils/formatPrice';
+import { useEffect, useState } from 'react';
 function PaymentVerification({ onBack }) {
 
   const dispatch = useDispatch();
+  const { information } = useSelector(state => state.basket);
+
+  const [dateTime, setDateTime] = useState("");
+
+  useEffect(() => {
+    const currentDateTime = new Date();
+    const formattedDateTime = `${currentDateTime.getDate().toString().padStart(2, '0')}.${(currentDateTime.getMonth() + 1).toString().padStart(2, '0')}.${currentDateTime.getFullYear()} - ${currentDateTime.getHours().toString().padStart(2, '0')}:${currentDateTime.getMinutes().toString().padStart(2, '0')}`;
+    setDateTime(formattedDateTime);
+  }, []);
 
   //Modal Methods
   const handleCancelProcess = () => {
@@ -39,11 +50,11 @@ function PaymentVerification({ onBack }) {
           </div>
           <div className='info-item'>
             <p>İşlem Tutarı :</p>
-            <span>11.000.000 ₺</span>
+            <span>{formatPrice(information.totalPrice)} ₺</span>
           </div>
           <div className='info-item'>
             <p>İşlem Tarihi-Saati :</p>
-            <span>21.08.2024 - 18:20 </span>
+            <span>{dateTime}</span>
           </div>
         </div>
         <div className='verification-info'>

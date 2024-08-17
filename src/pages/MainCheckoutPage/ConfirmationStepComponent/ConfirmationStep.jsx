@@ -7,8 +7,12 @@ import ProductItemCard from "../../../shared/components/OrderProductItemCard/Pro
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCreditCard } from "react-icons/fa";
 import { FaTruckFast } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { formatPrice } from "../../../shared/utils/formatPrice";
 
 function ConfirmationStep({ onBack }) {
+
+  const { information, basketProducts } = useSelector(state => state.basket);
 
   const dummyAddress = {
     addressTitle: "İş yeri",
@@ -20,64 +24,26 @@ function ConfirmationStep({ onBack }) {
     recipientName: "Hamza Doğan"
   };
 
+  console.log(basketProducts)
+
   return (
     <>
       <h2>Sipariş Detayları</h2>
-     
+
       <div className='order-details-box'>
         <div className="products-general-box">
           <div className="products-title-box">
             <img src={ProductBox} alt="" />
-            <p>Ürünler (Toplam 4 Ürün)</p>
+            <p>Ürünler (Toplam {information.productsNumber} Ürün)</p>
           </div>
           <div className="all-products">
             <div className="products-box">
-
-              <ProductItemCard
-                image={MacBookPro}
-                brand={"Apple"}
-                productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
-                price={434424}
-                quantity={10}
-              />
-
-              <ProductItemCard
-                image={MacBookPro}
-                brand={"Apple"}
-                productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
-                price={434424}
-                quantity={10}
-              />
-
-              <ProductItemCard
-                image={MacBookPro}
-                brand={"Apple"}
-                productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
-                price={434424}
-                quantity={10}
-              />
-              <ProductItemCard
-                image={MacBookPro}
-                brand={"Apple"}
-                productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
-                price={434424}
-                quantity={10}
-              />
-              <ProductItemCard
-                image={MacBookPro}
-                brand={"Apple"}
-                productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
-                price={434424}
-                quantity={10}
-              />
-              <ProductItemCard
-                image={MacBookPro}
-                brand={"Apple"}
-                productName={"Macbook Pro 15 Inc Ultra Vision Edition"}
-                price={434424}
-                quantity={10}
-              />
-
+              {basketProducts.map(product => (
+                <ProductItemCard
+                  key={product.referenceId}
+                 product={product}
+                />
+              ))}
             </div>
           </div>
 
@@ -108,7 +74,7 @@ function ConfirmationStep({ onBack }) {
           </div>
         </div>
 
-      </div>
+      </div >
       <GoBackStepButton onBack={onBack} />
     </>
   )

@@ -43,7 +43,7 @@ function Addresses() {
   //--------Modal Handlers--------
 
   const handleAddingProcess = () => {
-    if (addresses.length >= 3) {
+    if (addresses.length >= 4) {
       customErrorToast("Daha fazla adres ekleyemezsin");
       return;
     }

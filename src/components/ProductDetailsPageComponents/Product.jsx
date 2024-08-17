@@ -182,6 +182,7 @@ function Product({ product }) {
                                     style={{
                                         backgroundColor: color,
                                         border: selectedColor === color ? '4px solid #b0b0b0' : '4px solid #e0e0e0',
+                                        scale: selectedColor == color ? "1.2" : "1"
                                     }}
                                 >
                                 </button>

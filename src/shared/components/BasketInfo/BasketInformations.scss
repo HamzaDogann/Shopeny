@@ -6,6 +6,7 @@
     padding-bottom: 25px;
     border-radius: 20px;
     height: max-content;
+    width: 100%;
 
     &.fixedBar {
         position: sticky;
@@ -171,6 +172,9 @@
                 gap: 10px;
                 color: white;
 
+                @media (max-width:500px) {
+                    padding: 10px;
+                }
 
                 .icon {
                     font-size: 23px;
@@ -185,6 +189,10 @@
                 font-weight: 500;
                 border-radius: 5px;
                 @include move-opacity-effect(1s);
+
+                @media (max-width:500px) {
+                    padding: 10px;
+                }
             }
 
         }
@@ -318,7 +326,7 @@
             border-radius: 20px;
             width: 160px;
             font-weight: 500;
-            @include click-scale(0.7, 1s);
+            @include click-scale(0.8, 0.5s);
 
             &:hover {
                 transition: 0.3s ease-in-out;

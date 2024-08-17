@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 function RemainingTime() {
     const [time, setTime] = useState(180); 
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         if (time > 0) {
@@ -10,8 +13,10 @@ function RemainingTime() {
             }, 1000);
 
             return () => clearInterval(timer);
+        } else {
+            navigate(-1);
         }
-    }, [time]);
+    }, [time, navigate]);
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);

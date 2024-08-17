@@ -348,6 +348,10 @@
                         border-radius: 12px;
                         transition: all 0.2s ease-in-out;
 
+                        &:active{
+                           
+                        }
+
                         @media (max-width:500px) {
                             width: 35px;
                             height: 35px;

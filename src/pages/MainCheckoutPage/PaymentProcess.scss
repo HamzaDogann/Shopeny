@@ -30,6 +30,7 @@
 
         .content-box {
             width: 60%;
+            margin-right: 80px;
 
             @media (max-width:1000px) {
                 width: 100%;
@@ -59,7 +60,7 @@
         .basket-info-box {
             display: flex;
             justify-content: center;
-            width: 40%;
+            width: 30%;
 
             @media (max-width:1450px) {
                 justify-content: end;
