@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    isAddressSelected: false,
+    isAddressSelected: null,
     selectedAddressId: null,
     isPaymentInfoReceived: false,
     paymentInformations: {},
@@ -18,7 +18,7 @@ const paymentProcessSlice = createSlice({
                 state.isAddressSelected = true;
                 state.selectedAddressId = id;
             } else {
-                state.isAddressSelected = false;
+                state.isAddressSelected = null;
                 state.selectedAddressId = null;
             }
         },

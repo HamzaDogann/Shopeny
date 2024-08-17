@@ -15,9 +15,10 @@ import { customErrorToast, customSuccessToast } from "../../../shared/utils/Cust
 import { setIsAddress } from "../../../store/slices/PaymentProcess/PaymentProcessSlice";
 
 const AddressStep = () => {
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [isModalVisible, setModalVisible] = useState(false);
   const { addresses } = useSelector(state => state.addresses);
+  const { selectedAddressId } = useSelector(state => state.paymentProcess)
+  const [selectedAddress, setSelectedAddress] = useState(selectedAddressId);
+  const [isModalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
 
   const windowWidth = window.innerWidth;
