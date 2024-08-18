@@ -49,6 +49,7 @@
         @media (max-width:1000px) {
             padding: 0px 30px;
         }
+
         @media (max-width:500px) {
             padding: 0px;
         }
@@ -56,6 +57,7 @@
         .search-bar {
             width: 100%;
             position: relative;
+
             @media (max-width:800px) {
                 width: 70%;
             }
@@ -66,7 +68,7 @@
 
             .search-box {
                 width: 100%;
-                position: relative; 
+                position: relative;
                 @include flex-row;
                 align-items: center;
 
@@ -99,14 +101,16 @@
                     color: rgb(67, 67, 67);
                     transition: border-bottom 0s, border-radius 0s; // Animasyonu kaldır
                     transition: all 0.3s ease-in-out;
-                  
+
                     @media (max-width:1000px) {
                         font-size: 14px;
                     }
+
                     @media (max-width:800px) {
                         font-size: 16px;
                         height: 60px;
                     }
+
                     @media (max-width:500px) {
                         font-size: 16px;
                         height: 50px;
@@ -128,12 +132,12 @@
                 scale: 1.06;
                 border-radius: 10px;
                 box-sizing: border-box;
-                margin-top: 12px; 
+                margin-top: 12px;
                 padding: 8px;
                 background-color: #fff;
                 position: absolute;
                 z-index: 1;
-                transition: max-height 0.6s ease-in-out, opacity 0.2s ease-in-out; 
+                transition: max-height 0.6s ease-in-out, opacity 0.2s ease-in-out;
                 overflow-y: auto;
                 @include CustomScroll;
 
@@ -146,6 +150,7 @@
                         height: 200px;
                         max-height: 200px;
                     }
+
                     opacity: 1;
                     border-radius: 10px;
                     display: flex;
@@ -174,6 +179,7 @@
                     @media (max-width:1000px) {
                         font-size: 12px;
                     }
+
                     @media (max-width:500px) {
                         font-size: 14px;
                     }
@@ -277,6 +283,14 @@
         display: flex;
         align-items: center;
         justify-content: end;
+
+        @media (max-width:1300px) {
+            width: 40%;
+        }
+
+        @media (max-width:1240px) {
+            width: 30%;
+        }
     }
 }
 

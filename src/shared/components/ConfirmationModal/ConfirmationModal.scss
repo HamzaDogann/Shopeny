@@ -30,6 +30,7 @@
             color: rgb(87, 87, 87);
             text-align: center;
             max-width: 430px;
+            font-size: 17px;
 
             @media (max-width:1300px) {
                 font-size: 16px;
@@ -41,11 +42,11 @@
 
             button {
                 margin: 0 10px;
-                padding: 11px 31px;
+                padding: 9px 31px;
                 border: none;
                 border-radius: 8px;
                 color: #fff;
-                font-size: 15px;
+                font-size: 16px;
                 font-weight: 500;
                 cursor: pointer;
                 transition: all 0.2s ease-in-out;

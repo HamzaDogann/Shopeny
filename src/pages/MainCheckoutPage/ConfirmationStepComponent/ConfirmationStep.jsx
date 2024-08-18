@@ -60,7 +60,7 @@ function ConfirmationStep({ onBack }) {
                 <p className='address-recipient'>Alıcı: {selectedAddress.recipientName}</p>
               </div>
             ) : (
-              <p>Adres bulunamadı</p>
+              <p>Adres seçilmedi</p>
             )}
           </div>
         </div>

@@ -109,10 +109,6 @@ function Addresses() {
 
     }
   };
-  //DELETE CANCEL
-  const handleCancelDelete = () => {
-    dispatch(hideModal());
-  };
 
   return (
     <motion.div className='addresses-box'
@@ -179,7 +175,6 @@ function Addresses() {
 
       <ConfirmationModal
         onConfirm={handleConfirmDelete}
-        onCancel={handleCancelDelete}
       />
     </motion.div>
   );

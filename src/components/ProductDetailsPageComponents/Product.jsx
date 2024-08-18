@@ -99,34 +99,41 @@ function Product({ product }) {
     //=========== Data Process for basket===========
 
     const handleAddToCart = async (event) => {
-        if (!isAddedBasket) {
-            event.stopPropagation();
-            dispatch(clearError());
 
-            try {
-                const resultAction = await dispatch(addProductToBasket({
-                    uid: userId, product: product, color: selectedColor, amount: amount
-                }));
+        if (userId) {
+            if (!isAddedBasket) {
+                event.stopPropagation();
+                dispatch(clearError());
 
-                if (addProductToBasket.fulfilled.match(resultAction)) {
-                    customSuccessToast("Sepete Eklendi", 1800);
-                    setIsAddedBasket(true);
-                    setTimeout(() => {
-                        setIsAddedBasket(false);
-                    }, 2000);
-                } else if (addProductToBasket.rejected.match(resultAction)) {
-                    const error = resultAction.payload?.error;
+                try {
+                    const resultAction = await dispatch(addProductToBasket({
+                        uid: userId, product: product, color: selectedColor, amount: amount
+                    }));
 
-                    if (error === "product-limit") {
-                        customErrorToast(" Aynı üründen en fazla 5 tane ekleyebilirsiniz", 16, 3000);
-                    } else {
-                        customErrorToast("Ürün sepete eklenirken bir hata oluştu", 16, 2000);
+                    if (addProductToBasket.fulfilled.match(resultAction)) {
+                        customSuccessToast("Sepete Eklendi", 1800);
+                        setIsAddedBasket(true);
+                        setTimeout(() => {
+                            setIsAddedBasket(false);
+                        }, 2000);
+                    } else if (addProductToBasket.rejected.match(resultAction)) {
+                        const error = resultAction.payload?.error;
+
+                        if (error === "product-limit") {
+                            customErrorToast(" Aynı üründen en fazla 5 tane ekleyebilirsiniz", 16, 3000);
+                        } else {
+                            customErrorToast("Ürün sepete eklenirken bir hata oluştu", 16, 2000);
+                        }
                     }
+                } catch {
+                    customErrorToast("Beklenmeyen bir hata oluştu", 14, 2000);
                 }
-            } catch {
-                customErrorToast("Beklenmeyen bir hata oluştu", 14, 2000);
             }
         }
+        else {
+            navigate("/giris-yap");
+        }
+
     };
 
     //handle Color

@@ -34,9 +34,12 @@ const paymentProcessSlice = createSlice({
         },
         setIsPaymentInfoReceived: (state, action) => {
             state.isPaymentInfoReceived = action.payload;
+        },
+        clearPaymentProcess: (state) => {
+            Object.assign(state, initialState);
         }
     }
 });
 
-export const { setIsAddress, setPaymentInformations, setIsPaymentInfoReceived } = paymentProcessSlice.actions;
+export const { setIsAddress, setPaymentInformations, setIsPaymentInfoReceived,clearPaymentProcess } = paymentProcessSlice.actions;
 export default paymentProcessSlice.reducer;

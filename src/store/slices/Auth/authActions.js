@@ -32,6 +32,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearFavoriteProducts } from "../../thunks/User/favoriteProductThunk";
 import { clearFavorites } from "../User/favoriteProductsSlice";
 import { clearUpdateInformations } from "../User/accountDetailsSlice";
+import { clearPaymentProcess } from "../PaymentProcess/PaymentProcessSlice";
+import { clearOrders } from "../User/ordersSlice";
 
 
 export const authActions = {
@@ -296,4 +298,6 @@ const clearUserDatas = (dispatch) => {
     dispatch(clearAddresses());
     dispatch(clearFavorites());
     dispatch(clearUpdateInformations());
+    dispatch(clearPaymentProcess());
+    dispatch(clearOrders());
 }

@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     background-color: rgb(255, 255, 255);
-    z-index: 999999999999;
+    z-index: 1001;
     @include flex-center;
     align-items: center;
 
@@ -28,113 +28,164 @@
             }
         }
 
-    @media (max-width: 768px) {
-        border: 0px;
-    }
-
-    .title {
-        color: $shopenyTextGray;
-        font-size: 20px;
-        font-weight: 500;
-    }
-
-    .payment-informations {
-        padding: 10px 0px;
-        @include flex-column;
-        align-items: start;
-        margin: 20px 0px;
-        border-top: 2px solid rgb(216, 216, 216);
-        border-bottom: 2px solid rgb(216, 216, 216);
-        gap: 5px;
-        width: 100%;
-
-        .info-item {
-            @include flex-row-center;
-            font-size: 14px;
-            gap: 5px;
-
-            @media (max-width:340px) {
-                font-size: 12px;  
-            }
-
-            span {
-                font-weight: 400;
-            }
-        }
-    }
-
-    .verification-info {
-        width: 300px;
-        text-align: center;
-
-        p {
-            font-size: 14px;
-            font-weight: 400;
-        }
-    }
-
-    .verification-input-box {
-        margin-top: 20px;
-        @include flex-column;
-        gap: 8px;
-
-        span {
-            font-size: 14px;
+        @media (max-width: 768px) {
+            border: 0px;
         }
 
-        input {
-            width: 250px;
-            border: 2px solid rgb(216, 216, 216);
-            border-radius: 5px;
-
-            &:focus {
-                border: 2px solid $shopenyBlue;
-                outline: none;
-            }
-        }
-    }
-
-    .verification-buttons {
-        margin-top: 20px;
-        @include flex-column;
-        gap: 15px;
-
-        button {
-            width: 250px;
-            padding: 10px 0px;
-            border-radius: 6px;
-            font-size: 14px;
+        .title {
+            color: $shopenyTextGray;
+            font-size: 20px;
             font-weight: 500;
         }
 
-        :first-child {
+        .payment-informations {
+            padding: 10px 0px;
+            @include flex-column;
+            align-items: start;
+            margin: 20px 0px;
+            border-top: 2px solid rgb(216, 216, 216);
+            border-bottom: 2px solid rgb(216, 216, 216);
+            gap: 5px;
+            width: 100%;
+
+            .info-item {
+                @include flex-row-center;
+                font-size: 14px;
+                gap: 5px;
+
+                @media (max-width:340px) {
+                    font-size: 12px;
+                }
+
+                span {
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .verification-info {
+            width: 300px;
+            text-align: center;
+
+            p {
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+
+        .verification-input-box {
+            margin-top: 20px;
+            @include flex-column;
+            gap: 8px;
+
+            span {
+                font-size: 14px;
+            }
+
+            input {
+                width: 250px;
+                border: 2px solid rgb(216, 216, 216);
+                border-radius: 5px;
+
+                &:focus {
+                    border: 2px solid $shopenyBlue;
+                    outline: none;
+                }
+            }
+        }
+
+        .verification-buttons {
+            margin-top: 20px;
+            @include flex-column;
+            gap: 15px;
+
+            button {
+                width: 250px;
+                padding: 10px 0px;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            :first-child {
+                background-color: $shopenyOrange;
+                color: white;
+                transition: all 0.3s ease-in-out;
+
+                &:hover {
+                    @include shopenyOrangeHoverBackground;
+                }
+            }
+
+            :last-child {
+                transition: all 0.3s ease-in-out;
+                color: $shopenyTextGray;
+
+                &:hover {
+                    background-color: rgb(230, 230, 230);
+                }
+            }
+
+
+        }
+    }
+
+    .order-created-box {
+        @include flex-center;
+        flex-direction: column;
+        gap: 25px;
+
+        img {
+            width: 90px;
+            @media (max-width:400px) {
+                width: 80px;
+            }
+        }
+
+        p {
+
+            font-size: 25px;
+            font-weight: 600;
+            color: $shopenyTextGray;
+            @media (max-width:335px) {
+                font-size: 23px;
+                text-align: center;
+            }
+        }
+
+        span {
+            font-size: 16px;
+            font-weight: 500;
+            padding: 0px 15px;
+            text-align: center;
+            color: rgb(120, 132, 137);
+
+            a {
+                color: $shopenyOrange;
+                font-weight: 600;
+            }
+        }
+
+        .back-home-btn {
             background-color: $shopenyOrange;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 16px;
             color: white;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.2s ease-in-out;
 
             &:hover {
                 @include shopenyOrangeHoverBackground;
             }
         }
-
-        :last-child {
-            transition: all 0.3s ease-in-out;
-            color: $shopenyTextGray;
-
-            &:hover {
-                background-color: rgb(230, 230, 230);
-            }
-        }
-
-
     }
-}
 
-.remaining-time {
-    margin-top: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    color: $shopenyTextGray;
-}
+    .remaining-time {
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 500;
+        color: $shopenyTextGray;
+    }
 
 }

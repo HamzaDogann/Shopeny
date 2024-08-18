@@ -8,16 +8,27 @@ import { useEffect, useState } from 'react';
 import { formatPhoneNumber } from '../../../shared/utils/formatPhoneNumber';
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { addOrder } from '../../../store/thunks/User/ordersThunk';
+import Modal from '../../../shared/components/Modal/Modal';
+import { Link, useNavigate } from 'react-router-dom';
+import PreLoader from '../../../components/PreLoader/PreLoader';
+import successfulIcon from "../../../assets/images/paymentVerification/successful_icon.png";
+import AnimationBackground from "../../../shared/components/AnimationBackground/AnimationBackground";
+import { clearBasket } from '../../../store/thunks/Basket/basketThunk';
 function PaymentVerification({ onBack }) {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector(state => state.auth);
   const { information, basketProducts } = useSelector(state => state.basket);
+  const { loading } = useSelector(state => state.orders);
   const { addresses } = useSelector(state => state.addresses);
   const { selectedAddressId } = useSelector(state => state.paymentProcess);
   const selectedAddress = addresses.find(address => address.addressId === selectedAddressId);
+  const [verificationCode, setVerificationCode] = useState("");
 
   const [dateTime, setDateTime] = useState("");
+  const [orderCreated, setOrderCreated] = useState(false);
+
 
   useEffect(() => {
     const currentDateTime = new Date();
@@ -40,60 +51,92 @@ function PaymentVerification({ onBack }) {
 
   //-------------------------------------------------
 
-  const handleAcceptVerification = async () => {
-    console.log("Buraya girdi");
-    console.log(selectedAddress);
-    const orderData = {
-      basketProducts: basketProducts,
-      address: selectedAddress,
-      status: 'Onay Bekliyor',
-      date: new Date().toLocaleDateString('tr-TR')
-    };
 
-    try {
-      await dispatch(addOrder({ orderData })).unwrap();
-      customSuccessToast("Sipariş Oluşturuldu")
-    } catch {
-      customErrorToast("Sipariş Oluşturulamadı")
+  const handleAcceptVerification = async () => {
+    if (verificationCode == 12345) {
+
+      const orderData = {
+        basketProducts: basketProducts,
+        address: selectedAddress,
+        status: 'Onay Bekliyor',
+        date: new Date().toLocaleDateString('tr-TR'),
+        information: information
+      };
+
+      try {
+        await dispatch(addOrder({ orderData })).unwrap();
+        setOrderCreated(true);
+        dispatch(clearBasket());
+      } catch {
+        customErrorToast("Sipariş Oluşturulamadı")
+      }
+    }
+    else {
+      customErrorToast("Doğrulama Kodu Hatalı")
+      return;
     }
   };
 
+  const setModalVisible = () => {
+    navigate("/");
+  }
 
   return (
+
     <div className='payment-verification-box'>
-      <div className='payment-verification-modal'>
-        <p className='title'>Doğrulama kodu giriniz</p>
-        <div className='payment-informations'>
-          <div className='info-item'>
-            <p>İşyeri Adı :</p>
-            <span>Shopeny</span>
+      {!orderCreated ? <>
+        <div className='payment-verification-modal'>
+          <p className='title'>Doğrulama kodu giriniz</p>
+          <div className='payment-informations'>
+            <div className='info-item'>
+              <p>İşyeri Adı :</p>
+              <span>Shopeny</span>
+            </div>
+            <div className='info-item'>
+              <p>İşlem Tutarı :</p>
+              <span>{formatPrice(information.totalPrice)} ₺</span>
+            </div>
+            <div className='info-item'>
+              <p>İşlem Tarihi-Saati :</p>
+              <span>{dateTime}</span>
+            </div>
           </div>
-          <div className='info-item'>
-            <p>İşlem Tutarı :</p>
-            <span>{formatPrice(information.totalPrice)} ₺</span>
+          <div className='verification-info'>
+            <p>
+              {formatPhoneNumber(user.phoneNumber)} nolu telefon numarasına SMS ile gönderilen
+              SHOPENY referanslı doğrulama kodunu giriniz.
+            </p>
           </div>
-          <div className='info-item'>
-            <p>İşlem Tarihi-Saati :</p>
-            <span>{dateTime}</span>
+          <div className='verification-input-box'>
+            <span>Doğrulama Kodu</span>
+            <input value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} placeholder='12345' type="text" />
           </div>
+          <div className='verification-buttons'>
+            <button onClick={handleAcceptVerification}>Onayla</button>
+            <button onClick={handleCancelProcess} className='cancel-verification'>İşlemi iptal et</button>
+          </div>
+          <RemainingTime />
         </div>
-        <div className='verification-info'>
-          <p>
-            {formatPhoneNumber(user.phoneNumber)} nolu telefon numarasına SMS ile gönderilen
-            SHOPENY referanslı doğrulama kodunu giriniz.
-          </p>
-        </div>
-        <div className='verification-input-box'>
-          <span>Doğrulama Kodu</span>
-          <input placeholder='12345' type="text" />
-        </div>
-        <div className='verification-buttons'>
-          <button onClick={handleAcceptVerification}>Onayla</button>
-          <button onClick={handleCancelProcess} className='cancel-verification'>İşlemi iptal et</button>
-        </div>
-        <RemainingTime />
-      </div>
-      <ConfirmationModal onConfirm={handleConfirm} />
+        <ConfirmationModal onConfirm={handleConfirm} />
+      </>
+        :
+
+        <>
+          <Modal setModalVisible={setModalVisible} >
+            <div className='order-created-box'>
+              <img src={successfulIcon} alt="successful" />
+              <p>Siparişiniz Oluşturuldu</p>
+              <span>Siparişiniz başarılı bir şekilde oluşturuldu. Siparişinizin teslimatı için gerekli bilgiler satıcıya iletilmiştir.
+                Siparişinizin durumunu <Link to="/hesabim/siparislerim">Siparişlerim</Link> sayfasından takip edebilirsiniz.
+              </span>
+              <Link className='back-home-btn' to="/">Anasayfaya Dön</Link>
+            </div>
+          </Modal>
+          <AnimationBackground />
+        </>
+
+      }
+      {loading && <PreLoader />}
     </div>
   )
 }

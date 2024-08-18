@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ref, set, push } from 'firebase/database';
+import { ref, set, push, get, remove } from 'firebase/database';
 import { db } from '../../../services/firebase/config';
 import { getUserId } from '../../utils/getUserId';
 
@@ -8,16 +8,49 @@ export const addOrder = createAsyncThunk(
     async ({ orderData }, { rejectWithValue }) => {
         const userId = getUserId();
         const ordersRef = ref(db, `Data/Users/${userId}/orders`);
-console.log(orderData);
         try {
-            // Firebase'in otomatik olarak oluşturduğu benzersiz referansı almak için `push()` kullanın
-            const newOrderRef = push(ordersRef);
-            const orderId = newOrderRef.key; // Referansın benzersiz anahtarını al
 
-            // orderData'ya orderId ekle
+            const newOrderRef = push(ordersRef);
+            const orderId = newOrderRef.key;
+
             const orderWithId = { ...orderData, orderId };
             await set(newOrderRef, orderWithId);
-            return orderWithId; // orderId ile birlikte döndür
+            return orderWithId;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+
+export const fetchOrders = createAsyncThunk(
+    'orders/fetchOrders',
+    async (_, { rejectWithValue }) => {
+        console.log("SİPARİŞLER ÇEKME İŞLEMİNDE")
+        const userId = getUserId();
+        const ordersRef = ref(db, `Data/Users/${userId}/orders`);
+        try {
+            const snapshot = await get(ordersRef);
+            if (!snapshot.exists()) {
+                return [];
+            }
+            const orders = snapshot.val();
+            return Object.values(orders);
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+);
+
+
+export const removeOrder = createAsyncThunk(
+    'orders/removeOrder',
+    async ({ orderId }, { rejectWithValue }) => {
+        const userId = getUserId();
+        const orderRef = ref(db, `Data/Users/${userId}/orders/${orderId}`);
+        try {
+            await remove(orderRef);
+            return orderId; 
         } catch (error) {
             return rejectWithValue(error.message);
         }

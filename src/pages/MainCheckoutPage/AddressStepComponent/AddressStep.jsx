@@ -69,7 +69,7 @@ const AddressStep = () => {
             <div className="address-card" key={address.addressId}>
               <div className="address-informations">
                 <p className='address-title'>{truncateName(address.addressTitle, truncateLength)}</p>
-                <p className='address-name'>{address.street}, {address.neighborhood}, {address.district}, {address.city} {address.postalCode}</p>
+                <p className='address-name'>{address.street}, {address.neighborhood}, {address.district}, {address.city}, {address.postalCode}</p>
                 <p className='address-recipient'>Alıcı: {address.recipientName}</p>
               </div>
 
