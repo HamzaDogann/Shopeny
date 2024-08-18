@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import "./PaymentStep.scss";
 import Cards from 'react-credit-cards-2';
 import "react-credit-cards-2/dist/lib/styles.scss";
 import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
+import { setIsPaymentInfoReceived, setPaymentInformations } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
 
-function PaymentStep({ onBack }) {
-  const [cardInformations, setCardInformations] = useState({
-    number: '',
-    expiry: '0125',
-    cvc: '',
-    name: '',
-    focus: '',
-  });
-  const [expiryMonth, setExpiryMonth] = useState('01');
-  const [expiryYear, setExpiryYear] = useState('25');
+function usePaymentForm(initialValues) {
+
+  const dispatch = useDispatch();
+  const [cardInformations, setCardInformations] = useState(initialValues);
+  const [expiryMonth, setExpiryMonth] = useState(initialValues.expiry.slice(0, 2));
+  const [expiryYear, setExpiryYear] = useState(initialValues.expiry.slice(2, 4));
 
   const handleInputChange = (evt) => {
     const { name, value } = evt.target;
@@ -27,15 +25,56 @@ function PaymentStep({ onBack }) {
     } else {
       setCardInformations((prev) => ({ ...prev, [name]: value }));
     }
-  }
+  };
 
   const handleInputFocus = (evt) => {
     setCardInformations((prev) => ({ ...prev, focus: evt.target.name }));
-  }
+  };
+
+  useEffect(() => {
+    const isFormValid = cardInformations.number.length === 16 &&
+      cardInformations.cvc.length >= 3 && cardInformations.cvc.length <= 4 &&
+      cardInformations.name.trim() !== '' &&
+      expiryMonth.length === 2 && expiryYear.length === 2;
+
+    if (isFormValid) {
+      dispatch(setPaymentInformations({
+        nameOnCard: cardInformations.name,
+        cardNumber: cardInformations.number,
+        month: expiryMonth,
+        year: expiryYear,
+        cvv: cardInformations.cvc
+      }));
+    } else {
+      dispatch(setIsPaymentInfoReceived(false));
+    }
+  }, [cardInformations, expiryMonth, expiryYear, dispatch]);
+
+  return {
+    cardInformations,
+    expiryMonth,
+    expiryYear,
+    handleInputChange,
+    handleInputFocus
+  };
+}
+
+function PaymentStep({ onBack }) {
+
+  const paymentInformations = useSelector((state) => state.paymentProcess.paymentInformations);
+
+  const { cardInformations, expiryMonth, expiryYear, handleInputChange, handleInputFocus }
+    = usePaymentForm({
+      number: paymentInformations.cardNumber || '',
+      expiry: paymentInformations.month + paymentInformations.year || '0125',
+      cvc: paymentInformations.cvv || '',
+      name: paymentInformations.nameOnCard || '',
+      focus: '',
+    });
 
   return (
     <>
-      <h2 style={{marginBottom:"50px"}}>Ödeme Bilgilerinizi Girin</h2>
+      <h2 style={{ marginBottom: "50px" }}>Ödeme Bilgilerinizi Girin</h2>
       <div className='payment-general-box'>
         <div className='payment-form-box'>
           <form>

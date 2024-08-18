@@ -33,8 +33,10 @@ const basketSlice = createSlice({
             state.information = updateBasketInformation(state.basketProducts, state.information);
         },
         updatePromotion: (state, action) => {
-            const promotionCode = action.payload;
-            const foundPromotion = promotions.find(promo => promo.code === promotionCode);
+      
+            const promotionCode = action.payload.toLowerCase();
+
+            const foundPromotion = promotions.find(promo => promo.code.toLowerCase() === promotionCode);
 
             if (foundPromotion) {
                 state.information.promotion = true;
@@ -47,6 +49,7 @@ const basketSlice = createSlice({
                 state.information = updateBasketInformation(state.basketProducts, state.information);
             }
         },
+
         removePromotion: (state) => {
             state.information.promotion = false;
             state.information.promotionDiscount = 0;

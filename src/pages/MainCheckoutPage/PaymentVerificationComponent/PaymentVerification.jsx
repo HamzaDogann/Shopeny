@@ -5,10 +5,17 @@ import RemainingTime from '../../../components/CheckoutPagesComponents/Remaining
 import "./PaymentVerification.scss";
 import { formatPrice } from '../../../shared/utils/formatPrice';
 import { useEffect, useState } from 'react';
+import { formatPhoneNumber } from '../../../shared/utils/formatPhoneNumber';
+import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
+import { addOrder } from '../../../store/thunks/User/ordersThunk';
 function PaymentVerification({ onBack }) {
 
   const dispatch = useDispatch();
-  const { information } = useSelector(state => state.basket);
+  const { user } = useSelector(state => state.auth);
+  const { information, basketProducts } = useSelector(state => state.basket);
+  const { addresses } = useSelector(state => state.addresses);
+  const { selectedAddressId } = useSelector(state => state.paymentProcess);
+  const selectedAddress = addresses.find(address => address.addressId === selectedAddressId);
 
   const [dateTime, setDateTime] = useState("");
 
@@ -33,9 +40,22 @@ function PaymentVerification({ onBack }) {
 
   //-------------------------------------------------
 
-  //Ödeme İşlemini Onayladıktan Sonra yapılacak işlemler.
-  const handleAcceptVerification = () => {
+  const handleAcceptVerification = async () => {
+    console.log("Buraya girdi");
+    console.log(selectedAddress);
+    const orderData = {
+      basketProducts: basketProducts,
+      address: selectedAddress,
+      status: 'Onay Bekliyor',
+      date: new Date().toLocaleDateString('tr-TR')
+    };
 
+    try {
+      await dispatch(addOrder({ orderData })).unwrap();
+      customSuccessToast("Sipariş Oluşturuldu")
+    } catch {
+      customErrorToast("Sipariş Oluşturulamadı")
+    }
   };
 
 
@@ -58,7 +78,8 @@ function PaymentVerification({ onBack }) {
           </div>
         </div>
         <div className='verification-info'>
-          <p>05XX XXX XX 90 nolu telefon numarasına SMS ile gönderilen
+          <p>
+            {formatPhoneNumber(user.phoneNumber)} nolu telefon numarasına SMS ile gönderilen
             SHOPENY referanslı doğrulama kodunu giriniz.
           </p>
         </div>

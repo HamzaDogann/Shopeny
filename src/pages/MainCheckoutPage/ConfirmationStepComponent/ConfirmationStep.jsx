@@ -9,22 +9,16 @@ import { FaCreditCard } from "react-icons/fa";
 import { FaTruckFast } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { formatPrice } from "../../../shared/utils/formatPrice";
+import { formatCardNumber } from "../../../shared/utils/formatCardNumber";
 
 function ConfirmationStep({ onBack }) {
 
   const { information, basketProducts } = useSelector(state => state.basket);
+  const { paymentInformations } = useSelector(state => state.paymentProcess);
+  const { selectedAddressId } = useSelector(state => state.paymentProcess);
+  const { addresses } = useSelector(state => state.addresses);
 
-  const dummyAddress = {
-    addressTitle: "İş yeri",
-    city: "İstanbul",
-    district: "Kadıköy",
-    neighborhood: "Barbaros",
-    street: "Ata Cad. No:123 D:5",
-    postalCode: "34750",
-    recipientName: "Hamza Doğan"
-  };
-
-  console.log(basketProducts)
+  const selectedAddress = addresses.find(address => address.addressId === selectedAddressId);
 
   return (
     <>
@@ -41,7 +35,7 @@ function ConfirmationStep({ onBack }) {
               {basketProducts.map(product => (
                 <ProductItemCard
                   key={product.referenceId}
-                 product={product}
+                  product={product}
                 />
               ))}
             </div>
@@ -55,11 +49,19 @@ function ConfirmationStep({ onBack }) {
             <p>Teslim Adresi</p>
           </div>
           <div className='address-card'>
-            <div className='address-informations'>
-              <p className='address-title'>{dummyAddress.addressTitle}</p>
-              <p className='address-name'>{dummyAddress.street}, {dummyAddress.neighborhood}, {dummyAddress.district}, {dummyAddress.city} {dummyAddress.postalCode}</p>
-              <p className='address-recipient'>Alıcı: {dummyAddress.recipientName}</p>
-            </div>
+            {selectedAddress ? (
+              <div className='address-informations'>
+                <p className='address-title'>{selectedAddress.addressTitle}</p>
+                <p className='address-name'>
+                  {selectedAddress.street}, {selectedAddress.neighborhood},
+                  {selectedAddress.district}, {selectedAddress.city}
+                  {selectedAddress.postalCode}
+                </p>
+                <p className='address-recipient'>Alıcı: {selectedAddress.recipientName}</p>
+              </div>
+            ) : (
+              <p>Adres bulunamadı</p>
+            )}
           </div>
         </div>
 
@@ -70,7 +72,7 @@ function ConfirmationStep({ onBack }) {
           </div>
 
           <div className="payment-card-informations">
-            <p><strong>4242 9429 4294 9249</strong> Numaralı Kredi/Banka Kartı</p>
+            <p> <strong>{formatCardNumber(paymentInformations.cardNumber)}</strong> Numaralı Kredi/Banka Kartı</p>
           </div>
         </div>
 

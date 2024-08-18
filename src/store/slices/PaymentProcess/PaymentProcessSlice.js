@@ -4,7 +4,13 @@ const initialState = {
     isAddressSelected: null,
     selectedAddressId: null,
     isPaymentInfoReceived: false,
-    paymentInformations: {},
+    paymentInformations: {
+        nameOnCard: "",
+        cardNumber: "",
+        month: "",
+        year: "",
+        cvv: "",
+    },
     isPaymentConfirmed: false,
 };
 
@@ -22,8 +28,15 @@ const paymentProcessSlice = createSlice({
                 state.selectedAddressId = null;
             }
         },
+        setPaymentInformations: (state, action) => {
+            state.paymentInformations = action.payload;
+            state.isPaymentInfoReceived = action.payload.nameOnCard !== '';
+        },
+        setIsPaymentInfoReceived: (state, action) => {
+            state.isPaymentInfoReceived = action.payload;
+        }
     }
 });
 
-export const { setIsAddress } = paymentProcessSlice.actions;
+export const { setIsAddress, setPaymentInformations, setIsPaymentInfoReceived } = paymentProcessSlice.actions;
 export default paymentProcessSlice.reducer;

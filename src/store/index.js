@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+//Reducers
 import preLoaderReducer from './slices/preLoaderSlice'
 import authReducer from './slices/Auth/authSlice'
 import modalReducer from './slices/confirmationModalSlice'
@@ -12,6 +13,7 @@ import favoriteProductsReducer from './slices/User/favoriteProductsSlice'
 import accountDetailsReducer from './slices/User/accountDetailsSlice'
 import basketReducer from './slices/Basket/basketSlice'
 import PaymentProcessReducer from './slices/PaymentProcess/PaymentProcessSlice'
+import ordersReducer from './slices/User/ordersSlice'
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +29,7 @@ export const store = configureStore({
     favoriteProducts: favoriteProductsReducer,
     accountDetails: accountDetailsReducer,
     basket: basketReducer,
-    paymentProcess: PaymentProcessReducer
+    paymentProcess: PaymentProcessReducer,
+    orders: ordersReducer
   },
 })

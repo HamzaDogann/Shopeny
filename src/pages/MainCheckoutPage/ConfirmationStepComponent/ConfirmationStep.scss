@@ -135,7 +135,7 @@
 
             .address-informations {
                 @include flex-column;
-                gap: 7px;
+                gap: 5px;
 
                 .address-title {
                     font-size: 20px;
@@ -150,6 +150,7 @@
                 }
 
                 .address-name {
+             
                     font-size: 16px;
                     color: rgb(93, 93, 93);
 
@@ -203,8 +204,8 @@
 
             p {
                 font-size: 16px;
-                color: $shopenyTextGray;
                 font-weight: 500;
+                color: rgb(93, 93, 93);
 
                 @media (max-width:1300px) {
                     font-size: 14px;

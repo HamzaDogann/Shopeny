@@ -12,6 +12,8 @@ import { BiSolidDiscount } from "react-icons/bi";
 import { HiMiniShoppingBag } from "react-icons/hi2";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { TbShoppingCartCheck } from "react-icons/tb";
+import { TbShoppingBag } from "react-icons/tb";
+import { TbShoppingBagCheck } from "react-icons/tb";
 
 import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts"
 import { formatPrice } from '../../shared/utils/formatPrice';
@@ -213,12 +215,12 @@ function Product({ product }) {
                                     onClick={handleAddToCart}
                                     className={`add-basket ${isAddedBasket ? 'added' : ''}`}>
                                     {isAddedBasket ?
-                                        <>  <TbShoppingCartCheck className='icon' />
+                                        <>  <TbShoppingBagCheck className='icon' />
                                             <span>Sepete Eklendi</span>
                                         </>
                                         :
                                         <>
-                                            <HiMiniShoppingBag className='icon' />
+                                            <TbShoppingBag className='icon' />
                                             <span>Sepete Ekle</span>
                                         </>
                                     }
