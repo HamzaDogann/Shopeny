@@ -16,10 +16,11 @@ function Order() {
   const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
+
     if (orders.length === 0) {
-      dispatch(fetchOrders());
+        dispatch(fetchOrders());
     }
-  }, [dispatch, orders.length]);
+}, [dispatch, orders.length]);
 
   //Delete Order
   const handleDeleteProcess = (orderId) => {

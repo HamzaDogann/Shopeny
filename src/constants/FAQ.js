@@ -33,7 +33,7 @@ export const questionsAnswers = [
     },
     {
         "question": "Siparişimi nasıl iptal edebilirim?",
-        "answer": "Siparişinizi iptal etmek için müşteri hizmetleri ekibimize başvurmanız gerekmektedir. Siparişiniz kargoya verilmeden önce iptal talebiniz işleme alınacaktır. Kargo aşamasında olan siparişler için iptal işlemi mümkün olmayabilir. İptal taleplerinizin hızlı işleme alınması için mümkün olan en kısa sürede bizimle iletişime geçmelisiniz."
+        "answer": "Siparişinizi iptal etmek için siparişlerim sayfasından siparişi iptal et butonuna basarak iptal edebilirsiniz. Siparişiniz kargoya verilmeden önce iptal talebiniz işleme alınacaktır. Kargo aşamasında olan siparişler için iptal işlemi mümkün olmayabilir. İptal taleplerinizin hızlı işleme alınması için mümkün olan en kısa sürede bizimle iletişime geçmelisiniz."
     },
 
 ];

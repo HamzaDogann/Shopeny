@@ -7,7 +7,7 @@ import { formatPrice } from '../../../shared/utils/formatPrice';
 import { useEffect, useState } from 'react';
 import { formatPhoneNumber } from '../../../shared/utils/formatPhoneNumber';
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
-import { addOrder } from '../../../store/thunks/User/ordersThunk';
+import { addOrder, fetchOrders } from '../../../store/thunks/User/ordersThunk';
 import Modal from '../../../shared/components/Modal/Modal';
 import { Link, useNavigate } from 'react-router-dom';
 import PreLoader from '../../../components/PreLoader/PreLoader';
@@ -65,6 +65,7 @@ function PaymentVerification({ onBack }) {
 
       try {
         await dispatch(addOrder({ orderData })).unwrap();
+        dispatch(fetchOrders());
         setOrderCreated(true);
         dispatch(clearBasket());
       } catch {

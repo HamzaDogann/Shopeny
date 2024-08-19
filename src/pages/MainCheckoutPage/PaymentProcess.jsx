@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import CustomStepperComponent from '../../shared/components/Stepper/CustomStepper.jsx';
 import AddressStep from "./AddressStepComponent/AddressStep.jsx";
 import PaymentStep from "./PaymentStepComponent/PaymentStep.jsx";
@@ -6,13 +7,20 @@ import ConfirmationStep from "./ConfirmationStepComponent/ConfirmationStep.jsx";
 import PaymentVerification from "./PaymentVerificationComponent/PaymentVerification.jsx";
 import BasketInformations from '../../shared/components/BasketInfo/BasketInformations.jsx';
 import MiniBasketInfo from '../../shared/components/MiniBasketInfo/MiniBasketInfo.jsx';
+import { useNavigate } from 'react-router-dom';
 import "./PaymentProcess.scss";
 
 const PaymentProcess = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const navigate = useNavigate();
 
- 
-  
+  const { basketProducts } = useSelector(state => state.basket);
+
+  if (!basketProducts.length > 0 && currentStep !== 3) {
+    navigate("/");
+    return null; 
+  }
+
   useEffect(() => {
     const handlePopState = (event) => {
       if (currentStep > 0) {
@@ -96,10 +104,10 @@ const PaymentProcess = () => {
         <div className='basket-info-box'>
           {currentStep !== 2
             ? <BasketInformations
-                currentStep={currentStep}
-                onGoPayment={handleGoPayment}
-                onGoConfirm={handleGoConfirm}
-              />
+              currentStep={currentStep}
+              onGoPayment={handleGoPayment}
+              onGoConfirm={handleGoConfirm}
+            />
             : <MiniBasketInfo onGoVerification={handleGoVerification} handleBack={handleBack} />}
         </div>
       </div>

@@ -65,9 +65,9 @@ export const addProductToBasket = createAsyncThunk(
                 }
 
                 const newBasketProduct = createBasketProduct(product, selectedColor, amount);
-                const newProductRef = push(basketRef); // Yeni referans oluştur
-                await set(newProductRef, newBasketProduct); // Yeni ürün ekle
-                return { ...newBasketProduct, referenceId: newProductRef.key }; // Döndür
+                const newProductRef = push(basketRef); 
+                await set(newProductRef, newBasketProduct); 
+                return { ...newBasketProduct, referenceId: newProductRef.key }; 
             }
         } catch (error) {
             console.error("Ürün eklenirken bir hata oluştu:", error);

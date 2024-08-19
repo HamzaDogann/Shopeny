@@ -30,10 +30,27 @@ import React from 'react'
 import truncateName from '../../utils/truncateName'
 import "./ProductItemCard.scss";
 import { formatPrice } from '../../utils/formatPrice';
+import { Skeleton } from '@mui/material';
+import useLazyImage from '../../hooks/useLazyImage';
 function ProductItemCard({ product }) {
+
+    const { imageStyle, skeletonProps, onLoad } = useLazyImage({
+        src: product.mainImage,
+        width: 80,
+        height: 80,
+        borderRadius: "12px"
+    });
+
     return (
         <div className="product-item">
-            <img src={product.mainImage} alt="" />
+            <Skeleton {...skeletonProps} />
+            <img
+                className='product-img'
+                src={product.mainImage}
+                alt=""
+                style={imageStyle}
+                onLoad={onLoad}
+            />
             <div className="item-info">
                 <div className='name-color-brand-box'>
                     <span>{product.productBrand}</span>

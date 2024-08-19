@@ -8,8 +8,10 @@ import { removeBasketProduct, updateBasketProductAmount } from '../../store/thun
 import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
 import { useNavigate } from 'react-router-dom';
 import { translateCategoryNameToTurkish } from "../../constants/categories";
-import { LazyLoadComponent } from 'react-lazy-load-image-component';
+import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component';
 import { slugify } from '../../shared/utils/slugify';
+import useLazyImage from '../../shared/hooks/useLazyImage';
+import { Skeleton } from '@mui/material';
 
 function BasketProduct({ product }) {
 
@@ -17,6 +19,13 @@ function BasketProduct({ product }) {
     const navigate = useNavigate();
     const [amount, setAmount] = useState(product.amount);
     const debouncedAmount = useDebounce(amount, 500);
+
+    const { imageStyle, skeletonProps, onLoad } = useLazyImage({
+        src: product.mainImage,
+        width: 110,
+        height: 110,
+        borderRadius: "12px"
+    });
 
 
     useEffect(() => {
@@ -58,7 +67,14 @@ function BasketProduct({ product }) {
 
     return (
         <div className='basket-product'>
-            <img onClick={handleProductLink} src={product.mainImage} alt="" />
+            <LazyLoadImage
+                onClick={handleProductLink}
+                src={product.mainImage}
+                alt=""
+                effect="blur"
+                className='basket-product-image'
+            
+            />
             <div className='product-infos-box'>
                 <p className='product-brand'>{product.productBrand}</p>
                 <p onClick={handleProductLink} className='product-name'>{truncateName(product.productName, 30)}</p>

@@ -50,7 +50,7 @@ export const removeOrder = createAsyncThunk(
         const orderRef = ref(db, `Data/Users/${userId}/orders/${orderId}`);
         try {
             await remove(orderRef);
-            return orderId; 
+            return orderId;
         } catch (error) {
             return rejectWithValue(error.message);
         }

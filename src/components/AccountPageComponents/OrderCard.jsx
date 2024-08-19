@@ -42,15 +42,11 @@ function OrderCard({ order, onDelete }) {
                 <p className='dividing-line'></p>
 
                 <div className='address-informations'>
-                    <h2>Adres</h2>
+               
                     <div className='address'>
                         <p className='address-title'>{order.address.addressTitle}</p>
                         <p className='address-name'>
-                            {order.address.street},
-                            {order.address.neighborhood},
-                            {order.address.district},
-                            {order.address.city},
-                            {order.address.postalCode}
+                            {order.address.street}, {order.address.neighborhood}, {order.address.district}, {order.address.city}, {order.address.postalCode}
                         </p>
                         <p className='address-recipient'>Alıcı: <span>{order.address.recipientName}</span></p>
                     </div>
