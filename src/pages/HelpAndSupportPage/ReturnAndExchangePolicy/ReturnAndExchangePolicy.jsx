@@ -1,9 +1,10 @@
 import React from 'react'
 import "./ReturnAndExchangePolicy.scss";
-
+import { motion } from 'framer-motion';
+import { opacityAndTransformEffect } from '../../../shared/animations/animations';
 function ReturnAndExchangePolicy() {
   return (
-    <div>
+    <motion.div {...opacityAndTransformEffect('y', 23, 0.5)}>
       <h2>İade ve Değişim Politikası</h2>
       <div className='return-and-exchange-box'>
         <p> Müşteri memnuniyeti bizim önceliğimizdir. Alışveriş deneyiminizi daha güvenli ve keyifli hale getirmek için kolay ve anlaşılır bir iade ve değişim politikası sunuyoruz. Eğer satın aldığınız üründen memnun kalmadıysanız ya da farklı bir ürünle değiştirmek istiyorsanız, sizlere yardımcı olmaktan memnuniyet duyarız. Aşağıda, iade ve değişim süreçleri hakkında bilmeniz gereken tüm detayları bulabilirsiniz. Ürünlerinizi orijinal ambalajında, faturası ile birlikte belirtilen süre içinde iade edebilir veya değiştirebilirsiniz.</p>
@@ -25,7 +26,7 @@ function ReturnAndExchangePolicy() {
           <li>İade edilen ürün tarafımıza ulaştığında, ürünün iade koşullarına uygun olup olmadığını kontrol ederiz. İade talebiniz onaylandıktan sonra, geri ödeme işlemi başlatılır. Geri ödemenin hesabınıza yansıması, kullanılan ödeme yöntemine bağlı olarak genellikle 5-7 iş günü sürebilir. İade süreci boyunca sizi bilgilendirmek için e-posta veya telefon yoluyla iletişim kuracağız.</li>
         </ul>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

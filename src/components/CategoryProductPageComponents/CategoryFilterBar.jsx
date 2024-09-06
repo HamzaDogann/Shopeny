@@ -3,7 +3,8 @@ import Checkbox from '../../shared/helpers/Checkbox';
 import { Slider, Box, Rating } from '@mui/material';
 import { MdClose } from "react-icons/md";
 import { colors } from "../../constants/FilterColors";
-
+import { opacityAndTransformEffect } from '../../shared/animations/animations';
+import { motion } from "framer-motion";
 function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClearFilters, closeFilterMenuFunc, clearFilters, isFilterButtonEnable, setIsFilterButtonEnable }) {
 
   //Filter States

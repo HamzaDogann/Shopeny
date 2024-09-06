@@ -7,7 +7,10 @@ import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import RadioButton from '../../shared/helpers/RadioButton';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
+import { motion } from 'framer-motion';
+
 import "./Auth.scss";
+import { opacityAndTransformEffect } from '../../shared/animations/animations';
 function SignUp() {
 
   const dispatch = useDispatch();
@@ -60,7 +63,7 @@ function SignUp() {
 
   return (
     <>
-      <div className='sign-box' style={{ marginBottom: "70px" }}>
+      <motion.div {...opacityAndTransformEffect('y', 18, 0.4)}  className='sign-box' style={{ marginBottom: "70px" }}>
         {/* Sign-Up Modal */}
         <div className='sign-modal sign-up-box'>
           <h2>Üye Ol</h2>
@@ -172,7 +175,7 @@ function SignUp() {
 
           </form>
         </div>
-      </div>
+      </motion.div>
 
       {showAgreement && <MembershipAgreement handleAgreement={handleAgreement} />}
       <AnimationBackground />

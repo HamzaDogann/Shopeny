@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/slices/Auth/authActions.js';
 import { Link, useNavigate } from 'react-router-dom';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground.jsx';
+import { motion } from 'framer-motion';
+
 //Styles - Images - Icons
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import "./Auth.scss";
@@ -14,6 +16,7 @@ import { LuEye } from "react-icons/lu";
 import { LuEyeOff } from "react-icons/lu";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { opacityAndTransformEffect } from '../../shared/animations/animations.js';
 
 
 
@@ -52,12 +55,12 @@ function SignIn() {
     <div className='sign-box'>
 
       {/* Logo */}
-      <div className='shopeny-logo'>
+      <motion.div {...opacityAndTransformEffect('y', 20, 0.5)} className='shopeny-logo'>
         <img src={ShopenyLogo} alt="ShopenyLogo" />
-      </div>
+      </motion.div>
 
       {/* Sign-In Modal */}
-      <div className='sign-modal'>
+      <motion.div {...opacityAndTransformEffect('y', 20, 0.5)} className='sign-modal'>
         <h2>Giriş Yap</h2>
         <h3 className='linear-colors-h3'></h3>
 
@@ -113,7 +116,7 @@ function SignIn() {
         <div className='account-status-box'>
           <p>Hesabınız yok mu?  <Link to="/uye-ol">Üye Ol</Link></p>
         </div>
-      </div >
+      </motion.div>
       <div>
       </div>
 

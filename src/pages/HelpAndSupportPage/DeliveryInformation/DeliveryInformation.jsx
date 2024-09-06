@@ -3,11 +3,13 @@ import Fee from "../../../assets/images/DeliveryInformations/Fee.png"
 import Location from "../../../assets/images/DeliveryInformations/Location.png"
 import Time from "../../../assets/images/DeliveryInformations/Time.png"
 import Cargo from "../../../assets/images/DeliveryInformations/Cargo.png"
+import { motion } from 'framer-motion';
 
 import "./DeliveryInformation.scss";
+import { opacityAndTransformEffect } from '../../../shared/animations/animations'
 function DeliveryInformation() {
   return (
-    <div>
+    <motion.div  {...opacityAndTransformEffect('y', 25, 0.5)}>
       <h2>Teslimat Bilgileri</h2>
       <div className='delivery-information-box'>
         <p>Değerli müşterilerimiz, siparişlerinizi güvenle ve zamanında teslim almanız bizim önceliğimizdir. Bu sayfada, siparişlerinizin teslimat süreci hakkında bilmeniz gereken tüm detayları bulabilirsiniz. Teslimat hizmetlerimizle ilgili her türlü sorunuz ve öneriniz için müşteri hizmetlerimizle iletişime geçmekten çekinmeyin. Sizlere en iyi alışveriş deneyimini sunmak için buradayız!</p>
@@ -52,14 +54,14 @@ function DeliveryInformation() {
             <h4>Kargo Ücretleri</h4>
             <ul>
               <li><strong>Standart Kargo Ücretleri:</strong> 100 TL ve üzeri alışverişlerinizde ücretsiz kargo imkanı sunuyoruz. Ücretsiz kargo kampanyası, yalnızca standart teslimat seçeneği için geçerlidir.</li>
-              <li><strong>Hızlı Kargo Ücretleri:</strong> Şehir içi teslimat ücretimiz 30 TL, şehir dışı teslimat ücretimiz ise 60 TL'dir. Kargo ücretleri, sipariş toplamına eklenerek ödeme sayfasında görüntülenir.</li>
+              <li><strong>Hızlı Kargo Ücretleri:</strong> Şehir içi teslimat ücretimiz 50 TL, şehir dışı teslimat ücretimiz ise 80 TL'dir. Kargo ücretleri, sipariş toplamına eklenerek ödeme sayfasında görüntülenir.</li>
             </ul>
           </div>
         </div>
 
       </div>
 
-    </div>
+    </motion.div>
   )
 }
 

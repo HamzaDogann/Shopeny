@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import OrderCard from "../../../components/AccountPageComponents/OrderCard";
 import NoOrder from "../../../assets/images/Orders/NoOrder.png";
 import NoContent from "../../../components/AccountPageComponents/NoContent";
-
+import { motion } from 'framer-motion';
 import { fetchOrders, removeOrder } from "../../../store/thunks/User/ordersThunk";
 import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
 import ConfirmationModal from "../../../shared/components/ConfirmationModal/ConfirmationModal";
 import { showModal } from "../../../store/slices/confirmationModalSlice";
 import "./Order.scss";
+import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations";
 function Order() {
 
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ function Order() {
   useEffect(() => {
 
     if (orders.length === 0) {
-        dispatch(fetchOrders());
+      dispatch(fetchOrders());
     }
-}, [dispatch, orders.length]);
+  }, [dispatch, orders.length]);
 
   //Delete Order
   const handleDeleteProcess = (orderId) => {
@@ -46,14 +47,18 @@ function Order() {
       <div className='orders-box'>
         {orders.length > 0 ? (
           <>
-            <h2>Siparişlerim</h2>
-            <div className='orders'>
+            <motion.h2 {...opacityAndTransformEffect('y', 20, 0.4)}>
+              Siparişlerim
+            </motion.h2>
+            
+            <motion.div className='orders' variants={createContainerVariants(0.6, 0.3)} initial="hidden" animate="visible">
               {orders.map((order) => (
-                <OrderCard
-                  onDelete={handleDeleteProcess}
-                  key={order.orderId} order={order} />
+                <motion.div key={order.orderId} variants={createItemVariants(20, 0)}>
+                  <OrderCard onDelete={handleDeleteProcess} order={order} />
+                </motion.div>
+
               ))}
-            </div>
+            </motion.div>
           </>
         ) : (
           <NoContent

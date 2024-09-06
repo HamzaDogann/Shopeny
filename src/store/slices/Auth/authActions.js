@@ -27,9 +27,7 @@ import { clearAddresses } from "../User/addressesSlice";
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
 import { startLoading, stopLoading } from "../preLoaderSlice";
-import { newUserRegistration, newUserRegistrationWithGoogle, newUserRegistrationWithFacebook } from '../../../services/firebase/database/newUserRegisterOperations';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearFavoriteProducts } from "../../thunks/User/favoriteProductThunk";
+import { newUserRegistration, newUserRegistrationWithGoogle } from '../../../services/firebase/database/newUserRegisterOperations';
 import { clearFavorites } from "../User/favoriteProductsSlice";
 import { clearUpdateInformations } from "../User/accountDetailsSlice";
 import { clearPaymentProcess } from "../PaymentProcess/PaymentProcessSlice";
@@ -183,17 +181,20 @@ export const authActions = {
 
             if (!snapshot.exists()) {
                 customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
-                return;
+                return Promise.reject();
             }
 
             await sendPasswordResetEmail(auth, email);
             customSuccessToast("Sıfırlama bağlantısı gönderildi");
+            return Promise.resolve(); 
+
         } catch (error) {
             if (error.code === 'auth/user-not-found') {
                 customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
             } else {
                 customErrorToast(error.message);
             }
+            return Promise.reject(error);
         } finally {
             dispatch(stopLoading());
         }

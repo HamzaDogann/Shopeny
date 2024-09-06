@@ -3,6 +3,8 @@ import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { validCategories } from "../../constants/categories";
 import { useDispatch, useSelector } from 'react-redux';
 import { MdFilterListAlt } from "react-icons/md";
+
+
 import { filterProducts } from '../../store/utils/filterProducts.js';
 import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
 import { setBrands, setColors, setIsFilterMode, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/filteredCategoryProductsSlice.js';
@@ -12,6 +14,9 @@ import CategoryFilterBar from '../../components/CategoryProductPageComponents/Ca
 import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
 import RadioButton from '../../shared/helpers/RadioButton';
 import { getCategoryBrands } from '../../store/utils/getCategoryBrands.js';
+import PreLoader from '../../components/PreLoader/PreLoader.jsx';
+
+import { opacityEffect } from '../../shared/animations/animations.js';
 import "./CategoryProducts.scss";
 
 function CategoryProducts() {
@@ -112,6 +117,10 @@ function CategoryProducts() {
   };
 
 
+  if (loading) {
+    return <div style={{ width: "100%", height: "600px" }}></div>
+  }
+
   //============================JSX==================================
 
   return (
@@ -142,6 +151,7 @@ function CategoryProducts() {
         )}
       </div>
 
+
       <div className='category-products'>
         <div className='category-filter-bar' style={{ display: isMobile && isFilterVisible ? 'flex' : !isMobile ? 'flex' : 'none' }}>
           <CategoryFilterBar
@@ -157,6 +167,7 @@ function CategoryProducts() {
             filters={filters}
           />
         </div>
+
         <div className='category-products-bar'>
           <CategoryProductList
             ClearFilters={handleClearFilters}

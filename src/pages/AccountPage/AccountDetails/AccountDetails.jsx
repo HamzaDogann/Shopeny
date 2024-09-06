@@ -12,7 +12,9 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
+import { motion } from 'framer-motion';
 import "./AccountDetails.scss";
+import { opacityAndTransformEffect } from '../../../shared/animations/animations';
 
 function AccountDetails() {
 
@@ -127,7 +129,7 @@ function AccountDetails() {
     //=======================JSX=========================
 
     return (
-        <div className='account-details-box'>
+        <motion.div {...opacityAndTransformEffect('y', 20, 0.4)} className='account-details-box' >
             <h2>Hesap Bilgilerim</h2>
             <GeneralUserDetailsCard />
 
@@ -232,7 +234,7 @@ function AccountDetails() {
                     </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

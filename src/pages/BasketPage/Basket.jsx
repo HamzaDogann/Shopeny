@@ -11,6 +11,8 @@ import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomT
 import { showModal } from "../../store/slices/confirmationModalSlice";
 import ConfirmationModal from "../../shared/components/ConfirmationModal/ConfirmationModal";
 
+import { motion } from 'framer-motion';
+import { opacityAndTransformEffect } from "../../shared/animations/animations";
 
 function Basket() {
   const dispatch = useDispatch();
@@ -47,10 +49,10 @@ function Basket() {
       {loading && <PreLoader />}
 
       <div className="top-box">
-        <div className="basket-title">
+        <motion.div {...opacityAndTransformEffect('x', -70, 0.7)} className="basket-title">
           <TiShoppingCart className="basket-icon" />
           <p>Sepetim</p>
-        </div>
+        </motion.div>
 
         {thereAreProducts &&
           <button onClick={handleClearProcess} className="clear-basket-btn">
@@ -64,22 +66,22 @@ function Basket() {
       <div className="basket-boxs">
         {thereAreProducts ?
           <>
-            <div className="products-box">
+            <motion.div {...opacityAndTransformEffect('y', 14, 0.4)} className="products-box">
               {basketProducts.map(product => (
                 <BasketProduct key={product.referenceId} product={product} />
               ))}
-            </div>
-            <div className="basket-info-box">
+            </motion.div>
+            <motion.div {...opacityAndTransformEffect('y', 14, 0.4)} className="basket-info-box">
               <BasketInformations checkoutButton={<button onClick={handleConfirmCart} className="checkout-btn">Sepeti Onayla</button>}
               />
-            </div>
+            </motion.div>
           </>
 
           :
-          <div className='there-are-no-content-box' >
+          <motion.div {...opacityAndTransformEffect('y', 29, 0.6)} className='there-are-no-content-box' >
             Sepete eklenmiş bir ürün bulunmuyor.
             <Link to={"/"} > Alışverişe Başla</Link>
-          </div>
+          </motion.div>
         }
       </div>
       {/* Confirmation Modal */}

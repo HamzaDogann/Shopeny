@@ -2,32 +2,40 @@ import React, { useState } from 'react'
 import { IoArrowBack } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
+import { motion } from 'framer-motion';
+
 import "./Auth.scss";
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/slices/Auth/authActions';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
+import { opacityAndTransformEffect } from '../../shared/animations/animations';
 
 function ResetPassword() {
 
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleResetPassword = (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
-    dispatch(authActions.resetPassword(email));
-  }
+    try {
+        await dispatch(authActions.resetPassword(email));
+        navigate("/giris-yap"); 
+    } catch (error) {
+
+    }
+};
 
   return (
     <>
       <div className='reset-password-box'>
         {/* Logo */}
-        <div className='shopeny-logo' style={{ marginTop: "-40px", marginBottom: "15px", marginRight: "15px" }}>
+        <motion.div {...opacityAndTransformEffect('y', 18, 0.4)} className='shopeny-logo' style={{ marginTop: "-40px", marginBottom: "15px", marginRight: "15px" }}>
           <img src={ShopenyLogo} alt="ShopenyLogo" />
-        </div>
+        </motion.div>
 
-        <div className='reset-password-modal'>
-
+        <motion.div {...opacityAndTransformEffect('y', 18, 0.4)} className='reset-password-modal'>
           <Link to="/giris-yap" className='come-back-to-signIn-page'>
             <IoArrowBack />
           </Link>
@@ -45,7 +53,8 @@ function ResetPassword() {
               <button type='submit'>Gönder</button>
             </form>
           </div>
-        </div>
+        </motion.div>
+
         <AnimationBackground />
       </div>
 

@@ -1,8 +1,10 @@
 import React, { useState, useCallback, memo } from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { questionsAnswers } from '../../../constants/FAQ';
+import { motion } from 'framer-motion';
 
 import './FAQ.scss';
+import { opacityAndTransformEffect } from '../../../shared/animations/animations';
 
 const FAQ = memo(() => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -12,7 +14,8 @@ const FAQ = memo(() => {
   }, [activeIndex]);
 
   return (
-    <div className='faq-box'>
+
+    <motion.div {...opacityAndTransformEffect('y', 23, 0.5)} className='faq-box'>
       <h2>Sıkça Sorulan Sorular</h2>
       <div className='questions'>
         {questionsAnswers.map((qa, index) => (
@@ -32,7 +35,7 @@ const FAQ = memo(() => {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 });
 

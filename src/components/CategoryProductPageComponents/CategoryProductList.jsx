@@ -8,6 +8,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
 import { AiFillProduct } from "react-icons/ai";
 import { categoryTranslation } from '../../constants/categories.js';
+import { motion } from 'framer-motion';
+import { opacityAndTransformEffect } from '../../shared/animations/animations.js';
 
 const ProductList = memo(({ products, loading, error, filters, ClearFilters }) => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -38,12 +40,6 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
         };
     }, []);
 
-    useEffect(() => {
-        window.scrollTo({
-            top: 180,
-            behavior: 'smooth',
-        });
-    }, [currentPage]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -55,13 +51,15 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
+
+        window.scrollTo({
+            top: 180,
+            behavior: 'smooth',
+        });
     };
 
     const totalPages = Math.ceil(translatedProducts.length / productsPerPage);
 
-    if (loading) {
-        return null;
-    }
 
     if (error) {
         return <div>Beklenmedik bir hata meydana geldi, {error.message}</div>;
@@ -69,15 +67,15 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
 
     return (
         <div>
-            <p className='total-product-number'>
+            <motion.p {...opacityAndTransformEffect('y', 45, 0.4)} className='total-product-number'>
                 <AiFillProduct className='icon' />
                 <span>Toplam  <strong>{products.length}</strong> Ürün Listeleniyor</span>
-            </p>
+            </motion.p>
 
             <div className="products-box">
                 {currentProducts.length > 0 ? (
                     currentProducts.map((product) => (
-                        <ProductCard key={product.Id} product={product} loading={loading} />
+                            <ProductCard key={product.Id} product={product} loading={loading} />
                     ))
                 ) : (
                     <div className='no-products-box'>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '../../store/utils/getUserId';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import PreLoader from '../../components/PreLoader/PreLoader';
@@ -12,6 +13,7 @@ import { clearFavoriteProducts, fetchProducts } from '../../store/thunks/User/fa
 import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 import { showModal } from '../../store/slices/confirmationModalSlice';
+import { opacityAndTransformEffect } from '../../shared/animations/animations';
 import "./FavoriteProducts.scss";
 
 
@@ -111,10 +113,10 @@ function FavoriteProducts() {
   return (
     <div className='favorite-product-general-box'>
       <div className="top-box">
-        <div className="favorite-title">
+        <motion.div {...opacityAndTransformEffect('x', -70, 0.7)} className="favorite-title">
           <PiHeartStraightFill className='favorite-icon' />
           <p>Favori Ürünlerim</p>
-        </div>
+        </motion.div>
         {favoriteProducts.length > 0 &&
           <button onClick={handleClearProcess} className='clear-favorites-btn'>
             Tümünü Kaldır
@@ -124,13 +126,15 @@ function FavoriteProducts() {
       <div className='favorite-products-box'>
         {loading && <PreLoader />}
         {favoriteProducts.length > 0 ? currentItems.map(product => (
-          <ProductCard key={product.favoriteProductKey} product={product} />
+          <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} key={product.favoriteProductKey}>
+            <ProductCard product={product} />
+          </motion.div>
         )) :
           !loading && (
-            <div className='there-are-no-content-box'>
+            <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} className='there-are-no-content-box'>
               Favorilere eklenmiş bir ürün bulunmuyor.
               <Link to={"/"}>Ürünleri Keşfet</Link>
-            </div>
+            </motion.div>
           )
         }
       </div>
