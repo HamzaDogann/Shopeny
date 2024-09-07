@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import { IoIosArrowRoundForward } from "react-icons/io";
 function Links() {
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
 
     <div className="footer-links-section">
@@ -10,7 +14,7 @@ function Links() {
           <img style={{ width: "220px" }} src={ShopenyLogo} alt="Shopeny Logo" />
           <h3> Shopeny herhangi bir ticaret faaliyetinde bulunmayı amaçlamamaktadır. Bir React E-Ticaret Sitesi projesi olarak tasarlanmıştır.</h3>
           <button>
-           <Link to={"/hakkimizda"}>Daha fazla</Link>
+            <Link to={"/hakkimizda"}>Daha fazla</Link>
             <IoIosArrowRoundForward style={{ fontSize: "22px" }} />
           </button>
         </div>
@@ -49,10 +53,10 @@ function Links() {
           <h2>Hızlı Bağlantılar</h2>
           <div className="footer-link-item-box">
             <Link to={"/favori-urunler"}>Favori Ürünlerim</Link>
-            <Link to={"/hesabim/siparislerim"}>Siparişlerim</Link>
+            <Link to={"/hesabim/siparislerim"} onClick={scrollToTop}>Siparişlerim</Link>
             <Link to={"/sepetim"}>Sepetim</Link>
-            <Link to={"/hesabim/adreslerim"}>Adreslerim</Link>
-            <Link to={"/hesabim/hesap-bilgilerim"}>Hesap Bilgilerim</Link>
+            <Link to={"/hesabim/adreslerim"} onClick={scrollToTop}>Adreslerim</Link>
+            <Link to={"/hesabim/hesap-bilgilerim"} onClick={scrollToTop}>Hesap Bilgilerim</Link>
           </div>
         </div>
 

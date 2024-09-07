@@ -84,6 +84,7 @@
         justify-content: start;
         top: 0px;
         left: 0px;
+        z-index: 999999 !important;
         background-color: rgb(255, 255, 255);
         animation: animationMobileMenu 0.6s ease-in;
 
@@ -172,7 +173,7 @@
 
     .category-menu-close-icon {
         display: none;
-        z-index: 999;
+        z-index: 999999 !important;
         font-size: 50px;
         position: fixed;
         top: 27px;

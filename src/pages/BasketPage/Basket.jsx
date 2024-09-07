@@ -22,7 +22,6 @@ function Basket() {
   const navigate = useNavigate();
 
   const handleConfirmCart = () => {
-    // Implement the checkout logic here
     navigate("/sepetim/odeme-islemleri");
   }
 
@@ -72,8 +71,10 @@ function Basket() {
               ))}
             </motion.div>
             <motion.div {...opacityAndTransformEffect('y', 14, 0.4)} className="basket-info-box">
-              <BasketInformations checkoutButton={<button onClick={handleConfirmCart} className="checkout-btn">Sepeti Onayla</button>}
-              />
+              <BasketInformations checkoutButton={
+                <button onClick={handleConfirmCart} className="checkout-btn">
+                  Sepeti Onayla
+                </button>} />
             </motion.div>
           </>
 

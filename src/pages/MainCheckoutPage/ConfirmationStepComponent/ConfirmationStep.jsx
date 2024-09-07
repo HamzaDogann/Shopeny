@@ -10,6 +10,8 @@ import { FaTruckFast } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { formatPrice } from "../../../shared/utils/formatPrice";
 import { formatCardNumber } from "../../../shared/utils/formatCardNumber";
+import { opacityEffect } from "../../../shared/animations/animations";
+import { motion } from "framer-motion"
 
 function ConfirmationStep({ onBack }) {
 
@@ -21,7 +23,8 @@ function ConfirmationStep({ onBack }) {
   const selectedAddress = addresses.find(address => address.addressId === selectedAddressId);
 
   return (
-    <>
+
+    <motion.div {...opacityEffect(0.5)}>
       <h2>Sipariş Detayları</h2>
 
       <div className='order-details-box'>
@@ -78,7 +81,7 @@ function ConfirmationStep({ onBack }) {
 
       </div >
       <GoBackStepButton onBack={onBack} />
-    </>
+    </motion.div>
   )
 }
 

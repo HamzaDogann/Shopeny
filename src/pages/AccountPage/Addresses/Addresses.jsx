@@ -19,6 +19,7 @@ import { hideModal, showModal } from '../../../store/slices/confirmationModalSli
 
 import "./Addresses.scss";
 import PreLoader from '../../../components/PreLoader/PreLoader';
+import { resetAddressInfo } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
 
 
 function Addresses() {
@@ -102,6 +103,7 @@ function Addresses() {
     dispatch(hideModal());
     try {
       await dispatch(removeUserAddress(addressToDelete.addressId)).unwrap();
+      dispatch(resetAddressInfo());
       customSuccessToast("Adres başarıyla silindi.", 2000);
     } catch (error) {
       customErrorToast("Adres silinirken bir hata oluştu.");
@@ -117,10 +119,6 @@ function Addresses() {
         <PreLoader />
       ) : (
         <motion.div
-          variants={createContainerVariants}
-          initial="hidden"
-          animate="visible"
-          className="addresses-container"
         >
           {addresses.length > 0 ? (
             <>

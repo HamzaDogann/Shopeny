@@ -124,19 +124,25 @@ function FavoriteProducts() {
         }
       </div>
       <div className='favorite-products-box'>
-        {loading && <PreLoader />}
-        {favoriteProducts.length > 0 ? currentItems.map(product => (
-          <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} key={product.favoriteProductKey}>
-            <ProductCard product={product} />
-          </motion.div>
-        )) :
-          !loading && (
-            <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} className='there-are-no-content-box'>
-              Favorilere eklenmiş bir ürün bulunmuyor.
-              <Link to={"/"}>Ürünleri Keşfet</Link>
+        {loading ?
+          <div style={{ height: "600px" }}>
+            <PreLoader />
+          </div>
+          :
+
+          favoriteProducts.length > 0 ? currentItems.map(product => (
+            <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} key={product.favoriteProductKey}>
+              <ProductCard product={product} />
             </motion.div>
-          )
-        }
+          )) :
+            !loading && (
+              <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} className='there-are-no-content-box'>
+                Favorilere eklenmiş bir ürün bulunmuyor.
+                <Link to={"/"}>Ürünleri Keşfet</Link>
+              </motion.div>
+            )
+      }
+
       </div>
       {favoriteProducts.length > 0 && Math.ceil(favoriteProducts.length / itemsPerPage) > 1 && (
         <div className='pagination-box'>

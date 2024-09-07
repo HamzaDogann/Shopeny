@@ -13,9 +13,11 @@ import { addUserAddress, getUserAddresses } from "../../../store/thunks/User/add
 import truncateName from "../../../shared/utils/truncateName";
 import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
 import { setIsAddress } from "../../../store/slices/PaymentProcess/PaymentProcessSlice";
+import { opacityEffect } from "../../../shared/animations/animations";
+import { motion } from "framer-motion"
 
 const AddressStep = () => {
-  const { addresses } = useSelector(state => state.addresses);
+  const { addresses, loading } = useSelector(state => state.addresses);
   const { selectedAddressId } = useSelector(state => state.paymentProcess)
   const [selectedAddress, setSelectedAddress] = useState(selectedAddressId);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -59,52 +61,54 @@ const AddressStep = () => {
 
   return (
     <>
-      <h2>Adresinizi Seçin</h2>
+      <motion.div {...opacityEffect(0.5)}>
+        <h2>Adresinizi Seçin</h2>
 
-      {addresses.length > 0
+        {addresses.length > 0
 
-        ? <div className="choose-address-box">
-          {/* Örnek Adres Kartları */}
-          {addresses.map(address => (
-            <div className="address-card" key={address.addressId}>
-              <div className="address-informations">
-                <p className='address-title'>{truncateName(address.addressTitle, truncateLength)}</p>
-                <p className='address-name'>{address.street}, {address.neighborhood}, {address.district}, {address.city}, {address.postalCode}</p>
-                <p className='address-recipient'>Alıcı: {address.recipientName}</p>
-              </div>
+          ? <div className="choose-address-box">
+            {/* Örnek Adres Kartları */}
+            {addresses.map(address => (
+              <motion.div  {...opacityEffect(0.7)} className="address-card" key={address.addressId}>
+                <div className="address-informations">
+                  <p className='address-title'>{truncateName(address.addressTitle, truncateLength)}</p>
+                  <p className='address-name'>{address.street}, {address.neighborhood}, {address.district}, {address.city}, {address.postalCode}</p>
+                  <p className='address-recipient'>Alıcı: {address.recipientName}</p>
+                </div>
 
-              <RadioButton
-                name="choose-address"
-                checked={selectedAddress === address.addressId}
-                onChange={() => handleAddressChange(address.addressId)}
-              />
-            </div>
-          ))}
+                <RadioButton
+                  name="choose-address"
+                  checked={selectedAddress === address.addressId}
+                  onChange={() => handleAddressChange(address.addressId)}
+                />
+              </motion.div>
+            ))}
+          </div>
+          :
+          <div className="no-address-box">
+            <p>Daha önce eklenmiş bir adres bulunmuyor, siparişe devam etmek için bir adres ekleyin.</p>
+          </div>
+        }
+
+
+        <div className="new-address-box">
+          <button onClick={() => handleAddProcess()}>
+            <span>Adres Ekle</span>
+            <MdAddLocationAlt className="icon" />
+          </button>
         </div>
-        :
-        <div className="no-address-box">
-          <p>Daha önce eklenmiş bir adres bulunmuyor, siparişe devam etmek için bir adres ekleyin.</p>
-        </div>
-      }
 
-
-      <div className="new-address-box">
-        <button onClick={() => handleAddProcess()}>
-          <span>Adres Ekle</span>
-          <MdAddLocationAlt className="icon" />
-        </button>
-      </div>
-
-      {/* Modal */}
-      <Fullsize isVisible={isModalVisible}>
-        <Modal setModalVisible={setModalVisible}>
-          <AddressModal
-            isVisible={isModalVisible}
-            onClose={handleCloseModal}
-            onSubmit={handleNewAddress}
-          />
-        </Modal>
-      </Fullsize>
+        {/* Modal */}
+        <Fullsize isVisible={isModalVisible}>
+          <Modal setModalVisible={setModalVisible}>
+            <AddressModal
+              isVisible={isModalVisible}
+              onClose={handleCloseModal}
+              onSubmit={handleNewAddress}
+            />
+          </Modal>
+        </Fullsize>
+      </motion.div>
     </>
   );
 };

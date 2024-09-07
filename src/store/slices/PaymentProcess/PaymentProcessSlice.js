@@ -37,9 +37,13 @@ const paymentProcessSlice = createSlice({
         },
         clearPaymentProcess: (state) => {
             Object.assign(state, initialState);
+        },
+        resetAddressInfo: (state) => {
+            state.isAddressSelected = null;
+            state.selectedAddressId = null;
         }
     }
 });
 
-export const { setIsAddress, setPaymentInformations, setIsPaymentInfoReceived,clearPaymentProcess } = paymentProcessSlice.actions;
+export const { setIsAddress, setPaymentInformations, setIsPaymentInfoReceived, resetAddressInfo, clearPaymentProcess } = paymentProcessSlice.actions;
 export default paymentProcessSlice.reducer;

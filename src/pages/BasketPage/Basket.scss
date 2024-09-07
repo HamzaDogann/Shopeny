@@ -179,12 +179,20 @@
                 }
 
                 @media (max-width:770px) {
-                    height: 100px;
+                    height: 120px;
                     border-radius: 5px;
                     padding: 0px 10px;
+                    padding-bottom: 10px;
+                    padding-top: 10px;
+
                 }
 
-                .basket-product-image{
+                @media (max-width:670px) {
+                    margin: 20px 0px;
+                }
+
+
+                .basket-product-image {
                     width: 110px;
                     height: 110px;
                     border-radius: 21px;
@@ -199,6 +207,12 @@
                     }
 
                     @media (max-width:770px) {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 5px;
+                    }
+
+                    @media (max-width:360px) {
                         width: 60px;
                         height: 60px;
                         border-radius: 5px;
@@ -228,18 +242,15 @@
                             font-size: 13px;
                         }
 
-                        @media (max-width:770px) {
-                            font-size: 9px;
+                        @media (max-width:360px) {
+                            font-size: 11px;
                         }
-
-
                     }
 
                     .product-name {
                         font-size: 20px;
                         color: rgb(74, 80, 90);
                         cursor: pointer;
-
                         width: 340px;
 
                         @media (max-width:1350px) {
@@ -258,6 +269,10 @@
                         }
 
                         @media (max-width:770px) {
+                            font-size: 13px;
+                        }
+
+                        @media (max-width:360px) {
                             font-size: 11px;
                         }
 
@@ -277,9 +292,6 @@
                             font-size: 12px;
                         }
 
-                        @media (max-width:770px) {
-                            font-size: 8px;
-                        }
                     }
 
                     .product-color {
@@ -289,8 +301,8 @@
                         height: 20px;
 
                         @media (max-width:770px) {
-                            width: 25px;
-                            height: 15px;
+                            width: 30px;
+                            height: 20px;
                         }
                     }
                 }
@@ -310,27 +322,19 @@
                     }
 
 
-                    @media (max-width:600px) {
+                    @media (max-width:660px) {
                         position: absolute;
-                        bottom: 0px;
-                        left: 70px;
+                        bottom: 3px;
+                        left: 110px;
                         scale: 0.7;
                     }
 
-                    @media (max-width:450px) {
-                        left: 120px;
-
-                    }
-
-                    @media (max-width:400px) {
-                        left: 90px;
+                    @media (max-width:500px) {
+                        left: auto;
+                        right: 0px;
                     }
 
 
-                    @media (max-width:360px) {
-                        scale: 0.5;
-                        left: 65px;
-                    }
 
                     button {
                         background-color: rgba(220, 220, 220, 0.679);
@@ -356,16 +360,16 @@
                     flex-direction: column;
                     align-items: center;
 
-                    @media (max-width:600px) {
-                        bottom: 6px;
-                        right: 10px;
+                    @media (max-width:500px) {
+                        position: absolute;
+                        width: 100%;
+                        background-color: rgb(247, 247, 247);
+                        margin-bottom: -50px;
+                        right: 0;
+                        border-radius: 5px;
                     }
 
-                    @media (max-width:360px) {
-                        bottom: 8px;
-                        right: 10px;
-                    }
-
+            
                     p {
                         margin-top: 10px;
                         background-color: rgb(239, 239, 239);
@@ -377,16 +381,14 @@
                         @include move-opacity-effect(0.4s);
 
 
-                        @media (max-width:1350px) {
+                        @media (max-width:670px) {
+                        
                             font-size: 14px;
-                        }
-
-                        @media (max-width:600px) {
-                            font-size: 8px;
+                            margin-top: 0px;
+                            background-color: rgb(247, 247, 247);
                         }
 
                         @media (max-width:360px) {
-                            font-size: 5px;
                             padding: 5px 10px;
                         }
                     }

@@ -14,7 +14,7 @@ import CategoryFilterBar from '../../components/CategoryProductPageComponents/Ca
 import CategoryProductList from '../../components/CategoryProductPageComponents/CategoryProductList';
 import RadioButton from '../../shared/helpers/RadioButton';
 import { getCategoryBrands } from '../../store/utils/getCategoryBrands.js';
-import PreLoader from '../../components/PreLoader/PreLoader.jsx';
+import { motion } from 'framer-motion';
 
 import { opacityEffect } from '../../shared/animations/animations.js';
 import "./CategoryProducts.scss";
@@ -124,7 +124,7 @@ function CategoryProducts() {
   //============================JSX==================================
 
   return (
-    <div className='category-products-box'>
+    <motion.div {...opacityEffect(0.5)} className='category-products-box'>
       <div className='top-filter-options-box'>
         <div className='stock-and-sorting-box'>
           <div className='is-stock-box'>
@@ -177,7 +177,7 @@ function CategoryProducts() {
             setIsFilterButtonEnable={setIsFilterButtonEnable} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

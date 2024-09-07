@@ -10,10 +10,11 @@ import ConfirmationModal from "../../../shared/components/ConfirmationModal/Conf
 import { showModal } from "../../../store/slices/confirmationModalSlice";
 import "./Order.scss";
 import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations";
+import PreLoader from "../../../components/PreLoader/PreLoader";
 function Order() {
 
   const dispatch = useDispatch();
-  const { orders } = useSelector((state) => state.orders);
+  const { orders, loading } = useSelector((state) => state.orders);
   const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
@@ -42,6 +43,10 @@ function Order() {
     }
   };
 
+  if (loading) {
+    return null;
+  }
+
   return (
     <>
       <div className='orders-box'>
@@ -50,7 +55,7 @@ function Order() {
             <motion.h2 {...opacityAndTransformEffect('y', 20, 0.4)}>
               Siparişlerim
             </motion.h2>
-            
+
             <motion.div className='orders' variants={createContainerVariants(0.6, 0.3)} initial="hidden" animate="visible">
               {orders.map((order) => (
                 <motion.div key={order.orderId} variants={createItemVariants(20, 0)}>

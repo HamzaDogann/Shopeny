@@ -10,7 +10,6 @@ import { BsMouse3 } from "react-icons/bs";
 import { FaRegKeyboard } from "react-icons/fa6";
 import { RxCamera } from "react-icons/rx";
 import { FiMic } from "react-icons/fi";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { HiMenu } from "react-icons/hi";
 
 import { RiCloseCircleFill } from "react-icons/ri";

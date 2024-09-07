@@ -153,7 +153,7 @@ function ProductCard({ product }) {
             </p>
 
             <button className='basket-btn' onClick={handleProduct} >
-                  <MdShoppingCart className='icon' />
+                <MdShoppingCart className='icon' />
             </button>
         </div>
     );

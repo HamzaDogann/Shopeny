@@ -6,17 +6,17 @@ import 'swiper/css/free-mode';
 import { FreeMode, Navigation } from 'swiper/modules';
 import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
-import { fetchPopularProducts } from '../../store/thunks/Products/popularProductThunk'; 
+import { fetchPopularProducts } from '../../store/thunks/Products/popularProductThunk';
 import { categoryTranslation } from '../../constants/categories';
+import Skeleton from '@mui/material/Skeleton';
 
 export default function PopularProductsSlider() {
     const swiperRef = useRef(null);
     const dispatch = useDispatch();
 
-    const { popularProducts } = useSelector(state => state.popularProducts);
+    const { popularProducts, loading } = useSelector(state => state.popularProducts);
 
     useEffect(() => {
-        // Eğer popularProducts dizisi boşsa veri çek
         if (popularProducts.length === 0) {
             dispatch(fetchPopularProducts());
         }
@@ -68,11 +68,19 @@ export default function PopularProductsSlider() {
                     },
                 }}
             >
-                {translatedProducts.map((product, i) => (
-                    <SwiperSlide key={i}>
-                        <ProductCard product={product} />
-                    </SwiperSlide>
-                ))}
+                {loading ? (
+                    Array.from(new Array(4)).map((_, index) => (
+                        <SwiperSlide key={index}>
+                            <Skeleton variant="rectangular" style={{ borderRadius: '20px' }} width={230} height={380} />
+                        </SwiperSlide>
+                    ))
+                ) : (
+                    translatedProducts.map((product, i) => (
+                        <SwiperSlide key={i}>
+                            <ProductCard product={product} />
+                        </SwiperSlide>
+                    ))
+                )}
             </Swiper>
 
             <button
