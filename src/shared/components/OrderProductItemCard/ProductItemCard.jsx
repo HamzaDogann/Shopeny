@@ -1,39 +1,15 @@
-// import React from 'react'
-// import truncateName from '../../utils/truncateName'
-// import "./ProductItemCard.scss";
-// import { formatPrice } from '../../utils/formatPrice';
-// function ProductItemCard({ image, brand, quantity,color, price, productName }) {
-//     return (
-//         <div className="product-item">
-//             <img src={image} alt="" />
-//             <div className="item-info">
-//                 <div className='name-color-brand-box'>
-//                     <span>{brand}</span>
-//                     <p>{truncateName(productName, 30)}</p>
-//                     <span className='color-box' style={{ backgroundColor: color }}></span>
-//                 </div>
-//                 <div className='item-quantity-box'>
-//                     <span className="item-quantity">{quantity}</span>
-//                 </div>
-//                 <div className='item-price-box'>
-//                     <span className="item-price">{formatPrice(price)}₺</span>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default ProductItemCard
-
-
 import React from 'react'
 import truncateName from '../../utils/truncateName'
-import "./ProductItemCard.scss";
 import { formatPrice } from '../../utils/formatPrice';
 import { Skeleton } from '@mui/material';
 import useLazyImage from '../../hooks/useLazyImage';
+import { translateCategoryNameToTurkish } from '../../../constants/categories';
+import { slugify } from '../../utils/slugify';
+import "./ProductItemCard.scss";
+import { useNavigate } from 'react-router-dom';
 function ProductItemCard({ product }) {
 
+    const navigate = useNavigate();
     const { imageStyle, skeletonProps, onLoad } = useLazyImage({
         src: product.mainImage,
         width: 80,
@@ -41,10 +17,15 @@ function ProductItemCard({ product }) {
         borderRadius: "12px"
     });
 
+    const handleProductLink = () => {
+        navigate(`/${translateCategoryNameToTurkish(product.categoryName)}/${slugify(product.productName)}`);
+    }
+
     return (
         <div className="product-item">
             <Skeleton {...skeletonProps} />
             <img
+                onClick={handleProductLink}
                 className='product-img'
                 src={product.mainImage}
                 alt=""
@@ -52,7 +33,7 @@ function ProductItemCard({ product }) {
                 onLoad={onLoad}
             />
             <div className="item-info">
-                <div className='name-color-brand-box'>
+                <div onClick={handleProductLink} className='name-color-brand-box'>
                     <span>{product.productBrand}</span>
                     <p>{truncateName(product.productName, 30)}</p>
                     <span className='color-box' style={{ backgroundColor: product.color }}></span>

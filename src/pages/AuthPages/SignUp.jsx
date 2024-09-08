@@ -63,7 +63,7 @@ function SignUp() {
 
   return (
     <>
-      <motion.div {...opacityAndTransformEffect('y', 18, 0.4)}  className='sign-box' style={{ marginBottom: "70px" }}>
+      <motion.div {...opacityAndTransformEffect('y', 18, 0.4)} className='sign-box' style={{ marginBottom: "70px" }}>
         {/* Sign-Up Modal */}
         <div className='sign-modal sign-up-box'>
           <h2>Üye Ol</h2>
