@@ -76,13 +76,22 @@ select {
     @include auth-opacity-effect(0.4s);
 }
 
+
+.warning-error {
+    border-bottom: 2px solid red;
+}
+
 .warning-spans {
+    @include flex-row-center;
+    gap: 5px;
     color: red;
     font-size: 13px;
     margin-top: -15px;
     height: 25px;
     @include auth-opacity-effect(0.4s);
 }
+
+
 
 
 .social-media-auth-box {
@@ -169,7 +178,7 @@ select {
         margin-bottom: 50px;
 
         @media (max-width: 500px) {
-           box-shadow: none;
+            box-shadow: none;
         }
 
         @media (max-width: 450px) {
@@ -201,6 +210,19 @@ select {
                 input {
                     width: 100%;
                 }
+            }
+
+            .error-message {
+                @include flex-row-center;
+                gap: 5px;
+                font-size: 14px;
+                margin-top: -10px;
+                color: red;
+                @include auth-opacity-effect(0.5s);
+            }
+
+            .error-icons {
+                font-size: 18px;
             }
 
         }
@@ -257,7 +279,7 @@ select {
     z-index: 20;
     backdrop-filter: blur(5px);
     @include auth-opacity-effect(0.7s);
-  
+
 
     .membership-agreement-modal {
         width: 700px !important;
@@ -342,7 +364,7 @@ select {
 
         @media (max-width: 500px) {
             box-shadow: none;
-         }
+        }
 
         @media (max-width:500px) {
             width: 100%;
@@ -392,11 +414,25 @@ select {
                     margin-top: 20px;
                     width: 100%;
                     padding: 10px 20px;
-                  color: $shopenyTextGray;
+                    color: $shopenyTextGray;
                     font-weight: 500;
                     @include shopenyOrangeBackgroundHoverEffect;
                 }
+
+                .email-error {
+                    @include flex-row-center;
+                    @include auth-opacity-effect(0.5s);
+                    gap: 5px;
+                    margin-top: 10px;
+                    font-size: 14px;
+                    color: red;
+
+                    .error-icons {
+                        font-size: 18px;
+                    }
+                }
             }
+
         }
 
         h2 {
@@ -411,6 +447,11 @@ select {
             }
         }
     }
+
+    .error-email {
+        color: red;
+        margin-top: 40px;
+    }
 }
 
 
@@ -420,6 +461,7 @@ select {
 .sign-up-box {
     width: 440px !important;
     margin: 45px 0px !important;
+
     @media (max-width:460px) {
         width: 100% !important;
         border: 0 !important;

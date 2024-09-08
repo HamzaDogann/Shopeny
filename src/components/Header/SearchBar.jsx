@@ -48,7 +48,7 @@ function SearchBar() {
     setFocusState(false);
   };
 
-  // Dış tıklama işlemlerini yönetme
+
   const handleClickOutside = (event) => {
     if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
       setIsVisible(false);
@@ -64,7 +64,7 @@ function SearchBar() {
       }
     }
   };
-  // Sonuçların üzerine tıklama işlemi
+ 
   const handleLinkClick = (e, categoryName, productName) => {
     e.preventDefault();
     const slug = slugify(productName);

@@ -1,118 +1,103 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import MembershipAgreement from '../../components/AuthPageComponents/MembershipAgreement';
 import { authActions } from '../../store/slices/Auth/authActions';
-import { LuEye } from "react-icons/lu";
-import { LuEyeOff } from "react-icons/lu";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 import RadioButton from '../../shared/helpers/RadioButton';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
 import { motion } from 'framer-motion';
 
-import "./Auth.scss";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import SignUpSchema from '../../schemas/SignUpSchema';
 import { opacityAndTransformEffect } from '../../shared/animations/animations';
+import './Auth.scss';
+import { PiShieldWarningBold } from 'react-icons/pi';
+
 function SignUp() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    phone: '',
-    gender: '',
-    agreementAccepted: false,
-  });
-
   const [showPassword, setShowPassword] = useState(false);
   const [showAgreement, setShowAgreement] = useState(false);
+  const [agreementAccepted, setAgreementAccepted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(SignUpSchema),
+  });
 
   const handleAgreement = () => {
     setShowAgreement(!showAgreement);
   }
 
-  //=======Input Data Controllers Methods======\\
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleRadioButtonChange = () => {
-    setFormData((prevFormData) => {
-      const newAgreementAccepted = !prevFormData.agreementAccepted;
-      return { ...prevFormData, agreementAccepted: newAgreementAccepted };
-    });
-  };
-
-
-  //=======Register Method======\\
-
-  const handleRegister = (e) => {
-    e.preventDefault();
-    dispatch(authActions.registerWithEmail(formData, () => {
-      setTimeout(() => {
-        navigate('/giris-yap');
-      }, 2000);
-    }));
+  const onSubmit = (data) => {
+    setFormSubmitted(true);
+    if (agreementAccepted) {
+      dispatch(authActions.registerWithEmail(data, () => {
+        setTimeout(() => {
+          navigate('/giris-yap');
+        }, 2000);
+      }));
+    }
   };
 
   return (
     <>
       <motion.div {...opacityAndTransformEffect('y', 18, 0.4)} className='sign-box' style={{ marginBottom: "70px" }}>
-        {/* Sign-Up Modal */}
         <div className='sign-modal sign-up-box'>
           <h2>Üye Ol</h2>
           <h3 className='linear-colors-h3'></h3>
 
-          {/* =========================Form========================= */}
-
-          <form onSubmit={handleRegister} className='sign-form'>
+          <form onSubmit={handleSubmit(onSubmit)} className='sign-form'>
+            {/* Name */}
             <div className='input-box'>
               <input
                 type="text"
-                name="name"
                 placeholder="Ad Soyad"
-                value={formData.name}
-                onChange={handleInputChange}
+                className={errors.name ? 'warning-error' : ''}
+                {...register('name')}
               />
             </div>
-            <span className='warning-spans'></span>
+            {errors.name &&
+              <span className='warning-spans'>
+                <PiShieldWarningBold className='error-icons' />
+                {errors.name.message}
+              </span>}
 
             {/* Email */}
             <div className='input-box'>
               <input
                 type="text"
-                name="email"
                 placeholder="E-mail"
-                value={formData.email}
-                onChange={handleInputChange}
+                className={errors.email ? 'warning-error' : ''}
+                {...register('email')}
               />
             </div>
-            <span className='warning-spans'></span>
+            {errors.email &&
+              <span className='warning-spans'>
+                <PiShieldWarningBold className='error-icons' />
+                {errors.email.message}
+              </span>}
 
             {/* Password */}
             <div className='input-box'>
               <input
                 type={showPassword ? "text" : "password"}
                 maxLength={16}
-                name="password"
                 placeholder="Şifre Belirle"
-                value={formData.password}
-                onChange={handleInputChange}
+                className={errors.password ? 'warning-error' : ''}
+                {...register('password')}
               />
-
               {showPassword
                 ? <LuEye onClick={() => setShowPassword(false)} className='auth-icons eyes' />
                 : <LuEyeOff onClick={() => setShowPassword(true)} className='auth-icons eyes' />
               }
             </div>
-            <span className='warning-spans'></span>
-
+            {errors.password && <span className='warning-spans'>
+              <PiShieldWarningBold className='error-icons' />
+              {errors.password.message}</span>}
 
             {/* Phone Number */}
             <div className='input-box'>
@@ -120,59 +105,69 @@ function SignUp() {
               <input
                 style={{ marginLeft: "-10px" }}
                 type="text"
-                name="phone"
-                maxLength={10}
                 placeholder="Telefon"
-                value={formData.phone}
-                onChange={handleInputChange}
+                maxLength={10}
+                className={errors.phone ? 'warning-error' : ''}
+                {...register('phone')}
+                onKeyPress={(e) => {
+                  // Sadece rakam tuşlarına izin verir
+                  if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
               />
             </div>
-            <span className='warning-spans'></span>
+            {errors.phone && <span className='warning-spans'>
+              <PiShieldWarningBold className='error-icons' />
+              {errors.phone.message}</span>}
 
             {/* Gender */}
             <div className='input-box'>
               <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleInputChange}
+                className={errors.gender ? 'warning-error' : ''}
+                {...register('gender')}
               >
                 <option value="" disabled>Cinsiyetiniz</option>
                 <option value="Erkek">Erkek</option>
                 <option value="Kadın">Kadın</option>
               </select>
             </div>
+            {errors.gender &&
+              <span className='warning-spans'>
+                <PiShieldWarningBold className='error-icons' />
+                {errors.gender.message}
+              </span>}
 
-            {/* Confirm Rules  */}
+            {/* Confirm Rules */}
             <div className='confirm-rules-box'>
-
-              <div onClick={() => handleRadioButtonChange()}>
-                <RadioButton />
+              <div>
+                <RadioButton
+                  checked={agreementAccepted}
+                  onChange={() => setAgreementAccepted(!agreementAccepted)}
+                />
               </div>
-
               <span>
-                <strong onClick={() => handleAgreement()} style={{ cursor: "pointer", marginRight: "4px" }}>
+                <strong onClick={handleAgreement} style={{ cursor: "pointer", marginRight: "4px" }}>
                   Üyelik Sözleşmesi
                 </strong>
                 şartlarını okudum ve kabul ediyorum.
               </span>
             </div>
-            <div className='confirm-rules-box' style={{ marginTop: "20px" }}>
+            {formSubmitted && !agreementAccepted && <span className='warning-spans' style={{ marginTop: '5px' }}>Üyelik sözleşmesini kabul etmelisiniz.</span>}
+
+            <div className='confirm-rules-box' style={{ marginTop: "10px" }}>
               <RadioButton />
               <span>Shopeny'nin bana özel sunduğu kampanya ve fırsatlardan haberdar olmak istiyorum.</span>
             </div>
-            <span className='warning-spans'></span>
-
-            {/* ======================================================== */}
 
             {/*Sign Up */}
-            <div className='flex-center' style={{ marginTop: "10px" }}>
+            <div className='flex-center' style={{ marginTop: "20px" }}>
               <button className='sign-buttons' type="submit">Üye Ol</button>
             </div>
 
             <div className='account-status-box' style={{ marginTop: "20px" }}>
               <p>Zaten Hesabın var mı? <Link to="/giris-yap">Giriş Yap</Link></p>
             </div>
-
           </form>
         </div>
       </motion.div>
@@ -180,8 +175,7 @@ function SignUp() {
       {showAgreement && <MembershipAgreement handleAgreement={handleAgreement} />}
       <AnimationBackground />
     </>
-
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;

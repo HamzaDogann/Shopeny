@@ -6,11 +6,9 @@ import "react-credit-cards-2/dist/lib/styles.scss";
 import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
 import { setIsPaymentInfoReceived, setPaymentInformations } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
 import { opacityEffect } from '../../../shared/animations/animations';
-import { motion } from "framer-motion"
-
+import { motion } from "framer-motion";
 
 function usePaymentForm(initialValues) {
-
   const dispatch = useDispatch();
   const [cardInformations, setCardInformations] = useState(initialValues);
   const [expiryMonth, setExpiryMonth] = useState(initialValues.expiry.slice(0, 2));
@@ -26,12 +24,12 @@ function usePaymentForm(initialValues) {
       setExpiryYear(value);
       setCardInformations(prev => ({ ...prev, expiry: expiryMonth + value }));
     } else {
-      setCardInformations((prev) => ({ ...prev, [name]: value }));
+      setCardInformations(prev => ({ ...prev, [name]: value }));
     }
   };
 
   const handleInputFocus = (evt) => {
-    setCardInformations((prev) => ({ ...prev, focus: evt.target.name }));
+    setCardInformations(prev => ({ ...prev, focus: evt.target.name }));
   };
 
   useEffect(() => {
@@ -63,117 +61,123 @@ function usePaymentForm(initialValues) {
 }
 
 function PaymentStep({ onBack }) {
+  const paymentInformations = useSelector(state => state.paymentProcess.paymentInformations);
 
-  const paymentInformations = useSelector((state) => state.paymentProcess.paymentInformations);
+  const { cardInformations, expiryMonth, expiryYear, handleInputChange, handleInputFocus } = usePaymentForm({
+    number: paymentInformations.cardNumber || '',
+    expiry: (paymentInformations.month + paymentInformations.year) || '0125',
+    cvc: paymentInformations.cvv || '',
+    name: paymentInformations.nameOnCard || '',
+    focus: '',
+  });
 
-  const { cardInformations, expiryMonth, expiryYear, handleInputChange, handleInputFocus }
-    = usePaymentForm({
-      number: paymentInformations.cardNumber || '',
-      expiry: paymentInformations.month + paymentInformations.year || '0125',
-      cvc: paymentInformations.cvv || '',
-      name: paymentInformations.nameOnCard || '',
-      focus: '',
-    });
+  const handleCardNumberInput = (e) => {
+    if (!/^\d*$/.test(e.target.value)) {
+      e.preventDefault();
+    } else {
+      handleInputChange(e);
+    }
+  };
 
   return (
-
-      <motion.div {...opacityEffect(0.5)}>
-        <h2 style={{ marginBottom: "50px" }}>Ödeme Bilgilerinizi Girin</h2>
-        <div className='payment-general-box'>
-          <div className='payment-form-box'>
-            <form>
-              <div className='input-item'>
-                <span>Kart Üzerindeki İsim</span>
-                <input
-                  type="text"
-                  name="name"
-                  value={cardInformations.name}
+    <motion.div {...opacityEffect(0.5)}>
+      <h2 style={{ marginBottom: "50px" }}>Ödeme Bilgilerinizi Girin</h2>
+      <div className='payment-general-box'>
+        <div className='payment-form-box'>
+          <form>
+            <div className='input-item'>
+              <span>Kart Üzerindeki İsim</span>
+              <input
+                type="text"
+                name="name"
+                value={cardInformations.name}
+                onChange={handleInputChange}
+                onFocus={handleInputFocus}
+                maxLength={30}
+                autoComplete="off"
+                onKeyPress={(e) => {
+                  if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            </div>
+            <div className='input-item'>
+              <span>Kart Numarası</span>
+              <input
+                type="text"
+                name="number"
+                value={cardInformations.number}
+                onChange={handleCardNumberInput}
+                onFocus={handleInputFocus}
+                maxLength={16}
+                autoComplete="off"
+              />
+            </div>
+            <div className='multi-input-items'>
+              <div className='month-box'>
+                <span>Ay</span>
+                <select
+                  name="expiryMonth"
+                  value={expiryMonth}
                   onChange={handleInputChange}
                   onFocus={handleInputFocus}
-                />
+                >
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <option key={i + 1} value={String(i + 1).padStart(2, '0')}>
+                      {String(i + 1).padStart(2, '0')}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <div className='input-item'>
-                <span>Kart Numarası</span>
-                <input
-                  type="text"
-                  name="number"
-                  value={cardInformations.number}
+              <div className='year-box'>
+                <span>Yıl</span>
+                <select
+                  name="expiryYear"
+                  value={expiryYear}
                   onChange={handleInputChange}
                   onFocus={handleInputFocus}
+                >
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <option key={i + 25} value={String(i + 25)}>
+                      {i + 25}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className='cvc-cvv-box'>
+                <span>CVC/CVV</span>
+                <input
+                  type="text"
+                  name="cvc"
+                  value={cardInformations.cvc}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                  maxLength={4}
+                  onKeyPress={(e) => {
+                    if (!/^\d*$/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
-              <div className='multi-input-items'>
-                <div className='month-box'>
-                  <span>Ay</span>
-                  <select
-                    name="expiryMonth"
-                    value={expiryMonth}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                  >
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                  </select>
-                </div>
-                <div className='year-box'>
-                  <span>Yıl</span>
-                  <select
-                    name="expiryYear"
-                    value={expiryYear}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                  >
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                    <option value="32">32</option>
-                    <option value="33">33</option>
-                    <option value="34">34</option>
-                    <option value="35">35</option>
-                    <option value="36">36</option>
-                  </select>
-                </div>
-                <div className='cvc-cvv-box'>
-                  <span>CVC/CVV</span>
-                  <input
-                    type="text"
-                    name="cvc"
-                    value={cardInformations.cvc}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-          <div className='payment-credit-card-box'>
-            <Cards
-              placeholders={{ name: 'KART SAHİBİ' }}
-              locale={{ valid: 'Ay/Yıl' }}
-              number={cardInformations.number}
-              expiry={cardInformations.expiry}
-              cvc={cardInformations.cvc}
-              name={cardInformations.name}
-              focused={cardInformations.focus}
-            />
-          </div>
+            </div>
+          </form>
         </div>
-        <GoBackStepButton onBack={onBack} />
-      </motion.div>
+        <div className='payment-credit-card-box'>
+          <Cards
+            placeholders={{ name: 'KART SAHİBİ' }}
+            locale={{ valid: 'Ay/Yıl' }}
+            number={cardInformations.number}
+            expiry={cardInformations.expiry}
+            cvc={cardInformations.cvc}
+            name={cardInformations.name}
+            focused={cardInformations.focus}
+          />
+        </div>
+      </div>
+      <GoBackStepButton onBack={onBack} />
+    </motion.div>
   );
 }
 

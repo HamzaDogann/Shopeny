@@ -8,8 +8,8 @@
 
     .product-img {
         width: 80px;
-
         border-radius: 12px;
+        cursor: pointer;
 
         @media (max-width: 1199px) {
             width: 65px;
@@ -43,6 +43,7 @@
     .name-color-brand-box {
         @include flex-column;
         font-weight: 500;
+        cursor: pointer;
 
         span {
             font-size: 15px;

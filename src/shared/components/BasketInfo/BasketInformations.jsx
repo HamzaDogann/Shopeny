@@ -126,7 +126,7 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
                 return (
                     <button
                         className="checkout-btn"
-                   
+
                     >
                         Onayla
                     </button>
@@ -182,6 +182,7 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
                         <input type="text"
                             onChange={(e) => setPromotionCode(e.target.value)}
                             value={promotionCode}
+                            maxLength={20}
                             placeholder="Bir promosyon kodu giriniz" />
                         <button onClick={handlePromotion} className="confirm-promotion-btn">Uygula</button>
                     </>

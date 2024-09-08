@@ -50,6 +50,9 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                     value={form.addressTitle}
                     onChange={handleChange}
                     required
+                    minLength={3}
+                    maxLength={30}
+                    autoComplete="off"
                 />
             </label>
             <label>
@@ -60,6 +63,14 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                     value={form.city}
                     onChange={handleChange}
                     required
+                    minLength={3}
+                    maxLength={14}
+                    autoComplete="off"
+                    onKeyPress={(e) => {
+                        if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ]+$/.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    }}
                 />
             </label>
             <label>
@@ -70,6 +81,14 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                     value={form.district}
                     onChange={handleChange}
                     required
+                    minLength={5}
+                    maxLength={25}
+                    autoComplete="off"
+                    onKeyPress={(e) => {
+                        if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ]+$/.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    }}
                 />
             </label>
             <label>
@@ -80,6 +99,14 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                     value={form.neighborhood}
                     onChange={handleChange}
                     required
+                    minLength={5}
+                    maxLength={50}
+                    autoComplete="off"
+                    onKeyPress={(e) => {
+                        if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(e.key)) {
+                            e.preventDefault();
+                        }
+                    }}
                 />
             </label>
             <label>
@@ -90,6 +117,9 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                     value={form.street}
                     onChange={handleChange}
                     required
+                    minLength={5}
+                    maxLength={30}
+                    autoComplete="off"
                 />
             </label>
             <div className="row">
@@ -101,6 +131,14 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                         value={form.postalCode}
                         onChange={handleChange}
                         required
+                        minLength={5}
+                        maxLength={5}
+                        autoComplete="off"
+                        onKeyPress={(e) => {
+                            if (!/[0-9]/.test(e.key)) {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                 </label>
                 <label>
@@ -110,7 +148,13 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                         name="recipientName"
                         value={form.recipientName}
                         onChange={handleChange}
-                        required
+                        maxLength={30}
+                        onKeyPress={(e) => {
+                            if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(e.key)) {
+                                e.preventDefault();
+                            }
+                        }}
+                        autoComplete="off"
                     />
                 </label>
             </div>

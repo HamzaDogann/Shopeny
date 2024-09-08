@@ -36,7 +36,7 @@ function MiniBasketInfo({ onGoVerification }) {
                 <p className="dividing-line"></p>
                 <div style={{ marginBottom: "10px" }} className="product-amount-and-price-box">
                     <p>{information.productsNumber} Ürün</p>
-                    <p>{formatPrice(information.productPrices)}</p>
+                    <p>{formatPrice(information.productPrices)}₺</p>
                 </div>
                 <div className="total-promotion-and-cargo-prices-box">
                     <div className="price-box">

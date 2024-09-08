@@ -53,8 +53,12 @@ function PaymentVerification({ onBack }) {
 
 
   const handleAcceptVerification = async () => {
-    if (verificationCode == 12345) {
+    if (!verificationCode) {
+      customErrorToast("Doğrulama Kodu Giriniz");
+      return;
+    }
 
+    if (verificationCode == 12345) {
       const orderData = {
         basketProducts: basketProducts,
         address: selectedAddress,
@@ -69,15 +73,12 @@ function PaymentVerification({ onBack }) {
         setOrderCreated(true);
         dispatch(clearBasket());
       } catch {
-        customErrorToast("Sipariş Oluşturulamadı")
+        customErrorToast("Sipariş Oluşturulamadı");
       }
-    }
-    else {
-      customErrorToast("Doğrulama Kodu Hatalı")
-      return;
+    } else {
+      customErrorToast("Doğrulama Kodu Hatalı");
     }
   };
-
   const setModalVisible = () => {
     navigate("/");
   }
@@ -95,7 +96,7 @@ function PaymentVerification({ onBack }) {
             </div>
             <div className='info-item'>
               <p>İşlem Tutarı :</p>
-              <span>{formatPrice(information.totalPrice)} ₺</span>
+              <span>{formatPrice(information.totalPrice)}₺</span>
             </div>
             <div className='info-item'>
               <p>İşlem Tarihi-Saati :</p>
@@ -110,7 +111,18 @@ function PaymentVerification({ onBack }) {
           </div>
           <div className='verification-input-box'>
             <span>Doğrulama Kodu</span>
-            <input value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} placeholder='12345' type="text" />
+            <input
+              value={verificationCode}
+              onChange={(e) => setVerificationCode(e.target.value)}
+              placeholder='12345'
+              maxLength={5}
+              type="text"
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+            />
           </div>
           <div className='verification-buttons'>
             <button onClick={handleAcceptVerification}>Onayla</button>
