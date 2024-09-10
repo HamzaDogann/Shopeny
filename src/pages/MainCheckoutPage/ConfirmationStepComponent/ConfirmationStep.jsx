@@ -1,14 +1,11 @@
 import "./ConfirmationStep.scss";
 import ProductBox from "../../../assets/images/Orders/ProductBox.png";
-import MacBookPro from "../../../assets/images/productPhotoMain.jpg"
 import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
 import ProductItemCard from "../../../shared/components/OrderProductItemCard/ProductItemCard";
 
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCreditCard } from "react-icons/fa";
-import { FaTruckFast } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { formatPrice } from "../../../shared/utils/formatPrice";
 import { formatCardNumber } from "../../../shared/utils/formatCardNumber";
 import { opacityEffect } from "../../../shared/animations/animations";
 import { motion } from "framer-motion"

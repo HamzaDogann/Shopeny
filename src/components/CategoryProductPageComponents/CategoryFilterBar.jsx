@@ -84,7 +84,7 @@ function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClea
     window.scrollTo({ top: 180, behavior: 'smooth' });
   };
 
-
+ console.log("filter bar renderd")
   return (
     <div className="filter-box">
       <div className="filter-options-box">

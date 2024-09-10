@@ -138,7 +138,6 @@ export const updateBasketProductAmount = createAsyncThunk(
                 throw new Error('Güncellenecek ürün bulunamadı.');
             }
         } catch (error) {
-            console.log("Ürün miktarını güncellerken bir hata oluştu:", error);
             return thunkAPI.rejectWithValue(error.message);
         }
     }

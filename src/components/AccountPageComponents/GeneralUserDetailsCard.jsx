@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Skeleton } from '@mui/material';
 import { TbCameraPlus, TbCameraCog } from "react-icons/tb";
 import { setUser } from '../../store/slices/Auth/authSlice.js';
+import truncateName from '../../shared/utils/truncateName.js';
 
 function GeneralUserDetailsCard() {
 
@@ -88,7 +89,7 @@ function GeneralUserDetailsCard() {
                 }
             </div>
             <div className='user-infos'>
-                <p className='user-name'>{user.nameAndSurname}</p>
+                <p className='user-name'>{truncateName(user.nameAndSurname,25)}</p>
                 <p className='user-email'>{user.email}</p>
                 <p className='user-phone-number'>
                     {user.phoneNumber === "belirtilmedi" ? "Telefon numarası belirtilmedi" : `+0${user.phoneNumber}`}

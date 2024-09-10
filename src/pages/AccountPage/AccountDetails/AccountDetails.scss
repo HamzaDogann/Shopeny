@@ -48,6 +48,7 @@
       font-weight: 500;
       @include flex-column;
       gap: 4px;
+      width: 100%;
 
       @media (max-width:570px) {
         margin-top: 10px;
@@ -57,6 +58,9 @@
 
       .user-name {
         font-size: 23px;
+        width: 100%;
+        word-break: break-all;
+        overflow-wrap: break-word;
         color: $shopenyTextGray;
 
         @media (max-width:570px) {

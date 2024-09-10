@@ -121,6 +121,8 @@ function CategoryProducts() {
     return <div style={{ width: "100%", height: "600px" }}></div>
   }
 
+  console.log("CategorProducts Rendered")
+
   //============================JSX==================================
 
   return (
@@ -181,4 +183,4 @@ function CategoryProducts() {
   );
 }
 
-export default CategoryProducts;
+export default React.memo(CategoryProducts);

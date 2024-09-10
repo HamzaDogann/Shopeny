@@ -32,7 +32,6 @@ export const updateProfilePhoto = createAsyncThunk(
 
             return downloadURL;
         } catch (error) {
-            console.log(error.message);
             return rejectWithValue('Fotoğraf yüklenirken bir hata oluştu. Lütfen tekrar deneyin.');
         }
     }
@@ -76,7 +75,6 @@ export const updateProfileDetails = createAsyncThunk(
 
             return updatedData;
         } catch (error) {
-            console.log(error.message);
             return rejectWithValue('Profil bilgilerini güncellemek için bir hata oluştu. Lütfen tekrar deneyin.');
         }
     }

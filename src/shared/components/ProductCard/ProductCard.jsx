@@ -18,7 +18,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import "./ProductCard.scss";
 
-function ProductCard({ product }) {
+const ProductCard = React.memo(({ product }) => {
 
     const userId = getUserId();
     const navigate = useNavigate();
@@ -157,6 +157,6 @@ function ProductCard({ product }) {
             </button>
         </div>
     );
-}
+})
 
 export default ProductCard;

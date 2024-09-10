@@ -11,8 +11,8 @@ import "./HomePage.scss";
 function HomePage() {
   const isLoading = useSelector((state) => state.preLoader.isLoading);
   const [isModalOpen, closeModal] = useDiscountModal();
-
   return (
+    
     <div className='home-page-box'>
       <AutoPlaySlider />
       <h3 className="text-center">Popüler Ürünler</h3>

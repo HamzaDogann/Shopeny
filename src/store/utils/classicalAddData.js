@@ -6,7 +6,6 @@ export const addData = async (path, data) => {
         const dbRef = ref(db, path);
         await set(dbRef, data);
     } catch (error) {
-        console.log(error.message);
         throw new Error(error.message);
     }
 };

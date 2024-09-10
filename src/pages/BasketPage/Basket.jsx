@@ -13,6 +13,7 @@ import ConfirmationModal from "../../shared/components/ConfirmationModal/Confirm
 
 import { motion } from 'framer-motion';
 import { opacityAndTransformEffect } from "../../shared/animations/animations";
+import React from "react";
 
 function Basket() {
   const dispatch = useDispatch();
@@ -91,5 +92,5 @@ function Basket() {
   )
 }
 
-export default Basket
+export default React.memo(Basket)
 

@@ -53,7 +53,6 @@ function Product({ product }) {
 
     //Add Favorite Product
     const handleAddToFavorites = async () => {
-        console.log("Ekleme işlemi başladı.")
 
         if (userId) {
             try {
@@ -61,7 +60,6 @@ function Product({ product }) {
                 customSuccessToast("Favorilere Eklendi", 1800);
                 setIsFavoriteProduct(true);
             } catch (error) {
-                console.log(error.message);
                 customErrorToast("Favorilere Eklenemedi");
             }
         }

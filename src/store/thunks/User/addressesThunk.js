@@ -12,7 +12,6 @@ export const getUserAddresses = createAsyncThunk(
         const userId = getUserId();
         const path = `Data/Users/${userId}/addresses/`;
         const data = await fetchData(path);
-        console.log("veri alındı ve bir kez çalıştı.")
         return data;
     }
 );
@@ -45,8 +44,6 @@ export const updateUserAddress = createAsyncThunk(
             await update(dbRef, address);
             return address;
         } catch (error) {
-
-            console.log(error.message);
             throw new Error(error.message);
         }
     }
@@ -60,8 +57,7 @@ export const removeUserAddress = createAsyncThunk(
         try {
             const dbRef = ref(db, `Data/Users/${userId}/addresses/${addressId}`);
             await remove(dbRef);
-        } catch (error) {
-            console.log(error.message);
+        } catch {
         }
     }
 );

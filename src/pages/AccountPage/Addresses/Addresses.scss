@@ -219,7 +219,7 @@
         .button-box {
             @include flex-center;
             margin-top: 15px;
-
+        
             .submit-button {
                 padding: 12px;
                 background-color: $shopenyOrange;
@@ -232,11 +232,17 @@
                 border-radius: 30px;
                 width: 180px;
                 @include click-scale(0.8, 0.5s);
-
+        
                 &:hover {
                     @include shopenyOrangeHoverBackground;
                 }
+        
+                &:disabled {
+                    background-color: #A0A0A0; 
+                    @include click-scale(1, 0s);
+                }
             }
         }
+        
     }
 }

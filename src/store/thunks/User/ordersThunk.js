@@ -26,7 +26,6 @@ export const addOrder = createAsyncThunk(
 export const fetchOrders = createAsyncThunk(
     'orders/fetchOrders',
     async (_, { rejectWithValue }) => {
-        console.log("SİPARİŞLER ÇEKME İŞLEMİNDE")
         const userId = getUserId();
         const ordersRef = ref(db, `Data/Users/${userId}/orders`);
         try {

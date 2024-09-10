@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit }) => {
-
     const [form, setForm] = useState({
         addressTitle: "",
         city: "",
@@ -12,11 +11,15 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
         recipientName: "",
     });
 
+    const [initialForm, setInitialForm] = useState(form);
+    const [isFormChanged, setIsFormChanged] = useState(false);
+
     useEffect(() => {
         if (isEditMode && initialAddress) {
             setForm(initialAddress);
+            setInitialForm(initialAddress);
         } else {
-            setForm({
+            const emptyForm = {
                 addressTitle: "",
                 city: "",
                 district: "",
@@ -24,9 +27,17 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                 street: "",
                 postalCode: "",
                 recipientName: "",
-            });
+            };
+            setForm(emptyForm);
+            setInitialForm(emptyForm);
         }
     }, [isEditMode, initialAddress]);
+
+    useEffect(() => {
+        // Form değişikliklerini kontrol et
+        const formChanged = JSON.stringify(form) !== JSON.stringify(initialForm);
+        setIsFormChanged(formChanged);
+    }, [form, initialForm]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -34,8 +45,10 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(form);
-        onClose();
+        if (isFormChanged) {
+            onSubmit(form);
+            onClose();
+        }
     };
 
     if (!isVisible) return null;
@@ -148,7 +161,9 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                         name="recipientName"
                         value={form.recipientName}
                         onChange={handleChange}
+                        minLength={5}
                         maxLength={30}
+                        required
                         onKeyPress={(e) => {
                             if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(e.key)) {
                                 e.preventDefault();
@@ -159,7 +174,8 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
                 </label>
             </div>
             <div className="button-box">
-                <button type="submit" className="submit-button">
+                <button type="submit" className={`submit-button ${!isFormChanged ? 'disabled' : ''}`} disabled={!isFormChanged}
+                >
                     {isEditMode ? "Adresi Güncelle" : "Adresi Ekle"}
                 </button>
             </div>

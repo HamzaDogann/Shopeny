@@ -17,7 +17,6 @@ export const addFavoriteProduct = createAsyncThunk(
             const newRef = await push(newFavoriteRef, favoriteProduct);
             return { ...favoriteProduct, favoriteProductKey: newRef.key };
         } catch (error) {
-            console.log(error.message)
             return rejectWithValue(error.message);
 
         }
@@ -60,7 +59,6 @@ export const fetchProducts = createAsyncThunk(
     async (favoriteProductsRef, { rejectWithValue }) => {
         try {
             const productsArray = [];
-            console.log("veri çekme yine başladı")
             for (const { categoryName, productId } of favoriteProductsRef) {
 
                 const path = `Data/Categories/${categoryName}/${productId}`;
@@ -138,7 +136,6 @@ export const clearFavoriteProducts = createAsyncThunk(
         try {
             const path = `Data/Users/${userId}/favoriteProducts`;
             const favoriteProductsRef = ref(db, path);
-            console.log(`favoriteProducts: ${favoriteProductsRef}`);
             await remove(favoriteProductsRef);
 
         } catch (error) {

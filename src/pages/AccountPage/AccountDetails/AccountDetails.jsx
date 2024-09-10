@@ -95,6 +95,14 @@ function AccountDetails() {
     };
 
     const handleSaveClick = (field) => {
+        if (formState.nameAndSurname.length < 5) {
+            customErrorToast("Ad Soyad en az 5 karakter olmalı");
+            return;
+        }
+        if (formState.phoneNumber.length < 10) {
+            customErrorToast("Telefon numarasını tamamlayın");
+            return;
+        }
         setEditing(prevState => ({
             ...prevState,
             [field]: false
@@ -121,8 +129,24 @@ function AccountDetails() {
             setIsFormChanged(!isFormChanged);
 
         } catch (error) {
-            console.log(error.message);
             customErrorToast("Hesap Bilgileri Güncellenemedi");
+        }
+    };
+
+    const handlePhoneInputChange = (e) => {
+        const { value } = e.target;
+
+        // Eğer ilk karakter '0' ise değeri güncellemeyi engelle
+        if (value.length > 0 && value[0] === '0') {
+            return; // İlk karakter '0' olduğunda, input değeri güncellenmez
+        }
+
+        // Telefon numarası 10 karakteri geçemez
+        if (value.length <= 10) {
+            setFormState(prevState => ({
+                ...prevState,
+                phoneNumber: value
+            }));
         }
     };
 
@@ -142,10 +166,19 @@ function AccountDetails() {
                                 {editing.nameAndSurname ? (
                                     <>
                                         <input
+                                            required
                                             type="text"
                                             name="nameAndSurname"
                                             value={formState.nameAndSurname}
                                             onChange={handleInputChange}
+                                            onKeyPress={(e) => {
+                                                if (!/^[a-zA-ZığüşöçİĞÜŞÖÇ\s]+$/.test(e.key)) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                            minLength={5}
+                                            maxLength={30}
+                                            autoComplete="off"
                                             ref={inputRefs.nameAndSurname}
                                             className='name-and-surname-input'
                                         />
@@ -186,9 +219,14 @@ function AccountDetails() {
                                             name="phoneNumber"
                                             maxLength={10}
                                             value={formState.phoneNumber}
-                                            onChange={handleInputChange}
+                                            onChange={handlePhoneInputChange}
                                             ref={inputRefs.phoneNumber}
                                             className='number-input'
+                                            onKeyPress={(e) => {
+                                                if (!/[0-9]/.test(e.key)) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
                                         />
                                         <FaCircleCheck
                                             className='check-icon'
@@ -211,6 +249,7 @@ function AccountDetails() {
                                 )}
                             </div>
                         </div>
+
 
                         <div className='input-box'>
                             <p>Cinsiyet</p>

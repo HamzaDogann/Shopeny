@@ -282,7 +282,6 @@ const checkUserFromDatabase = async (uid) => {
 
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
-            console.log("Kullanıcı ilk kayıtı çoktan yapıldı.")
             return snapshot.val();
 
         } else {

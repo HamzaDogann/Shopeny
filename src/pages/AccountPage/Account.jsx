@@ -5,25 +5,25 @@ import Sidebar from '../../components/AccountPageComponents/Sidebar';
 
 
 import "./Account.scss";
-function Account() {
 
+function Account() {
   return (
     <div className="account-general-box">
-    <div className="top-box">
-      <div className="account-title">
-        <MdOutlineAccountCircle className="account-icon" />
-        <p>Hesabım</p>
+      <div className="top-box">
+        <div className="account-title">
+          <MdOutlineAccountCircle className="account-icon" />
+          <p>Hesabım</p>
+        </div>
       </div>
-    </div>
 
-    <div className="account-box">
-      <Sidebar />
-      <div className="content">
-        <Outlet />
+      <div className="account-box">
+        <Sidebar />
+        <div className="content">
+          <Outlet />
+        </div>
       </div>
     </div>
-  </div>
   )
 }
 
-export default Account
+export default React.memo(Account);

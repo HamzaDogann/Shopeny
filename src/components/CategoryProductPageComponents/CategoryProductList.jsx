@@ -65,6 +65,7 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
         return <div>Beklenmedik bir hata meydana geldi, {error.message}</div>;
     }
 
+
     return (
         <div>
             <motion.p {...opacityAndTransformEffect('y', 45, 0.4)} className='total-product-number'>
@@ -75,7 +76,7 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
             <div className="products-box">
                 {currentProducts.length > 0 ? (
                     currentProducts.map((product) => (
-                            <ProductCard key={product.Id} product={product} loading={loading} />
+                        <ProductCard key={product.Id} product={product} loading={loading} />
                     ))
                 ) : (
                     <div className='no-products-box'>
@@ -106,4 +107,4 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
     );
 });
 
-export default ProductList;
+export default React.memo(ProductList);
