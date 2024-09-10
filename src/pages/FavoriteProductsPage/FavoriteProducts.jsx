@@ -113,10 +113,12 @@ function FavoriteProducts() {
   return (
     <div className='favorite-product-general-box'>
       <div className="top-box">
+
         <motion.div {...opacityAndTransformEffect('x', -70, 0.7)} className="favorite-title">
           <PiHeartStraightFill className='favorite-icon' />
           <p>Favori Ürünlerim</p>
         </motion.div>
+
         {favoriteProducts.length > 0 &&
           <button onClick={handleClearProcess} className='clear-favorites-btn'>
             Tümünü Kaldır
@@ -129,9 +131,8 @@ function FavoriteProducts() {
             <PreLoader />
           </div>
           :
-
           favoriteProducts.length > 0 ? currentItems.map(product => (
-            <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} key={product.favoriteProductKey}>
+            <motion.div {...opacityAndTransformEffect('y', 30, 0.6)} key={product.categoryName + product.Id}>
               <ProductCard product={product} />
             </motion.div>
           )) :
@@ -141,7 +142,7 @@ function FavoriteProducts() {
                 <Link to={"/"}>Ürünleri Keşfet</Link>
               </motion.div>
             )
-      }
+        }
 
       </div>
       {favoriteProducts.length > 0 && Math.ceil(favoriteProducts.length / itemsPerPage) > 1 && (

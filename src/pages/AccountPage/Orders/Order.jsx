@@ -61,9 +61,9 @@ function Order() {
                 <motion.div key={order.orderId} variants={createItemVariants(20, 0)}>
                   <OrderCard onDelete={handleDeleteProcess} order={order} />
                 </motion.div>
-
               ))}
             </motion.div>
+
           </>
         ) : (
           <NoContent

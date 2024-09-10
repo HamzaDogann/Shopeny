@@ -11,15 +11,16 @@ import { useNavigate } from 'react-router-dom';
 import "./PaymentProcess.scss";
 
 const PaymentProcess = () => {
+  
   const [currentStep, setCurrentStep] = useState(0);
   const navigate = useNavigate();
-
   const { basketProducts } = useSelector(state => state.basket);
 
-  if (!basketProducts.length > 0 && currentStep !== 3) {
-    navigate("/");
-    return null; 
-  }
+  useEffect(() => {
+    if (!basketProducts.length && currentStep !== 3) {
+      navigate("/");
+    }
+  }, [basketProducts, currentStep, navigate]);
 
   useEffect(() => {
     const handlePopState = (event) => {

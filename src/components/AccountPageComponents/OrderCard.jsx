@@ -3,14 +3,12 @@ import { IoIosArrowDown } from 'react-icons/io';
 import ProductBox from "./../../assets/images/Orders/ProductBox.png";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
-import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
 
 import ProductItemCard from '../../shared/components/OrderProductItemCard/ProductItemCard';
 import { formatPrice } from '../../shared/utils/formatPrice';
 
 
 function OrderCard({ order, onDelete }) {
-
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,14 +33,14 @@ function OrderCard({ order, onDelete }) {
                 <div className='order-items'>
                     {order.basketProducts.map(product => (
                         <ProductItemCard
-                            product={product}
+                            key={product.referenceId} product={product}
                         />
                     ))}
                 </div>
                 <p className='dividing-line'></p>
 
                 <div className='address-informations'>
-               
+
                     <div className='address'>
                         <p className='address-title'>{order.address.addressTitle}</p>
                         <p className='address-name'>

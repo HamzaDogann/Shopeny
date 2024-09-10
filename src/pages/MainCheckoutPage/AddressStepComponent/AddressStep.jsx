@@ -17,7 +17,7 @@ import { opacityEffect } from "../../../shared/animations/animations";
 import { motion } from "framer-motion"
 
 const AddressStep = () => {
-  const { addresses, loading } = useSelector(state => state.addresses);
+  const { addresses } = useSelector(state => state.addresses);
   const { selectedAddressId } = useSelector(state => state.paymentProcess)
   const [selectedAddress, setSelectedAddress] = useState(selectedAddressId);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -30,18 +30,21 @@ const AddressStep = () => {
   }, [dispatch])
 
   const handleAddressChange = (id) => {
-    setSelectedAddress(prevSelectedAddress => {
+    setSelectedAddress((prevSelectedAddress) => {
       const newAddress = prevSelectedAddress === id ? null : id;
-      dispatch(setIsAddress(newAddress));
       return newAddress;
     });
   };
 
+  useEffect(() => {
+    dispatch(setIsAddress(selectedAddress));
+  }, [selectedAddress, dispatch]);
+
   const handleCloseModal = () => {
     setModalVisible(false);
   };
-  const handleAddProcess = () => {
 
+  const handleAddProcess = () => {
     if (addresses.length >= 4) {
       customErrorToast("Daha fazla adres ekleyemezsin", 16, 2400);
       return;
