@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-function RadioButton({ checked,  onChange }) {
+function RadioButton({ checked, onChange }) {
     return (
         <div className="checkbox-wrapper-12">
             <div className="cbx">
