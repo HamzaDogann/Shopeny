@@ -1,16 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import OrderCard from "../../../components/AccountPageComponents/OrderCard";
-import NoOrder from "../../../assets/images/Orders/NoOrder.png";
-import NoContent from "../../../components/AccountPageComponents/NoContent";
 import { motion } from 'framer-motion';
-import { fetchOrders, removeOrder } from "../../../store/thunks/User/ordersThunk";
-import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
-import ConfirmationModal from "../../../shared/components/ConfirmationModal/ConfirmationModal";
+import NoOrder from "../../../assets/images/Orders/NoOrder.png";
+
+import OrderCard from "../../../components/AccountPageComponents/OrderCard";
+import NoContent from "../../../components/AccountPageComponents/NoContent";
+
 import { showModal } from "../../../store/slices/confirmationModalSlice";
-import "./Order.scss";
+import { fetchOrders, removeOrder } from "../../../store/thunks/User/ordersThunk";
+
+import ConfirmationModal from "../../../shared/components/ConfirmationModal/ConfirmationModal";
+import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
 import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations";
-import PreLoader from "../../../components/PreLoader/PreLoader";
+
+import "./Order.scss";
 function Order() {
 
   const dispatch = useDispatch();
@@ -18,13 +21,12 @@ function Order() {
   const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
-
     if (orders.length === 0) {
       dispatch(fetchOrders());
     }
   }, [dispatch, orders.length]);
 
-  //Delete Order
+
   const handleDeleteProcess = (orderId) => {
     dispatch(showModal({
       message: "Bu siparişi iptal etmek istediğinize emin misiniz?",

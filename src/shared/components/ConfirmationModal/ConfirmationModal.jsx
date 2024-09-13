@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./ConfirmationModal.scss";
 import { hideModal } from "../../../store/slices/confirmationModalSlice";
+import "./ConfirmationModal.scss";
+
 const ConfirmationModal = ({ onConfirm }) => {
+ 
     const dispatch = useDispatch();
     const { isVisible, message, confirmText, cancelText } = useSelector((state) => state.modal);
 

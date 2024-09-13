@@ -4,6 +4,7 @@ import { RiCloseFill } from "react-icons/ri";
 import './DiscountModal.scss';
 
 const DiscountModal = memo(({ isOpen, onClose }) => {
+    
     const [closing, setClosing] = useState(false);
 
     useEffect(() => {
@@ -19,7 +20,6 @@ const DiscountModal = memo(({ isOpen, onClose }) => {
             setClosing(false);
         }, 1200);
     };
-
 
     if ((!isOpen && !closing)) return null;
 

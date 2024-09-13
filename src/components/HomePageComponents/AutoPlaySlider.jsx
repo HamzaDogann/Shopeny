@@ -23,12 +23,10 @@ import 'swiper/css/pagination';
 import { Autoplay, Pagination } from 'swiper/modules';
 
 export default function AutoPlaySlider() {
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+
     const navigate = useNavigate();
 
-    const handleClick = (path) => {
-        navigate(path);
-    };
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
 
     useEffect(() => {
         const handleResize = () => {
@@ -44,6 +42,10 @@ export default function AutoPlaySlider() {
     const Banner3 = isMobile ? Banner3Mobile : Banner3Desktop;
     const Banner4 = isMobile ? Banner4Mobile : Banner4Desktop;
     const Banner5 = isMobile ? Banner5Mobile : Banner5Desktop;
+
+    const handleClick = (path) => {
+        navigate(path);
+    };
 
     return (
         <div className='auto-play-slider-box'>

@@ -1,4 +1,3 @@
-// src/components/Container.js
 import React from 'react';
 import "./container.scss";
 

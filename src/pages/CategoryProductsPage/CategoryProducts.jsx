@@ -21,11 +21,14 @@ import "./CategoryProducts.scss";
 
 function CategoryProducts() {
 
+  //=========HOOKS=========
+
   const dispatch = useDispatch();
   const location = useLocation();
   const { categoryName } = useParams();
 
 
+  //=========ISVALIDCATEGORY=========
   if (!validCategories.includes(categoryName)) {
     return <Navigate to="/" />;
   }
@@ -49,6 +52,7 @@ function CategoryProducts() {
 
   //Other States
   const [isFilterButtonEnable, setIsFilterButtonEnable] = useState(false);
+  
 
   //=========FUNCTIONALITY=========
 
@@ -121,7 +125,6 @@ function CategoryProducts() {
     return <div style={{ width: "100%", height: "600px" }}></div>
   }
 
-  console.log("CategorProducts Rendered")
 
   //============================JSX==================================
 

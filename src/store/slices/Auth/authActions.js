@@ -15,14 +15,10 @@ import {
 import Cookies from 'js-cookie';
 
 //Auth Slice
-import {
-    setUser,
-    clearUser,
-} from './authSlice';
+import {setUser,clearUser} from './authSlice';
 
 //Remove All User Datas
 import { clearAddresses } from "../User/addressesSlice";
-
 
 //Loading Process - Alerts
 import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
@@ -38,6 +34,7 @@ export const authActions = {
 
     //========== Register Method | Email/Password/UserInformations ==========\\
     registerWithEmail: (formData, callback) => async (dispatch) => {
+        
         dispatch(startLoading());
         const { email, password } = formData;
 
@@ -243,7 +240,6 @@ const handleUserLogin = async (userCredential, dispatch) => {
     }
 };
 
-
 // ==== Remembering and logging in the user with token ==== \\
 
 const getUserFromCookies = () => {
@@ -291,7 +287,6 @@ const checkUserFromDatabase = async (uid) => {
         return null;
     }
 };
-
 
 //===== Remove User's data when logout =====\\
 const clearUserDatas = (dispatch) => {

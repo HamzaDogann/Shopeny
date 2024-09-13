@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getCategoryProducts } from '../../thunks/Products/categoryProductsThunk';
 
-
 const initialState = {
     products: {},
     loading: false,

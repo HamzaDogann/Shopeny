@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ref, get } from 'firebase/database'; // Doğru importları yapıyoruz
-import { db } from '../../services/firebase/config'; // Firebase bağlantısını import ediyoruz
+import { ref, get } from 'firebase/database'; 
+import { db } from '../../services/firebase/config'; 
 import { translateCategoryNameToTurkish } from '../../constants/categories';
 
 export const searchProductsThunk = createAsyncThunk(

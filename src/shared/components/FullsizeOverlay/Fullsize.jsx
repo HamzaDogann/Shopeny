@@ -1,5 +1,3 @@
-// Fullsize.jsx
-
 import React from 'react';
 import './Fullsize.scss';
 

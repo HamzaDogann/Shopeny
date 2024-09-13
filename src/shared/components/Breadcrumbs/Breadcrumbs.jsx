@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import './Breadcrumbs.scss';
 
 const Breadcrumbs = () => {
+    
     const location = useLocation();
     const { pathname } = location;
 

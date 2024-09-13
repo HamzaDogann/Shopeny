@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function RemainingTime() {
-    const [time, setTime] = useState(180); 
+
+    const [time, setTime] = useState(180);
     const navigate = useNavigate();
-    const location = useLocation();
 
     useEffect(() => {
         if (time > 0) {

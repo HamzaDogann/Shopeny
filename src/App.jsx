@@ -13,7 +13,6 @@ import AppRoutes from './routes/AppRoutes.jsx';
 import Container from './shared/container/Container.jsx';
 import Breadcrumbs from './shared/components/Breadcrumbs/Breadcrumbs.jsx';
 
-
 function App() {
   const isLoading = useSelector((state) => state.preLoader.isLoading);
   return (

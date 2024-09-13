@@ -1,16 +1,3 @@
-const properties = [
-  { propertyName: 'Temel İşlemci Hızı', propertyDescription: 'Belirtilmemiş' },
-  { propertyName: 'Cihaz Ağırlığı', propertyDescription: '2 - 4 kg' },
-  { propertyName: 'Ram (Sistem Belleği)', propertyDescription: '16 GB' },
-  { propertyName: 'Ekran Panel Tipi', propertyDescription: 'Liquid Retina XDR' },
-  { propertyName: 'Bluetooth Özelliği', propertyDescription: 'Var' },
-  { propertyName: 'Optik Sürücü', propertyDescription: 'Yok' },
-  { propertyName: 'Ekran Kartı Hafızası', propertyDescription: 'Paylaşımlı' },
-  { propertyName: 'Dokunmatik Ekran', propertyDescription: 'Yok' },
-  { propertyName: 'SSD Kapasitesi', propertyDescription: '1 TB' },
-  { propertyName: 'HDMI', propertyDescription: 'Var' },
-];
-
 function TechnicialSpecifications({technicalSpecifications}) {
   return (
     <div className='technicial-specifications-box'>

@@ -1,6 +1,6 @@
 import React from 'react'
-import "./Modal.scss";
 import { IoClose } from 'react-icons/io5';
+import "./Modal.scss";
 
 function Modal({ children, setModalVisible }) {
     return (

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'; // NavLink import edilmiştir
+import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
 import Badge from '@mui/material/Badge';
 import { FaUserLarge } from "react-icons/fa6";
 import { HiOutlineHeart } from "react-icons/hi";
 import { TiShoppingCart } from "react-icons/ti";
-import { useSelector } from 'react-redux';
+
 import truncateName from "../../shared/utils/truncateName";
 import { formatPrice } from '../../shared/utils/formatPrice';
 
 function UserActions() {
+
   const user = useSelector(state => state.auth.user);
   const { information } = useSelector(state => state.basket);
   const { favoriteProductsRef } = useSelector(state => state.favoriteProducts);
@@ -27,8 +30,8 @@ function UserActions() {
 
   return (
     <>
-      <NavLink 
-        to="/hesabim" 
+      <NavLink
+        to="/hesabim"
         className={({ isActive }) => `user-account-button ${isActive ? 'active' : ''}`}
       >
         <FaUserLarge className='user-icon' />
@@ -38,8 +41,8 @@ function UserActions() {
         </div>
       </NavLink>
 
-      <NavLink 
-        to="/favori-urunler" 
+      <NavLink
+        to="/favori-urunler"
         className={({ isActive }) => `favorite-products-button ${isActive ? 'active' : ''}`}
       >
         <Badge color="error" variant={isFavorites ? "dot" : ""}>
@@ -47,8 +50,8 @@ function UserActions() {
         </Badge>
       </NavLink>
 
-      <NavLink 
-        to="/sepetim" 
+      <NavLink
+        to="/sepetim"
         className={({ isActive }) => `basket-button ${isActive ? 'active' : ''}`}
       >
         <Badge color="error" variant={isBasketProducts ? "dot" : ""}>

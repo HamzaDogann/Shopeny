@@ -8,7 +8,6 @@
     float: right;
     margin-bottom: 20px;
 
-
     @media (max-width:1100px) {
       float: none;
       justify-content: center;
@@ -17,7 +16,6 @@
 
     .stock-and-sorting-box {
       @include flex-row;
-
 
       @media (max-width:1100px) {
         width: 60%;
@@ -65,7 +63,6 @@
       border-radius: 30px;
       padding: 7px 12px;
       gap: 8px;
-
     }
 
     select {
@@ -90,8 +87,6 @@
     }
   }
 
-  // Filter bAR
-
   .category-filter-bar {
     width: 100%;
     @include flex;
@@ -110,6 +105,7 @@
         margin-top: 25px;
         margin-bottom: 20px;
       }
+
       @media (max-width:500px) {
         width: 100%;
       }
@@ -134,7 +130,6 @@
           margin-top: 20px
         }
 
-
         ul {
           @include flex-column;
           gap: 15px;
@@ -147,7 +142,6 @@
             label {
               cursor: pointer;
             }
-
           }
         }
 
@@ -160,7 +154,6 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-
             border-radius: 50%;
             margin-right: 8px;
             border: 2px solid rgb(226, 226, 226);
@@ -185,7 +178,6 @@
           @media (max-width:1500px) {
             margin: 0px 10px;
           }
-
         }
 
         .custom-input-box {
@@ -206,23 +198,22 @@
           border-radius: 0px;
           padding-left: 0px;
           -moz-appearance: textfield;
-          /* Firefox */
+
 
           &::-webkit-outer-spin-button,
           &::-webkit-inner-spin-button {
             -webkit-appearance: none;
-            /* Chrome, Safari, Edge, Opera */
             margin: 0;
           }
         }
 
         .MuiSlider-root {
-          color: #f27d59; // Slider'ın genel rengi
+          color: #f27d59; 
         }
 
         .MuiSlider-thumb {
           border-radius: 50%;
-          background-color: #f27d59; // Thumb'un rengi
+          background-color: #f27d59;
 
           &:hover,
           &:active,
@@ -232,29 +223,29 @@
         }
 
         .MuiSlider-track {
-          background-color: #f27d59; // Slider'ın aktif parçasının rengi
+          background-color: #f27d59; 
         }
 
         .MuiSlider-rail {
-          background-color: #f27d59; // Slider'ın pasif parçasının rengi
+          background-color: #f27d59; 
         }
 
         .MuiSlider-valueLabel {
-          background-color: #f27d59; // Değer etiketinin arka plan rengi
-          color: #fff; // Değer etiketinin yazı rengi
-          border-radius: 4px; // Değer etiketinin köşe yumuşatma
+          background-color: #f27d59; 
+          color: #fff; 
+          border-radius: 4px; 
         }
 
         .MuiSlider-mark {
-          background-color: #f27d59; // İşaretlerin rengi
+          background-color: #f27d59; 
         }
 
         .MuiSlider-markLabel {
-          color: #f27d59; // İşaret etiketlerinin rengi
+          color: #f27d59; 
         }
 
         .MuiSlider-markActive {
-          background-color: #f27d59; // Aktif işaretlerin rengi
+          background-color: #f27d59; 
         }
       }
 
@@ -279,14 +270,12 @@
 
           @media (max-width:500px) {
             padding: 15px 22px;
-          
           }
           
           &:hover {
             transition: 0.3s ease-in-out;
             background-color: darken($shopenyOrange, 6%);
           }
-
         }
 
         .remove-filter-btn {
@@ -298,7 +287,6 @@
             background-color: rgb(227, 227, 227);
           }
         }
-
       }
 
 
@@ -312,7 +300,6 @@
         backdrop-filter: blur(5px);
         color: rgb(133, 133, 133);
         padding: 10px;
-
         font-size: 30px;
         border-radius: 50%;
         font-weight: 600;
@@ -341,7 +328,6 @@
         left: 0;
         background-color: rgb(255, 255, 255);
         z-index: 666666;
-
       }
     }
 
@@ -350,7 +336,6 @@
 
       @media (max-width:"1100px") {
         width: 100%;
-
       }
 
       .total-product-number {
@@ -376,7 +361,6 @@
         }
       }
 
-
       .products-box {
         margin-top: 15px;
         @include flex-row;
@@ -385,15 +369,12 @@
         justify-content: center;
         flex-wrap: wrap;
 
-
-       
         .product-card {
           @media (max-width:"1100px") {
             gap: 0px;
 
           }
         }
-
 
         .no-products-box {
           width: 100%;
@@ -440,7 +421,6 @@
               padding: 15px 22px;
             }
             
-
             &:hover {
               background-color: rgb(227, 227, 227);
             }
@@ -455,5 +435,4 @@
       margin-top: 20px;
     }
   }
-
 }

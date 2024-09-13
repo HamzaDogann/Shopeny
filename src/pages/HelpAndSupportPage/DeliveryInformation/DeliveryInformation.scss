@@ -47,11 +47,9 @@
            display: none;
         }
 
-   
         .advantage {
             @include flex-row-center;
             gap: 10px;
-
 
             img {
                 width: 80px;
@@ -72,13 +70,11 @@
                 @media (max-width:840px) {
                     font-size: 12px;
                 }
-
             }
         }
 
 
         .advantage:nth-child(1) {
-
             img {
                 @media (max-width:1020px) {
                     width: 50px;
@@ -91,7 +87,6 @@
             img {
                 width: 60px;
                 height: 58px;
-
 
                 @media (max-width:1020px) {
                     width: 45px;
@@ -151,9 +146,6 @@
             @media (max-width:1200px) {
                 width: 320px;
             }
-
         }
-
     }
-
 }

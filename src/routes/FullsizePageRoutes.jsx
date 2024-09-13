@@ -1,9 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import AuthProtectedRoute from "./AuthProtectedRoute";
+
 import SignIn from "../pages/AuthPages/SignIn";
 import SignUp from "../pages/AuthPages/SignUp";
-import AuthProtectedRoute from "./AuthProtectedRoute";
 import ResetPassword from "../pages/AuthPages/ResetPassword";
+
 import PreLoader from "../components/PreLoader/PreLoader.jsx";
 const About = lazy(() => import('../components/AboutShopeny/About.jsx'));
 

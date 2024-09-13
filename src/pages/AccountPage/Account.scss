@@ -1,7 +1,6 @@
 @import "../../shared/styles/main.scss";
 
 .account-general-box {
-
   .top-box {
     margin: 20px 70px;
     @include flex-row-center;
@@ -171,7 +170,6 @@
         font-weight: 500;
         padding-left: 10px;
 
-
         option {
           padding: 0.5rem;
         }
@@ -297,6 +295,5 @@
         }
       }
     }
-
   }
 }

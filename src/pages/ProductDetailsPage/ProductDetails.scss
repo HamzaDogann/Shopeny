@@ -39,7 +39,6 @@
             &:Hover {
                 @include shopenyOrangeHoverBackground;
             }
-
         }
     }
 
@@ -59,7 +58,6 @@
         width: 25px;
         border-radius: 50%;
         background-image: linear-gradient(50deg, $shopenyOrange 23%, $shopenyBlue);
-
 
         @media (max-width:880px) {
             justify-content: center;
@@ -107,7 +105,6 @@
             background-color: rgb(255, 255, 255);
         }
 
-
         .product-image-box {
             width: 55%;
 
@@ -145,7 +142,6 @@
                         width: 310px;
                         height: 290px;
                     }
-
 
                     .lazy-main-image {
                         width: 100%;
@@ -221,7 +217,6 @@
 
                     @media (max-width:500px) {
                         font-size: 18px;
-
                     }
                 }
 
@@ -258,7 +253,6 @@
                         gap: 0px;
                     }
 
-
                     .rating-box {
                         background-color: rgba(230, 230, 230, 0.679);
                         padding: 5px 10px;
@@ -274,8 +268,6 @@
                             border-radius: 5px;
                             justify-content: center;
                         }
-
-
                     }
 
                     .comment-status {
@@ -328,8 +320,6 @@
                         justify-content: center;
                         margin: 15px;
                     }
-
-
                 }
 
                 .choose-color-box {
@@ -348,17 +338,12 @@
                         border-radius: 12px;
                         transition: all 0.2s ease-in-out;
 
-                        &:active{
-                           
-                        }
-
                         @media (max-width:500px) {
                             width: 35px;
                             height: 35px;
                             border-radius: 50%;
                         }
                     }
-
                 }
 
                 .product-price-info {
@@ -372,12 +357,10 @@
                         justify-content: center;
                     }
 
-
                     strike {
                         font-size: 20px;
                         font-weight: 500;
                         color: rgb(158, 158, 158);
-
 
                         @media (max-width:500px) {
                             font-size: 20px;
@@ -397,7 +380,6 @@
 
                 }
 
-                // background-color: rgba(230, 230, 230, 0.679);
                 .discounted-price {
                     margin-top: 5px;
                     font-size: 29px;
@@ -443,19 +425,14 @@
                             font-size: 22px;
                             padding: 0px 11px;
                             color: $shopenyOrange;
-
                             @include click-scale(0.8, 0.3s);
                             @include shopenyOrangeBackgroundHoverEffect;
-
-
                         }
 
                         .amount-value {
                             color: rgb(75, 75, 75);
                             font-weight: 500;
                         }
-
-
                     }
 
                     .add-basket {
@@ -496,7 +473,6 @@
                 }
 
                 .no-stock {
-
                     width: max-content;
                     padding: 10px 15px;
                     font-weight: 500;
@@ -537,7 +513,6 @@
 // ----- Technicial Specifications Styles  -----\\
 
 .technicial-specifications-box {
-
     width: 100%;
     border-collapse: collapse;
 
@@ -617,7 +592,6 @@
                 @media (max-width:880px) {
                     margin-top: 0px;
                 }
-
             }
 
             @media (max-width:1400px) {
@@ -644,7 +618,6 @@
                     border: 5px solid rgb(231, 231, 231);
                     width: 120px;
                     height: 120px;
-
 
                     @media (max-width:880px) {
                         width: 90px;
@@ -710,15 +683,12 @@
                     width: 100%;
                 }
 
-
                 p {
                     height: 60px;
                     font-size: 14px;
                     overflow: hidden;
                     line-height: 1.2;
-                    /* Satır yüksekliği */
                     max-height: 50px;
-
                     display: flex;
                     align-items: center;
 

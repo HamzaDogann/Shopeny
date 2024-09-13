@@ -1,12 +1,16 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { Skeleton } from '@mui/material';
+
+import { slugify } from '../../utils/slugify';
 import truncateName from '../../utils/truncateName'
 import { formatPrice } from '../../utils/formatPrice';
-import { Skeleton } from '@mui/material';
+
 import useLazyImage from '../../hooks/useLazyImage';
 import { translateCategoryNameToTurkish } from '../../../constants/categories';
-import { slugify } from '../../utils/slugify';
+
 import "./ProductItemCard.scss";
-import { useNavigate } from 'react-router-dom';
+
 function ProductItemCard({ product }) {
 
     const navigate = useNavigate();
@@ -38,9 +42,11 @@ function ProductItemCard({ product }) {
                     <p>{truncateName(product.productName, 30)}</p>
                     <span className='color-box' style={{ backgroundColor: product.color }}></span>
                 </div>
+
                 <div className='item-quantity-box'>
                     <span className="item-quantity">{product.amount}</span>
                 </div>
+
                 <div className='item-price-box'>
                     <span className="item-price">{formatPrice(product.discountedPrice * product.amount)}₺</span>
                 </div>

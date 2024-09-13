@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import CustomStepperComponent from '../../shared/components/Stepper/CustomStepper.jsx';
+
 import AddressStep from "./AddressStepComponent/AddressStep.jsx";
 import PaymentStep from "./PaymentStepComponent/PaymentStep.jsx";
 import ConfirmationStep from "./ConfirmationStepComponent/ConfirmationStep.jsx";
 import PaymentVerification from "./PaymentVerificationComponent/PaymentVerification.jsx";
+
+import CustomStepperComponent from '../../shared/components/Stepper/CustomStepper.jsx';
 import BasketInformations from '../../shared/components/BasketInfo/BasketInformations.jsx';
 import MiniBasketInfo from '../../shared/components/MiniBasketInfo/MiniBasketInfo.jsx';
-import { useNavigate } from 'react-router-dom';
+
 import "./PaymentProcess.scss";
 
 const PaymentProcess = () => {
-  
-  const [currentStep, setCurrentStep] = useState(0);
+
   const navigate = useNavigate();
+
+  //========================STATES============================
+
+  const [currentStep, setCurrentStep] = useState(0);
   const { basketProducts } = useSelector(state => state.basket);
+
+  //========================EFFECTS============================
 
   useEffect(() => {
     if (!basketProducts.length && currentStep !== 3) {
@@ -37,6 +45,8 @@ const PaymentProcess = () => {
       window.removeEventListener('popstate', handlePopState);
     };
   }, [currentStep]);
+
+  //========================FUNCTIONS============================
 
   const handleNext = () => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -67,7 +77,7 @@ const PaymentProcess = () => {
     });
   }, [currentStep]);
 
-
+  //========================STEPS============================
 
   const renderStep = () => {
     switch (currentStep) {
@@ -109,7 +119,8 @@ const PaymentProcess = () => {
               onGoPayment={handleGoPayment}
               onGoConfirm={handleGoConfirm}
             />
-            : <MiniBasketInfo onGoVerification={handleGoVerification} handleBack={handleBack} />}
+            : <MiniBasketInfo onGoVerification={handleGoVerification} handleBack={handleBack} />
+          }
         </div>
       </div>
     </div>

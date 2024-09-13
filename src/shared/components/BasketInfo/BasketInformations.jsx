@@ -1,15 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { FaTruck } from "react-icons/fa";
 import { FaTruckFast } from "react-icons/fa6";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { RiDiscountPercentFill } from "react-icons/ri";
+
 import { formatPrice } from "../../utils/formatPrice"
+import useEffectSkipFirstRender from '../../utils/useEffectSkipFirstRender';
+import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
+import { clearError, removePromotion, updateCargoType, updatePromotion } from '../../../store/slices/Basket/basketSlice';
 
 import "./BasketInformations.scss";
-import { useDispatch, useSelector } from 'react-redux';
-import { clearError, removePromotion, updateCargoType, updatePromotion } from '../../../store/slices/Basket/basketSlice';
-import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
-import useEffectSkipFirstRender from '../../utils/useEffectSkipFirstRender';
 
 function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConfirm }) {
 
@@ -17,8 +19,7 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
 
     const [isFixed, setIsFixed] = useState(false);
     const { information, error } = useSelector(state => state.basket);
-    const { isAddressSelected, isPaymentInfoReceived, isBasketConfirmed, isPaymentConfirmed, }
-        = useSelector(state => state.paymentProcess);
+    const { isAddressSelected, isPaymentInfoReceived } = useSelector(state => state.paymentProcess);
 
     const [selectedCargo, setSelectedCargo] = useState(information.cargoType);
     const [promotionCode, setPromotionCode] = useState("");
@@ -124,10 +125,7 @@ function BasketInformations({ checkoutButton, currentStep, onGoPayment, onGoConf
                 );
             case 2:
                 return (
-                    <button
-                        className="checkout-btn"
-
-                    >
+                    <button className="checkout-btn">
                         Onayla
                     </button>
                 );

@@ -48,7 +48,6 @@
         @include flex-center;
         flex-direction: column;
 
-
         p {
             width: 65%;
             font-size: 16px;
@@ -74,8 +73,6 @@
                 width: 100%;
                 text-align: center;
             }
-
-
         }
 
     }
@@ -100,7 +97,6 @@
         @media (max-width: 900px) {
             flex-direction: column;
             align-items: center;
-
             padding: 10px;
         }
 
@@ -116,9 +112,7 @@
             @media (max-width: 900px) {
                 margin-top: 20px;
                 width: 90%;
-
             }
-
 
             img {
                 width: 150px;
@@ -142,14 +136,10 @@
                 @media (max-width:330px) {
                     font-size: 15px;
                 }
-
-
-
             }
 
             span {
                 background-color: rgba(4, 43, 153, 0.736);
-
                 padding: 10px 25px;
                 border-radius: 20px;
                 color: rgb(255, 255, 255);
@@ -158,9 +148,6 @@
                 @media (max-width: 1000px) {
                     font-size: 13px
                 }
-
-
-
             }
         }
 
@@ -213,8 +200,5 @@
                 }
             }
         }
-
     }
-
-
 }

@@ -1,30 +1,37 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion"
+import { MdAddLocationAlt } from "react-icons/md";
+
 import RadioButton from "../../../shared/helpers/RadioButton";
 import Fullsize from "../../../shared/components/FullsizeOverlay/Fullsize";
 import Modal from "../../../shared/components/Modal/Modal";
+import truncateName from "../../../shared/utils/truncateName";
+import { opacityEffect } from "../../../shared/animations/animations";
+import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
+
+import { addUserAddress, getUserAddresses } from "../../../store/thunks/User/addressesThunk";
+import { setIsAddress } from "../../../store/slices/PaymentProcess/PaymentProcessSlice";
+
 import AddressModal from "../../../components/AccountPageComponents/AddressModal";
 
-//Styles
-import { MdAddLocationAlt } from "react-icons/md";
-import "../../AccountPage/Addresses/Addresses.scss";
 import "./AddressStep.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { addUserAddress, getUserAddresses } from "../../../store/thunks/User/addressesThunk";
-import truncateName from "../../../shared/utils/truncateName";
-import { customErrorToast, customSuccessToast } from "../../../shared/utils/CustomToasts";
-import { setIsAddress } from "../../../store/slices/PaymentProcess/PaymentProcessSlice";
-import { opacityEffect } from "../../../shared/animations/animations";
-import { motion } from "framer-motion"
+import "../../AccountPage/Addresses/Addresses.scss";
 
 const AddressStep = () => {
+
+  const dispatch = useDispatch();
+
+  //==============STATES==============
+
   const { addresses } = useSelector(state => state.addresses);
   const { selectedAddressId } = useSelector(state => state.paymentProcess)
   const [selectedAddress, setSelectedAddress] = useState(selectedAddressId);
   const [isModalVisible, setModalVisible] = useState(false);
-  const dispatch = useDispatch();
 
   const windowWidth = window.innerWidth;
   const truncateLength = windowWidth < 500 ? 15 : 25;
+
   useEffect(() => {
     dispatch(getUserAddresses());
   }, [dispatch])
@@ -61,16 +68,12 @@ const AddressStep = () => {
     }
   };
 
-
   return (
     <>
       <motion.div {...opacityEffect(0.5)}>
         <h2>Adresinizi Seçin</h2>
-
         {addresses.length > 0
-
           ? <div className="choose-address-box">
-            {/* Örnek Adres Kartları */}
             {addresses.map(address => (
               <motion.div  {...opacityEffect(0.7)} className="address-card" key={address.addressId}>
                 <div className="address-informations">
@@ -93,7 +96,6 @@ const AddressStep = () => {
           </div>
         }
 
-
         <div className="new-address-box">
           <button onClick={() => handleAddProcess()}>
             <span>Adres Ekle</span>
@@ -101,7 +103,6 @@ const AddressStep = () => {
           </button>
         </div>
 
-        {/* Modal */}
         <Fullsize isVisible={isModalVisible}>
           <Modal setModalVisible={setModalVisible}>
             <AddressModal

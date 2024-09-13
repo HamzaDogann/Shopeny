@@ -1,8 +1,4 @@
-//Auth Styles
 @import "../../shared/styles//main.scss";
-
-
-//Global Auth Styles
 
 .background-theme {
     height: 120px;
@@ -41,7 +37,6 @@ input {
 
     &:focus {
         border-bottom: 2px solid rgb(125, 125, 125);
-
     }
 }
 
@@ -92,8 +87,6 @@ select {
 }
 
 
-
-
 .social-media-auth-box {
     @include flex-column-align-center;
     margin: 20px 0;
@@ -126,7 +119,6 @@ select {
 }
 
 
-
 .confirm-rules-box {
     @include flex-row;
     align-items: center;
@@ -134,7 +126,6 @@ select {
 
     span {
         font-size: 12px;
-
     }
 }
 
@@ -165,7 +156,6 @@ select {
     height: 100%;
     flex-direction: column;
     font-weight: 500;
-
 
     .sign-modal {
         width: 400px;
@@ -242,8 +232,6 @@ select {
     }
 
 
-
-
     .account-status-box {
         margin-top: 15px;
 
@@ -279,7 +267,6 @@ select {
     z-index: 20;
     backdrop-filter: blur(5px);
     @include auth-opacity-effect(0.7s);
-
 
     .membership-agreement-modal {
         width: 700px !important;
@@ -337,7 +324,6 @@ select {
 }
 
 
-
 //---------------------Reset Password Style----------------------------
 
 .reset-password-box {
@@ -352,7 +338,6 @@ select {
     @media (max-width:500px) {
         justify-content: normal;
         margin-top: 40px;
-
     }
 
     .reset-password-modal {

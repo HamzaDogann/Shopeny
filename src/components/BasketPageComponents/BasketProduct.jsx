@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import truncateName from "../../shared/utils/truncateName";
-import { AiFillDelete } from "react-icons/ai";
-import { formatPrice } from '../../shared/utils/formatPrice';
 import { useDispatch } from 'react-redux';
-import useDebounce from '../../shared/hooks/useDebounce';
-import { removeBasketProduct, updateBasketProductAmount } from '../../store/thunks/Basket/basketThunk';
-import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
 import { useNavigate } from 'react-router-dom';
-import { translateCategoryNameToTurkish } from "../../constants/categories";
-import { LazyLoadComponent, LazyLoadImage } from 'react-lazy-load-image-component';
+import { AiFillDelete } from "react-icons/ai";
+
+import { formatPrice } from '../../shared/utils/formatPrice';
+import useDebounce from '../../shared/hooks/useDebounce';
+import truncateName from "../../shared/utils/truncateName";
 import { slugify } from '../../shared/utils/slugify';
-import useLazyImage from '../../shared/hooks/useLazyImage';
-import { Skeleton } from '@mui/material';
+
+import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
+import { removeBasketProduct, updateBasketProductAmount } from '../../store/thunks/Basket/basketThunk';
+import { translateCategoryNameToTurkish } from "../../constants/categories";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 function BasketProduct({ product }) {
 
@@ -20,13 +20,6 @@ function BasketProduct({ product }) {
     const [amount, setAmount] = useState(product.amount);
     const debouncedAmount = useDebounce(amount, 500);
 
-    const { imageStyle, skeletonProps, onLoad } = useLazyImage({
-        src: product.mainImage,
-        width: 110,
-        height: 110,
-        borderRadius: "12px"
-    });
-
 
     useEffect(() => {
         if (debouncedAmount !== product.amount) {
@@ -34,6 +27,9 @@ function BasketProduct({ product }) {
             dispatch(updateBasketProductAmount({ referenceId: product.referenceId, amountDelta }));
         }
     }, [debouncedAmount, dispatch, product.amount]);
+
+
+    //======FUNCTIONS======
 
     const incrementAmount = () => {
         if (amount < 5) {
@@ -49,7 +45,6 @@ function BasketProduct({ product }) {
         }
     };
 
-
     const handleRemoveProductFromBasket = async () => {
         try {
             await dispatch(removeBasketProduct({ referenceId: product.referenceId }));
@@ -57,9 +52,7 @@ function BasketProduct({ product }) {
         } catch {
             customErrorToast("Sepetten çıkarma başarısız oldu");
         }
-
     }
-
 
     const handleProductLink = () => {
         navigate(`/${translateCategoryNameToTurkish(product.categoryName)}/${slugify(product.productName)}`);
@@ -73,7 +66,7 @@ function BasketProduct({ product }) {
                 alt=""
                 effect="blur"
                 className='basket-product-image'
-            
+
             />
             <div className='product-infos-box'>
                 <p className='product-brand'>{product.productBrand}</p>

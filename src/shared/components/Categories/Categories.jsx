@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-// Styles
-import "./Categories.scss";
-// Icons
-import { GrPersonalComputer } from "react-icons/gr";
+import { NavLink, useLocation } from "react-router-dom";
+
 import { HiMiniDevicePhoneMobile } from "react-icons/hi2";
+import { GrPersonalComputer } from "react-icons/gr";
+import { RiCloseCircleFill } from "react-icons/ri";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import { PiMonitorLight } from "react-icons/pi";
-import { BsMouse3 } from "react-icons/bs";
 import { FaRegKeyboard } from "react-icons/fa6";
+import { BsMouse3 } from "react-icons/bs";
 import { RxCamera } from "react-icons/rx";
 import { FiMic } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 
-import { RiCloseCircleFill } from "react-icons/ri";
-import { NavLink, useLocation } from "react-router-dom";
-
+import "./Categories.scss";
 const Categories = React.memo(() => {
 
     const [categoryMenu, setCategoryMenu] = useState(false);
@@ -90,7 +88,8 @@ const Categories = React.memo(() => {
                     style={{ display: categoryMenu ? "flex" : "none" }}
                     className="category-menu-close-icon"
                 />
-            ) : null}
+            ) : null
+            }
         </>
     );
 });

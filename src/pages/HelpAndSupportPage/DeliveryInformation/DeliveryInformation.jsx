@@ -1,12 +1,14 @@
 import React from 'react'
+import { motion } from 'framer-motion';
+
 import Fee from "../../../assets/images/DeliveryInformations/Fee.png"
 import Location from "../../../assets/images/DeliveryInformations/Location.png"
 import Time from "../../../assets/images/DeliveryInformations/Time.png"
 import Cargo from "../../../assets/images/DeliveryInformations/Cargo.png"
-import { motion } from 'framer-motion';
 
-import "./DeliveryInformation.scss";
 import { opacityAndTransformEffect } from '../../../shared/animations/animations'
+import "./DeliveryInformation.scss";
+
 function DeliveryInformation() {
   return (
     <motion.div  {...opacityAndTransformEffect('y', 25, 0.5)}>

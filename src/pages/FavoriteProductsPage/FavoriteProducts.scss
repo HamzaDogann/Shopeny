@@ -18,7 +18,6 @@
 
         }
 
-
         .favorite-title {
             @include flex-row-center;
             gap: 10px;
@@ -30,8 +29,7 @@
 
             .favorite-icon {
                 font-size: 50px;
-              
-
+            
                 @media (max-width:1200px) {
                     font-size: 40px;
                 }
@@ -52,10 +50,6 @@
                 @media (max-width:770px) {
                     font-size: 24px;
                 }
-  
-
-
-
             }
         }
 
@@ -73,7 +67,6 @@
                 padding: 9px 15px;
             }
 
-
             @media (max-width:450px) {
                 margin-top: 15px;
                 width: 70%;
@@ -85,7 +78,6 @@
                 background-color: rgba(243, 72, 72, 0.867);
                 color: rgb(255, 255, 255);
             }
-
         }
 
     }
@@ -127,7 +119,6 @@
                 text-align: center;
             }
 
-
             a {
                 font-size: 15px;
                 margin-top: 15px;
@@ -145,8 +136,6 @@
                 @media (max-width:750px) {
                     font-size: 14px;
                 }
-           
-
             }
         }
     }

@@ -3,7 +3,6 @@
 .addresses-box {
     position: relative;
 
-
     h2 {
         @include flex-row-center;
         gap: 10px;
@@ -11,10 +10,7 @@
         .home-icon {
             font-size: 33px;
         }
-
     }
-
-
 }
 
 .addresses {
@@ -132,7 +128,6 @@
             width: 200px;
             justify-content: center;
             margin-top: 30px;
-
         }
 
         .icon {
@@ -153,7 +148,6 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
     max-width: 500px;
-
     @include move-opacity-effect(0.5s);
 
     .close-button {
@@ -184,8 +178,6 @@
             @media (max-width:800px) {
                 font-size: 13px;
             }
-
-
 
             input {
                 width: 100%;
@@ -242,7 +234,6 @@
                     @include click-scale(1, 0s);
                 }
             }
-        }
-        
+        }  
     }
 }

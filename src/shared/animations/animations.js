@@ -1,5 +1,3 @@
-// Animations.js
-
 export const opacityEffect = (duration = 0.8) => ({
   initial: { opacity: 0 },
   animate: { opacity: 1 },
@@ -19,7 +17,6 @@ export const opacityAndTransformEffect = (direction = 'y', distance = 20, durati
     transition: { duration }
   };
 };
-
 
 export const createContainerVariants = (delayChildren = 0.3, staggerChildren = 0.2) => ({
   hidden: { opacity: 0, scale: 0.95 },

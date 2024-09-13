@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import "./PaymentStep.scss";
-import Cards from 'react-credit-cards-2';
-import "react-credit-cards-2/dist/lib/styles.scss";
-import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
-import { setIsPaymentInfoReceived, setPaymentInformations } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
-import { opacityEffect } from '../../../shared/animations/animations';
 import { motion } from "framer-motion";
 
+import Cards from 'react-credit-cards-2';
+import "react-credit-cards-2/dist/lib/styles.scss";
+
+import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
+import { opacityEffect } from '../../../shared/animations/animations';
+import { setIsPaymentInfoReceived, setPaymentInformations } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
+
+import "./PaymentStep.scss";
 function usePaymentForm(initialValues) {
+
   const dispatch = useDispatch();
+
   const [cardInformations, setCardInformations] = useState(initialValues);
   const [expiryMonth, setExpiryMonth] = useState(initialValues.expiry.slice(0, 2));
   const [expiryYear, setExpiryYear] = useState(initialValues.expiry.slice(2, 4));
@@ -61,8 +65,9 @@ function usePaymentForm(initialValues) {
 }
 
 function PaymentStep({ onBack }) {
-  const paymentInformations = useSelector(state => state.paymentProcess.paymentInformations);
 
+  const paymentInformations = useSelector(state => state.paymentProcess.paymentInformations);
+  
   const { cardInformations, expiryMonth, expiryYear, handleInputChange, handleInputFocus } = usePaymentForm({
     number: paymentInformations.cardNumber || '',
     expiry: (paymentInformations.month + paymentInformations.year) || '0125',

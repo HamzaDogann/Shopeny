@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
-import UploadProfilePhoto from './UploadProfilePhoto.jsx';
-import Modal from '../../shared/components/Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { Skeleton } from '@mui/material';
 import { TbCameraPlus, TbCameraCog } from "react-icons/tb";
 import { setUser } from '../../store/slices/Auth/authSlice.js';
+
+import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
+import UploadProfilePhoto from './UploadProfilePhoto.jsx';
+import Modal from '../../shared/components/Modal/Modal';
 import truncateName from '../../shared/utils/truncateName.js';
 
 function GeneralUserDetailsCard() {
 
-    //===================States===================
+    const dispatch = useDispatch();
+
+    //===================STATES===================
 
     const user = useSelector(state => state.auth.user);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -18,13 +21,13 @@ function GeneralUserDetailsCard() {
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 800);
     const { updatedProfileDetails, loading, error } = useSelector(state => state.accountDetails);
 
+    //===================ACTIONS===================
 
-    //===================Actions===================
-
-    const dispatch = useDispatch();
     const handleImageLoad = () => {
         setImageLoaded(true);
     };
+
+    //===================EFFECTS===================
 
     useEffect(() => {
         if (user.profilePhotoURL) {
@@ -33,6 +36,7 @@ function GeneralUserDetailsCard() {
             img.onload = handleImageLoad;
         }
     }, [user.profilePhotoURL]);
+
 
     useEffect(() => {
         if (updatedProfileDetails) {
@@ -89,7 +93,7 @@ function GeneralUserDetailsCard() {
                 }
             </div>
             <div className='user-infos'>
-                <p className='user-name'>{truncateName(user.nameAndSurname,25)}</p>
+                <p className='user-name'>{truncateName(user.nameAndSurname, 25)}</p>
                 <p className='user-email'>{user.email}</p>
                 <p className='user-phone-number'>
                     {user.phoneNumber === "belirtilmedi" ? "Telefon numarası belirtilmedi" : `+0${user.phoneNumber}`}

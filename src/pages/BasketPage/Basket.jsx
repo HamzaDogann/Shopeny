@@ -1,21 +1,26 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from 'framer-motion';
+
 import { MdOutlineDeleteSweep } from "react-icons/md";
 import { TiShoppingCart } from "react-icons/ti";
-import BasketProduct from "../../components/BasketPageComponents/BasketProduct";
-import BasketInformations from "../../shared/components/BasketInfo/BasketInformations";
-import PreLoader from "../../components/PreLoader/PreLoader";
-import "./Basket.scss";
-import { clearBasket } from "../../store/thunks/Basket/basketThunk";
-import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts";
-import { showModal } from "../../store/slices/confirmationModalSlice";
-import ConfirmationModal from "../../shared/components/ConfirmationModal/ConfirmationModal";
 
-import { motion } from 'framer-motion';
+import { clearBasket } from "../../store/thunks/Basket/basketThunk";
+import { showModal } from "../../store/slices/confirmationModalSlice";
+
+import BasketProduct from "../../components/BasketPageComponents/BasketProduct";
+import PreLoader from "../../components/PreLoader/PreLoader";
+
+import ConfirmationModal from "../../shared/components/ConfirmationModal/ConfirmationModal";
+import BasketInformations from "../../shared/components/BasketInfo/BasketInformations";
 import { opacityAndTransformEffect } from "../../shared/animations/animations";
-import React from "react";
+import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomToasts";
+
+import "./Basket.scss";
 
 function Basket() {
+
   const dispatch = useDispatch();
   const { basketProducts, loading } = useSelector(state => state.basket);
 
@@ -25,7 +30,6 @@ function Basket() {
   const handleConfirmCart = () => {
     navigate("/sepetim/odeme-islemleri");
   }
-
 
   const handleClearProcess = () => {
     dispatch(showModal({

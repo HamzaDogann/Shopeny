@@ -1,20 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserId } from '../../../store/utils/getUserId';
-import GeneralUserDetailsCard from '../../../components/AccountPageComponents/GeneralUserDetailsCard';
-import { updateProfileDetails } from '../../../store/thunks/User/accountDetailsThunk';
+import { motion } from 'framer-motion';
 
-import truncateName from '../../../shared/utils/truncateName';
-import truncateEmail from '../../../shared/utils/truncateEmail';
+import { getUserId } from '../../../store/utils/getUserId';
+import { updateProfileDetails } from '../../../store/thunks/User/accountDetailsThunk';
 
 import { TbPencilCog } from "react-icons/tb";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 
-import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
-import { motion } from 'framer-motion';
-import "./AccountDetails.scss";
+import truncateName from '../../../shared/utils/truncateName';
+import truncateEmail from '../../../shared/utils/truncateEmail';
 import { opacityAndTransformEffect } from '../../../shared/animations/animations';
+import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
+
+import GeneralUserDetailsCard from '../../../components/AccountPageComponents/GeneralUserDetailsCard';
+import "./AccountDetails.scss";
 
 function AccountDetails() {
 
@@ -136,12 +137,10 @@ function AccountDetails() {
     const handlePhoneInputChange = (e) => {
         const { value } = e.target;
 
-        // Eğer ilk karakter '0' ise değeri güncellemeyi engelle
         if (value.length > 0 && value[0] === '0') {
-            return; // İlk karakter '0' olduğunda, input değeri güncellenmez
+            return; 
         }
 
-        // Telefon numarası 10 karakteri geçemez
         if (value.length <= 10) {
             setFormState(prevState => ({
                 ...prevState,

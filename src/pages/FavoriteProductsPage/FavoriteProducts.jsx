@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserId } from '../../store/utils/getUserId';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import PreLoader from '../../components/PreLoader/PreLoader';
 import Pagination from '@mui/material/Pagination';
 import { PiHeartStraightFill } from "react-icons/pi";
 
-import { clearFavoriteProducts, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
+import ProductCard from '../../shared/components/ProductCard/ProductCard';
 import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
 import ConfirmationModal from '../../shared/components/ConfirmationModal/ConfirmationModal';
-import { showModal } from '../../store/slices/confirmationModalSlice';
 import { opacityAndTransformEffect } from '../../shared/animations/animations';
+
+import { getUserId } from '../../store/utils/getUserId';
+import { showModal } from '../../store/slices/confirmationModalSlice';
+import { clearFavoriteProducts, fetchProducts } from '../../store/thunks/User/favoriteProductThunk';
+
 import "./FavoriteProducts.scss";
 
 
@@ -103,7 +105,7 @@ function FavoriteProducts() {
     }
   }, [currentItems, currentPage]);
 
-  //If error is returned
+  
   if (error) {
     return <div>Beklenmedik bir hata meydana geldi</div>;
   }

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { IoIosArrowDroprightCircle, IoIosArrowDropleftCircle } from "react-icons/io";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Skeleton from '@mui/material/Skeleton'; // MUI Skeleton importu
+import Skeleton from '@mui/material/Skeleton';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ProductSlider = ({ productImages }) => {
+
+    //==============States==============
+
     const [currentIndex, setCurrentIndex] = useState(0);
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const [thumbnailsLoaded, setThumbnailsLoaded] = useState(false);
+
+    //=============Functions==============
 
     const goToNext = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % productImages.otherImages.length);
@@ -21,12 +26,10 @@ const ProductSlider = ({ productImages }) => {
         setCurrentIndex(index);
     };
 
-    // Set imagesLoaded to true after the image is loaded
     const handleImageLoad = () => {
         setImagesLoaded(true);
     };
 
-    // Set thumbnailsLoaded to true after all thumbnails are loaded
     const handleThumbnailLoad = () => {
         setThumbnailsLoaded(true);
     };
@@ -53,7 +56,7 @@ const ProductSlider = ({ productImages }) => {
                     className={`lazy-main-image ${imagesLoaded ? 'visible' : 'hidden'}`}
                     onLoad={handleImageLoad}
                 />
-                {/* Show buttons only after images are loaded */}
+
                 {imagesLoaded && (
                     <>
                         <button className="next-btn" onClick={goToNext}>

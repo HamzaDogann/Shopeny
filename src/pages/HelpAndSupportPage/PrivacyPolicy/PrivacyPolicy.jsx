@@ -1,7 +1,8 @@
 import React from 'react';
-import './PrivacyPolicy.scss';
 import { motion } from 'framer-motion';
+
 import { opacityAndTransformEffect } from '../../../shared/animations/animations';
+import './PrivacyPolicy.scss';
 
 function PrivacyPolicy() {
     return (

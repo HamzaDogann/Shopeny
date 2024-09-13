@@ -1,7 +1,5 @@
 @import "../../styles/main.scss";
 
-
-
 .header-box {
     display: flex;
     justify-content: space-between;
@@ -22,7 +20,6 @@
             padding-top: 2px;
         }
 
-        //Logo
         .logo {
             width: 230px;
         }
@@ -77,8 +74,7 @@
                     color: rgb(147, 147, 147);
                     right: 15px;
                     position: absolute;
-                    transition: all 0.3s ease-in-out; // Geçiş efekti
-
+                    transition: all 0.3s ease-in-out;
                 }
 
                 .hidden {
@@ -86,8 +82,6 @@
                     opacity: 0;
                     right: 0px;
                 }
-
-
 
                 input.header-search-bar {
                     width: 100%;
@@ -100,7 +94,7 @@
                     padding-left: 12px;
                     padding-right: 40px;
                     color: rgb(67, 67, 67);
-                    transition: border-bottom 0s, border-radius 0s; // Animasyonu kaldır
+                    transition: border-bottom 0s, border-radius 0s; 
                     transition: all 0.3s ease-in-out;
 
                     @media (max-width:1000px) {
@@ -142,7 +136,6 @@
                 overflow-y: auto;
                 @include CustomScroll;
 
-
                 &.visible {
                     height: 170px;
                     max-height: 170px;
@@ -158,7 +151,6 @@
                     flex-direction: column;
                     align-items: start;
                     justify-content: start;
-
                 }
 
                 &.spinner-active {
@@ -191,14 +183,12 @@
                     }
                 }
 
-
                 .spinner {
                     width: 30px;
                     aspect-ratio: 1;
                     display: grid;
                     opacity: 1;
                     animation: spinnerOpacityEffect 2s;
-
                 }
 
                 @keyframes spinnerOpacityEffect {
@@ -264,7 +254,7 @@
 
             &.search-active {
                 input.header-search-bar {
-                    transition: none; // Animasyonu tamamen kaldır
+                    transition: none; 
                     scale: 1.07;
 
                     &:focus {
@@ -287,8 +277,7 @@
         gap: 10px;
         border-radius: 15px;
         background-color: rgb(255, 255, 255);
-        
-
+    
         @media (max-width:1300px) {
             width: 40%;
         }
@@ -308,8 +297,6 @@
     @include white-button-hover
 }
 
-//User Actions
-
 .user-account-button {
     @include user-actions-button-styles;
     color: rgb(55, 55, 55);
@@ -321,7 +308,6 @@
     }
 
     .user-actions-buttons-detail-info {
-
         margin-left: 6px;
 
         span {
@@ -340,7 +326,6 @@
 
 
 .favorite-products-button {
-
     color: rgb(55, 55, 55);
     @include user-actions-button-styles;
     padding: 10px 12px;
@@ -383,13 +368,10 @@
 .basket-button.active {
     background-color: #f0f0f0;
     margin: 0px
-    /* Aktif link için arka plan rengi */
 }
 
 
 //================Media Query===============//
-
-
 
 @media (max-width: 1240px) {
     .header-box {
@@ -399,14 +381,7 @@
     }
 }
 
-@media (max-width: 500px) {
-    .header-box {}
-}
-
-
-
 @media (max-width: 800px) {
-
     .header-box {
         margin-top: 30px;
         padding: 0;
@@ -425,15 +400,11 @@
             }
         }
 
-
-
         .header-item:nth-child(3) {
             justify-content: center !important;
             margin-top: 10px;
             gap: 20px;
         }
-
-
 
         .user-account-button,
         .favorite-products-button,
@@ -441,5 +412,4 @@
             scale: 0.9;
         }
     }
-
 }

@@ -1,14 +1,15 @@
 import { ref as dbRef, set } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../../../services/firebase/config';
-import { defaultProfilePhotoURL } from "../../../constants/defaultProfilePhoto"
-import { customErrorToast } from '../../../shared/utils/CustomToasts';
 
+import { defaultProfilePhotoURL } from "../../../constants/defaultProfilePhoto"
+import { db, storage } from '../../../services/firebase/config';
+import { customErrorToast } from '../../../shared/utils/CustomToasts';
 
 
 //=================== Add new user to database | Email & Password Registration ===================
 
 export const newUserRegistration = async (uid, formData) => {
+
     const { email, name, gender, phone } = formData;
 
     const userData = {
@@ -85,12 +86,13 @@ export const newUserRegistrationWithFacebook = async (uid, userInfo) => {
 
 
 const uploadProfilePhoto = async (uid, photoURL = defaultProfilePhotoURL) => {
-    // Eğer verilen photoURL varsayılan URL ise, direkt olarak döndür
+
     if (photoURL === defaultProfilePhotoURL) {
         return photoURL;
     }
 
     const imageRef = storageRef(storage, `users/${uid}/images/profilePhoto.png`);
+  
     try {
         const response = await fetch(photoURL);
         const blob = await response.blob();

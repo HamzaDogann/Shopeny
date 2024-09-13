@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInSchema } from '../../schemas/SignInSchema.js';
 import { authActions } from '../../store/slices/Auth/authActions.js';
-import { Link, useNavigate } from 'react-router-dom';
-import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground.jsx';
 import { motion } from 'framer-motion';
-import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
-import "./Auth.scss";
+
 import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { opacityAndTransformEffect } from '../../shared/animations/animations.js';
 import { PiShieldWarningBold } from "react-icons/pi";
+import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
+
+import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground.jsx';
+import { opacityAndTransformEffect } from '../../shared/animations/animations.js';
+import "./Auth.scss";
 
 function SignIn() {
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const { register, handleSubmit, formState: { errors }, } = useForm({

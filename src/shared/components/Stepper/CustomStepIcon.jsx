@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Check from '@mui/icons-material/Check';
+
 import { FaLocationDot } from 'react-icons/fa6';
 import { FaCreditCard } from 'react-icons/fa';
 import { TbShoppingBagCheck } from 'react-icons/tb';

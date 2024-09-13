@@ -1,18 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
+import Skeleton from '@mui/material/Skeleton';
+import { FreeMode, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { FreeMode, Navigation } from 'swiper/modules';
-import ProductCard from '../../shared/components/ProductCard/ProductCard';
-import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
+
 import { fetchPopularProducts } from '../../store/thunks/Products/popularProductThunk';
 import { categoryTranslation } from '../../constants/categories';
-import Skeleton from '@mui/material/Skeleton';
+import ProductCard from '../../shared/components/ProductCard/ProductCard';
 
 export default function PopularProductsSlider() {
-    const swiperRef = useRef(null);
+
     const dispatch = useDispatch();
+    const swiperRef = useRef(null);
 
     const { popularProducts, loading } = useSelector(state => state.popularProducts);
 

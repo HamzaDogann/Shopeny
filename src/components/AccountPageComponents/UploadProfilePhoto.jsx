@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '../../store/utils/getUserId';
 import { setUser } from '../../store/slices/Auth/authSlice';
 import { removeProfilePhoto, updateProfilePhoto } from '../../store/thunks/User/accountDetailsThunk';
-
 import { TbArrowBigRightLinesFilled } from "react-icons/tb";
 import { customErrorToast, customSuccessToast } from '../../shared/utils/CustomToasts';
-
 import { defaultProfilePhotoURL } from '../../constants/defaultProfilePhoto';
 import PreLoader from "../PreLoader/PreLoader"
 
@@ -15,7 +13,7 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
     const dispatch = useDispatch();
     const userId = getUserId();
 
-    //=========================States=========================
+    //=========================STATES=========================
 
     const { loading, error, updatedProfilePhoto } = useSelector((state) => state.accountDetails);
     const { user } = useSelector((state) => state.auth);
@@ -23,7 +21,7 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
     const [errorMsg, setErrorMsg] = useState(null);
     const [preview, setPreview] = useState(null);
 
-    //=========================Image Actions=========================
+    //=====================IMAGE ACTIONS=========================
 
     //handle Updated Profile Photo
     useEffect(() => {
@@ -68,7 +66,7 @@ function UploadProfilePhoto({ UserProfilePhoto, setModalVisible }) {
     };
 
 
-    //=========================Database Actions=========================
+    //=========================DATABASE ACTIONS=========================
 
     //Add & Update Profile Photo
     const handleUpload = async () => {

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 
 const SuperDealCards = () => {
+    
     const navigate = useNavigate();
 
     const refs = {

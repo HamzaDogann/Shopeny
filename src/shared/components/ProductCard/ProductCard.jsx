@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFavoriteProduct, removeFavoriteProduct } from '../../../store/thunks/User/favoriteProductThunk';
-
-import { getUserId } from '../../../store/utils/getUserId';
-import { slugify } from '../../utils/slugify';
-import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
-import { translateCategoryNameToEnglish, translateCategoryNameToTurkish } from '../../../constants/categories';
-
-import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
-import { MdShoppingCart, MdFavorite } from "react-icons/md";
+import CircularProgress from '@mui/material/CircularProgress';
 
+import { slugify } from '../../utils/slugify';
+import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
+
+import { getUserId } from '../../../store/utils/getUserId';
+import { addFavoriteProduct, removeFavoriteProduct } from '../../../store/thunks/User/favoriteProductThunk';
+import { translateCategoryNameToEnglish, translateCategoryNameToTurkish } from '../../../constants/categories';
+
+import { MdShoppingCart, MdFavorite } from "react-icons/md";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 

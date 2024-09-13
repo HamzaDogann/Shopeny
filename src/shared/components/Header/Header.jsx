@@ -1,11 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-// Components
+
 import Logo from '../../../components/Header/Logo';
 import SearchBar from '../../../components/Header/SearchBar';
 import UserActions from '../../../components/Header/UserActions';
 
-// Styles
 import "./header.scss";
 
 const Header = React.memo(() => {

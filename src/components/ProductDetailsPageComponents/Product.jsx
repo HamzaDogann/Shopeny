@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserId } from '../../store/utils/getUserId';
 
@@ -9,9 +10,7 @@ import Rating from '@mui/material/Rating';
 import { MdFavorite } from "react-icons/md";
 import { IoShareSocialSharp } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
-import { HiMiniShoppingBag } from "react-icons/hi2";
 import { TfiCommentAlt } from "react-icons/tfi";
-import { TbShoppingCartCheck } from "react-icons/tb";
 import { TbShoppingBag } from "react-icons/tb";
 import { TbShoppingBagCheck } from "react-icons/tb";
 
@@ -19,9 +18,7 @@ import { customErrorToast, customSuccessToast } from "../../shared/utils/CustomT
 import { formatPrice } from '../../shared/utils/formatPrice';
 import { translateCategoryNameToEnglish } from '../../constants/categories';
 import { addFavoriteProduct, removeFavoriteProduct } from '../../store/thunks/User/favoriteProductThunk';
-import { useNavigate } from 'react-router-dom';
 import { addProductToBasket } from '../../store/thunks/Basket/basketThunk';
-import truncateName from '../../shared/utils/truncateName';
 import { clearError } from '../../store/slices/Basket/basketSlice';
 
 function Product({ product }) {
@@ -34,7 +31,6 @@ function Product({ product }) {
     //========================States==========================
 
     const { favoriteProductsRef, loading } = useSelector(state => state.favoriteProducts)
-    const { error } = useSelector(state => state.basket)
     const [isFavoriteProduct, setIsFavoriteProduct] = useState();
     const [isAddedBasket, setIsAddedBasket] = useState(false);
     const [selectedColor, setSelectedColor] = useState(product.productColors[0]);

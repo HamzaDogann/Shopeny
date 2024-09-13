@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import "../BasketInfo/BasketInformations.scss";
 import { useSelector } from 'react-redux';
 import { formatPrice } from '../../utils/formatPrice';
+import "../BasketInfo/BasketInformations.scss";
 
 function MiniBasketInfo({ onGoVerification }) {
+    
     const [isFixed, setIsFixed] = useState(false);
     const { information } = useSelector(state => state.basket);
 

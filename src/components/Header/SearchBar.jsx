@@ -1,28 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CgSearch } from "react-icons/cg";
+
 import { slugify } from "../../shared/utils/slugify";
 import truncateName from '../../shared/utils/truncateName';
-import { useDispatch, useSelector } from 'react-redux';
-import { searchProductsThunk } from '../../store/thunks/searchProductsThunk';
-import { clearSearchResults } from '../../store/slices/searchProductsSlice';
 import useDebounce from '../../shared/hooks/useDebounce';
 
+import { searchProductsThunk } from '../../store/thunks/searchProductsThunk';
+import { clearSearchResults } from '../../store/slices/searchProductsSlice';
+
 function SearchBar() {
+
+  //=========STATES=======
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const searchBarRef = useRef(null);
+
   const [isVisible, setIsVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [focusState, setFocusState] = useState(false);
-  const searchBarRef = useRef(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  // Redux'dan arama sonuçlarını ve yüklenme durumunu al
+  //====SEARCH BAR STATES/ACTIONS=====
+
   const { resultProducts, loading } = useSelector((state) => state.searchProducts);
-
-  // Debounce edilmiş arama terimi
   const debouncedInputValue = useDebounce(inputValue, 500);
 
-  // Arama terimi değiştiğinde
   useEffect(() => {
     if (debouncedInputValue) {
       dispatch(searchProductsThunk(debouncedInputValue));
@@ -33,21 +37,18 @@ function SearchBar() {
     }
   }, [debouncedInputValue, dispatch]);
 
-  // Input değiştiğinde
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
-  // Focus event'ini işleme
   const handleFocus = () => {
     setFocusState(true);
   };
 
-  // Blur event'ini işleme
   const handleBlur = () => {
     setFocusState(false);
   };
-
 
   const handleClickOutside = (event) => {
     if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
@@ -64,7 +65,7 @@ function SearchBar() {
       }
     }
   };
- 
+
   const handleLinkClick = (e, categoryName, productName) => {
     e.preventDefault();
     const slug = slugify(productName);
@@ -73,7 +74,7 @@ function SearchBar() {
     setIsVisible(false);
   };
 
-  // Dış tıklama event'lerini dinleme
+  
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {

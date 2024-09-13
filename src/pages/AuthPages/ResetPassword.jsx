@@ -1,29 +1,32 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import ShopenyLogo from '../../assets/logo/ShopenyLogo.png';
+
 import { IoArrowBack } from 'react-icons/io5';
 import { HiOutlineMail } from 'react-icons/hi';
-import ShopenyLogo from '../../assets/logo/ShopenyLogo.png';
-import { motion } from 'framer-motion';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { authActions } from '../../store/slices/Auth/authActions';
-import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
-import { opacityAndTransformEffect } from '../../shared/animations/animations';
-import './Auth.scss';
 import { PiShieldWarningBold } from 'react-icons/pi';
+
+import { authActions } from '../../store/slices/Auth/authActions';
+import { opacityAndTransformEffect } from '../../shared/animations/animations';
+import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
+
+import './Auth.scss';
 
 const schema = z.object({
   email: z.string()
-    .min(1, 'Bir E-posta giriniz') // En az 1 karakter uzunluğunda olmalı
-    .email('Geçersiz E-posta adresi') // Geçerli bir e-posta formatı olmalı
+    .min(1, 'Bir E-posta giriniz') 
+    .email('Geçersiz E-posta adresi') 
 });
 
 function ResetPassword() {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),

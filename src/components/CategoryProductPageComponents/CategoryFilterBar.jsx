@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Checkbox from '../../shared/helpers/Checkbox';
+
 import { Slider, Box, Rating } from '@mui/material';
 import { MdClose } from "react-icons/md";
 import { colors } from "../../constants/FilterColors";
-import { opacityAndTransformEffect } from '../../shared/animations/animations';
-import { motion } from "framer-motion";
+
+import Checkbox from '../../shared/helpers/Checkbox';
+
 function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClearFilters, closeFilterMenuFunc, clearFilters, isFilterButtonEnable, setIsFilterButtonEnable }) {
 
-  //Filter States
+  //=============FILTER STATES=============
+
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 200000]);
   const [checkedColors, setCheckedColors] = useState([]);
@@ -20,7 +22,7 @@ function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClea
     setRating(0)
   }, [onClearFilters])
 
-  //! ======= Handle Filter Methods =======
+  // ======= Handle Filter Methods =======
 
   // Handle Brands
   const handleCheckboxChange = (brand) => {
@@ -64,7 +66,7 @@ function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClea
     setIsFilterButtonEnable(true);
   };
 
-  //! ======= Apply Filters ======= 
+  //======= Apply Filters ======= 
 
   const applyFilters = () => {
     onFilterApply({
@@ -84,7 +86,6 @@ function CategoryFilterBar({ isFilterOpen, categoryBrands, onFilterApply, onClea
     window.scrollTo({ top: 180, behavior: 'smooth' });
   };
 
- console.log("filter bar renderd")
   return (
     <div className="filter-box">
       <div className="filter-options-box">

@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import MembershipAgreement from '../../components/AuthPageComponents/MembershipAgreement';
-import { authActions } from '../../store/slices/Auth/authActions';
-import { LuEye, LuEyeOff } from "react-icons/lu";
-import RadioButton from '../../shared/helpers/RadioButton';
-import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
 import { motion } from 'framer-motion';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import SignUpSchema from '../../schemas/SignUpSchema';
-import { opacityAndTransformEffect } from '../../shared/animations/animations';
-import './Auth.scss';
+
 import { PiShieldWarningBold } from 'react-icons/pi';
+import { LuEye, LuEyeOff } from "react-icons/lu";
+
+import { authActions } from '../../store/slices/Auth/authActions';
+import RadioButton from '../../shared/helpers/RadioButton';
+import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
+import { opacityAndTransformEffect } from '../../shared/animations/animations';
+import MembershipAgreement from '../../components/AuthPageComponents/MembershipAgreement';
+
+import './Auth.scss';
 
 function SignUp() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [showAgreement, setShowAgreement] = useState(false);
   const [agreementAccepted, setAgreementAccepted] = useState(false);
@@ -110,7 +114,6 @@ function SignUp() {
                 className={errors.phone ? 'warning-error' : ''}
                 {...register('phone')}
                 onKeyPress={(e) => {
-                  // Sadece rakam tuşlarına izin verir
                   if (!/[0-9]/.test(e.key)) {
                     e.preventDefault();
                   }

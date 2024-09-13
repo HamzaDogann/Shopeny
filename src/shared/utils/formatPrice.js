@@ -1,7 +1,3 @@
-/**
- *  @param {number} amount - 
- *  @returns {string} - 
- */
 export const formatPrice = (amount) => {
   
     if (isNaN(amount)) {

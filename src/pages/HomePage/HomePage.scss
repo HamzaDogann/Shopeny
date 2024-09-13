@@ -24,9 +24,6 @@
             width: 200px;
             border-radius: 30px;
         }
-
-
-
     }
 }
 
@@ -40,7 +37,6 @@
         height: 480px;
         border-radius: 20px;
         z-index: 0 !important;
-
 
         @media (max-width:1380px) {
             height: 440px;
@@ -62,6 +58,7 @@
         @media (max-width:850px) {
             height: 250px;
         }
+
         @media (max-width:740px) {
             height: 220px;
         }
@@ -71,7 +68,7 @@
         }
 
         @media (max-width:600px) {
-            height:auto;
+            height: auto;
             border-radius: 10px;
             width: 100%;
         }
@@ -82,11 +79,7 @@
         text-align: center;
         font-size: 18px;
         background: #e2e2e2;
-
-        /* Center slide text vertically */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flex-center;
     }
 
     .swiper-slide img {
@@ -96,10 +89,7 @@
         width: 100%;
     }
 
-
-
     // Custom Swiper Styles
-
 
     .swiper-button-next,
     .swiper-button-prev {
@@ -142,19 +132,15 @@
         background-color: rgb(99, 99, 99);
 
         @media (max-width:800px) {
-          
             margin-bottom: 0px !important;
         }
     }
 
     .myAutoPlaySlider .swiper-wrapper {
         transition-timing-function: ease-in-out !important;
-        /* Yumuşatma işlevi */
         transition-duration: 1s !important;
-        /* Geçiş süresi: 1 saniye */
     }
 }
-
 
 
 .popular-products-box {
@@ -171,7 +157,6 @@
 
     .prev-button,
     .next-button {
-
         background-color: transparent;
         color: rgb(187, 187, 187);
         border: none;
@@ -185,7 +170,6 @@
 
         @media (max-width:500px) {
             position: absolute;
-
         }
     }
 
@@ -211,16 +195,10 @@
 
         }
 
-
-
         .swiper-slide {
             text-align: center;
             font-size: 18px;
-
-            /* Center slide text vertically */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @include flex-center;
         }
     }
 }
@@ -232,15 +210,12 @@
 .super-deal-cards-box {
     @include flex-row;
     padding: 0px 50px;
+    gap: 20px;
 
     @media (max-width:"1200px") {
         @include flex-column;
         padding: 0px;
     }
-
-    gap: 20px;
-
-    // Large Box----------------
 
     .large-box {
         color: white;
@@ -263,7 +238,6 @@
             border-radius: 10px;
         }
 
-
         overflow: hidden;
         cursor: pointer;
 
@@ -277,12 +251,11 @@
             background-color: #26262600;
             background-image: linear-gradient(25deg, rgba(29, 85, 206, 0.785) 10%, #00000000 80%);
             border-radius: 25px;
+            z-index: 1;
 
             @media (max-width:"500px") {
                 border-radius: 10px;
             }
-
-            z-index: 1;
         }
 
         &::after {
@@ -297,25 +270,23 @@
             background-size: cover;
             background-repeat: no-repeat;
             border-radius: 25px;
+            z-index: 0;
+            transition: transform 0.3s ease;
 
             @media (max-width:"500px") {
                 border-radius: 10px;
             }
-
-            z-index: 0;
-            transition: transform 0.3s ease;
         }
 
         &:hover::after {
-            transform: scale(1.06); // Hover efekti sırasında arka planın büyütülmesi
+            transform: scale(1.06);
         }
 
         @media (max-width:"500px") {
 
             &:hover::after {
-                transform: scale(1); // Hover efekti sırasında arka planın büyütülmesi
+                transform: scale(1);
             }
-
         }
 
         h2 {
@@ -343,10 +314,8 @@
             position: relative;
             z-index: 2;
 
-
             @media (max-width:"500px") {
                 font-size: 13px;
-
             }
         }
 
@@ -380,9 +349,6 @@
         @include flex-column;
     }
 
-    // Small Box----------------
-
-
     .small-boxes {
         gap: 20px;
 
@@ -407,24 +373,23 @@
 
             h2 {
                 font-weight: 500;
+                padding-top: 50px;
+                margin: 0;
+                padding-left: 20px;
 
                 @media (max-width:"1200px") {
                     font-size: 22px;
                 }
 
-                padding-top: 50px;
-                margin: 0;
-                padding-left: 20px;
-
                 @media (max-width:"500px") {
                     padding-top: 0px;
-
                 }
             }
 
             p {
                 font-weight: 500;
                 font-size: 16px;
+                padding-left: 20px;
 
                 @media (max-width:"1200px") {
                     font-size: 14px;
@@ -437,8 +402,6 @@
                 @media (max-width:"330px") {
                     font-size: 11px;
                 }
-
-                padding-left: 20px;
             }
 
             &:nth-child(1) {
@@ -446,7 +409,6 @@
                 background-position: center;
                 background-size: cover;
                 background-repeat: no-repeat;
-
                 color: white;
                 position: relative;
                 overflow: hidden;
@@ -461,12 +423,11 @@
                     background-color: #26262600;
                     background-image: linear-gradient(100deg, rgba(59, 104, 208, 0.914) 10%, #00000000 70%);
                     border-radius: 18px;
+                    z-index: 1;
 
                     @media (max-width:"500px") {
                         border-radius: 10px;
                     }
-
-                    z-index: 1;
                 }
 
                 &::after {
@@ -499,7 +460,6 @@
                     }
                 }
 
-
                 p {
                     position: relative;
                     z-index: 3;
@@ -521,7 +481,6 @@
                 background-position: center;
                 background-size: cover;
                 background-repeat: no-repeat;
-
                 color: white;
                 position: relative;
                 overflow: hidden;
@@ -582,7 +541,5 @@
                 }
             }
         }
-
     }
-
 }

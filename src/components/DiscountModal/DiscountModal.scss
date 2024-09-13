@@ -10,7 +10,6 @@
     align-items: center;
     z-index: 99999999999;
     animation: modalOverlayAnimation 1s ease-in-out;
-
     
     &.closing {
         animation: fadeOut 0.9s forwards;

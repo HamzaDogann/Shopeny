@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import ShopenyLogo from "../../assets/logo/ShopenyLogo.png";
+
 function Links() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  return (
 
+  return (
     <div className="footer-links-section">
       <div className='links-box'>
         <div className="footer-links-item">
@@ -32,7 +33,6 @@ function Links() {
         <div className="footer-links-item  item-3">
           <h2>Kategoriler</h2>
           <div className="footer-link-item-box" >
-            {/* Router Link Nesnelerine dönüşecekler */}
             <Link to={"/bilgisayar"}>Bilgisayar</Link>
             <Link to={"/telefon"}>Telefon</Link>
             <Link to={"/televizyon"}>Televizyon</Link>
@@ -62,11 +62,9 @@ function Links() {
 
       </div>
 
-
       <span className="copyright-text">Copyright © 2024 All Right Reserved | This Website was created by
         <a href="https://www.linkedin.com/in/hamzadogann/" target="_blank">Hamza Dogan</a>
       </span>
-
     </div>
 
   )

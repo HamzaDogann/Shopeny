@@ -6,10 +6,11 @@ import { ImGithub } from "react-icons/im";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareUpwork } from "react-icons/fa6";
 
-import "./About.scss";
 import Container from '../../shared/container/Container';
 import AnimationBackground from '../../shared/components/AnimationBackground/AnimationBackground';
 import { Link, useLocation } from 'react-router-dom';
+import "./About.scss";
+
 function About() {
 
     const location = useLocation();
@@ -54,7 +55,6 @@ function About() {
                             </a>
                         </div>
                     </div>
-
                 </div>
 
                 <h3>Proje Hakkında</h3>
@@ -73,7 +73,6 @@ function About() {
                         Shopeny ile elde ettiğim deneyimler, gelecekte daha büyük ve karmaşık projelerde çalışabilme yetkinliğimi pekiştirmiştir. Bu süreçte destek olan ve katkıda bulunan herkese teşekkür ederim. 🙏
                     </p>
                 </div>
-
                 <AnimationBackground />
             </div>
         </Container>

@@ -1,12 +1,13 @@
 import React, { useState, useCallback, memo } from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
-import { questionsAnswers } from '../../../constants/FAQ';
 import { motion } from 'framer-motion';
+import { questionsAnswers } from '../../../constants/FAQ';
 
-import './FAQ.scss';
+import { IoIosArrowDown } from 'react-icons/io';
 import { opacityAndTransformEffect } from '../../../shared/animations/animations';
+import './FAQ.scss';
 
 const FAQ = memo(() => {
+  
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleToggle = useCallback((index) => {

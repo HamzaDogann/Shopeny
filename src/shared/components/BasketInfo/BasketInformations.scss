@@ -33,7 +33,6 @@
     }
 
     h2 {
-
         font-weight: 600;
         color: $shopenyTextGray;
         margin: 16px 0px;
@@ -80,7 +79,7 @@
             .selected-box {
                 display: flex;
                 align-items: center;
-                justify-content: space-between; // Alanı boşluklarla doldurur
+                justify-content: space-between;
                 padding: 8px;
                 border: 3px solid rgb(223, 223, 223);
                 background-color: rgb(247, 247, 247);
@@ -102,7 +101,7 @@
             }
 
             .dropdown-icon.open {
-                transform: rotate(180deg); // 180 derece döndür
+                transform: rotate(180deg); 
             }
 
             .select-options {
@@ -124,7 +123,6 @@
                 cursor: pointer;
                 transition: background-color 0.3s;
                 font-size: 14px;
-
 
                 @media (max-width:1200px) {
                     font-size: 12px;

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit }) => {
+
+    //=========STATES=========
+
     const [form, setForm] = useState({
         addressTitle: "",
         city: "",
@@ -13,6 +16,8 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
 
     const [initialForm, setInitialForm] = useState(form);
     const [isFormChanged, setIsFormChanged] = useState(false);
+
+    //=========EFFECTS=========
 
     useEffect(() => {
         if (isEditMode && initialAddress) {
@@ -33,11 +38,13 @@ const AddressModal = ({ isVisible, isEditMode, onClose, initialAddress, onSubmit
         }
     }, [isEditMode, initialAddress]);
 
+
     useEffect(() => {
-        // Form değişikliklerini kontrol et
         const formChanged = JSON.stringify(form) !== JSON.stringify(initialForm);
         setIsFormChanged(formChanged);
     }, [form, initialForm]);
+
+    //=========FUNCTIONS========
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });

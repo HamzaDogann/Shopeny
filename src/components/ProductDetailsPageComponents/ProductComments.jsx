@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Rating, Skeleton } from '@mui/material';
 import { MdOutlineDateRange } from "react-icons/md";
 import truncateName from '../../shared/utils/truncateName';
-import zIndex from '@mui/material/styles/zIndex';
 
 
 function ProductComments({ comments }) {

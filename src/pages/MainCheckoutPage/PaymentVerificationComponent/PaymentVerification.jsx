@@ -1,23 +1,31 @@
-import { useDispatch, useSelector } from 'react-redux';
-import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
-import { showModal } from '../../../store/slices/confirmationModalSlice';
-import RemainingTime from '../../../components/CheckoutPagesComponents/RemainingTime';
-import "./PaymentVerification.scss";
-import { formatPrice } from '../../../shared/utils/formatPrice';
 import { useEffect, useState } from 'react';
-import { formatPhoneNumber } from '../../../shared/utils/formatPhoneNumber';
-import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
-import { addOrder, fetchOrders } from '../../../store/thunks/User/ordersThunk';
-import Modal from '../../../shared/components/Modal/Modal';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+
 import PreLoader from '../../../components/PreLoader/PreLoader';
+import RemainingTime from '../../../components/CheckoutPagesComponents/RemainingTime';
 import successfulIcon from "../../../assets/images/paymentVerification/successful_icon.png";
+
+import Modal from '../../../shared/components/Modal/Modal';
+import { formatPhoneNumber } from '../../../shared/utils/formatPhoneNumber';
+import { customErrorToast } from '../../../shared/utils/CustomToasts';
+import { formatPrice } from '../../../shared/utils/formatPrice';
+import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
 import AnimationBackground from "../../../shared/components/AnimationBackground/AnimationBackground";
+
+import { showModal } from '../../../store/slices/confirmationModalSlice';
 import { clearBasket } from '../../../store/thunks/Basket/basketThunk';
+import { addOrder, fetchOrders } from '../../../store/thunks/User/ordersThunk';
+
+import "./PaymentVerification.scss";
+
 function PaymentVerification({ onBack }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  //========================STATES============================
+
   const { user } = useSelector(state => state.auth);
   const { information, basketProducts } = useSelector(state => state.basket);
   const { loading } = useSelector(state => state.orders);
@@ -29,6 +37,7 @@ function PaymentVerification({ onBack }) {
   const [dateTime, setDateTime] = useState("");
   const [orderCreated, setOrderCreated] = useState(false);
 
+  //========================EFFECTS============================
 
   useEffect(() => {
     const currentDateTime = new Date();
@@ -36,7 +45,8 @@ function PaymentVerification({ onBack }) {
     setDateTime(formattedDateTime);
   }, []);
 
-  //Modal Methods
+  //========================FUNCTIONS============================
+
   const handleCancelProcess = () => {
     dispatch(showModal({
       message: 'Ödeme işlemini iptal etmek istiyor musun?',
@@ -44,13 +54,6 @@ function PaymentVerification({ onBack }) {
       cancelText: 'Hayır',
     }));
   }
-
-  const handleConfirm = () => {
-    onBack();
-  };
-
-  //-------------------------------------------------
-
 
   const handleAcceptVerification = async () => {
     if (!verificationCode) {
@@ -79,12 +82,16 @@ function PaymentVerification({ onBack }) {
       customErrorToast("Doğrulama Kodu Hatalı");
     }
   };
+
+  const handleConfirm = () => {
+    onBack();
+  };
+
   const setModalVisible = () => {
     navigate("/");
   }
 
   return (
-
     <div className='payment-verification-box'>
       {!orderCreated ? <>
         <div className='payment-verification-modal'>
@@ -133,7 +140,6 @@ function PaymentVerification({ onBack }) {
         <ConfirmationModal onConfirm={handleConfirm} />
       </>
         :
-
         <>
           <Modal setModalVisible={setModalVisible} >
             <div className='order-created-box'>
@@ -147,7 +153,6 @@ function PaymentVerification({ onBack }) {
           </Modal>
           <AnimationBackground />
         </>
-
       }
       {loading && <PreLoader />}
     </div>

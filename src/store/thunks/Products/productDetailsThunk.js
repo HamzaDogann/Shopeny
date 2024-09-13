@@ -33,7 +33,6 @@ export const fetchProductDetailsByName = createAsyncThunk(
         return thunkAPI.rejectWithValue("product-not-found");
       }
     } catch (error) {
-      console.error(error);
       return thunkAPI.rejectWithValue("Bilinmeyen bir hata meydana geldi");
     }
   }

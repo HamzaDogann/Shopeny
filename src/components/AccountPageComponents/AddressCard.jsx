@@ -4,6 +4,7 @@ import { TbPencilCog } from "react-icons/tb";
 import truncateName from '../../shared/utils/truncateName';
 
 function AddressCard({ onEdit, onDelete, address }) {
+ 
   const windowWidth = window.innerWidth;
   const truncateLength = windowWidth < 500 ? 15 : 25;
 

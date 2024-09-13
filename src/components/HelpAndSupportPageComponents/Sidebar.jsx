@@ -5,7 +5,7 @@ import { FaTruckRampBox } from "react-icons/fa6";
 import { MdPrivacyTip } from "react-icons/md";
 
 function Sidebar() {
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -28,7 +28,7 @@ function Sidebar() {
     { path: 'gizlilik-politikasi', label: 'Gizlilik Politikası', icon: <MdPrivacyTip /> },
   ];
 
-  // Aktif sayfanın etiketi
+  //Active Page Label
   const activeLabel = navLinks.find(link => location.pathname.includes(link.path))?.label || "Sayfa Seçin";
 
   return (

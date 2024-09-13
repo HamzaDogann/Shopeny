@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addProductToBasket, fetchBasketData, removeBasketProduct, updateBasketProductAmount, clearBasket } from '../../thunks/Basket/basketThunk';
 import { updateBasketInformation } from '../../utils/basketHelper';
 import { promotions } from '../../../constants/promotions';
+import { addProductToBasket, fetchBasketData, removeBasketProduct, updateBasketProductAmount, clearBasket } from '../../thunks/Basket/basketThunk';
 
 const initialState = {
     basketProducts: [],
@@ -84,7 +84,7 @@ const basketSlice = createSlice({
 
                 state.information = updateBasketInformation(state.basketProducts, state.information);
                 state.loading = false;
-                state.error = null; // Başarılı işlemde hata olmadığını belirtmek için
+                state.error = null; 
             })
             .addCase(addProductToBasket.rejected, (state, action) => {
                 state.loading = false;

@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+
 import { MdOutlineAddLocationAlt } from "react-icons/md";
 import { TbHomeDot } from "react-icons/tb";
-
-import { addUserAddress, updateUserAddress, getUserAddresses, removeUserAddress } from "../../../store/thunks/User/addressesThunk";
-import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
-import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations";
-
-import AddressCard from '../../../components/AccountPageComponents/AddressCard';
 import NoAddress from "../../../assets/images/Orders/NoAddress.png";
+
+import { createContainerVariants, createItemVariants, opacityAndTransformEffect } from "../../../shared/animations/animations";
+import AddressCard from '../../../components/AccountPageComponents/AddressCard';
+import PreLoader from '../../../components/PreLoader/PreLoader';
 import NoContent from '../../../components/AccountPageComponents/NoContent';
+
 import Fullsize from '../../../shared/components/FullsizeOverlay/Fullsize';
 import Modal from '../../../shared/components/Modal/Modal';
 import AddressModal from '../../../components/AccountPageComponents/AddressModal';
 import ConfirmationModal from '../../../shared/components/ConfirmationModal/ConfirmationModal';
+import { customErrorToast, customSuccessToast } from '../../../shared/utils/CustomToasts';
+
 import { hideModal, showModal } from '../../../store/slices/confirmationModalSlice';
+import { resetAddressInfo } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
+import { addUserAddress, updateUserAddress, getUserAddresses, removeUserAddress } from "../../../store/thunks/User/addressesThunk";
 
 import "./Addresses.scss";
-import PreLoader from '../../../components/PreLoader/PreLoader';
-import { resetAddressInfo } from '../../../store/slices/PaymentProcess/PaymentProcessSlice';
 
 
 function Addresses() {

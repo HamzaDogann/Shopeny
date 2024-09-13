@@ -1,7 +1,6 @@
 @import "../../shared/styles/main.scss";
 
 .help-and-support-general-box {
-
     .top-box {
         margin: 20px 70px;
         @include flex-row-center;
@@ -27,7 +26,6 @@
                 @media (max-width:1200px) {
                     font-size: 35px;
                 }
-
             }
 
             p {
@@ -135,7 +133,6 @@
                 border-bottom: 3px solid $shopenyOrange;
                 font-family: "Poppins";
                 font-size: 18px;
-
                 color: #333;
                 height: 56px;
 
@@ -144,7 +141,6 @@
                 }
             }
         }
-
 
 
         .content {
@@ -171,8 +167,6 @@
                 @media (max-width:768px) {
                     display: none;
                 }
-
-
             }
         }
     }

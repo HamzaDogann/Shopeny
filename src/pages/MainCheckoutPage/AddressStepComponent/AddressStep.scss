@@ -1,11 +1,12 @@
 @import "../../../shared/styles/main.scss";
 
 .choose-address-box {
+
     @media (max-width:1000px) {
         @include flex-column;
         align-items: center;
-
       }
+      
     .address-card {
         background-color: $shopenyLightGray;
         padding: 20px 30px;
@@ -26,7 +27,6 @@
         }
 
 
-
         .address-informations {
             @include flex-column;
             gap: 5px;
@@ -39,7 +39,6 @@
                 @media (max-width:1200px) {
                     font-size: 18px;
                 }
-
             }
 
             .address-name {
@@ -87,6 +86,7 @@
 
 .new-address-box {
     margin-top: 40px;
+  
     @media (max-width:1000px) {
         width: 100%;
         @include flex-center;
@@ -110,8 +110,6 @@
         @media (max-width:1000px) {
             width: 200px;
          }
-
-
 
         .icon {
             font-size: 23px;

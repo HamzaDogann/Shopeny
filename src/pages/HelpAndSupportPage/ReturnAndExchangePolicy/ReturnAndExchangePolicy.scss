@@ -1,7 +1,6 @@
 @import "../../../shared/styles/main.scss";
 
 .return-and-exchange-box {
-
     p {
         font-weight: 500;
         font-size: 16px;
@@ -10,7 +9,7 @@
 
         @media (max-width:1020px) {
             font-size: 14px;
-         }
+        }
     }
 
     h4 {
@@ -34,17 +33,18 @@
         gap: 20px;
         padding-left: 5px;
         padding-top: 5px;
-         li {
-             color: rgb(85, 85, 85);
-             list-style:inside;
-             font-weight: 500;
-             font-size: 15px;
-             line-height: 30px;
 
-             @media (max-width:1020px) {
+        li {
+            color: rgb(85, 85, 85);
+            list-style: inside;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 30px;
+
+            @media (max-width:1020px) {
                 font-size: 14px;
                 list-style: none;
-             }
-         }
-     }
+            }
+        }
+    }
 }

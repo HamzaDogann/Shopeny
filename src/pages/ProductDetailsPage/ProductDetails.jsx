@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useParams } from 'react-router-dom';
+
 import { validCategories } from '../../constants/categories';
 import { fetchProductDetailsByName } from '../../store/thunks/Products/productDetailsThunk';
 
 import Product from '../../components/ProductDetailsPageComponents/Product';
+import PreLoader from '../../components/PreLoader/PreLoader';
 import TechnicialSpecifications from '../../components/ProductDetailsPageComponents/TechnicialSpecifications';
 import ProductComments from '../../components/ProductDetailsPageComponents/ProductComments';
 import AddComment from '../../components/ProductDetailsPageComponents/AddComment';
 
 import "./ProductDetails.scss";
-import PreLoader from '../../components/PreLoader/PreLoader';
 
 function ProductDetails() {
 

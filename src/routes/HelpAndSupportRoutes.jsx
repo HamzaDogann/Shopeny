@@ -1,9 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import FAQ from "../pages/HelpAndSupportPage/FAQ/FAQ.jsx";
 import PrivacyPolicy from "../pages/HelpAndSupportPage/PrivacyPolicy/PrivacyPolicy.jsx";
+import HelpAndSupport from "../pages/HelpAndSupportPage/HelpAndSupport.jsx";
 import DeliveryInformation from "../pages/HelpAndSupportPage/DeliveryInformation/DeliveryInformation.jsx";
 import ReturnAndExchangePolicy from "../pages/HelpAndSupportPage/ReturnAndExchangePolicy/ReturnAndExchangePolicy.jsx";
-import HelpAndSupport from "../pages/HelpAndSupportPage/HelpAndSupport.jsx";
 
 function HelpAndSupportRoutes() {
   return (

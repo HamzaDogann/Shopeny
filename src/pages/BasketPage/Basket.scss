@@ -1,7 +1,6 @@
 @import "../../shared/styles/main.scss";
 
 .basket-general-box {
-
     .top-box {
         margin: 20px 70px;
         @include flex-row-center;
@@ -89,7 +88,6 @@
         justify-content: center;
         color: rgb(122, 122, 122);
         font-size: 19px;
-
         font-weight: 500;
 
         @media (max-width:750px) {
@@ -119,7 +117,6 @@
             @media (max-width:750px) {
                 font-size: 14px;
             }
-
         }
     }
 
@@ -184,13 +181,11 @@
                     padding: 0px 10px;
                     padding-bottom: 10px;
                     padding-top: 10px;
-
                 }
 
                 @media (max-width:500px) {
                     margin: 20px 0px;
                 }
-
 
                 .basket-product-image {
                     width: 110px;
@@ -264,7 +259,6 @@
                         }
 
                         @media (max-width:900px) {
-
                             width: 250px;
                         }
 
@@ -275,7 +269,6 @@
                         @media (max-width:360px) {
                             font-size: 11px;
                         }
-
                     }
 
                     .product-price {
@@ -369,7 +362,7 @@
                         border-radius: 5px;
                     }
 
-            
+
                     p {
                         margin-top: 10px;
                         background-color: rgb(239, 239, 239);
@@ -380,9 +373,7 @@
                         font-weight: 600;
                         @include move-opacity-effect(0.4s);
 
-
                         @media (max-width:670px) {
-                        
                             font-size: 14px;
                             margin-top: 0px;
                             background-color: rgb(247, 247, 247);
@@ -445,6 +436,4 @@
             }
         }
     }
-
-
 }

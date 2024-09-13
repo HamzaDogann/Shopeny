@@ -1,15 +1,16 @@
-import "./ConfirmationStep.scss";
-import ProductBox from "../../../assets/images/Orders/ProductBox.png";
-import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
-import ProductItemCard from "../../../shared/components/OrderProductItemCard/ProductItemCard";
-
+import { motion } from "framer-motion"
 import { FaLocationDot } from "react-icons/fa6";
 import { FaCreditCard } from "react-icons/fa";
 import { useSelector } from "react-redux";
+
 import { formatCardNumber } from "../../../shared/utils/formatCardNumber";
 import { opacityEffect } from "../../../shared/animations/animations";
-import { motion } from "framer-motion"
+import ProductItemCard from "../../../shared/components/OrderProductItemCard/ProductItemCard";
 
+import ProductBox from "../../../assets/images/Orders/ProductBox.png";
+import GoBackStepButton from '../../../components/CheckoutPagesComponents/GoBackStepButton';
+
+import "./ConfirmationStep.scss";
 function ConfirmationStep({ onBack }) {
 
   const { information, basketProducts } = useSelector(state => state.basket);
@@ -23,7 +24,6 @@ function ConfirmationStep({ onBack }) {
 
     <motion.div {...opacityEffect(0.5)}>
       <h2>Sipariş Detayları</h2>
-
       <div className='order-details-box'>
         <div className="products-general-box">
           <div className="products-title-box">
@@ -75,7 +75,6 @@ function ConfirmationStep({ onBack }) {
             <p> <strong>{formatCardNumber(paymentInformations.cardNumber)}</strong> Numaralı Kredi/Banka Kartı</p>
           </div>
         </div>
-
       </div >
       <GoBackStepButton onBack={onBack} />
     </motion.div>

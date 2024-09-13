@@ -70,7 +70,6 @@ export const addProductToBasket = createAsyncThunk(
                 return { ...newBasketProduct, referenceId: newProductRef.key }; 
             }
         } catch (error) {
-            console.error("Ürün eklenirken bir hata oluştu:", error);
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -98,7 +97,6 @@ export const fetchBasketData = createAsyncThunk(
 
             return basketData;
         } catch (error) {
-            console.error("Sepet verileri çekilirken bir hata oluştu:", error);
             return thunkAPI.rejectWithValue(error.message);
         }
     }

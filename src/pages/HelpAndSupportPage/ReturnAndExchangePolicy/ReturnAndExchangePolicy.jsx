@@ -1,7 +1,8 @@
 import React from 'react'
-import "./ReturnAndExchangePolicy.scss";
 import { motion } from 'framer-motion';
+
 import { opacityAndTransformEffect } from '../../../shared/animations/animations';
+import "./ReturnAndExchangePolicy.scss";
 function ReturnAndExchangePolicy() {
   return (
     <motion.div {...opacityAndTransformEffect('y', 23, 0.5)}>

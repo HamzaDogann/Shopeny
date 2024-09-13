@@ -1,27 +1,31 @@
 import React, { useState, useEffect, memo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { AiFillProduct } from "react-icons/ai";
+
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+
 import ProductCard from "../../shared/components/ProductCard/ProductCard.jsx";
-import { AiFillProduct } from "react-icons/ai";
-import { categoryTranslation } from '../../constants/categories.js';
-import { motion } from 'framer-motion';
 import { opacityAndTransformEffect } from '../../shared/animations/animations.js';
+import { categoryTranslation } from '../../constants/categories.js';
 
 const ProductList = memo(({ products, loading, error, filters, ClearFilters }) => {
+
+    const location = useLocation();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [productsPerPage, setProductsPerPage] = useState(12);
-
 
     const translatedProducts = products.map(product => ({
         ...product,
         categoryName: Object.keys(categoryTranslation).find(key => categoryTranslation[key] === product.categoryName) || product.categoryName
     }));
 
-    const location = useLocation();
+    //==PAGINATION CONTROL==
 
     useEffect(() => {
         const handleResize = () => {
@@ -45,9 +49,12 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
         setCurrentPage(1);
     }, [location, filters]);
 
+
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = translatedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const totalPages = Math.ceil(translatedProducts.length / productsPerPage);
 
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -58,13 +65,9 @@ const ProductList = memo(({ products, loading, error, filters, ClearFilters }) =
         });
     };
 
-    const totalPages = Math.ceil(translatedProducts.length / productsPerPage);
-
-
     if (error) {
         return <div>Beklenmedik bir hata meydana geldi, {error.message}</div>;
     }
-
 
     return (
         <div>
