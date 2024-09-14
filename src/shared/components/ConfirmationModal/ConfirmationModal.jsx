@@ -1,11 +1,25 @@
+import React, { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideModal } from "../../../store/slices/confirmationModalSlice";
 import "./ConfirmationModal.scss";
 
 const ConfirmationModal = ({ onConfirm }) => {
- 
     const dispatch = useDispatch();
     const { isVisible, message, confirmText, cancelText } = useSelector((state) => state.modal);
+
+    const handleKeyDown = useCallback((event) => {
+        if (event.key === 'Escape') {
+            dispatch(hideModal());
+        }
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [handleKeyDown]);
 
     if (!isVisible) return null;
 
@@ -25,6 +39,5 @@ const ConfirmationModal = ({ onConfirm }) => {
         </div>
     );
 };
-
 
 export default ConfirmationModal;

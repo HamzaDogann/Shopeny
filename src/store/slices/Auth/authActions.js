@@ -190,6 +190,7 @@ export const authActions = {
                 customErrorToast("Bu email ile kayıtlı kullanıcı bulunamadı");
             } else {
                 customErrorToast(error.message);
+                console.log(error)
             }
             return Promise.reject(error);
         } finally {
