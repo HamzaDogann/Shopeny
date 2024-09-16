@@ -118,6 +118,12 @@ function SignUp() {
                     e.preventDefault();
                   }
                 }}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length > 0 && value[0] === '0') {
+                    e.target.value = value.slice(1);
+                  }
+                }}
               />
             </div>
             {errors.phone && <span className='warning-spans'>

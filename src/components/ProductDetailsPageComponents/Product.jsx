@@ -27,7 +27,6 @@ function Product({ product }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
     //========================States==========================
 
     const { favoriteProductsRef, loading } = useSelector(state => state.favoriteProducts)
@@ -150,6 +149,7 @@ function Product({ product }) {
         }
     };
 
+    console.log(product)
     //========================JSX==========================
 
     return (

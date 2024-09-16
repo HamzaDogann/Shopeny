@@ -35,7 +35,7 @@ function ProductComments({ comments }) {
             <div className='comment-user-and-rating-info-box'>
               <p className='comment-user'>{truncateName(comment.user, 12)}</p>
               <div className='comment-rating-box'>
-                <Rating name="read-only" value={comment.starRating} readOnly size={"small"} />
+                <Rating name="read-only" precision={0.5} value={comment.starRating} readOnly size={"small"} />
               </div>
             </div>
 

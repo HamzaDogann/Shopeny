@@ -138,7 +138,7 @@ function AccountDetails() {
         const { value } = e.target;
 
         if (value.length > 0 && value[0] === '0') {
-            return; 
+            return;
         }
 
         if (value.length <= 10) {

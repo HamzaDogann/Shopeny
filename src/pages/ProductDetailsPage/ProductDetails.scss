@@ -618,6 +618,7 @@
                     border: 5px solid rgb(231, 231, 231);
                     width: 120px;
                     height: 120px;
+                    object-fit: cover;
 
                     @media (max-width:880px) {
                         width: 90px;
