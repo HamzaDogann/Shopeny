@@ -67,35 +67,35 @@ export default function AutoPlaySlider() {
                     <img
                         src={Banner1}
                         alt="Banner 1"
-                        onClick={() => handleClick('/telefon/iphone-16')}
+                        onClick={() => handleClick('/telefon/iphone-16-pro-max-256-gb')}
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
                         src={Banner2}
                         alt="Banner 2"
-                        onClick={() => handleClick('/bilgisayar/macbook-air')}
+                        onClick={() => handleClick('/bilgisayar/macbook-air-m1-256gb')}
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
                         src={Banner3}
                         alt="Banner 3"
-                        onClick={() => handleClick('/kulaklik/steelseries-oyuncu-kulaklik')}
+                        onClick={() => handleClick('/kulaklik')}
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
                         src={Banner4}
                         alt="Banner 4"
-                        onClick={() => handleClick('/telefon/redmi-note-12-pro-5g')}
+                        onClick={() => handleClick('/telefon/redmi-note-12-pro-5g-256gb')}
                     />
                 </SwiperSlide>
                 <SwiperSlide>
                     <img
                         src={Banner5}
                         alt="Banner 5"
-                        onClick={() => handleClick('/televizyon/toshiba-uhd-tv')}
+                        onClick={() => handleClick('/televizyon')}
                     />
                 </SwiperSlide>
             </Swiper>

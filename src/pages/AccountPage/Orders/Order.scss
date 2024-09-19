@@ -178,6 +178,7 @@
                 @media (max-width:500px) {
                     width: 100px;
                 }
+
                 @media (max-width:400px) {
                     width: 80px;
                 }
@@ -266,7 +267,7 @@
                 justify-content: space-between;
                 margin: 20px 0px 25px 0px;
 
-                
+
                 @media (max-width: 620px) {
                     padding: 0px 20px;
                     margin: 20px 0px 20px 0px;
@@ -282,38 +283,61 @@
                     transition: all 0.3s ease-in-out;
 
                     &:hover {
-                        background-color: rgb(237, 237, 237);    
+                        background-color: rgb(237, 237, 237);
                     }
 
                     @media (max-width: 1199px) {
                         font-size: 14px;
                     }
+
                     @media (max-width: 620px) {
                         padding: 0px;
+
                         &:hover {
-                            background-color: transparent;    
+                            background-color: transparent;
                         }
                     }
+
                     @media (max-width: 359px) {
                         font-size: 12px;
                     }
 
-                    
+
                 }
 
-                span {
+                .total-price {
                     font-size: 17px;
                     font-weight: 500;
                     color: $shopenyTextGray;
-
+                   float: right;
                     @media (max-width: 1199px) {
                         font-size: 14px;
                     }
+
                     @media (max-width: 359px) {
                         font-size: 12px;
                     }
                 }
 
+            }
+
+            .discount-applied {
+
+                @include flex-row-center;
+                gap: 5px;
+                font-size: 14px;
+                font-weight: 500;
+                color: rgb(85, 85, 85);
+                margin-bottom: 7px;
+
+                @media (max-width:620px) {
+                    font-size: 12px;
+                }
+
+                .icon {
+                    font-size: 19px;
+                    color: $shopenyOrange;
+                }
             }
 
         }

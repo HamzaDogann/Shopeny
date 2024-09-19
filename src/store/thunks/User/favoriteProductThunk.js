@@ -47,6 +47,7 @@ export const fetchFavoriteProductsRef = createAsyncThunk(
             }
         } catch (error) {
             return rejectWithValue(error.message);
+          
 
         }
     }
@@ -83,12 +84,13 @@ export const fetchProducts = createAsyncThunk(
                     };
                     productsArray.push(product);
                 } else {
-                    return rejectWithValue(error.message);
+                    return "error";
                 }
             }
 
             return productsArray;
         } catch (error) {
+            console.log(error);
             return rejectWithValue(error.message);
         }
     }

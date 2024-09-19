@@ -3,6 +3,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import ProductBox from "./../../assets/images/Orders/ProductBox.png";
 import { MdAccessTimeFilled } from "react-icons/md";
 import { LuCalendarDays } from "react-icons/lu";
+import { RiDiscountPercentFill } from "react-icons/ri";
 
 import ProductItemCard from '../../shared/components/OrderProductItemCard/ProductItemCard';
 import { formatPrice } from '../../shared/utils/formatPrice';
@@ -54,7 +55,16 @@ function OrderCard({ order, onDelete }) {
 
                 <div className='manage-order-box'>
                     <button onClick={() => onDelete(order.orderId)}>Siparişi İptal Et</button>
-                    <span>Toplam : {formatPrice(order.information.totalPrice)}₺</span>
+
+                    <div>
+                        {order.information.promotion &&
+                            <p className='discount-applied'>
+                                <RiDiscountPercentFill className='icon' />
+                                %{order.information.promotionDiscount} indirim uygulandı
+                            </p>
+                        }
+                         <span className='total-price'>Toplam : {formatPrice(order.information.totalPrice)}₺</span>
+                    </div>
                 </div>
             </div>
         </div>

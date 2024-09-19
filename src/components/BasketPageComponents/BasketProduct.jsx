@@ -70,7 +70,7 @@ function BasketProduct({ product }) {
             />
             <div className='product-infos-box'>
                 <p className='product-brand'>{product.productBrand}</p>
-                <p onClick={handleProductLink} className='product-name'>{truncateName(product.productName, 30)}</p>
+                <p onClick={handleProductLink} className='product-name'>{truncateName(product.productName, 24)}</p>
                 <p className='product-price'>{formatPrice(product.discountedPrice)}₺</p>
                 <p style={{ backgroundColor: product.color }} className='product-color'>
                 </p>

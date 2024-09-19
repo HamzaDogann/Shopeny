@@ -53,10 +53,6 @@
             @media (max-width: 1199px) {
                 font-size: 13px;
             }
-
-            @media (max-width:399px) {
-                font-size: 12px;
-            }
         }
 
         .color-box {
@@ -84,7 +80,8 @@
             @media (max-width: 430px) {
                 width: 180px;
                 margin-top: 5px;
-                font-size: 11px;
+                font-size: 15px;
+                width: 100%;
             }
         }
     }
@@ -185,12 +182,9 @@
             font-size: 15px;
 
             @media (max-width: 1199px) {
-                font-size: 12px;
+                font-size: 13px;
             }
 
-            @media (max-width: 430px) {
-                font-size: 10px;
-            }
         }
     }
 }
