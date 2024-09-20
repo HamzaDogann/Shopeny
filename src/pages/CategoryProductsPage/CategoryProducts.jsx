@@ -4,7 +4,6 @@ import { validCategories } from "../../constants/categories";
 import { useDispatch, useSelector } from 'react-redux';
 import { MdFilterListAlt } from "react-icons/md";
 
-
 import { filterProducts } from '../../store/utils/filterProducts.js';
 import { getCategoryProducts } from '../../store/thunks/Products/categoryProductsThunk';
 import { setBrands, setColors, setIsFilterMode, setIsStock, setPriceRange, setRating, setSortOption } from '../../store/slices/Products/filteredCategoryProductsSlice.js';

@@ -41,7 +41,6 @@ function OrderCard({ order, onDelete }) {
                 <p className='dividing-line'></p>
 
                 <div className='address-informations'>
-
                     <div className='address'>
                         <p className='address-title'>{order.address.addressTitle}</p>
                         <p className='address-name'>
