@@ -90,7 +90,6 @@ export const fetchProducts = createAsyncThunk(
 
             return productsArray;
         } catch (error) {
-            console.log(error);
             return rejectWithValue(error.message);
         }
     }

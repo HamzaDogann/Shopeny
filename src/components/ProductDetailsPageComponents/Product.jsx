@@ -149,7 +149,6 @@ function Product({ product }) {
         }
     };
 
-    console.log(product)
     //========================JSX==========================
 
     return (

@@ -32,7 +32,7 @@ function App() {
           </Container>
           <Breadcrumbs />
           <Container>
-            {/* Header - *AppRoutes* - Footer*/}
+            {/* Header - AppRoutes - Footer*/}
             <AppRoutes />
           </Container>
           <Footer />
