@@ -8,10 +8,13 @@ import Fullsize from "../../shared/components/FullsizeOverlay/Fullsize";
 import UploadProfilePhoto from './UploadProfilePhoto.jsx';
 import Modal from '../../shared/components/Modal/Modal';
 import truncateName from '../../shared/utils/truncateName.js';
+import { authActions } from '../../store/slices/Auth/authActions.js';
+import { useNavigate } from 'react-router-dom';
 
 function GeneralUserDetailsCard() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //===================STATES===================
 
@@ -27,6 +30,13 @@ function GeneralUserDetailsCard() {
         setImageLoaded(true);
     };
 
+    const handleLogout = () => {
+        dispatch(authActions.logout())
+            .then(() => {
+                navigate('/');
+            });
+    };
+    
     //===================EFFECTS===================
 
     useEffect(() => {
@@ -100,7 +110,7 @@ function GeneralUserDetailsCard() {
                 </p>
 
                 {isMobileView && (
-                    <button className='logout-button'>Çıkış yap</button>
+                    <button onClick={handleLogout} className='logout-button'>Çıkış yap</button>
                 )}
             </div>
 
