@@ -97,75 +97,41 @@ Netlify, projenin barındırılması ve dağıtılması için kullanılan bir pl
 
 Bu projede, geliştirme sürecini hızlandırmak ve özellikleri daha verimli bir şekilde sunmak amacıyla çeşitli bağımlılıklar kullanılmıştır. Aşağıda, projede kullanılan başlıca bağımlılıklar ve kısa açıklamaları yer almaktadır:
 
-### **React**
-→ React, kullanıcı arayüzlerini oluşturmak için kullanılan ana kütüphanedir. Bileşen bazlı yapı sayesinde projenin daha dinamik ve modüler olması sağlanmıştır.
+## 🛠️ Proje Bağımlılıkları
 
-### **@mui/material & @mui/icons-material**
-→ Material-UI bileşen kütüphanesi, modern ve erişilebilir kullanıcı arayüzleri oluşturmak için kullanılmıştır. Projede butonlar, formlar, modal pencereler ve ikonlar için kullanılmıştır.
-
-### **Firebase**
-→ Projede, Firebase Authentication ve Firebase Realtime Database ile kimlik doğrulama ve veri yönetimi işlemleri yapılmaktadır.
-
-### **Framer Motion**
-→ Framer Motion, animasyonlar için kullanılmıştır. Kullanıcı deneyimini zenginleştiren etkileşimli animasyonlar, geçiş efektleri bu kütüphane ile sağlanmıştır.
-
-### **React Hook Form & @hookform/resolvers**
-→ React Hook Form, form verilerini yönetmek ve doğrulama işlemleri için kullanılmıştır. Daha az render ve daha yüksek performans sunan bir form yönetimi sağlar. Doğrulama işlemleri için Zod ile entegre edilmiştir.
-
-### **Zod**
-→ Zod, form verilerinin tip güvenliği ile doğrulanması için kullanılan bir kütüphanedir. Formların doğru şekilde doldurulmasını sağlamak için kullanılmıştır.
-
-### **@reduxjs/toolkit & react-redux**
-→ Redux Toolkit, global state yönetimi ve asenkron işlemleri yönetmek için kullanılmıştır. `react-redux` ile birlikte kullanılarak bileşenlerde Redux state'ine erişim sağlanmıştır.
-
-### **react-router-dom**
-→ Sayfalar arasında yönlendirme işlemlerini yönetmek için `react-router-dom` kullanılmıştır. Single Page Application (SPA) yapısı sağlanarak hızlı ve dinamik bir kullanıcı deneyimi sunulmuştur.
-
-### **Swiper**
-→ Swiper, ana sayfa slider ve popüler ürünleri göstermek için kullanılan bir kütüphanedir. Etkileşimli, dokunmatik destekli bir kaydırma deneyimi sağlar.
-
-### **js-cookie**
-`js-cookie`, kullanıcı bilgilerini çerezlerde saklamak için kullanılmıştır. Bu, özellikle kullanıcı oturumlarının ve tercihlerinin yönetilmesinde büyük kolaylık sağlar.
-
-### **react-lazy-load-image-component**
-Lazy loading, sayfa performansını artırmak için resimlerin yalnızca ihtiyaç duyulduğunda yüklenmesini sağlar. Bu kütüphane, özellikle ürün görsellerinin yüklenmesinde kullanılmıştır.
-
-### **react-hot-toast**
-React Hot Toast, kullanıcıya işlem bildirimleri sunmak için kullanılmıştır. Başarı, hata ve uyarı bildirimleri dinamik ve modern bir şekilde gösterilmiştir.
-
-### **react-credit-cards-2**
-Bu kütüphane, ödeme işlemleri sırasında kredi kartı bilgilerinin görsel olarak kullanıcıya gösterilmesini sağlar.
-
-### **react-infinite-logo-slider**
-Footer bileşeninde sonsuz döngüde kayan markalar bu kütüphane ile sağlanmıştır.
-
+- **@emotion/react**: CSS-in-JS yaklaşımıyla stil yazımına olanak tanır.
+- **@emotion/styled**: Stil bileşenleri oluşturmayı sağlar; dinamik stiller için idealdir.
+- **@hookform/resolvers**: React Hook Form ile birlikte kullanılarak, form doğrulama işlemlerini kolaylaştırır.
+- **@mui/icons-material**: Material-UI için ikonlar sağlar.
+- **@mui/material**: Modern ve erişilebilir UI bileşenleri sunar; formlar ve butonlar gibi.
+- **@reduxjs/toolkit**: Redux uygulamalarını daha verimli ve basit bir şekilde yazmak için bir araç setidir.
+- **firebase**: Kimlik doğrulama ve veritabanı işlemleri için kullanılır; gerçek zamanlı veri güncellemeleri sağlar.
+- **framer-motion**: Animasyonlar ve geçiş efektleri için kullanılır; kullanıcı deneyimini geliştirir.
+- **js-cookie**: Kullanıcı bilgilerini çerezlerde yönetmek için kullanılır; oturum ve tercih bilgileri için idealdir.
+- **npm**: Node.js paket yöneticisi; bağımlılıkların yönetilmesini sağlar.
+- **react**: Kullanıcı arayüzleri oluşturmak için ana kütüphanedir.
+- **react-credit-cards-2**: Ödeme işlemleri sırasında kredi kartı bilgilerini görsel olarak sunar.
+- **react-dom**: React bileşenlerini DOM'a yerleştirmek için kullanılır.
+- **react-hook-form**: Form verilerini yönetmek için hafif ve performans odaklı bir kütüphanedir.
+- **react-hot-toast**: Kullanıcı bildirimleri için modern ve şık bir çözüm sunar.
+- **react-icons**: Çeşitli ikonları kolayca kullanmak için bir kütüphanedir.
+- **react-infinite-logo-slider**: Sonsuz döngüde kayan logo gösterimi için kullanılır.
+- **react-lazy-load-image-component**: Görsellerin yalnızca görünür olduklarında yüklenmesini sağlar; performansı artırır.
+- **react-redux**: Redux state yönetimi için React bileşenlerine bağlanmayı sağlar.
+- **react-router-dom**: SPA'lar için yönlendirme işlemlerini yönetir; sayfalar arası geçişleri kolaylaştırır.
+- **swiper**: Etkileşimli ve dokunmatik destekli slider bileşenleri oluşturur.
+- **zod**: Form verilerinin doğruluğunu kontrol etmek için tip güvenliğini sağlar.
 
 ## ⚛️ Kullanılan Hook'lar
 
-Projede kullanılan hook'lar, dinamik veri yönetimi ve kullanıcı etkileşimlerini optimize etmek için kullanılmıştır. İşte kullanılan ana React hook'lar ve custom hook'lar:
+- **useState**: Dinamik veri yönetimi için kullanılır.
+- **useEffect**: Bileşen yaşam döngüsüne müdahale etmek için kullanılır.
+- **useRef**: DOM elemanlarına doğrudan referans vermek için kullanılır.
+- **useMemo**: Performans optimizasyonu için hesaplamaların tekrarlanmasını önler.
+- **useCallback**: Fonksiyon referanslarının yeniden oluşturulmasını engeller.
+- **useDebounce**: Kullanıcı girişlerinde gereksiz API çağrılarını önler.
+- **useDiscountModal**: İndirim modallarını yönetir.
+- **useLazyImage**: Görsellerin yalnızca görünür olduklarında yüklenmesini sağlar.
 
-### **useState**
-React bileşenlerinde dinamik veri yönetimi için kullanılmıştır. Kullanıcı formları ve UI durumlarını yönetmede yaygın olarak kullanılmıştır.
-
-### **useEffect**
-Bileşenlerin yaşam döngüsüne müdahale etmek ve yan etkileri yönetmek için kullanılmıştır. API çağrıları, veri çekme işlemleri ve component mount işlemlerinde yoğun olarak kullanılmıştır.
-
-### **useRef**
-React bileşenlerinde DOM elemanlarına doğrudan referans vermek için kullanılan bir hook'tur. Kullanıcı etkileşimlerini yönetmek ve belirli bileşenlerin durumunu izlemek için kullanılır. Örneğin, input alanlarının değerlerine erişim sağlamak veya bileşenler arasında DOM elemanlarını kolayca referanslamak amacıyla kullanılabilir.
-
-### **useMemo**
-Performans optimizasyonu için hesaplamaların ve render işlemlerinin gereksiz yere tekrarlanmaması amacıyla kullanılmıştır.
-
-### **useCallback**
-Fonksiyon referanslarının her render'da yeniden oluşturulmasını önlemek için kullanılmıştır. Bu sayede performans iyileştirmeleri sağlanmıştır.
-
-### **useDebounce**
-Kullanıcı girişlerinde, özellikle arama çubuğunda anında API çağrısı yapmayı engelleyip belirli bir süre bekleyerek gereksiz istekleri önleyen bir custom hook'tur.
-
-### **useDiscountModal**
-Bu custom hook, kullanıcıya indirim modalları göstermek için kullanılmıştır. İndirim kampanyaları ve promosyonların yönetilmesini sağlar.
-
-### **useLazyImage**
-Görsellerin yalnızca görünür olduklarında yüklenmesini sağlayan bir custom hook'tur. Sayfa yüklenme süresini iyileştirmeye yönelik bir performans optimizasyonudur.
 
 
