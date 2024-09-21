@@ -117,7 +117,6 @@ export const authActions = {
                 customErrorToast("Bu hesap başka kimlik ile ilişkili");
             }
             else {
-                console.log(error);
                 customErrorToast("Giriş Yapılamıyor, Tekrar Deneyiniz");
             }
         } finally {
