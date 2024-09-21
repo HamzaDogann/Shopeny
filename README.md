@@ -1,17 +1,14 @@
 ![SHOPENYBANNERNEW](https://github.com/user-attachments/assets/0a0a41fe-6102-4d21-b1c3-3e16fd858816)
 
-## Projenin Amacı
+## 🎯 Projenin Amacı
 
 Bu projenin temel amacı, üniversitede ve kendi çabalarımla edindiğim iki yıllık bilgi birikimimi pratikte uygulayarak, nitelikli bir yazılım projesi ortaya koymaktır. Ticari bir hedef gütmeden, eğitim sürecimde edindiğim yazılım becerilerini canlı bir proje üzerinde sergilemeyi ve bu proje aracılığıyla olası iş fırsatlarına kapı aralamayı amaçladım.
 
-## Hedef Kitle
+## 🌐 Hedef Kitle
 
 Bu proje, yazılım geliştiriciler, işverenler, öğrenciler ve potansiyel müşteriler için değer taşımaktadır. Yazılım geliştiriciler ve öğrenciler, projeyi inceleyerek teknik becerileri öğrenebilir ya da ilham alabilirler. İşverenler için proje, yazılım yetkinliklerimi ve çalışma disiplinimi göstermektedir. Potansiyel müşteriler ise, e-ticaret deneyimini simüle ederek kullanıcı dostu bir arayüz ve performans optimizasyonlarını gözlemleyebilirler.
 
 ![Proje Özellikleri](https://github.com/user-attachments/assets/cfdcde63-0fbd-4db3-b2e1-2e668902ea2c)
-
-
-## 🗃️ Proje Özellikleri
 
 ### 🚀 **Kullanıcı Doğrulama (Auth)**
 - E-posta ve şifre ile hesap oluşturma.
@@ -75,4 +72,24 @@ Bu proje, yazılım geliştiriciler, işverenler, öğrenciler ve potansiyel mü
 
 ### 🎨 **Modern ve Sade UX/UI**
 - Modern, kullanıcı dostu ve sade bir arayüz tasarımı.
+
+![KullanilanTeknolojiler](https://github.com/user-attachments/assets/0ae93114-344e-4b5d-9906-d3e217721601)
+
+### ⚡ **Vite**
+Vite, modern web projeleri için geliştirilmiş, hızlı ve verimli bir yapılandırma aracıdır. Projenin geliştirme sürecinde hızlı yeniden yükleme ve derleme avantajları sağlayarak, React ile sorunsuz bir şekilde entegre edilmiştir.
+
+### ⚛️ **React**
+React, kullanıcı arayüzlerini oluşturmak için kullanılan popüler bir JavaScript kütüphanesidir. Bu projede, dinamik ve yeniden kullanılabilir bileşenler sayesinde kullanıcı deneyimi geliştirilmiş ve yönetilebilir hale getirilmiştir.
+
+### 🎨 **Sass/SCSS**
+Sass/SCSS, CSS'in daha güçlü ve organize bir sürümüdür. Projedeki stillerin daha modüler, okunabilir ve sürdürülebilir olmasını sağlayarak, büyük ölçekli CSS yapılarını daha etkin bir şekilde yönetmemize olanak tanımıştır.
+
+### 🔑 **Firebase Authentication**
+Firebase Authentication, kullanıcı doğrulama işlemleri için kullanılan güvenli bir hizmettir. E-posta/şifre, Google ve Facebook gibi sosyal oturum açma seçeneklerini entegre ederek kullanıcıların kolayca giriş yapmasını sağlamıştır.
+
+### 🔥 **Firebase Realtime Database**
+Firebase Realtime Database, verilerin anında senkronize edilmesini sağlayan bulut tabanlı bir NoSQL veritabanıdır. Kullanıcı verileri, ürünler, siparişler ve adres bilgileri gibi veriler, güvenli ve hızlı bir şekilde saklanmış ve yönetilmiştir.
+
+### 🌐 **Netlify**
+Netlify, projenin barındırılması ve dağıtılması için kullanılan bir platformdur. Kolayca entegrasyon ve otomatik dağıtım süreçleri sunarak, projenin hızlı bir şekilde canlıya alınmasını ve güvenli bir ortamda sunulmasını sağlamıştır.
 
