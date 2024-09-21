@@ -22,7 +22,7 @@ function GeneralUserDetailsCard() {
     const [isModalVisible, setModalVisible] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 800);
-    const { updatedProfileDetails, loading, error } = useSelector(state => state.accountDetails);
+    const { updatedProfileDetails } = useSelector(state => state.accountDetails);
 
     //===================ACTIONS===================
 
@@ -36,7 +36,7 @@ function GeneralUserDetailsCard() {
                 navigate('/');
             });
     };
-    
+
     //===================EFFECTS===================
 
     useEffect(() => {
