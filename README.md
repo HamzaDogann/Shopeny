@@ -135,8 +135,6 @@ Bu projede, geliştirme sürecini hızlandırmak ve özellikleri daha verimli bi
 
 ![ProjeSüreci](https://github.com/user-attachments/assets/a5556beb-70c4-4a32-af87-5d5a164ecd2e)
 
-# Proje Süreci ve Planlar
-
 ## 1. Fikir
 
 Bu projeye başlarken amacım, React üzerinde pratik yaparak birçok farklı teknik ve paket kullanımıyla ilgili deneyim kazanmaktı. Hemen hemen tüm modern web geliştirme süreçlerini kapsayacak bir proje üzerinde çalışmayı hedefliyordum. Bir e-ticaret sitesinin geniş bir state yönetimi yapısını gerektirdiğini, birden fazla rota yönetimi, yüksek performans ve optimizasyon çalışmalarını içerdiğini fark ettim. Ayrıca, kullanıcı dostu ve sade bir arayüzün farklı cihazlar için uyumlu olması gerektiği için bu projenin kapsamlı bir çalışma fırsatı sunduğuna karar verdim.
@@ -153,19 +151,21 @@ Projenin özelliklerini belirlerken, rakip e-ticaret platformlarının sunduğu 
 
 Proje başlamadan önce storyboard tasarımları hazırlandı. Bu taslaklar, projede hangi sayfaların ve bileşenlerin bulunacağı, bu bileşenlerin nasıl etkileşime gireceği ve tasarımların nasıl bir görsel düzen sunacağı konusunda net bir fikir verdi. Bu süreçte kullanıcı yolculuğu ve kullanıcı deneyimi üzerine yoğunlaşıldı.
 
-![Prototypes](https://github.com/user-attachments/assets/23140f99-c2e1-4169-a108-3026edf09753)
+![ProjeTaslaklari](https://github.com/user-attachments/assets/7f8d84cd-643b-4b3e-9967-476bf96de823)
 
 ## 5. Araçların ve Kaynakların Kullanımı
 
-Projeye başlamadan önce, kullanılacak araç ve teknolojilere karar verdim. React, Redux Toolkit, Firebase ve Material UI gibi teknolojiler bu projede temel taşları olarak belirlendi. Animasyonlar için Framer Motion, form yönetimi için React Hook Form, veri doğrulama için Zod gibi kütüphaneler projeye entegre edildi. Bu araçlar, proje hedeflerini karşılamak için ideal çözümler sundu.
+Projeye başlamadan önce, kullanılacak araç ve teknolojilere karar verdim. React, Redux Toolkit, Firebase, React Router ve Material UI gibi teknolojiler bu projede temel taşları olarak belirlendi. Animasyonlar için Framer Motion, form yönetimi için React Hook Form, veri doğrulama için Zod gibi kütüphaneler projeye entegre edildi. Bu araçlar, proje hedeflerini karşılamak ve kullanıcı dostu, performans odaklı bir deneyim sunmak için ideal çözümler sundu.
 
 ## 6. Projeye Başlama
 
-Gerekli teknolojiler ve hedefler belirlendikten sonra projeye başlama aşamasına geçildi. Proje yapısı ve genel dosya mimarisi oluşturuldu. Geliştirme sürecinde, proje yönetimi için hedeflenen roadmap izlendi. Her adımda belirlenen özellikler ve teknolojilere göre geliştirme stratejisi oluşturuldu.
+Gerekli teknolojiler ve hedefler belirlendikten sonra projeye başlama aşamasına geçildi. Proje yapısı ve genel dosya mimarisi oluşturuldu. Geliştirme sürecinde, proje yönetimi için hedeflenen yol haritası izlendi. Her adımda belirlenen özellikler ve teknolojilere göre geliştirme stratejisi oluşturuldu.
 
 ## 7. Proje Dosya Mimarisi
 
 Proje, modüler bir yapıda organize edildi. `shared`, `pages`, `schema`, `routes` gibi temel klasör yapıları belirlendi. Proje bileşenleri arasında tekrar kullanılabilir parçalar oluşturuldu ve böylece düzenli ve ölçeklenebilir bir dosya mimarisi sağlandı. Bu yapı, projenin daha okunabilir ve yönetilebilir olmasına olanak tanıdı.
+
+![DosyaMimarisi](https://github.com/user-attachments/assets/a6cc798a-7f16-4bb6-9050-948bce9da2eb)
 
 ## 8. Projeyi Parçalara Bölme
 
@@ -182,6 +182,8 @@ Kodlama sürecinde belirlenen hedefler doğrultusunda adım adım ilerlenildi. H
 ## 10. Performans ve Optimizasyon
 
 Projenin performansını artırmak amacıyla çeşitli optimizasyon teknikleri uygulandı. Lazy-load-image gibi teknikler kullanılarak sayfa yükleme hızları iyileştirildi. Helpers yapısı ve SOLID prensipleri baz alınarak gereksiz kod parçacıkları temizlendi ve daha modüler bir yapı elde edildi. Projenin ağ performansı, tarayıcıların Network araçları ile test edilerek kaynak tüketimi analiz edildi ve optimize edildi.
+
+
 
 ## 11. Güvenlik ve Test Süreci
 
