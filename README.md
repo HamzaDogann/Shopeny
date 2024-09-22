@@ -133,5 +133,66 @@ Bu projede, geliştirme sürecini hızlandırmak ve özellikleri daha verimli bi
 - **useDiscountModal**: İndirim modallarını yönetir.
 - **useLazyImage**: Görsellerin yalnızca görünür olduklarında yüklenmesini sağlar.
 
+![ProjeSüreci](https://github.com/user-attachments/assets/a5556beb-70c4-4a32-af87-5d5a164ecd2e)
+
+# Proje Süreci ve Planlar
+
+## 1. Fikir
+
+Bu projeye başlarken amacım, React üzerinde pratik yaparak birçok farklı teknik ve paket kullanımıyla ilgili deneyim kazanmaktı. Hemen hemen tüm modern web geliştirme süreçlerini kapsayacak bir proje üzerinde çalışmayı hedefliyordum. Bir e-ticaret sitesinin geniş bir state yönetimi yapısını gerektirdiğini, birden fazla rota yönetimi, yüksek performans ve optimizasyon çalışmalarını içerdiğini fark ettim. Ayrıca, kullanıcı dostu ve sade bir arayüzün farklı cihazlar için uyumlu olması gerektiği için bu projenin kapsamlı bir çalışma fırsatı sunduğuna karar verdim.
+
+## 2. Kaynaklar ve Araştırma Süreci
+
+Projeye başlamadan önce, sektörde kullanılan teknolojiler ve en iyi uygulamalar üzerine kapsamlı bir araştırma yaptım. React, Redux, Firebase gibi teknolojilerin güçlü yanlarını analiz ettim. Ayrıca Material UI, Framer Motion ve diğer UI/UX kütüphaneleriyle kullanıcı deneyimini zenginleştirecek araçlar üzerine çalıştım. Teknolojik makaleler, açık kaynak projeler ve kurslar gibi kaynaklardan faydalandım.
+
+## 3. Proje Özellikleri
+
+Projenin özelliklerini belirlerken, rakip e-ticaret platformlarının sunduğu fonksiyonları ve eksikliklerini analiz ettim. Kullanıcı dostu bir arayüz, hızlı performans, kolay gezinme ve sorunsuz ödeme deneyimleri gibi temel gereksinimlerin yanı sıra projeyi özgün kılacak özellikler üzerine yoğunlaştım. Bu özgün değerler arasında, yardım ve destek sayfasının oluşturulması, ödeme işlemleri adımlarının kullanıcı dostu bir yapıda olması ve projeye özel hazırlanan JSON verisi önemli bir yere sahip. Proje, kullanıcı deneyimini en üst düzeye çıkarmak üzere hazırlanmıştır.
+
+## 4. Proje Taslakları ve Prototipleme
+
+Proje başlamadan önce storyboard tasarımları hazırlandı. Bu taslaklar, projede hangi sayfaların ve bileşenlerin bulunacağı, bu bileşenlerin nasıl etkileşime gireceği ve tasarımların nasıl bir görsel düzen sunacağı konusunda net bir fikir verdi. Bu süreçte kullanıcı yolculuğu ve kullanıcı deneyimi üzerine yoğunlaşıldı.
+
+![Prototypes](https://github.com/user-attachments/assets/23140f99-c2e1-4169-a108-3026edf09753)
+
+## 5. Araçların ve Kaynakların Kullanımı
+
+Projeye başlamadan önce, kullanılacak araç ve teknolojilere karar verdim. React, Redux Toolkit, Firebase ve Material UI gibi teknolojiler bu projede temel taşları olarak belirlendi. Animasyonlar için Framer Motion, form yönetimi için React Hook Form, veri doğrulama için Zod gibi kütüphaneler projeye entegre edildi. Bu araçlar, proje hedeflerini karşılamak için ideal çözümler sundu.
+
+## 6. Projeye Başlama
+
+Gerekli teknolojiler ve hedefler belirlendikten sonra projeye başlama aşamasına geçildi. Proje yapısı ve genel dosya mimarisi oluşturuldu. Geliştirme sürecinde, proje yönetimi için hedeflenen roadmap izlendi. Her adımda belirlenen özellikler ve teknolojilere göre geliştirme stratejisi oluşturuldu.
+
+## 7. Proje Dosya Mimarisi
+
+Proje, modüler bir yapıda organize edildi. `shared`, `pages`, `schema`, `routes` gibi temel klasör yapıları belirlendi. Proje bileşenleri arasında tekrar kullanılabilir parçalar oluşturuldu ve böylece düzenli ve ölçeklenebilir bir dosya mimarisi sağlandı. Bu yapı, projenin daha okunabilir ve yönetilebilir olmasına olanak tanıdı.
+
+## 8. Projeyi Parçalara Bölme
+
+Proje, daha kolay yönetilebilmesi adına farklı aşamalara bölündü. Auth işlemleri, veritabanı bağlantısı, ürün ve kategorilerin yönetimi, form doğrulama adımları, animasyon ekleme süreçleri gibi alt bölümler tanımlandı. Bu yaklaşım sayesinde her bir adım bağımsız olarak ele alınarak geliştirme sürecinde daha fazla kontrol sağlandı.
+
+## 9. Kodlama Süreci
+
+Kodlama sürecinde belirlenen hedefler doğrultusunda adım adım ilerlenildi. Her bir parça için öncelikli fonksiyonlar geliştirildi ve kullanıcı arayüzü cihaz uyumluluğuna göre optimize edildi. Bu süreçte:
+- Frontend geliştirildi ve çeşitli cihazlar için uyumlu hale getirildi.
+- Firebase Realtime Database kullanılarak veritabanı bağlantıları ve veri işlemleri gerçekleştirildi.
+- Form doğrulama işlemleri React Hook Form ve Zod kullanılarak tamamlandı.
+- Framer Motion ile animasyonlar projeye eklendi ve kullanıcı deneyimi iyileştirildi.
+
+## 10. Performans ve Optimizasyon
+
+Projenin performansını artırmak amacıyla çeşitli optimizasyon teknikleri uygulandı. Lazy-load-image gibi teknikler kullanılarak sayfa yükleme hızları iyileştirildi. Helpers yapısı ve SOLID prensipleri baz alınarak gereksiz kod parçacıkları temizlendi ve daha modüler bir yapı elde edildi. Projenin ağ performansı, tarayıcıların Network araçları ile test edilerek kaynak tüketimi analiz edildi ve optimize edildi.
+
+## 11. Güvenlik ve Test Süreci
+
+Proje güvenliği için ortam değişkenleri korunarak Firebase "Rules" kullanıldı. Kullanıcı verileri, kimlik doğrulama işlemleri ve veritabanı erişimi güvenli hale getirildi. Projede bulunan bug ve hatalar, sistematik testler ile tespit edilerek giderildi. Birçok farklı test senaryosu üzerinde çalışılarak, uygulamanın sorunsuz çalıştığından emin olundu.
+
+## 12. Projeyi Yayınlama Aşaması
+
+Proje geliştirme süreci tamamlandıktan sonra, Netlify ortamında yapılandırılarak yayınlandı. Netlify üzerinde gerekli ortam ayarları ve yapılandırma işlemleri gerçekleştirildi. Projenin canlı ortama başarılı bir şekilde entegre edilmesi sağlandı.
+
+## 13. Kullanıcı Değerlendirme ve Bakım Aşaması
+
+Proje yayına alındıktan sonra kullanıcı geri bildirimleri toplanmaya başlandı. Bu geri bildirimler doğrultusunda düzenlemeler yapıldı ve proje sürekli kontrol altında tutuldu. Bakım süreçleri hala devam etmekte olup, kullanıcı deneyimini iyileştirmek için sürekli güncellemeler yapılmaktadır.
 
 
