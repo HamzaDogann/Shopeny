@@ -183,6 +183,23 @@ Kodlama sürecinde belirlenen hedefler doğrultusunda adım adım ilerlenildi. H
 
 Projenin performansını artırmak amacıyla çeşitli optimizasyon teknikleri uygulandı. Lazy-load-image gibi teknikler kullanılarak sayfa yükleme hızları iyileştirildi. Helpers yapısı ve SOLID prensipleri baz alınarak gereksiz kod parçacıkları temizlendi ve daha modüler bir yapı elde edildi. Projenin ağ performansı, tarayıcıların Network araçları ile test edilerek kaynak tüketimi analiz edildi ve optimize edildi.
 
+![PerformansIncelemeleri](https://github.com/user-attachments/assets/795fa5ef-6068-4794-8c60-6c93d2297d6c)
+
+### Performans için uygulanan teknikler,
+
+- **Görsel Optimizasyonu**: PNG ve JPG gibi resim dosyaları, daha hızlı yüklenmeleri için **WEBP** formatına dönüştürüldü ve bu sayede %87 oranında dosya boyutları düşürüldü.
+
+- **useMemo ve useCallback**: Gereksiz render işlemlerini önlemek için **useMemo** ve **useCallback** kullanıldı. Bu sayede bileşenlerin yeniden hesaplanması ve oluşturulması yalnızca gerekli olduğunda yapıldı.
+
+- **Lazy Loading**: **react-lazy-load-image-component** ile görseller lazy load (tembel yükleme) yöntemiyle yüklendi, böylece sayfa ilk açıldığında sadece ekranda görünen görseller yüklendi ve sayfa yüklenme hızı artırıldı.
+
+- **useDebounce**: Arama işlemlerinde **useDebounce** kullanılarak kullanıcıların sürekli veri sorgulaması önlendi ve gereksiz **fetch** işlemlerinin önüne geçildi.
+
+- **Code Splitting**: **React.lazy** ve **Suspense** ile bileşenlerin parça parça yüklenmesi sağlandı, böylece başlangıçta tüm sayfa yerine sadece gerekli bileşenler yüklendi.
+
+- **Tree Shaking**: Temel düzeyde bu prensip, projede kullanılmayan ve gereksiz olan importların, kod parçalarının ve boşlukların ortadan kaldırılması anlamına gelir. Bu sayede, yalnızca ihtiyaç duyulan modüller projeye dahil edilerek, kod daha temiz ve performanslı hale getirilmiştir.
+
+- **Statik Dosyaların Önbelleğe Alınması**: CSS, JavaScript ve görseller gibi statik dosyalar **Netlify** gibi barındırma servislerinde önbelleğe alındı, böylece kullanıcıların sayfayı yeniden yüklemesi durumunda daha hızlı erişim sağlandı.
 
 
 ## 11. Güvenlik ve Test Süreci
