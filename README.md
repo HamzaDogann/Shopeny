@@ -9,8 +9,7 @@ The main goal of this project is to apply the two years of knowledge I gained th
 
 This project holds value for software developers, employers, students, and potential clients. Software developers and students can learn technical skills or gain inspiration by reviewing the project. For employers, the project demonstrates my software competencies and work discipline. Potential clients can observe a user-friendly interface and performance optimizations by simulating the e-commerce experience.
 
-
-![Proje Özellikleri](https://github.com/user-attachments/assets/cfdcde63-0fbd-4db3-b2e1-2e668902ea2c)
+![ProjectFeatures](https://github.com/user-attachments/assets/2be0bc9a-aa47-49d6-bb78-bd8234286059)
 
 ### 🚀 **User Authentication (Auth)**
 - Account creation with email and password.
@@ -75,7 +74,8 @@ This project holds value for software developers, employers, students, and poten
 ### 🎨 **Modern and Simple UX/UI**
 - Modern, user-friendly, and minimal interface design.
 
-![KullanilanTeknolojiler](https://github.com/user-attachments/assets/0ae93114-344e-4b5d-9906-d3e217721601)
+![UsedTechnologies](https://github.com/user-attachments/assets/693d2a0b-b493-4e18-befa-da1365294af0)
+
 
 ### ⚡ **Vite**
 Vite is a fast and efficient build tool developed for modern web projects. It provides quick reload and build advantages during the development process and integrates seamlessly with React.
@@ -95,8 +95,7 @@ Firebase Realtime Database is a cloud-based NoSQL database that enables real-tim
 ### 🌐 **Netlify**
 Netlify is a platform used for hosting and deploying the project. It provides easy integration and automated deployment processes, ensuring the project can go live quickly and be served in a secure environment.
 
-
-![ProjeBagimlilik](https://github.com/user-attachments/assets/27de1d37-a801-4a51-bc5f-7d9ec4472d14)
+![ProjectDependencies](https://github.com/user-attachments/assets/abc8aedf-b2e0-4850-b53a-b3ed90c207b5)
 
 In this project, various dependencies have been used to accelerate the development process and present features more efficiently. 
 Below are the main dependencies used in the project along with brief descriptions:
@@ -138,7 +137,7 @@ Below are the main dependencies used in the project along with brief description
 - **useDiscountModal**: Manages discount modals.
 - **useLazyImage**: Ensures images are loaded only when they are visible.
 
-![ProjeSüreci](https://github.com/user-attachments/assets/a5556beb-70c4-4a32-af87-5d5a164ecd2e)
+![ProjectProcess](https://github.com/user-attachments/assets/bbd6f378-febb-4462-b058-12d4e41ae423)
 
 ## 1. Idea
 
@@ -221,8 +220,7 @@ Once the development process was completed, the project was configured and deplo
 
 After the project went live, user feedback began to be collected. Adjustments were made based on this feedback, and the project has been continuously monitored. Maintenance processes are still ongoing, with regular updates aimed at improving user experience.
 
-
-![SürümGelistirici](https://github.com/user-attachments/assets/1386c3b8-d151-41ef-bede-d5bf7d656709)
+![VersionandDeveloperInformation](https://github.com/user-attachments/assets/585b9795-506e-4b08-9d14-8a09c42d1d7d)
 
 - **Release Date**: 22.09.2024  
 
