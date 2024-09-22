@@ -210,7 +210,7 @@ Proje güvenliği için ortam değişkenleri korunarak Firebase "Rules" kullanı
 
 Proje geliştirme süreci tamamlandıktan sonra, Netlify ortamında yapılandırılarak yayınlandı. Netlify üzerinde gerekli ortam ayarları ve yapılandırma işlemleri gerçekleştirildi. Projenin canlı ortama başarılı bir şekilde entegre edilmesi sağlandı.
 
-## 13. Kullanıcı Değerlendirme ve Bakım Aşaması
+## 13. Kullanıcı Değerlendirmeleri ve Bakım Aşaması
 
 Proje yayına alındıktan sonra kullanıcı geri bildirimleri toplanmaya başlandı. Bu geri bildirimler doğrultusunda düzenlemeler yapıldı ve proje sürekli kontrol altında tutuldu. Bakım süreçleri hala devam etmekte olup, kullanıcı deneyimini iyileştirmek için sürekli güncellemeler yapılmaktadır.
 
