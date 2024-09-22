@@ -214,4 +214,23 @@ Proje geliştirme süreci tamamlandıktan sonra, Netlify ortamında yapılandır
 
 Proje yayına alındıktan sonra kullanıcı geri bildirimleri toplanmaya başlandı. Bu geri bildirimler doğrultusunda düzenlemeler yapıldı ve proje sürekli kontrol altında tutuldu. Bakım süreçleri hala devam etmekte olup, kullanıcı deneyimini iyileştirmek için sürekli güncellemeler yapılmaktadır.
 
+![ProjeSürümBilgiler](https://github.com/user-attachments/assets/e575faaf-bc93-4f3a-8aef-b39238d9d666)
+
+- **Yayın Tarihi**: 22.09.2024  
+
+- **Son Güncelleme**: 22.09.2024 🕟 16:00
+
+- **Sürüm**: 1.0  
+
+- **Lisans**: MIT Lisansı
+  
+- **Desteklenen Tarayıcılar**:  
+  Proje, en güncel sürümlerdeki Chrome, Firefox, Safari ve Edge gibi popüler web tarayıcıları ile uyumludur. 
+
+- **Geliştirici**:  
+  Proje, Hamza Doğan tarafından geliştirilmiştir. Geliştirici hakkında daha fazla bilgi için [[LinkedIn Profil Linki](https://www.linkedin.com/in/hamzadogann/)] ziyaret edilebilir.
+
+- **Geri Bildirim ve Destek**:  
+  Kullanıcıların proje ile ilgili geri bildirimde bulunmaları veya destek taleplerini iletmeleri için [hamzadgn011@gmail.com] üzerinden iletişime geçebilirler. 
+
 
