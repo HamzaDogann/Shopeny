@@ -47,8 +47,10 @@ input {
 }
 
 select {
+  @media (max-witdh:500px){
   background-color: transparent;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+    }
 }
