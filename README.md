@@ -1,4 +1,5 @@
-![SHOPENYBANNERNEW](https://github.com/user-attachments/assets/0a0a41fe-6102-4d21-b1c3-3e16fd858816)
+
+![ShopenyGithubBanner](https://github.com/user-attachments/assets/a3e2ff8f-bb1a-4a9b-9bed-58ff6356403e)
 
 ## 🎯 Projenin Amacı
 
