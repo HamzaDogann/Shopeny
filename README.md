@@ -166,7 +166,7 @@ Before starting the project, I decided on the tools and technologies to be used.
 
 After determining the necessary technologies and goals, we moved on to the project initiation phase. The project structure and overall file architecture were established. During the development process, a targeted roadmap for project management was followed. A development strategy was created for each step according to the specified features and technologies.
 
-## 7. Project File Architecture
+## 7. Project Folder Structure 
 
 The project was organized in a modular structure. Basic folder structures such as `shared`, `pages`, `schema`, and `routes` were defined. Reusable components were created among the project components, ensuring an organized and scalable file architecture. This structure made the project more readable and manageable.
 
