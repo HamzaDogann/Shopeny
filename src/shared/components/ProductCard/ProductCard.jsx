@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { slugify } from '../../utils/slugify';
 import { customErrorToast, customSuccessToast } from '../../utils/CustomToasts';
+import { formatPrice } from '../../utils/formatPrice';
 
 import { getUserId } from '../../../store/utils/getUserId';
 import { addFavoriteProduct, removeFavoriteProduct } from '../../../store/thunks/User/favoriteProductThunk';
@@ -149,7 +150,7 @@ const ProductCard = React.memo(({ product }) => {
             </div>
 
             <p className='discount-price'>
-                {product.discountedPrice}₺
+                {formatPrice(product.discountedPrice)}₺
             </p>
 
             <button className='basket-btn' onClick={handleProduct} >
