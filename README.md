@@ -224,7 +224,7 @@ After the project went live, user feedback began to be collected. Adjustments we
 
 - **Release Date**: 22.09.2024  
 
-- **Last Updated**: 22.09.2024 🕟 16:00  
+- **Last Updated**: 12.10.2024 🕟 21:00  
 
 - **Version**: 1.0  
 
