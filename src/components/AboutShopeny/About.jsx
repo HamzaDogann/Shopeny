@@ -30,7 +30,7 @@ function About() {
                 <h3>Geliştirici Hakkında</h3>
                 <div className='about-developer-box'>
                     <div className='developer'>
-                        <img src="https://media.licdn.com/dms/image/D4D03AQFtUmvID7fG8w/profile-displayphoto-shrink_400_400/0/1711049966022?e=1728518400&v=beta&t=142rc3NOEMBIpaPTwjWUUxf1emGM36P2oPJfwiTICQk" alt="" />
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQFY5NzFl3c4RA/profile-displayphoto-scale_400_400/B4DZzDcfKlKgAg-/0/1772805562284?e=1792022400&v=beta&t=plMuML9ejnoTRTN70Mk0Vq4djJzlxoZQ34v1u_96S9Q" alt="" />
                         <p>Hamza Doğan</p>
                         <span>Software Developer</span>
                     </div>
